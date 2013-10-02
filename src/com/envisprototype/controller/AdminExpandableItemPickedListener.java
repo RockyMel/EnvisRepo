@@ -11,6 +11,8 @@ import com.envisprototype.view.AddMapActivity;
 import com.envisprototype.view.InputIDActivity;
 import com.envisprototype.view.SensorListActivity;
 import com.envisprototype.view.SetListActivity;
+import com.envisprototype.view.processing.DrawMapApplet;
+import com.envisprototype.view.processing.EditMapApplet;
 
 public class AdminExpandableItemPickedListener implements OnClickListener{
 	String tag;
@@ -52,10 +54,10 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		}
 		menuOptions = adminkaActivity.getResources().getStringArray(R.array.map_admin_options);
 		if(tag.equals(menuOptions[0])){
-			intent = new Intent(adminkaActivity, com.envisprototype.view.processing.MainAct.class);
+			intent = new Intent(adminkaActivity, DrawMapApplet.class);
 		}
 		if(tag.equals(menuOptions[1])){
-			intent = new Intent(adminkaActivity, AddMapActivity.class);
+			intent = new Intent(adminkaActivity, EditMapApplet.class);
 		}
 		adminkaActivity.startActivity(intent);
 	}
