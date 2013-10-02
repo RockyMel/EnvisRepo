@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <Spinner
+    android:id="@+id/planets_spinner"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+	    <item
+	        android:id="@+id/itemAdd4"
+	        android:showAsAction="ifRoom|withText"
+	        android:icon="@drawable/ic_launcher"
+	
+	        >
+	    </item>
+	    <item
+	        android:id="@+id/itemAdd4"
+	        android:showAsAction="ifRoom|withText"
+	        android:icon="@drawable/ic_launcher"
+	
+	        >
+	    </item>
+	    <item
+	        android:id="@+id/chooseSensors"
+	        android:showAsAction="ifRoom|withText"
+	        android:icon="@drawable/ic_launcher"
+	
+	        >
+	    </item>
+    </Spinner>
+
+</menu>
+
+
