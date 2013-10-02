@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableRow;
@@ -37,10 +38,13 @@ public class ExpandableAdminAdapter extends ExpandableListAdapter{
 		}
 
 		//TextView sensorLabel = (TextView) convertView.findViewById(R.id.text1);
-		ImageButton sensorIB = (ImageButton) convertView.findViewById(R.id.sensorImageBtn);
+		Button sensorIB = (Button) convertView.findViewById(R.id.sensorImageBtn);
+		sensorIB.setText(childText);
 		System.out.println(childText + " " + convertView.getContext().getPackageName());
-		sensorIB.setImageResource(convertView.getResources().
-				getIdentifier("com.example.envisprototypetake2:drawable/" + childText,null, null));
+		// CHANGE TO IMAGE BUTTON
+//		sensorIB.setImageResource(convertView.getResources().
+//				getIdentifier("com.example.envisprototypetake2:drawable/" + childText,null, null));
+		
 		if (childText != null && sensorIB != null){
 			//sensorLabel.setText(childText);
 			//sensorLabel.setOnClickListener(new AdminExpandableItemPickedListener(childText));
