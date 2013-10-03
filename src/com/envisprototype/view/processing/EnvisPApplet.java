@@ -45,10 +45,6 @@ public class EnvisPApplet extends PApplet{
 		  CoordinateFiller filler = new CoordinateFiller(this);
 		  filler.prepareMapCoordinates("map.txt");
 		  if(getIntent().getExtras() != null){
-//			  if(getIntent().getExtras().containsKey("coors")){
-//			  envisMap.setRealCoors((Coordinates)(getIntent().getExtras().get("coors")));
-//			  envisMap.setVisCoors((Coordinates)(getIntent().getExtras().get("coors")));
-//			  }
 			  if(getIntent().getExtras().containsKey("mapID")){
 				  String mapID = (String)(getIntent().getExtras().get("mapID"));
 				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapID).getRealCoordinates();

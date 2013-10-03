@@ -47,7 +47,7 @@ public class MapInfoViewActivity extends Activity {
 		delete = (Button)findViewById(R.id.Delete);
 		delete.setOnClickListener(new DeleteMapButtonController(map.getId(),this));
 		show3DMapBtn = (Button) findViewById(R.id.show_map_btn);
-		show3DMapBtn.setOnClickListener(new Show3DMapBtnListener(this, map.getId()));
+		show3DMapBtn.setOnClickListener(new Show3DMapBtnListener(map.getId()));
 	}
 
 	@Override
