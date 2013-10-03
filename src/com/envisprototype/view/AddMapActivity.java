@@ -1,26 +1,22 @@
 package com.envisprototype.view;
 
-import java.util.StringTokenizer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.envisprototype.controller.QRreaderButtonController;
+import com.envisprototype.R;
+import com.envisprototype.controller.DrawMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
-import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.model.GPSTracker;
-import com.envisprototype.zxing.integration.android.IntentIntegrator;
-import com.envisprototype.zxing.integration.android.IntentResult;
-import com.envisprototype.R;
 
 
 public class AddMapActivity extends Activity {
@@ -29,10 +25,10 @@ public class AddMapActivity extends Activity {
 	EditText name;
 	EditText location;
 	EditText notes;
-	ImageButton QRreader;
 	Boolean flag;
 	MapInterface map;
 	Location myloc =  new Location(LocationManager.NETWORK_PROVIDER);
+	Button drawMapBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,9 +44,9 @@ public class AddMapActivity extends Activity {
 		name  = (EditText)findViewById(R.id.editText2);
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
-		QRreader = (ImageButton)findViewById(R.id.imageButton1);
-		QRreader.setOnClickListener(new QRreaderButtonController(this));
 		map = new MapModel();
+		drawMapBtn = (Button) findViewById(R.id.draw_map_btn);
+		drawMapBtn.setOnClickListener(new DrawMapBtnListener(this));
 	}
 
 	@Override
@@ -62,32 +58,21 @@ public class AddMapActivity extends Activity {
 		
 		
 	}
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		//retrieve result of scanning - instantiate ZXing object
-		IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-		//check we have a valid result
-		if (scanningResult != null) {
-			//get content from Intent Result
-			String scanContent = scanningResult.getContents();
-			//get format name of data scanned
-			StringTokenizer st = new StringTokenizer(scanContent,";");
-			 
-
-			id.setText(st.nextElement().toString());
-			name.setText(st.nextElement().toString());
-	 
-			//output to UI
-			Toast toast = Toast.makeText(this, 
-					scanContent, Toast.LENGTH_SHORT);
-			toast.show();
-		}
-		else{
-			//invalid scan data or scan canceled
-			Toast toast = Toast.makeText(this, 
-					"No scan data received!", Toast.LENGTH_SHORT);
-			toast.show();
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+            Intent data){
+		if(requestCode == DrawMapBtnListener.DRAW_REQUEST_CODE){
+			// now we have real coordinates from the map that we've just drawn
+			Coordinates realMapCoordinates = (Coordinates) data.getExtras().get("map");
+			Log.i("map",realMapCoordinates.toString());
+			// add it to model
+			MapInterface mapToAdd = new MapModel();
+			mapToAdd.setRealCoordinates(realMapCoordinates);
+			MapListModel.getSingletonInstance().addMap(mapToAdd);
+			// + upload to the cloud??
 		}
 	}
+	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub

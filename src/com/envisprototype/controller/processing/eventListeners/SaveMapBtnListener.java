@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.envisprototype.controller.processing.CoordinateWriter;
 import com.envisprototype.view.processing.EnvisPApplet;
-import com.envisprototype.view.processing.EditMapApplet;
 
 public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 

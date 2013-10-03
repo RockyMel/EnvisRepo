@@ -1,8 +1,9 @@
 package com.envisprototype.model.processing;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Coordinates {
+public class Coordinates implements Serializable{
 	ArrayList<Float> coorX;
 	ArrayList<Float> coorY; 
 	
@@ -20,6 +21,17 @@ public class Coordinates {
 	public void setMapCoordinates(ArrayList<Float> coorX, ArrayList<Float> coorY){
 		this.coorX = coorX;
 		this.coorY = coorY;
+	}
+	
+	@Override
+	public String toString(){
+		String stringToReturn = new String();
+		for(int j = 0; j < coorX.size(); j++){
+			stringToReturn += "x:" + coorX.get(j).toString();
+			stringToReturn += "y:" + coorY.get(j).toString() + ";";
+			  }
+		return stringToReturn;
+		
 	}
 
 	public ArrayList<Float> getCoorX() {

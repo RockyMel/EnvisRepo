@@ -65,14 +65,14 @@
         android:text="Notes:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="wrap_content"
+      <Button
+        android:id="@+id/draw_map_btn"
+		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher" />
+        android:text="Button" />
 
     <EditText
         android:id="@+id/editText2"
@@ -91,5 +91,7 @@
         android:layout_marginTop="16dp"
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+  
 
 </RelativeLayout>

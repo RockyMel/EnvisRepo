@@ -6,13 +6,14 @@ import com.envisprototype.controller.processing.eventListeners.AddToDrawingScope
 import com.envisprototype.controller.processing.eventListeners.DrawFreePolygonBtnListener;
 import com.envisprototype.controller.processing.eventListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.DrawRectMapBtnListener;
+import com.envisprototype.controller.processing.eventListeners.ExitFromDrawMapAppletListener;
 import com.envisprototype.controller.processing.eventListeners.RemoveLastNodeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
 
 public class DrawMapApplet extends EnvisPApplet {
 
 	EnvisButton closeFigure, rectMapBtn, freeShapeBtn, drawPolygonBtn,
-	removeLastNodeBtn;
+	removeLastNodeBtn, exitBtn;
 	EnvisButton drawingScope;
 	private boolean ifFreeshape = false;
 	private boolean ifRectMap = false;
@@ -40,7 +41,10 @@ public void setup(){
 	drawingScope.addDragEventListener(new DrawingScopeListener());
 	removeLastNodeBtn = new EnvisButton(this, getString(R.string.remove_last_node));
 	removeLastNodeBtn.setPlace(DEF_BTN_X, 7*height/29);
-	removeLastNodeBtn.addEventListener(new RemoveLastNodeBtnListener());	
+	removeLastNodeBtn.addEventListener(new RemoveLastNodeBtnListener());
+	exitBtn = new EnvisButton(this, "Exit");
+	exitBtn.setPlace(DEF_BTN_X, height-height/25);
+	exitBtn.addEventListener(new ExitFromDrawMapAppletListener());
 }
 
 public void draw(){
@@ -59,6 +63,7 @@ public void draw(){
   }
   else{
 	  threeDDrawPreset(false); // false - no sets of sensors will be displayed
+	  exitBtn.drawMe();
   }
 }
 
@@ -72,7 +77,7 @@ public void mouseReleased(){
 		removeLastNodeBtn.fireEvent();
 	}
 	else{
-		
+		exitBtn.fireEvent();
 	}
 }
 

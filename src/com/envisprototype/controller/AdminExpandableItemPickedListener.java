@@ -54,7 +54,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		}
 		menuOptions = adminkaActivity.getResources().getStringArray(R.array.map_admin_options);
 		if(tag.equals(menuOptions[0])){
-			intent = new Intent(adminkaActivity, DrawMapApplet.class);
+			intent = new Intent(adminkaActivity, AddMapActivity.class);
 		}
 		if(tag.equals(menuOptions[1])){
 			intent = new Intent(adminkaActivity, EditMapApplet.class);
