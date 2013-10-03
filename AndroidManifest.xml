@@ -35,6 +35,8 @@
         </activity>
         <activity android:name="com.envisprototype.view.InputIDActivity" >
         </activity>
+         <activity android:name="com.envisprototype.view.MapInfoViewActivity" >
+        </activity>
         <activity
             android:name="com.envisprototype.view.SensorListActivity"
             android:label="@string/app_name"
