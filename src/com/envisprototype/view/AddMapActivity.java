@@ -66,9 +66,7 @@ public class AddMapActivity extends Activity {
 			Coordinates realMapCoordinates = (Coordinates) data.getExtras().get("map");
 			Log.i("map",realMapCoordinates.toString());
 			// add it to model
-			MapInterface mapToAdd = new MapModel();
-			mapToAdd.setRealCoordinates(realMapCoordinates);
-			MapListModel.getSingletonInstance().addMap(mapToAdd);
+			map.setRealCoordinates(realMapCoordinates);
 			// + upload to the cloud??
 		}
 	}
