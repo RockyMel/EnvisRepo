@@ -4,23 +4,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
 import com.envisprototype.controller.processing.eventListeners.TopViewButtnoListener;
-import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 
 public class ThreeDVis extends EnvisPApplet{
 	
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton; 
 	
-@Override
-public void onCreate(Bundle onSavedIstanceState){
-	super.onCreate(onSavedIstanceState);
-}
+//@Override
+//public void onCreate(Bundle onSavedIstanceState){
+//	Log.i("coors","asdf");
+//	super.onCreate(onSavedIstanceState);
+//}
 
 public void setup(){
 	super.setup();
+	Log.i("coors","setup");
     envisMap.setIf3D(true);
     envisMap.translateToMiddle();
     rotateButton = new EnvisButton(this, "Rotate");
@@ -41,6 +44,7 @@ public void setup(){
 }
 public void draw(){
 	super.draw();
+	Log.i("coors","draw");
 	threeDDrawPreset(true); //drawing with sensors
 	rotateButton.drawMe();
 	frontViewButton.drawMe();

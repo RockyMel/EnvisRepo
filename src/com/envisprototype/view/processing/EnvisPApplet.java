@@ -9,6 +9,8 @@ import android.view.Display;
 import com.envisprototype.controller.processing.CoordinateFiller;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
+import com.envisprototype.model.maps.MapListModel;
+import com.envisprototype.model.processing.Coordinates;
 
 public class EnvisPApplet extends PApplet{
 	
@@ -26,6 +28,7 @@ public class EnvisPApplet extends PApplet{
 	  
 	  
 	  public void setup(){
+		  Log.i("coors","setup 222");
 		  MAX_WIDTH =  width-width/7;
 		  DEF_BTN_X = width-width/8;
 		  background(BACKGROUND_COLOR);
@@ -41,6 +44,19 @@ public class EnvisPApplet extends PApplet{
 		  rotateScope.addEventListener(new RotateScopeListener());
 		  CoordinateFiller filler = new CoordinateFiller(this);
 		  filler.prepareMapCoordinates("map.txt");
+		  if(getIntent().getExtras() != null){
+//			  if(getIntent().getExtras().containsKey("coors")){
+//			  envisMap.setRealCoors((Coordinates)(getIntent().getExtras().get("coors")));
+//			  envisMap.setVisCoors((Coordinates)(getIntent().getExtras().get("coors")));
+//			  }
+			  if(getIntent().getExtras().containsKey("mapID")){
+				  String mapID = (String)(getIntent().getExtras().get("mapID"));
+				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapID).getRealCoordinates();
+				  Log.i("coors",coors.toString());
+				  envisMap.setRealCoors(coors);
+				  envisMap.setVisCoors(coors);
+			  }
+		  }
 		  envisSensors = filler.prepareSensorsCoordinates("sensors.txt");
 		  zoom = new EnvisButton(this, "");
 		  zoom.addEventListener(new ZoomListener(envisMap));  
@@ -63,11 +79,11 @@ public void mouseDragged(){
 public void threeDDrawPreset(boolean ifWithSensors){
 	/*
 	 * Things to draw:
-	 * - rotateScope border √
+	 * - rotateScope border ���
 	 * - zoomBar
-	 * - 3D map √
-	 * - sets √
-	 * - axis √
+	 * - 3D map ���
+	 * - sets ���
+	 * - axis ���
 	 * - a bunch of buttons to choose vis type (bars or spheres)
 	 * - bars or spheres
 	 */

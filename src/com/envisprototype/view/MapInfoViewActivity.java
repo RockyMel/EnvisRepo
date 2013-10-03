@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.envisprototype.R;
 import com.envisprototype.controller.DeleteMapButtonController;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
-import com.envisprototype.R;
 
 
 public class MapInfoViewActivity extends Activity {

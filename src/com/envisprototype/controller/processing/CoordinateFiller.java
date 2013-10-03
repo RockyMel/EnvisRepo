@@ -93,9 +93,6 @@ public class CoordinateFiller {
 	      }
 	    }
 	  }
-	  
-//	  epApplet.getEnvisMap().getVisCoors().setMapCoordinates(coorX, coorY);
-//	  epApplet.getEnvisMap().getRealCoors().setMapCoordinates(coorX, coorY);
 	  epApplet.getEnvisMap().setVisCoors(new Coordinates());
 	  epApplet.getEnvisMap().setRealCoors(new Coordinates());
 	  for(int i = 0; i < coorX.size(); i++){
@@ -104,6 +101,6 @@ public class CoordinateFiller {
 		  epApplet.getEnvisMap().getRealCoors().getCoorX().add(coorX.get(i));
 		  epApplet.getEnvisMap().getRealCoors().getCoorY().add(coorY.get(i));
 	  }
-	  epApplet.getEnvisMap().printCoors();
+	  //epApplet.getEnvisMap().printCoors();
 	}
 }
