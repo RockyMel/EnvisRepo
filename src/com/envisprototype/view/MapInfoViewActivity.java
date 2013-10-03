@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.controller.DeleteMapButtonController;
+import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.R;
@@ -21,6 +22,7 @@ public class MapInfoViewActivity extends Activity {
 	Button delete;
 	String mapid;
 	MapInterface map;
+	Button show3DMapBtn;
 	public static Boolean del = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MapInfoViewActivity extends Activity {
 		name.setText(map.getName());
 		delete = (Button)findViewById(R.id.Delete);
 		delete.setOnClickListener(new DeleteMapButtonController(map.getId(),this));
+		show3DMapBtn = (Button) findViewById(R.id.show_map_btn);
+		show3DMapBtn.setOnClickListener(new Show3DMapBtnListener(this, map.getId()));
 	}
 
 	@Override

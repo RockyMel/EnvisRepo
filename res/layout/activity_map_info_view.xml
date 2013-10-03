@@ -93,4 +93,13 @@
         android:layout_below="@+id/id_map"
         android:ems="10" />
 
+    <Button
+        android:id="@+id/show_map_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Delete"
+        android:layout_alignBottom="@+id/Delete"
+        android:layout_toRightOf="@+id/Delete"
+        android:text="Show map" />
+
 </RelativeLayout>
