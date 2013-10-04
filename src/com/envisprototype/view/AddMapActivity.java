@@ -62,12 +62,14 @@ public class AddMapActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode,
             Intent data){
 		if(requestCode == DrawMapBtnListener.DRAW_REQUEST_CODE){
-			// now we have real coordinates from the map that we've just drawn
-			Coordinates realMapCoordinates = (Coordinates) data.getExtras().get("map");
-			Log.i("map",realMapCoordinates.toString());
-			// add it to model
-			map.setRealCoordinates(realMapCoordinates);
-			// + upload to the cloud??
+			if(data != null && data.hasExtra("map")){
+				// now we have real coordinates from the map that we've just drawn
+				Coordinates realMapCoordinates = (Coordinates) data.getExtras().get("map");
+				Log.i("map",realMapCoordinates.toString());
+				// add it to model
+				map.setRealCoordinates(realMapCoordinates);
+				// + upload to the cloud??
+			}
 		}
 	}
 	

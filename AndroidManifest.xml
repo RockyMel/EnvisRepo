@@ -97,7 +97,8 @@
          
          <activity android:name="com.envisprototype.view.processing.DrawMapApplet"
              android:configChanges="orientation"
-             android:screenOrientation="landscape"></activity>
+             android:screenOrientation="landscape">
+         </activity>
          <activity android:name="com.envisprototype.view.processing.SetPlotPApplet"
              android:configChanges="orientation"
              android:screenOrientation="landscape"></activity>    

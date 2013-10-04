@@ -4,6 +4,7 @@ import java.util.EventObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.envisprototype.R;
 
@@ -19,6 +20,8 @@ public class ExitFromDrawMapAppletListener extends AbstractDrawMapListener{
 				intentForAddMap.putExtra("map", drawMapApplet.getEnvisMap().getRealCoors());
 				drawMapApplet.setResult(Activity.RESULT_OK,intentForAddMap);     
 				drawMapApplet.finish();
+				drawMapApplet.destroy();
+				//return;
 			}
 		}
 	}

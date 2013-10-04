@@ -1,5 +1,8 @@
 package com.envisprototype.view.processing;
 
+import android.util.Log;
+import android.view.KeyEvent;
+
 import com.envisprototype.R;
 import com.envisprototype.controller.processing.dragListeners.DrawingScopeListener;
 import com.envisprototype.controller.processing.eventListeners.AddToDrawingScopeListener;

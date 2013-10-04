@@ -12,7 +12,7 @@ import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
 
-public class EnvisPApplet extends PApplet{
+public abstract class EnvisPApplet extends PApplet{
 	
 	static final int BACKGROUND_COLOR = 0xff000000; 
 	public static final int STROKE_COLOR = 0xffffffff;
@@ -28,7 +28,7 @@ public class EnvisPApplet extends PApplet{
 	  
 	  
 	  public void setup(){
-		  Log.i("coors","setup 222");
+		  //size(width,height,P3D);
 		  MAX_WIDTH =  width-width/7;
 		  DEF_BTN_X = width-width/8;
 		  background(BACKGROUND_COLOR);
@@ -133,11 +133,11 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	public void setEnvisMap(Map envisMap) {
 		this.envisMap = envisMap;
 	}
-	public int sketchWidth() {
-			Display display = getWindowManager().getDefaultDisplay();
-		  return display.getWidth(); }
-	  public int sketchHeight() {
-			Display display = getWindowManager().getDefaultDisplay();
-		  return display.getHeight(); }
-	  public String sketchRenderer() { return P3D; }
+//	public int sketchWidth() {
+//			Display display = getWindowManager().getDefaultDisplay();
+//		  return display.getWidth(); }
+//	  public int sketchHeight() {
+//			Display display = getWindowManager().getDefaultDisplay();
+//		  return display.getHeight(); }
+	  //public String sketchRenderer() { return P3D; }
 }

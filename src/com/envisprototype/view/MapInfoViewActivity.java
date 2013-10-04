@@ -41,7 +41,10 @@ public class MapInfoViewActivity extends Activity {
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
 		map = MapListModel.getSingletonInstance().findMapById(mapid);
-		Log.i("asdsad", map.getId());
+		
+		Log.i("coors", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
+		Log.i("coors", mapid);
+		Log.i("coors", map.getId());
 		id.setText(map.getId());
 		name.setText(map.getName());
 		delete = (Button)findViewById(R.id.Delete);
