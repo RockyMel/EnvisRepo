@@ -10,8 +10,10 @@ import com.envisprototype.view.processing.EnvisPApplet;
 public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 
 	CoordinateWriter output;
-	public SaveMapBtnListener(EnvisPApplet epApplet){
+	String mapFileName;
+	public SaveMapBtnListener(EnvisPApplet epApplet, String mapFileName){
 		output = new CoordinateWriter(epApplet);
+		this.mapFileName = mapFileName;
 	}
 	
 	@Override
@@ -22,7 +24,7 @@ public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 			// closing figure
 			eButton.getEpApplet().getEnvisMap().closeFigure();
 			if(eButton.getEpApplet().getEnvisMap().isIfCentered()){
-				output.saveMapToFile("map.txt");
+				output.saveMapToFile(mapFileName);
 				eButton.getEpApplet().getEnvisMap().translateToMiddle();
 				Log.i("edit","saved");
 			}

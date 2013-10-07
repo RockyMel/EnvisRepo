@@ -6,8 +6,11 @@ import processing.core.PApplet;
 import android.util.Log;
 import android.view.Display;
 
+import com.envisprototype.R;
 import com.envisprototype.controller.processing.CoordinateFiller;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
+import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
+import com.envisprototype.controller.processing.eventListeners.SaveSetBtnListener;
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
@@ -72,6 +75,7 @@ public void mouseDragged(){
 	}
 }
 
+
 public void threeDDrawPreset(boolean ifWithSensors){
 	/*
 	 * Things to draw:
@@ -133,11 +137,11 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	public void setEnvisMap(Map envisMap) {
 		this.envisMap = envisMap;
 	}
-//	public int sketchWidth() {
-//			Display display = getWindowManager().getDefaultDisplay();
-//		  return display.getWidth(); }
-//	  public int sketchHeight() {
-//			Display display = getWindowManager().getDefaultDisplay();
-//		  return display.getHeight(); }
-	  //public String sketchRenderer() { return P3D; }
+	public int sketchWidth() {
+			Display display = getWindowManager().getDefaultDisplay();
+		  return display.getWidth(); }
+	  public int sketchHeight() {
+			Display display = getWindowManager().getDefaultDisplay();
+		  return display.getHeight(); }
+	  public String sketchRenderer() { return P3D; }
 }

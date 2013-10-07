@@ -15,8 +15,8 @@ import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListene
 
 public class DrawMapApplet extends EnvisPApplet {
 
-	EnvisButton closeFigure, rectMapBtn, freeShapeBtn, drawPolygonBtn,
-	removeLastNodeBtn, exitBtn;
+	EnvisButton rectMapBtn, freeShapeBtn, drawPolygonBtn,
+	removeLastNodeBtn, exitBtn,  closeFigure;
 	EnvisButton drawingScope;
 	private boolean ifFreeshape = false;
 	private boolean ifRectMap = false;
@@ -26,7 +26,8 @@ public void setup(){
 	super.setup();
 	closeFigure = new EnvisButton(this, "Close");
 	closeFigure.setPlace(DEF_BTN_X, height-height/25);
-	closeFigure.addEventListener(new SaveMapBtnListener(this));
+	closeFigure.addEventListener(new SaveMapBtnListener(this, "map.txt"));
+	closeFigure.setIfCanFireWithNoClick(true);
 	envisMap = new Map(this);
 	rectMapBtn = new EnvisButton(this, "Draw rect");
 	rectMapBtn.setPlace(DEF_BTN_X, height/29);
@@ -94,6 +95,19 @@ public void mouseDragged(){
 		rotateScope.fireEvent();
 	}
 }
+
+
+public void keyPressed() {
+    if (key == CODED) {
+      if (keyCode == BACK) {
+        // do something here for the back button behavior
+        // you'll need to set keyCode to 0 if you want to prevent quitting (see above)
+    	  keyCode = 0;
+    	  Log.i("test", "in on pause");
+    	  closeFigure.fireEvent();
+      }
+    }
+  }
 
 public boolean isIfFreeshape() {
 	return ifFreeshape;

@@ -1,6 +1,5 @@
 package com.envisprototype.view.processing;
 
-import android.text.TextWatcher;
 
 public class EnvisButton extends AbstractEnvisButton{
 	int textSize;	
@@ -29,14 +28,16 @@ public class EnvisButton extends AbstractEnvisButton{
 	@Override
 	public void drawMe() {
 		// TODO Auto-generated method stub
-		epApplet.pushMatrix();
-		epApplet.noFill();
-		epApplet.stroke(color[R],color[G], color[B]);
-		epApplet.textSize(textSize);
-		drawRect();
-		drawText();
-		epApplet.textSize(tempTextSize);
-		epApplet.popMatrix();
+		if(ifVisible){
+			epApplet.pushMatrix();
+			epApplet.noFill();
+			epApplet.stroke(color[R],color[G], color[B]);
+			epApplet.textSize(textSize);
+			drawRect();
+			drawText();
+			epApplet.textSize(tempTextSize);
+			epApplet.popMatrix();
+		}
 	}
 	
 	public void drawRect(){
@@ -65,6 +66,10 @@ public class EnvisButton extends AbstractEnvisButton{
 	public void setyOffset(int yOffset) {
 		this.yOffset = yOffset;
 	}
+	
+	
+
+	
 
 	@Override
 	public void rotate(float xRotate, float yRotate, float zRotate) {

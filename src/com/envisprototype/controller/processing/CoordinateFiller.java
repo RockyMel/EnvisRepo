@@ -26,9 +26,6 @@ public class CoordinateFiller {
 	
 	public ArrayList<SensorSet> prepareSensorsCoordinates(String sensorFileName){
 		ArrayList<SensorSet> envisSensors = new ArrayList<SensorSet>();
-//		ArrayList<Float> sensorX = new ArrayList<Float>();
-//		ArrayList<Float> sensorY = new ArrayList<Float>();
-//		ArrayList<Float> sensorZ = new ArrayList<Float>();
 		try {
 			sensorsBReader = new BufferedReader(new FileReader(new 
 			        File(epApplet.getFilesDir()+File.separator+sensorFileName)));

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
@@ -54,8 +55,9 @@ public class AddMapActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//CODE TO SET THE TEXT FIELDS FROM QR READER
-			
-		
+		CoordinatesReader coorReader = new CoordinatesReader(this);
+		Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
+		map.setRealCoordinates(realCoors);
 		
 	}
 	@Override

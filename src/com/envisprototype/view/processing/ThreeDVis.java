@@ -3,7 +3,6 @@ package com.envisprototype.view.processing;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.os.Bundle;
 import android.util.Log;
 
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;

@@ -23,7 +23,7 @@ public class SaveSetBtnListener extends AbstractEnvisButtonListener{
 	public void handleEnvisClassEvent(EventObject e) {
 		// TODO Auto-generated method stub
 		super.handleEnvisClassEvent(e);
-		if(ifHitTheButton()){
+		if(ifHitTheButton() || eButton.isIfCanFireWithNoClick()){
 			sensorWriter.saveSetsToFile(sensorsFileName, envisSensors);
 			eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
 		}

@@ -3,10 +3,14 @@ package com.envisprototype.view.processing;
 
 public abstract class AbstractEnvisButton extends UIElement{
 	int defX, defY, defW, defH;
+	boolean ifVisible, ifCanFireWithNoClick;
+
 	public AbstractEnvisButton(EnvisPApplet epApplet, String name) {
 		super(epApplet, name);
 		defW = epApplet.width/15;
 		defH = epApplet.height/27;
+		ifVisible = true;
+		ifCanFireWithNoClick = false;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -46,5 +50,22 @@ public abstract class AbstractEnvisButton extends UIElement{
 	}
 	public void setDefH(int defH) {
 		this.defH = defH;
+	}
+	
+	public boolean isIfVisible() {
+		return ifVisible;
+	}
+
+	public void setIfVisible(boolean ifVisible) {
+		this.ifVisible = ifVisible;
+	}
+	public boolean isIfCanFireWithNoClick() {
+		return ifCanFireWithNoClick;
+	}
+
+
+
+	public void setIfCanFireWithNoClick(boolean ifCanFireWithNoClick) {
+		this.ifCanFireWithNoClick = ifCanFireWithNoClick;
 	}
 }
