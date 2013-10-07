@@ -3,6 +3,8 @@ package com.envisprototype.controller;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +15,7 @@ import com.envisprototype.model.processing.Coordinates;
 public class ModelSaver {
 
 	Context context;
+
 	
 	public ModelSaver(Context context){
 		this.context = context;
@@ -38,12 +41,17 @@ public class ModelSaver {
 		                    File(context.getFilesDir()+File.separator+mapId+".emp")));
 				  stringToWrite = "name:" + mapName + ";";
 				  bufferedWriter.write(stringToWrite);
-				  for(int j = 0; j < mapCoors.getCoorX().size(); j++){
-					  stringToWrite = "x:" + mapCoors.getCoorX().get(j).toString();
-					  bufferedWriter.write(stringToWrite);
-					  stringToWrite = "y:" + mapCoors.getCoorY().get(j).toString() + ";";
-					  bufferedWriter.write(stringToWrite);
+				  stringToWrite = new String();
+				  for(int j = 0; j <  mapCoors.getCoorX().size(); j++){
+					  stringToWrite += mapCoors.getCoorX().get(j).toString() + ",";
 					  }
+				  stringToWrite+="||";
+				  bufferedWriter.write(stringToWrite);
+				  stringToWrite = new String();
+				  for(int j = 0; j < mapCoors.getCoorY().size(); j++){
+					  stringToWrite +=  mapCoors.getCoorY().get(j).toString() + ",";
+					  }
+				  bufferedWriter.write(stringToWrite);
 				  Log.i("model", mapId);
 				  Log.i("model", mapName);
 				  Log.i("model", mapCoors.toString());
@@ -54,5 +62,11 @@ public class ModelSaver {
 			  e.printStackTrace();
 			}
 		  // testing
+		  
+		  
+		  
+		  
+		  
+		  
 		}
 }

@@ -68,8 +68,11 @@ public abstract class EnvisPApplet extends PApplet{
 		  zoom.setPlace(width/100, width/100);
 		  zoom.setSize(width/50, height-height/20);
 		  axis = new Axis(this);
-		  ModelSaver modelSaver = new ModelSaver(this);
-		  modelSaver.saveMapsToFiles();
+		  
+		  if(MapListModel.getSingletonInstance().getMapList().size() > 0){
+			  ModelSaver modelSaver = new ModelSaver(this);
+			  modelSaver.saveMapsToFiles();
+		  }
 	  }
 	  
 	  public void draw(){

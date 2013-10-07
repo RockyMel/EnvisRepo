@@ -21,11 +21,15 @@ public class CoordinateWriter {
                       File(epApplet.getFilesDir()+File.separator+mapFileName)));
 			  String stringToWrite = new String();
 			  for(int j = 0; j < epApplet.getEnvisMap().getVisCoors().getCoorX().size(); j++){
-				  stringToWrite = "x:" + epApplet.getEnvisMap().getRealCoors().getCoorX().get(j).toString();
-				  bufferedWriter.write(stringToWrite);
-				  stringToWrite = "y:" + epApplet.getEnvisMap().getRealCoors().getCoorY().get(j).toString() + ";";
-				  bufferedWriter.write(stringToWrite);
+				  stringToWrite +=epApplet.getEnvisMap().getRealCoors().getCoorX().get(j).toString() + ",";
 				  }
+			  stringToWrite+="||";
+			  bufferedWriter.write(stringToWrite);
+			  stringToWrite = new String();
+			  for(int j = 0; j < epApplet.getEnvisMap().getVisCoors().getCoorX().size(); j++){
+				  stringToWrite += epApplet.getEnvisMap().getRealCoors().getCoorY().get(j).toString() + ",";
+				  }
+			  bufferedWriter.write(stringToWrite);
 			  bufferedWriter.flush();
 			  bufferedWriter.close();
 			} catch (Exception e) {
