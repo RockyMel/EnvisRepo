@@ -3,10 +3,12 @@ package com.envisprototype.view.processing;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.ModelSaver;
 import com.envisprototype.controller.processing.CoordinateFiller;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
@@ -28,7 +30,7 @@ public abstract class EnvisPApplet extends PApplet{
 	public PositionDisplay currentClick;
 	ArrayList<SensorSet> envisSensors;
 	Map envisMap;
-	  
+	Bundle extras;
 	  
 	  public void setup(){
 		  //size(width,height,P3D);
@@ -40,17 +42,20 @@ public abstract class EnvisPApplet extends PApplet{
 		  envisSensors = new ArrayList<SensorSet>();		  
 		  currentClick = new PositionDisplay(this, "");
 		  currentClick.setPlace(width/15, height/30);
-		  envisMap = new Map(this);
 		  rotateScope = new EnvisButton(this, "");
 		  rotateScope.setPlace(1, 1);
 		  rotateScope.setSize(MAX_WIDTH, height-2);
 		  rotateScope.addEventListener(new RotateScopeListener());
+		  envisMap = new Map(this);
 		  CoordinateFiller filler = new CoordinateFiller(this);
-		  filler.prepareMapCoordinates("map.txt");
-		  if(getIntent().getExtras() != null){
-			  if(getIntent().getExtras().containsKey("mapID")){
-				  String mapID = (String)(getIntent().getExtras().get("mapID"));
-				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapID).getRealCoordinates();
+		  //filler.prepareMapCoordinates("map.txt");
+		  
+		  extras = getIntent().getExtras();
+		  if(extras != null){
+			  if(extras.containsKey("mapId")){
+				  String mapId = extras.getString("mapId");
+				  envisMap.setMapId(mapId);
+				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
 				  Log.i("coors",coors.toString());
 				  envisMap.setRealCoors(coors);
 				  envisMap.setVisCoors(coors);
@@ -63,6 +68,8 @@ public abstract class EnvisPApplet extends PApplet{
 		  zoom.setPlace(width/100, width/100);
 		  zoom.setSize(width/50, height-height/20);
 		  axis = new Axis(this);
+		  ModelSaver modelSaver = new ModelSaver(this);
+		  modelSaver.saveMapsToFiles();
 	  }
 	  
 	  public void draw(){

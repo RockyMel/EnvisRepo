@@ -1,18 +1,22 @@
 package com.envisprototype.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
+import com.envisprototype.controller.ModelReader;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
@@ -30,6 +34,7 @@ public class AddMapActivity extends Activity {
 	MapInterface map;
 	Location myloc =  new Location(LocationManager.NETWORK_PROVIDER);
 	Button drawMapBtn;
+	Button SaveBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +53,56 @@ public class AddMapActivity extends Activity {
 		map = new MapModel();
 		drawMapBtn = (Button) findViewById(R.id.draw_map_btn);
 		drawMapBtn.setOnClickListener(new DrawMapBtnListener(this));
+		final Context context = this;
+		SaveBtn = (Button)findViewById(R.id.savebutton);
+		SaveBtn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				GPSTracker gps = new GPSTracker(context);
+				double latitude = 0;
+				double longitude = 0;
+				
+				if(gps.canGetLocation()){
+			        	
+			        	latitude = gps.getLatitude();
+			        	longitude = gps.getLongitude();
+			        	
+			        	// \n is for new line
+			        	//Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();	
+			        }else{
+			        	// can't get location
+			        	// GPS or Network is not enabled
+			        	// Ask user to enable GPS/network in settings
+			        	gps.showSettingsAlert();
+			        }
+				
+				myloc.setLatitude(latitude);
+				myloc.setLongitude(longitude);
+				
+				map.setId(id.getText().toString());
+				map.setName(name.getText().toString());
+				map.setLocation(myloc);
+				
+				MapInterface temp = MapListModel.getSingletonInstance().findMapById(id.getText().toString());
+				MapListModel.getSingletonInstance().resetModel(context);
+				
+				if(temp!=null)
+					{
+					MapListModel.getSingletonInstance().removeMap(temp);
+					MapListModel.getSingletonInstance().addMap(map);
+					}
+				else
+					MapListModel.getSingletonInstance().addMap(map);
+				
+				
+					
+				Log.i("on res", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
+				
+			}
+			
+		});
 	}
 
 	@Override
@@ -60,64 +115,18 @@ public class AddMapActivity extends Activity {
 		map.setRealCoordinates(realCoors);
 		
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-            Intent data){
-		if(requestCode == DrawMapBtnListener.DRAW_REQUEST_CODE){
-			if(data != null && data.hasExtra("map")){
-				// now we have real coordinates from the map that we've just drawn
-				Coordinates realMapCoordinates = (Coordinates) data.getExtras().get("map");
-				Log.i("map",realMapCoordinates.toString());
-				// add it to model
-				map.setRealCoordinates(realMapCoordinates);
-				// + upload to the cloud??
-			}
-		}
-	}
 	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		 for(int j = 0; j < MapListModel.getSingletonInstance().getMapList().size(); j++){
+			 Log.i("reset", MapListModel.getSingletonInstance().getMapList().get(j).getId());
+			  Log.i("reset",  MapListModel.getSingletonInstance().getMapList().get(j).getName());
+			  Log.i("reset", "###############");
+		 }
 		
-		GPSTracker gps = new GPSTracker(this);
-		double latitude = 0;
-		double longitude = 0;
-		
-		if(gps.canGetLocation()){
-	        	
-	        	latitude = gps.getLatitude();
-	        	longitude = gps.getLongitude();
-	        	
-	        	// \n is for new line
-	        	//Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();	
-	        }else{
-	        	// can't get location
-	        	// GPS or Network is not enabled
-	        	// Ask user to enable GPS/network in settings
-	        	gps.showSettingsAlert();
-	        }
-		
-		myloc.setLatitude(latitude);
-		myloc.setLongitude(longitude);
-		
-		map.setId(id.getText().toString());
-		map.setName(name.getText().toString());
-		map.setLocation(myloc);
-		
-		MapInterface temp = MapListModel.getSingletonInstance().findMapById(id.getText().toString());
-		if(temp!=null)
-			{
-			MapListModel.getSingletonInstance().removeMap(temp);
-			MapListModel.getSingletonInstance().addMap(map);
-			}
-		else
-			MapListModel.getSingletonInstance().addMap(map);
-		
-		
-			
-		
-		
+	
 		
 	}
 	

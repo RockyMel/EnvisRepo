@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
+import com.envisprototype.controller.ModelReader;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.model.MapListAdapter;
@@ -42,7 +43,6 @@ public class MapListActivity extends Activity {
 				view.getContext().startActivity(intent); 
 			}
 		});
-		
 		maps = MapListModel.getSingletonInstance().getMapList();
 	
 		spinner = (Spinner) findViewById(R.id.spinner1);

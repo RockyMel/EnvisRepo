@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.DeleteMapButtonController;
+import com.envisprototype.controller.ModelReader;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
@@ -28,23 +29,22 @@ public class MapInfoViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_info_view);
-		mapid = getIntent().getStringExtra(MapListModel.MAP_ID_EXTRA);
-
-		init();
+		
 	}
 
 	private void init() {
 		// TODO Auto-generated method stub
 		id = (EditText)findViewById(R.id.id_map);
-		
+		mapid = getIntent().getStringExtra(MapListModel.MAP_ID_EXTRA);
 		name = (EditText)findViewById(R.id.editText2);
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
 		map = MapListModel.getSingletonInstance().findMapById(mapid);
 		
-		Log.i("coors", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
-		Log.i("coors", mapid);
-		Log.i("coors", map.getId());
+		Log.i("model", "init");
+		Log.i("model", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
+		Log.i("model", mapid);
+		Log.i("model", map.getId());
 		id.setText(map.getId());
 		name.setText(map.getName());
 		delete = (Button)findViewById(R.id.Delete);
@@ -58,25 +58,22 @@ public class MapInfoViewActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onPause();
 
-		if(!del){
-		map.setId(id.getText().toString());
-		map.setName(name.getText().toString());
-
-		MapListModel.getSingletonInstance().removeMap(map);
-		MapListModel.getSingletonInstance().addMap(map);
-		}
-		else
-			del = false;
-
-
-
-
+//		if(!del){
+//		map.setId(id.getText().toString());
+//		map.setName(name.getText().toString());
+//		MapListModel.getSingletonInstance().removeMap(map);
+//		MapListModel.getSingletonInstance().addMap(map);
+//		}
+//		else
+//			del = false;
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		MapListModel.getSingletonInstance().resetModel(this);
+		init();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

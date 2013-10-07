@@ -72,32 +72,40 @@ public class CoordinateFiller {
 	    mapBReader = new BufferedReader(new FileReader(new 
                 File(epApplet.getFilesDir()+File.separator+mapFileName)));
 	    line = mapBReader.readLine();
-	    
+	    if(line != null){
+			  PApplet.println(line);
+		    {
+		      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
+		      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
+		      for(int j = 0; j < xValues.length; j++){
+		         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
+		         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
+		         coorX.add(Float.parseFloat(xString));
+		         coorY.add(Float.parseFloat(yString));
+		      }
+		    }
+		  }
+		  epApplet.getEnvisMap().setVisCoors(new Coordinates());
+		  epApplet.getEnvisMap().setRealCoors(new Coordinates());
+		  for(int i = 0; i < coorX.size(); i++){
+			  epApplet.getEnvisMap().getVisCoors().getCoorX().add(coorX.get(i));
+			  epApplet.getEnvisMap().getVisCoors().getCoorY().add(coorY.get(i));
+			  epApplet.getEnvisMap().getRealCoors().getCoorX().add(coorX.get(i));
+			  epApplet.getEnvisMap().getRealCoors().getCoorY().add(coorY.get(i));
+		  }
 	  }catch(IOException e){
 	    line = null;
 	    e.printStackTrace();
 	  }
-	  if(line != null){
-		  PApplet.println(line);
-	    {
-	      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
-	      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
-	      for(int j = 0; j < xValues.length; j++){
-	         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
-	         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
-	         coorX.add(Float.parseFloat(xString));
-	         coorY.add(Float.parseFloat(yString));
-	      }
-	    }
+	  finally{
+		  try {
+			mapBReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	  }
-	  epApplet.getEnvisMap().setVisCoors(new Coordinates());
-	  epApplet.getEnvisMap().setRealCoors(new Coordinates());
-	  for(int i = 0; i < coorX.size(); i++){
-		  epApplet.getEnvisMap().getVisCoors().getCoorX().add(coorX.get(i));
-		  epApplet.getEnvisMap().getVisCoors().getCoorY().add(coorY.get(i));
-		  epApplet.getEnvisMap().getRealCoors().getCoorX().add(coorX.get(i));
-		  epApplet.getEnvisMap().getRealCoors().getCoorY().add(coorY.get(i));
-	  }
+	  
 	  //epApplet.getEnvisMap().printCoors();
 	}
 }

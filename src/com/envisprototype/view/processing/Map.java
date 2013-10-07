@@ -28,6 +28,7 @@ public class Map extends UIElement{
 	CenterPoint center;
 	Coordinates visCoors; // these are to show the map. Will be tampered
 	Coordinates realCoors; 
+	private String mapId;
 	
 	public void printCoors(){
 		Log.i("map", "vis: "+ visCoors.getCoorX() + ", " + visCoors.getCoorY()
@@ -430,6 +431,14 @@ public boolean ifIntersects(ArrayList<Float> coorX, ArrayList<Float> coorY,
 
 	public void setIf3D(boolean if3D) {
 		this.if3D = if3D;
+	}
+
+	public String getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(String mapId) {
+		this.mapId = mapId;
 	}
 
 	class CenterPoint{

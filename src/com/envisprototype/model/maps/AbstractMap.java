@@ -17,7 +17,10 @@ public abstract class AbstractMap implements MapInterface {
 	public AbstractMap() {
 
 		//this.id=UUID.randomUUID().toString();
-
+		this.location = new Location("0");
+		this.name = "default";
+		this.realCoordinates = new Coordinates();
+		this.zCoordinate = -50f;
 	}
 	public AbstractMap(String name, Location location) {
 		super();

@@ -16,7 +16,7 @@ import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListene
 public class DrawMapApplet extends EnvisPApplet {
 
 	EnvisButton rectMapBtn, freeShapeBtn, drawPolygonBtn,
-	removeLastNodeBtn, exitBtn,  closeFigure;
+	removeLastNodeBtn, closeFigure;
 	EnvisButton drawingScope;
 	private boolean ifFreeshape = false;
 	private boolean ifRectMap = false;
@@ -46,9 +46,6 @@ public void setup(){
 	removeLastNodeBtn = new EnvisButton(this, getString(R.string.remove_last_node));
 	removeLastNodeBtn.setPlace(DEF_BTN_X, 7*height/29);
 	removeLastNodeBtn.addEventListener(new RemoveLastNodeBtnListener());
-	exitBtn = new EnvisButton(this, "Exit");
-	exitBtn.setPlace(DEF_BTN_X, height-height/25);
-	exitBtn.addEventListener(new ExitFromDrawMapAppletListener());
 }
 
 public void draw(){
@@ -67,7 +64,6 @@ public void draw(){
   }
   else{
 	  threeDDrawPreset(false); // false - no sets of sensors will be displayed
-	  exitBtn.drawMe();
   }
 }
 
@@ -81,7 +77,6 @@ public void mouseReleased(){
 		removeLastNodeBtn.fireEvent();
 	}
 	else{
-		exitBtn.fireEvent();
 	}
 }
 
@@ -104,7 +99,7 @@ public void keyPressed() {
         // you'll need to set keyCode to 0 if you want to prevent quitting (see above)
     	  keyCode = 0;
     	  Log.i("test", "in on pause");
-    	  closeFigure.fireEvent();
+    	  //closeFigure.fireEvent();
       }
     }
   }

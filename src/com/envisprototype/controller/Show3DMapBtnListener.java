@@ -8,11 +8,11 @@ import android.view.View.OnClickListener;
 import com.envisprototype.view.processing.ThreeDVis;
 
 public class Show3DMapBtnListener implements OnClickListener{
-	String mapID;
+	String mapId;
 
 	public Show3DMapBtnListener(String id) {
 		// TODO Auto-generated constructor stub
-		this.mapID = id;
+		this.mapId = id;
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class Show3DMapBtnListener implements OnClickListener{
 		// TODO Auto-generated method stub
 		Context context = v.getContext();
 		Intent intent = new Intent(context, ThreeDVis.class);
-		intent.putExtra("mapID", mapID);
+		intent.putExtra("mapId", mapId);
 		context.startActivity(intent);
 	}
 
