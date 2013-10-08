@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.DeleteMapButtonController;
-import com.envisprototype.controller.ModelReader;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;

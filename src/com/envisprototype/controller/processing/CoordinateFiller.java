@@ -5,13 +5,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import processing.core.PApplet;
+
+import android.util.Log;
 
 import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.EnvisPApplet;
 import com.envisprototype.view.processing.SensorSet;
-
-import processing.core.PApplet;
-import android.util.Log;
 
 
 
@@ -72,17 +74,40 @@ public class CoordinateFiller {
 	    mapBReader = new BufferedReader(new FileReader(new 
                 File(epApplet.getFilesDir()+File.separator+mapFileName)));
 	    line = mapBReader.readLine();
+	    Log.i("for db", "total line when read is  = " + line);
 	    if(line != null){
 			  PApplet.println(line);
+			  String tempEl = new String();
+			  Log.i("for db", "total line when read is  = " + line);
 		    {
-		      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
-		      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
-		      for(int j = 0; j < xValues.length; j++){
-		         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
-		         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
-		         coorX.add(Float.parseFloat(xString));
-		         coorY.add(Float.parseFloat(yString));
-		      }
+		    	StringTokenizer filecontents = new StringTokenizer(line, "||");
+		    	String xCoor =  (String) filecontents.nextElement();
+		    	String yCoor =  (String) filecontents.nextElement();
+
+		    	StringTokenizer X = new StringTokenizer(xCoor, ",");
+		    	System.out.println("scoor = " + xCoor);
+		    	while (X.hasMoreElements()) {
+		    		tempEl = (String) X.nextElement();
+		    	System.out.println(tempEl);
+		    	coorX.add(Float.parseFloat(tempEl));
+		    	}
+
+
+		    	StringTokenizer Y = new StringTokenizer(yCoor, ",");
+		    	while (Y.hasMoreElements()) {
+		    		tempEl = (String) Y.nextElement();
+		    	System.out.println(tempEl);
+		    	coorY.add(Float.parseFloat(tempEl));
+		    	}
+//		      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
+//		      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
+//		      for(int j = 0; j < xValues.length; j++){
+//		         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
+//		         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
+//		         coorX.add(Float.parseFloat(xString));
+//		         coorY.add(Float.parseFloat(yString));
+		      //}
+		    	
 		    }
 		  }
 		  epApplet.getEnvisMap().setVisCoors(new Coordinates());

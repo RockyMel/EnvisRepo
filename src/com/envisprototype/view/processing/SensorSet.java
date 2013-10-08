@@ -25,7 +25,8 @@ public class SensorSet extends UIElement{
 	}
 	
 	public void printCoors(){
-		Log.i("sets", "vis: "+ x + ", " + y + ", " + z + " \n real: " + realX + ", " + realY + ", " + realZ);
+		Log.i("sets", "vis: "+ x + ", " + y + ", " + z + " \n"+
+	" real: " + realX + ", " + realY + ", " + realZ);
 	}
 	
 

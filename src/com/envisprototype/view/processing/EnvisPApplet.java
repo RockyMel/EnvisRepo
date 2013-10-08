@@ -7,12 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 
-import com.envisprototype.R;
-import com.envisprototype.controller.ModelSaver;
-import com.envisprototype.controller.processing.CoordinateFiller;
+//import com.envisprototype.controller.ModelSaver;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
-import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
-import com.envisprototype.controller.processing.eventListeners.SaveSetBtnListener;
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
@@ -24,8 +20,7 @@ public abstract class EnvisPApplet extends PApplet{
 	static final int STROKE_WEIGHT = 1;
 	public static int DEF_BTN_X;
 	int MAX_WIDTH;
-	EnvisButton zoom;
-	EnvisButton rotateScope;
+	EnvisButton zoom, rotateScope;
 	private Axis axis;
 	public PositionDisplay currentClick;
 	ArrayList<SensorSet> envisSensors;
@@ -33,13 +28,17 @@ public abstract class EnvisPApplet extends PApplet{
 	Bundle extras;
 	  
 	  public void setup(){
-		  //size(width,height,P3D);
+		  // defalt setup which will be reused
+		  // to specify size of ui elements for different screens
 		  MAX_WIDTH =  width-width/7;
 		  DEF_BTN_X = width-width/8;
 		  background(BACKGROUND_COLOR);
 		  stroke(STROKE_COLOR);
+		  // smooth is not available on most devices, but sometimes makes
+		  // the ui prettier
 		  smooth();
-		  envisSensors = new ArrayList<SensorSet>();		  
+		  envisSensors = new ArrayList<SensorSet>();
+		  // // current click is showing coordinates of the last finger tap
 		  currentClick = new PositionDisplay(this, "");
 		  currentClick.setPlace(width/15, height/30);
 		  rotateScope = new EnvisButton(this, "");
@@ -47,32 +46,33 @@ public abstract class EnvisPApplet extends PApplet{
 		  rotateScope.setSize(MAX_WIDTH, height-2);
 		  rotateScope.addEventListener(new RotateScopeListener());
 		  envisMap = new Map(this);
-		  CoordinateFiller filler = new CoordinateFiller(this);
-		  //filler.prepareMapCoordinates("map.txt");
-		  
+		  // getting a map id from model.
 		  extras = getIntent().getExtras();
 		  if(extras != null){
 			  if(extras.containsKey("mapId")){
 				  String mapId = extras.getString("mapId");
 				  envisMap.setMapId(mapId);
 				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
+				  
 				  Log.i("coors",coors.toString());
 				  envisMap.setRealCoors(coors);
 				  envisMap.setVisCoors(coors);
 			  }
 		  }
-		  envisSensors = filler.prepareSensorsCoordinates("sensors.txt");
+		  // HERE SENSORS MUST BE ADDED SIMILARLY TO MAP (EXTRAS)
+		  //envisSensors = filler.prepareSensorsCoordinates("sensors.txt");
+		  // zoom works only in 3D
 		  zoom = new EnvisButton(this, "");
 		  zoom.addEventListener(new ZoomListener(envisMap));  
 		  //drawing a zoom bar
 		  zoom.setPlace(width/100, width/100);
 		  zoom.setSize(width/50, height-height/20);
 		  axis = new Axis(this);
-		  
-		  if(MapListModel.getSingletonInstance().getMapList().size() > 0){
-			  ModelSaver modelSaver = new ModelSaver(this);
-			  modelSaver.saveMapsToFiles();
-		  }
+		  // as PApplet destroys the model when is reterned, we save it...
+//		  if(MapListModel.getSingletonInstance().getMapList().size() > 0){
+//			  ModelSaver modelSaver = new ModelSaver(this);
+//			  modelSaver.saveMapsToFiles();
+//		  }
 	  }
 	  
 	  public void draw(){
@@ -89,11 +89,11 @@ public void mouseDragged(){
 public void threeDDrawPreset(boolean ifWithSensors){
 	/*
 	 * Things to draw:
-	 * - rotateScope border ���
+	 * - rotateScope border ���������
 	 * - zoomBar
-	 * - 3D map ���
-	 * - sets ���
-	 * - axis ���
+	 * - 3D map ���������
+	 * - sets ���������
+	 * - axis ���������
 	 * - a bunch of buttons to choose vis type (bars or spheres)
 	 * - bars or spheres
 	 */
@@ -104,7 +104,7 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	rotateScope.fireEvent();
 	envisMap.drawMe();
 	//scale(envisMap.getZoomValue());
-	//println("zoom value = " + envisMap.getZoomValue());
+	println("coor in threedvissss = " + envisMap.getRealCoors().getCoorX().toString());
 	if(ifWithSensors){
 		for(int i = 0; i < envisSensors.size(); i++){
 	    	envisSensors.get(i).drawMe();

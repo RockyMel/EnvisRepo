@@ -14,7 +14,7 @@ public interface MapListInterface {
 
 	public abstract List<MapInterface> getMapList();
 	
-	public abstract void resetModel(Context context);
+	//public abstract void resetModel(Context context);
 	
 	public void setMapList(List<MapInterface> mapList);
 	

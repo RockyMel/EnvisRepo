@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.envisprototype.view.processing.EnvisPApplet;
 import com.envisprototype.view.processing.SensorSet;
 
@@ -20,12 +22,11 @@ public class CoordinateWriter {
 			  BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new 
                       File(epApplet.getFilesDir()+File.separator+mapFileName)));
 			  String stringToWrite = new String();
-			  for(int j = 0; j < epApplet.getEnvisMap().getVisCoors().getCoorX().size(); j++){
-				  stringToWrite = "x:" + epApplet.getEnvisMap().getRealCoors().getCoorX().get(j).toString();
-				  bufferedWriter.write(stringToWrite);
-				  stringToWrite = "y:" + epApplet.getEnvisMap().getRealCoors().getCoorY().get(j).toString() + ";";
-				  bufferedWriter.write(stringToWrite);
-				  }
+			  stringToWrite = epApplet.getEnvisMap().getRealCoors().getXCoorString();
+			  stringToWrite+="||";
+			  stringToWrite += epApplet.getEnvisMap().getRealCoors().getYCoorString();
+			  Log.i("for db", "total line is  = " + stringToWrite);
+			  bufferedWriter.write(stringToWrite);
 			  bufferedWriter.flush();
 			  bufferedWriter.close();
 			} catch (Exception e) {

@@ -3,6 +3,8 @@ package com.envisprototype.model.processing;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 public class Coordinates implements Serializable{
 	ArrayList<Float> coorX;
 	ArrayList<Float> coorY; 
@@ -52,11 +54,12 @@ public class Coordinates implements Serializable{
 
 	public String getXCoorString(){
 		String temp="";
+		Log.i("testingxcoorsize", coorX.size()+"");
 		for(int j = 0; j < coorX.size(); j++){
 			if(j==0)
-				temp=temp + String.valueOf(coorX.get(j));
+				temp+=String.valueOf(coorX.get(j));
 			else
-				temp=temp + "," + String.valueOf(coorX.get(j));
+				temp+="," + String.valueOf(coorX.get(j));
 			  }
 		return temp;
 	}

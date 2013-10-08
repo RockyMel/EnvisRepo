@@ -9,12 +9,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import processing.core.PApplet;
+import android.content.Context;
+import android.util.Log;
 
 import com.envisprototype.model.processing.Coordinates;
-
-import android.content.Context;
 
 public class CoordinatesReader {
 	BufferedReader mapBReader, sensorsBReader;
@@ -33,31 +34,50 @@ public class CoordinatesReader {
 	    mapBReader = new BufferedReader(new FileReader(new 
                 File(context.getFilesDir()+File.separator+mapFileName)));
 //	    while((line = mapBReader.readLine()) != null){
+	    
 	    	line = mapBReader.readLine();
+	    	Log.i("for db", "total line when read is  = " + line);
 	    	if(line != null){
 	    		 PApplet.println(line);
-			      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
-			      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
-			      for(int j = 0; j < xValues.length; j++){
-			         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
-			         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
-			         coorX.add(Float.parseFloat(xString));
-			         coorY.add(Float.parseFloat(yString));
-					  for(int i = 0; i < coorX.size(); i++){
+	    		 Log.i("for db", "total line is  = " + line);
+	    		 StringTokenizer filecontents = new StringTokenizer(line, "||");
+			    	String xCoor =  (String) filecontents.nextElement();
+			    	String yCoor =  (String) filecontents.nextElement();
+
+			    	StringTokenizer X = new StringTokenizer(xCoor, ",");
+			    	Float tempFloat;
+			    	while (X.hasMoreElements()) {
+			    		tempFloat = Float.parseFloat(X.nextToken());
+			    		coorX.add(tempFloat);
+			    	}
+			    	StringTokenizer Y = new StringTokenizer(yCoor, ",");
+			    	while (Y.hasMoreElements()) {
+			    		tempFloat = Float.parseFloat(Y.nextToken());
+			    		coorY.add(tempFloat);
+			    	}
+			    	Log.i("for db", "coorX size = " + coorX.size());
+			    	for(int i = 0; i < coorX.size(); i++){
+						  Log.i("for db", "x = " + Float.toString(coorX.get(i)));
+						  Log.i("for db", "y = " + Float.toString(coorY.get(i)));
 						  coors.getCoorX().add(coorX.get(i));
 						  coors.getCoorY().add(coorY.get(i));
 					  }
-			      }
 	    	}
 	    	
 //		    }
-		  mapBReader.close(); 
+		  
 	    
 	  }catch(IOException e){
 	    line = null;
 	    e.printStackTrace();
 	  }
 	  finally{
+		  try {
+			mapBReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		  return coors;
 	  }
 	}

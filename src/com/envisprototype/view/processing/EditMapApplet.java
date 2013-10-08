@@ -16,6 +16,7 @@ EnvisButton addNodeBtn, deleteNodeBtn, moveNodeBtn, saveMap;
 
 public void setup(){
 	super.setup();
+	// Setting up the default set of visual elements
 	addNodeBtn = new EnvisButton(this, getString(R.string.add_node));
 	addNodeBtn.setPlace(DEF_BTN_X, height/30);
 	addNodeBtn.addEventListener(new AddNodeBtnListener());
@@ -40,8 +41,13 @@ public void draw(){
 	deleteNodeBtn.drawMe();
 	saveMap.drawMe();
 	float[] center = envisMap.calculateMiddleCoors();
+	/* center - means that the map has been centered. (vis coordinates are put 
+	 * so that 0,0 point is in the middle of the figure)
+	*/
 	if(center != null)
-		currentClick.drawText((mouseX + center[Map.indexX] - width/2) + ", " + (mouseY + center[Map.indexY] - height/2)+ "; ");
+		// current click is showing coordinates of the last finger tap
+		currentClick.drawText((mouseX + center[Map.indexX] - width/2) + ", " + 
+	(mouseY + center[Map.indexY] - height/2)+ "; ");
 	pushMatrix();
 	translate(width/2, height/2);
 	envisMap.drawMe2D();

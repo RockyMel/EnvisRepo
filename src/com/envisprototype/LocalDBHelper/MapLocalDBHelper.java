@@ -117,12 +117,18 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 				
 				tempmap.setLocation(location);
 				StringTokenizer Xcoor = new StringTokenizer(cursor.getString(4),",");
+				int i = 0;
+				Log.i("db helper coor", "the whole line is " + cursor.getString(4));
+				Float abc= null;
+
 				while(Xcoor.hasMoreElements()){
-					tempmap.getRealCoordinates().getCoorX().add(Float.parseFloat((String) Xcoor.nextElement()));
-					
+					i++;
+					abc = Float.parseFloat((String) Xcoor.nextElement());
+					tempmap.getRealCoordinates().getCoorX().add(abc);
+					Log.i("db helper coor", Integer.toString(i) + " ##### " + abc );
 					
 				}
-				
+				Log.i("db helper coor", tempmap.getRealCoordinates().getXCoorString());
 				StringTokenizer Ycoor = new StringTokenizer(cursor.getString(5),",");
 				while(Ycoor.hasMoreElements()){
 					tempmap.getRealCoordinates().getCoorY().add(Float.parseFloat((String) Ycoor.nextElement()));
@@ -144,11 +150,11 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	}
 
 
-	@Override
-	public void resetModel(Context context) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void resetModel(Context context) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 
 	@Override

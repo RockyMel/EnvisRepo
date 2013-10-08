@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
-import com.envisprototype.controller.ModelReader;
 
 
 
@@ -69,18 +68,18 @@ public class MapListModel implements MapListInterface {
 		return singletonInstance;
 	}
 
-	@Override
-	public void resetModel(Context context) {
-		// TODO Auto-generated method stub
-		singletonInstance = new MapListModel();
-		ModelReader modelReader = new ModelReader(context);
-		modelReader.readModel();
-		 for(int j = 0; j < mapList.size(); j++){
-			 Log.i("reset", mapList.get(j).getId());
-			  Log.i("reset", mapList.get(j).getName());
-			  Log.i("reset", "###############");
-		 }
-	}
+//	@Override
+//	public void resetModel(Context context) {
+//		// TODO Auto-generated method stub
+//		singletonInstance = new MapListModel();
+//		ModelReader modelReader = new ModelReader(context);
+//		modelReader.readModel();
+//		 for(int j = 0; j < mapList.size(); j++){
+//			 Log.i("reset", mapList.get(j).getId());
+//			  Log.i("reset", mapList.get(j).getName());
+//			  Log.i("reset", "###############");
+//		 }
+//	}
 	
 	public void setMapList(List<MapInterface> mapList){
 		

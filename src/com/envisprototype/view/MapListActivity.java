@@ -15,7 +15,6 @@ import android.widget.Spinner;
 
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
-import com.envisprototype.controller.ModelReader;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.model.MapListAdapter;

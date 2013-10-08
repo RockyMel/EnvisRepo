@@ -17,7 +17,6 @@ import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
-import com.envisprototype.controller.ModelReader;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
@@ -31,7 +30,6 @@ public class AddMapActivity extends Activity {
 	EditText name;
 	EditText location;
 	EditText notes;
-	//Boolean flagVisited=false;
 	MapInterface map;
 	Location myloc =  new Location(LocationManager.NETWORK_PROVIDER);
 	Button drawMapBtn;
