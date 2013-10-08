@@ -82,9 +82,19 @@ public class MapListModel implements MapListInterface {
 		 }
 	}
 	
+	public void setMapList(List<MapInterface> mapList){
+		
+		this.mapList=mapList;
+	}
 //	public boolean isSensorListEmpty()
 //	{
 //		return sensorList.isEmpty();
 //
 //	}
+
+	@Override
+	public void ReplicateMapList() {
+		// TODO Auto-generated method stub
+		
+	}
 }

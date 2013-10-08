@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.DeleteMapButtonController;
 import com.envisprototype.controller.ModelReader;
 import com.envisprototype.controller.Show3DMapBtnListener;
@@ -30,10 +31,12 @@ public class MapInfoViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_info_view);
-		
+		init();
 	}
 
 	private void init() {
+		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
+
 		// TODO Auto-generated method stub
 		id = (EditText)findViewById(R.id.id_map);
 		mapid = getIntent().getStringExtra(MapListModel.MAP_ID_EXTRA);
@@ -74,10 +77,12 @@ public class MapInfoViewActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(secondTime)
-			MapListModel.getSingletonInstance().resetModel(this);
-		init();
-		secondTime = true;
+//		if(secondTime)
+//			MapListModel.getSingletonInstance().resetModel(this);
+//		init();
+//		secondTime = true;
+		
+		
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
 import com.envisprototype.controller.ModelReader;
@@ -30,7 +31,7 @@ public class AddMapActivity extends Activity {
 	EditText name;
 	EditText location;
 	EditText notes;
-	Boolean flag;
+	//Boolean flagVisited=false;
 	MapInterface map;
 	Location myloc =  new Location(LocationManager.NETWORK_PROVIDER);
 	Button drawMapBtn;
@@ -90,15 +91,17 @@ public class AddMapActivity extends Activity {
 				map.setLocation(myloc);
 				
 				MapInterface temp = MapListModel.getSingletonInstance().findMapById(id.getText().toString());
-				MapListModel.getSingletonInstance().resetModel(context);
+				//MapListModel.getSingletonInstance().resetModel(context);
 				
 				if(temp!=null)
 					{
-					MapListModel.getSingletonInstance().removeMap(temp);
-					MapListModel.getSingletonInstance().addMap(map);
+					//MapListModel.getSingletonInstance().removeMap(temp);
+					//MapListModel.getSingletonInstance().addMap(map);
+					MapLocalDBHelper.getSingletonInstance(context).addMap(map);
 					}
 				else
-					MapListModel.getSingletonInstance().addMap(map);
+					//MapListModel.getSingletonInstance().addMap(map);
+					MapLocalDBHelper.getSingletonInstance(context).addMap(map);
 				
 				
 					
@@ -114,6 +117,7 @@ public class AddMapActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//CODE TO SET THE TEXT FIELDS FROM QR READER
+		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 		
 	}
 	
@@ -121,11 +125,11 @@ public class AddMapActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		 for(int j = 0; j < MapListModel.getSingletonInstance().getMapList().size(); j++){
-			 Log.i("reset", MapListModel.getSingletonInstance().getMapList().get(j).getId());
-			  Log.i("reset",  MapListModel.getSingletonInstance().getMapList().get(j).getName());
-			  Log.i("reset", "###############");
-		 }
+//		 for(int j = 0; j < MapListModel.getSingletonInstance().getMapList().size(); j++){
+//			 Log.i("reset", MapListModel.getSingletonInstance().getMapList().get(j).getId());
+//			  Log.i("reset",  MapListModel.getSingletonInstance().getMapList().get(j).getName());
+//			  Log.i("reset", "###############");
+//		 }
 		
 	
 		

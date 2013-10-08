@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
 import com.envisprototype.controller.ModelReader;
 import com.envisprototype.model.maps.MapInterface;
@@ -31,7 +32,9 @@ public class MapListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_map_list);
+
 		//WILL BE REMOVED (TEMPORARY TO DEMO ADD SENSOR)
 		Button addmap = (Button)findViewById(R.id.button1);
 		addmap.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.envisprototype.view;
 
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.view.navigation.NavigationMaker;
 import com.envisprototype.R;
 
@@ -17,6 +18,8 @@ public class FavoritesTab extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
+
 		setContentView(R.layout.activity_favorites);
 		NavigationMaker.makeNavigationDrawer(this);
 	}

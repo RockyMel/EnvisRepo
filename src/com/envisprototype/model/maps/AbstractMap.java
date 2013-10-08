@@ -134,4 +134,6 @@ public abstract class AbstractMap implements MapInterface {
 		SetCoordinateHashMap = setCoordinateHashMap;
 	}
 
+
+	
 }
