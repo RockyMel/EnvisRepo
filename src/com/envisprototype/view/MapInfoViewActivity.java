@@ -24,6 +24,7 @@ public class MapInfoViewActivity extends Activity {
 	String mapid;
 	MapInterface map;
 	Button show3DMapBtn;
+	boolean secondTime = false;
 	public static Boolean del = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,11 @@ public class MapInfoViewActivity extends Activity {
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
 		map = MapListModel.getSingletonInstance().findMapById(mapid);
-		
+		Log.i("model", map +"");
+
 		Log.i("model", "init");
 		Log.i("model", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
-		Log.i("model", mapid);
+		Log.i("model", "**"+ mapid + "**");
 		Log.i("model", map.getId());
 		id.setText(map.getId());
 		name.setText(map.getName());
@@ -72,8 +74,10 @@ public class MapInfoViewActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		MapListModel.getSingletonInstance().resetModel(this);
+		if(secondTime)
+			MapListModel.getSingletonInstance().resetModel(this);
 		init();
+		secondTime = true;
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

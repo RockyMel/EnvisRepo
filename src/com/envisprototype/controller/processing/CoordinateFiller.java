@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.EnvisPApplet;
@@ -20,14 +19,9 @@ public class CoordinateFiller {
 	EnvisPApplet epApplet;
 	BufferedReader mapBReader, sensorsBReader;
 	String line, sensorLine;
-	String name, xCoorStr, yCoorStr;
-	ArrayList<Float> xCoor, yCoor;
-	
 	
 	public CoordinateFiller(EnvisPApplet epApplet){
 		this.epApplet = epApplet;
-		xCoor = new ArrayList<Float>();
-		yCoor = new ArrayList<Float>();
 	}
 	
 	public ArrayList<SensorSet> prepareSensorsCoordinates(String sensorFileName){
@@ -46,7 +40,6 @@ public class CoordinateFiller {
 			  if(sensorLine != null){
 				  PApplet. println(line);
 			    {
-			    	 
 			    	String[][] xValues =PApplet. matchAll(sensorLine, "x:\\d+");
 			    	String[][] yValues = PApplet.matchAll(sensorLine, "y:\\d+");
 			    	String[][] zValues = PApplet.matchAll(sensorLine, "z:\\d+");
@@ -73,6 +66,8 @@ public class CoordinateFiller {
 	}
 
 	public void prepareMapCoordinates(String mapFileName){
+		ArrayList<Float> coorX = new ArrayList<Float>();
+		ArrayList<Float> coorY = new ArrayList<Float>();
 	  try{
 	    mapBReader = new BufferedReader(new FileReader(new 
                 File(epApplet.getFilesDir()+File.separator+mapFileName)));
@@ -80,34 +75,23 @@ public class CoordinateFiller {
 	    if(line != null){
 			  PApplet.println(line);
 		    {
-		    	epApplet.getEnvisMap().setVisCoors(new Coordinates());
-				  epApplet.getEnvisMap().setRealCoors(new Coordinates());
-				  
-		    	StringTokenizer filecontents = new StringTokenizer(line, "||");
-		    	System.out.println("contents = " + filecontents);
-		  		  xCoorStr =  (String) filecontents.nextElement();
-		  		  yCoorStr =  (String) filecontents.nextElement();
-		  		  
-		  		  StringTokenizer X = new StringTokenizer(xCoorStr, ",");
-		  		  while (X.hasMoreElements()) {
-		  		  System.out.println(X.nextElement());
-		  		xCoor.add( Float.parseFloat((String)  X.nextElement()));
-		  		  }
-
-
-		  		  StringTokenizer Y = new StringTokenizer(yCoorStr, ",");
-		  		  while (Y.hasMoreElements()) {
-		  		  System.out.println(Y.nextElement());
-		  		yCoor.add( Float.parseFloat((String)  Y.nextElement()));
-			      }
-		    	
+		      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
+		      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
+		      for(int j = 0; j < xValues.length; j++){
+		         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
+		         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
+		         coorX.add(Float.parseFloat(xString));
+		         coorY.add(Float.parseFloat(yString));
 		      }
 		    }
-		  for(int i = 0; i < xCoor.size(); i++){
-			  epApplet.getEnvisMap().getVisCoors().getCoorX().add(xCoor.get(i));
-			  epApplet.getEnvisMap().getVisCoors().getCoorY().add(yCoor.get(i));
-			  epApplet.getEnvisMap().getRealCoors().getCoorX().add(xCoor.get(i));
-			  epApplet.getEnvisMap().getRealCoors().getCoorY().add(yCoor.get(i));
+		  }
+		  epApplet.getEnvisMap().setVisCoors(new Coordinates());
+		  epApplet.getEnvisMap().setRealCoors(new Coordinates());
+		  for(int i = 0; i < coorX.size(); i++){
+			  epApplet.getEnvisMap().getVisCoors().getCoorX().add(coorX.get(i));
+			  epApplet.getEnvisMap().getVisCoors().getCoorY().add(coorY.get(i));
+			  epApplet.getEnvisMap().getRealCoors().getCoorX().add(coorX.get(i));
+			  epApplet.getEnvisMap().getRealCoors().getCoorY().add(coorY.get(i));
 		  }
 	  }catch(IOException e){
 	    line = null;

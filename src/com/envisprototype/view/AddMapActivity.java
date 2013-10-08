@@ -77,6 +77,10 @@ public class AddMapActivity extends Activity {
 			        	// Ask user to enable GPS/network in settings
 			        	gps.showSettingsAlert();
 			        }
+				CoordinatesReader coorReader = new CoordinatesReader(context);
+				Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
+				Log.i("on Res add map act", realCoors.toString());
+				map.setRealCoordinates(realCoors);
 				
 				myloc.setLatitude(latitude);
 				myloc.setLongitude(longitude);
@@ -110,9 +114,6 @@ public class AddMapActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//CODE TO SET THE TEXT FIELDS FROM QR READER
-		CoordinatesReader coorReader = new CoordinatesReader(this);
-		Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
-		map.setRealCoordinates(realCoors);
 		
 	}
 	

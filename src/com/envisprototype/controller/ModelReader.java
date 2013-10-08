@@ -20,16 +20,16 @@ import com.envisprototype.model.processing.Coordinates;
 public class ModelReader {
 
 	Context context;
-	CoordinatesReader coorReader;
 	Coordinates mapCoors;
 	String mapName, mapId, lineToParse;
 	BufferedReader mapBReader;
 	String name, xCoorStr, yCoorStr;
 	ArrayList<Float> xCoor, yCoor;
+	String line = null, sensorLine;
+	Coordinates coors;
 	
 	public ModelReader(Context context){
 		this.context = context;
-		coorReader = new CoordinatesReader(context);
 		mapCoors = new Coordinates();
 		xCoor = new ArrayList<Float>();
 		yCoor = new ArrayList<Float>();
@@ -72,14 +72,16 @@ public class ModelReader {
 				  		  }
 				    		//mapNameArray = PApplet.matchAll(lineToParse, "name:\\d+");
 							tempMap.setName(name);
-							Log.i("ModelReaderName",mapName);
 							mapId = mapFile.getName().replace(".emp","");
 							tempMap.setId(mapId);
 				    	}
 				    	
 //				    }
 				    mapBReader.close();
-				    mapCoors = coorReader.prepareMapCoordinates(mapFile.getName());
+				    //mapCoors = prepareMapCoordinates(mapFile.getName());
+				    mapCoors = new Coordinates();
+				    mapCoors.setCoorX(xCoor);
+				    mapCoors.setCoorY(yCoor);
 					tempMap.setRealCoordinates(mapCoors);
 					MapListModel.getSingletonInstance().addMap(tempMap);
 				  }catch(IOException e){
@@ -89,4 +91,49 @@ public class ModelReader {
 		  }
 		//mapCoors = coorReader.prepareMapCoordinates("map.txt");
 	}
+//public Coordinates prepareMapCoordinates(String mapFileName){
+//		
+//		coors = new Coordinates();
+//	  try{
+//	    mapBReader = new BufferedReader(new FileReader(new 
+//                File(context.getFilesDir()+File.separator+mapFileName)));
+////	    while((line = mapBReader.readLine()) != null){
+//	    	line = mapBReader.readLine();
+//	    	if(line != null){
+//	    		 PApplet.println(line);
+//	    		 Log.i("quest real", "in real");
+//	    		 Log.i("quest real", line);
+//	    		 StringTokenizer filecontents = new StringTokenizer(line, "||");
+//		  		  xCoorStr =  (String) filecontents.nextElement();
+//		  		  yCoorStr =  (String) filecontents.nextElement();
+//		  		  
+//		  		  StringTokenizer X = new StringTokenizer(xCoorStr, ",");
+//		  		  while (X.hasMoreElements()) {
+//		  		  System.out.println(X.nextElement());
+//		  		  xCoor.add( Float.parseFloat((String)  X.nextElement()));
+//		  		  }
+//
+//
+//		  		  StringTokenizer Y = new StringTokenizer(yCoorStr, ",");
+//		  		  while (Y.hasMoreElements()) {
+//		  		  System.out.println(Y.nextElement());
+//		  		  yCoor.add( Float.parseFloat((String) Y.nextElement()));
+//					  for(int i = 0; i < xCoor.size(); i++){
+//						  coors.getCoorX().add(xCoor.get(i));
+//						  coors.getCoorY().add(yCoor.get(i));
+//					  }
+//			      }
+//	    	}
+//	    	
+////		    }
+//		  mapBReader.close(); 
+//	    
+//	  }catch(IOException e){
+//	    line = null;
+//	    e.printStackTrace();
+//	  }
+//	  finally{
+//		  return coors;
+//	  }
+//	}
 }

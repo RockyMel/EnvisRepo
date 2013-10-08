@@ -62,8 +62,10 @@ public class MapListAdapter extends ArrayAdapter<MapInterface>{
 		distance.setText(caldiststr);
 		
 		ImageButton editview = (ImageButton)inflatedView.findViewById(R.id.imageButton1);
-		Log.i("234567", map.getId());
-		Log.i("234567", context.toString());
+		Log.i("adap", map.getId());
+		Log.i("adap", map.getName());
+		Log.i("adap", map.getRealCoordinates().toString());
+		
 		
 		MapViewButtonController svbc=new MapViewButtonController(map.getId(),context);
 		editview.setOnClickListener(svbc);

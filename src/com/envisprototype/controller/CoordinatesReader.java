@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import processing.core.PApplet;
 
@@ -22,16 +21,13 @@ public class CoordinatesReader {
 	String line = null, sensorLine;
 	Context context;
 	Coordinates coors;
-	String name, xCoorStr, yCoorStr;
-	ArrayList<Float> xCoor, yCoor;
 	public CoordinatesReader(Context context){
 		this.context = context;
-		xCoor = new ArrayList<Float>();
-		yCoor = new ArrayList<Float>();
 	}
 	
 	public Coordinates prepareMapCoordinates(String mapFileName){
-		
+		ArrayList<Float> coorX = new ArrayList<Float>();
+		ArrayList<Float> coorY = new ArrayList<Float>();
 		coors = new Coordinates();
 	  try{
 	    mapBReader = new BufferedReader(new FileReader(new 
@@ -40,24 +36,16 @@ public class CoordinatesReader {
 	    	line = mapBReader.readLine();
 	    	if(line != null){
 	    		 PApplet.println(line);
-	    		 StringTokenizer filecontents = new StringTokenizer(line, "||");
-		  		  xCoorStr =  (String) filecontents.nextElement();
-		  		  yCoorStr =  (String) filecontents.nextElement();
-		  		  
-		  		  StringTokenizer X = new StringTokenizer(xCoorStr, ",");
-		  		  while (X.hasMoreElements()) {
-		  		  System.out.println(X.nextElement());
-		  		  xCoor.add( Float.parseFloat((String)  X.nextElement()));
-		  		  }
-
-
-		  		  StringTokenizer Y = new StringTokenizer(yCoorStr, ",");
-		  		  while (Y.hasMoreElements()) {
-		  		  System.out.println(Y.nextElement());
-		  		  yCoor.add( Float.parseFloat((String) Y.nextElement()));
-					  for(int i = 0; i < xCoor.size(); i++){
-						  coors.getCoorX().add(xCoor.get(i));
-						  coors.getCoorY().add(yCoor.get(i));
+			      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
+			      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
+			      for(int j = 0; j < xValues.length; j++){
+			         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
+			         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
+			         coorX.add(Float.parseFloat(xString));
+			         coorY.add(Float.parseFloat(yString));
+					  for(int i = 0; i < coorX.size(); i++){
+						  coors.getCoorX().add(coorX.get(i));
+						  coors.getCoorY().add(coorY.get(i));
 					  }
 			      }
 	    	}

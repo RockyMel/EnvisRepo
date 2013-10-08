@@ -39,9 +39,11 @@ public class ModelSaver {
 						  getMapList().get(i).getRealCoordinates();
 				  bufferedWriter = new BufferedWriter(new FileWriter(new 
 		                    File(context.getFilesDir()+File.separator+mapId+".emp")));
-				  stringToWrite = "name:" + mapName + ";";
+				  stringToWrite = mapName;
+				  stringToWrite+="||";
 				  bufferedWriter.write(stringToWrite);
 				  stringToWrite = new String();
+				  
 				  for(int j = 0; j <  mapCoors.getCoorX().size(); j++){
 					  stringToWrite += mapCoors.getCoorX().get(j).toString() + ",";
 					  }

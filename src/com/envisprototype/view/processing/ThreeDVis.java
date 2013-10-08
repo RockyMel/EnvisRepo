@@ -43,7 +43,7 @@ public void setup(){
 }
 public void draw(){
 	super.draw();
-	Log.i("coors","draw");
+	//Log.i("coors","draw");
 	threeDDrawPreset(true); //drawing with sensors
 	rotateButton.drawMe();
 	frontViewButton.drawMe();
