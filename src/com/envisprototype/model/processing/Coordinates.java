@@ -50,6 +50,27 @@ public class Coordinates implements Serializable{
 		this.coorY = coorY;
 	}
 
+	public String getXCoorString(){
+		String temp="";
+		for(int j = 0; j < coorX.size(); j++){
+			if(j==0)
+				temp=temp + String.valueOf(coorX.get(j));
+			else
+				temp=temp + "," + String.valueOf(coorX.get(j));
+			  }
+		return temp;
+	}
 	
+	public String getYCoorString(){
+		String temp="";
+		for(int j = 0; j < coorY.size(); j++){
+			if(j==0)
+				temp=temp + String.valueOf(coorY.get(j));
+			else
+				temp=temp + "," + String.valueOf(coorY.get(j));
+			  }
+		return temp;
+		
+	}
 	
 }
