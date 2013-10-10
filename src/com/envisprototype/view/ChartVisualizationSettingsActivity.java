@@ -1,27 +1,30 @@
 package com.envisprototype.view;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-
-import com.envisprototype.R;
-import com.envisprototype.R.id;
-import com.envisprototype.R.layout;
-import com.envisprototype.R.menu;
-import com.envisprototype.view.navigation.NavigationMaker;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.Switch;
 import android.widget.TimePicker;
+
+import com.envisprototype.R;
+import com.envisprototype.controller.ShowChartVisualizationButtonController;
+import com.envisprototype.view.navigation.NavigationMaker;
 
 
 public class ChartVisualizationSettingsActivity extends Activity {
@@ -34,6 +37,7 @@ public class ChartVisualizationSettingsActivity extends Activity {
 	Button SetsButton;
 	Button QRButton;
 	Switch RealTimeSwitch;
+	Button VisualizationButton;
 
 	protected static final int From_DATE_PICKER_DIALOG = 0;
 	protected static final int To_DATE_PICKER_DIALOG = 1;
@@ -44,6 +48,14 @@ public class ChartVisualizationSettingsActivity extends Activity {
 
 	final Calendar calfrom=Calendar.getInstance();
 	final Calendar calto=Calendar.getInstance();
+
+	int MODE=0;
+
+	List<String> SetIds = new ArrayList<String>();
+	List<String> SensorIds = new ArrayList<String>();
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +75,22 @@ public class ChartVisualizationSettingsActivity extends Activity {
 		SensorsByType = (Button)findViewById(R.id.SensorsByTypeButton);
 		SetsButton = (Button)findViewById(R.id.SetsButton);
 		QRButton = (Button)findViewById(R.id.QR);
+		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
+
+		VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+		final Context context = this;
+
+		SensorsByType.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context,SensorsExpandableListView.class);
+				v.getContext().startActivity(intent);
+			}
+			
+		});
+
 		RealTimeSwitch = (Switch)findViewById(R.id.switchforrealtime);
 		RealTimeSwitch.setChecked(false);
 
@@ -77,12 +105,15 @@ public class ChartVisualizationSettingsActivity extends Activity {
 					DateToPickerButton.setVisibility(Button.INVISIBLE);
 					TimeFromPickerButton.setVisibility(Button.INVISIBLE);
 					TimeToPickerButton.setVisibility(Button.INVISIBLE);
+					MODE = 1;
+					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
 				} else {
 					DateFromPickerButton.setVisibility(Button.VISIBLE);
 					DateToPickerButton.setVisibility(Button.VISIBLE);
 					TimeFromPickerButton.setVisibility(Button.VISIBLE);
 					TimeToPickerButton.setVisibility(Button.VISIBLE);
-
+					MODE = 0;
+					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
 				}
 
 			}

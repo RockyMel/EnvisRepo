@@ -20,26 +20,6 @@
         android:layout_centerHorizontal="true"
         android:text="RealTime" />
 
-    <Button
-        android:id="@+id/SetsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/SensorsByTypeButton"
-        android:layout_alignRight="@+id/SensorsByTypeButton"
-        android:layout_below="@+id/SensorsByTypeButton"
-        android:layout_marginTop="24dp"
-        android:text="Sets of Sensors" />
-
-    <Button
-        android:id="@+id/QR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/SetsButton"
-        android:layout_alignRight="@+id/SensorsByTypeButton"
-        android:layout_below="@+id/SetsButton"
-        android:layout_marginTop="27dp"
-        android:text="Scan Set QR Code" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -48,7 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/TimeFromButton"
         android:layout_marginTop="19dp"
-        android:text="Select Sensors for Visualization from the following Lists:" />
+        android:text="Select Sensors for Visualization by Clicking on the Buttons to the Right:" />
 
     <Button
         android:id="@+id/DateToButton"
@@ -104,6 +84,32 @@
         android:layout_toLeftOf="@+id/SetsButton" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/SetsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/DateToButton"
+        android:layout_below="@+id/SensorsByTypeButton"
+        android:text="Sets of Sensors" />
+
+    <Button
+        android:id="@+id/QR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SensorsByTypeButton"
+        android:layout_below="@+id/SetsButton"
+        android:text="Scan Set QR Code" />
+
+    <Button
+        android:id="@+id/VisualizationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/QR"
+        android:layout_marginBottom="14dp"
+        android:text="Visualization                          ->" />
 </RelativeLayout>
 <include layout="@layout/for_drawer" />
 </android.support.v4.widget.DrawerLayout>
