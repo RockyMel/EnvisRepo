@@ -11,11 +11,12 @@ import android.graphics.Color;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.envisprototype.model.ChartSensorConcept;
+import com.envisprototype.model.ChartSensorConceptInterface;
 import com.envisprototype.model.FormatFactory;
 import com.envisprototype.model.LinePointFormat;
-import com.envisprototype.model.Sensor;
+import com.envisprototype.model.ParameterConstruct;
 import com.envisprototype.model.SeriesContainer;
-import com.envisprototype.model.TempSensor;
 import com.envisprototype.view.LineChart;
 
 /**
@@ -30,16 +31,22 @@ public class DialogHandler implements OnClickListener {
 
 	private ArrayList<Boolean> chosenItems;
 	private HashMap<XYSeries, LineAndPointFormatter> container;
+	private Number[][] data;
+	private String[] names;
 
 	public DialogHandler() {
 
-		this.chosenItems = new ArrayList<Boolean>();
-		this.chosenItems.add(0, false);
-		this.chosenItems.add(1, false);
-		this.chosenItems.add(2, false);
-		this.chosenItems.add(3, false);
+		
 	}
 
+	public void init(int size){
+		this.chosenItems = new ArrayList<Boolean>();
+		for(int i=0;i<size;i++)
+		{
+			this.chosenItems.add(i, false);
+
+		}
+	}
 	public ArrayList getChosenItems() {
 		return chosenItems;
 	}
@@ -48,15 +55,37 @@ public class DialogHandler implements OnClickListener {
 		this.chosenItems = chosenItems;
 	}
 
+	public void setDataForVis(Number[][] data,String[] names){
+		this.data = data;
+		this.names = names;
+		
+	}
+	
+	List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
+	
 	@Override
 	public void onClick(DialogInterface arg0, int arg1) {
 		if (arg1 == arg0.BUTTON_POSITIVE) {
 			boolean flag = false;
 			XYPlot plot = LineChart.mySimpleXYPlot;
-			Sensor sensor = new TempSensor();
+			ChartSensorConceptInterface sensor = new ChartSensorConcept();
 			FormatFactory format = new LinePointFormat();
 
-			Number[] number1 = { 5, 15, 23, 36, 23, 17 };
+			for(int i=0;i<=names.length-1;i++){
+
+				List<Integer> parameter1 = new ArrayList<Integer>();
+				
+				parameter1.add(Color.RED);
+				parameter1.add(null);
+				parameter1.add(null);
+				parameter1.add(Color.WHITE);
+				
+				ParameterConstruct temp = new ParameterConstruct(names[i],parameter1,data[i]);
+				pclist.add(temp);
+				
+			}
+			
+		/*	Number[] number1 = { 5, 15, 23, 36, 23, 17 };
 			List<Integer> parameter1 = new ArrayList<Integer>();
 			parameter1.add(Color.RED);
 			parameter1.add(null);
@@ -80,7 +109,7 @@ public class DialogHandler implements OnClickListener {
 			parameter4.add(null);
 			parameter4.add(null);
 			parameter4.add(Color.WHITE);
-
+*/
 			plot.clear();
 
 			XYSeries tempSeries = null;
@@ -88,7 +117,17 @@ public class DialogHandler implements OnClickListener {
 			container = SeriesContainer.getContainer();
 			container.clear();
 
-			for (int i = 0; i < this.chosenItems.size(); i++) {
+			for (int i = 0; i < this.chosenItems.size(); i++)
+			{
+				if(chosenItems.get(i))
+				{
+					tempSeries = sensor.createXYChart(pclist.get(i).getNumber1(), pclist.get(i).getName());
+					tempFormat = format.createFormat(pclist.get(i).getParameter1());
+					container.put(tempSeries, tempFormat);
+					plot.addSeries(tempSeries, tempFormat);
+				}
+			}
+			/*for (int i = 0; i < this.chosenItems.size(); i++) {
 				if (chosenItems.get(i)) {
 					switch (i) {
 					case 0:
@@ -121,7 +160,8 @@ public class DialogHandler implements OnClickListener {
 				} else {
 
 				}
-			}
+			}*/
+			
 			plot.redraw();
 
 		} else if (arg1 == arg0.BUTTON_NEGATIVE) {

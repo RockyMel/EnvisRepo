@@ -4,12 +4,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,8 @@ import com.androidplot.xy.XYStepMode;
 import com.envisprototype.R;
 import com.envisprototype.controller.DialogHandler;
 import com.envisprototype.model.SeriesContainer;
+import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 /**
@@ -34,7 +38,7 @@ import com.envisprototype.view.navigation.NavigationMaker;
  * 
  */
 public class LineChart extends Activity implements OnClickListener,
-		OnMultiChoiceClickListener {
+OnMultiChoiceClickListener {
 
 	public static XYPlot mySimpleXYPlot;
 	private ImageButton imageBut;
@@ -46,10 +50,48 @@ public class LineChart extends Activity implements OnClickListener,
 	private HashMap<XYSeries, LineAndPointFormatter> tempMap;
 
 	public LineChart() {
-		this.dHandler = new DialogHandler();
-		this.chosenItems = this.dHandler.getChosenItems();
-		items = new CharSequence[] { "Sensor1", "Sensor2", "Sensor3", "Sensor4" };
-		checked = new boolean[] { false, false, false, false };
+
+		List<SensorInterface> tempsensorlist = SensorListModel.getSingletonInstance().getSensorList();
+
+		String[] names = null;
+		Number[][] data = null;
+		if(tempsensorlist.size()>0){
+
+
+			for(int i=0;i<tempsensorlist.size();i++){
+				if(i==0)
+				{
+					items = new CharSequence[tempsensorlist.size()];
+					names = new String[tempsensorlist.size()];
+					checked = new boolean[tempsensorlist.size()];
+				}
+
+				items[i]=tempsensorlist.get(i).getSetid()+"::"+tempsensorlist.get(i).getName();
+				checked[i]=false;
+				names[i]=tempsensorlist.get(i).getSetid()+"::"+tempsensorlist.get(i).getName();
+
+
+			}
+			int sizej=10;
+			data = new Number[tempsensorlist.size()][sizej];
+			Log.i("size", tempsensorlist.size() + " " +data.length+ " " + data[0].length);
+			for(int i=0;i<tempsensorlist.size();i++){
+				//data[i] = new Number[10];
+
+				for(int j=0;j<10;j++){
+
+					data[i][j]=(j+1)*4;
+				}
+
+			}
+
+			this.dHandler = new DialogHandler();
+			dHandler.init(tempsensorlist.size());
+			dHandler.setDataForVis(data, names);
+
+			this.chosenItems = this.dHandler.getChosenItems();
+		}
+		//checked = new boolean[] { false, false, false, false };
 	}
 
 	@Override
@@ -102,38 +144,39 @@ public class LineChart extends Activity implements OnClickListener,
 		imageBut = (ImageButton) findViewById(R.id.imageButton1);
 		imageBut.setOnClickListener(this);
 
-		tempMap = SeriesContainer.getContainer();
-		if (!tempMap.isEmpty()) {
-			Iterator iter = tempMap.keySet().iterator();
-			String name = "";
-			// this.chosenItems.clear();
-			while (iter.hasNext()) {
-				name = ((XYSeries) iter.next()).getTitle();
-				if (name.equals("Sensor1")) {
-					this.chosenItems.remove(0);
-					this.chosenItems.add(0, true);
-					this.checked[0] = true;
-				} else if (name.equals("Sensor2")) {
-					this.chosenItems.remove(1);
-					this.chosenItems.add(1, true);
-					this.checked[1] = true;
-				} else if (name.equals("Sensor3")) {
-					this.chosenItems.remove(2);
-					this.chosenItems.add(2, true);
-					this.checked[2] = true;
-				} else if (name.equals("Sensor4")) {
-					this.chosenItems.remove(3);
-					this.chosenItems.add(3, true);
-					this.checked[3] = true;
-				}
-			}
-		}
+		//		tempMap = SeriesContainer.getContainer();
+		//		if (!tempMap.isEmpty()) {
+		//			Iterator iter = tempMap.keySet().iterator();
+		//			String name = "";
+		//			// this.chosenItems.clear();
+		////			while (iter.hasNext()) {
+		////				name = ((XYSeries) iter.next()).getTitle();
+		////				if (name.equals("Sensor1")) {
+		////					this.chosenItems.remove(0);
+		////					this.chosenItems.add(0, true);
+		////					this.checked[0] = true;
+		////				} else if (name.equals("Sensor2")) {
+		////					this.chosenItems.remove(1);
+		////					this.chosenItems.add(1, true);
+		////					this.checked[1] = true;
+		////				} else if (name.equals("Sensor3")) {
+		////					this.chosenItems.remove(2);
+		////					this.chosenItems.add(2, true);
+		////					this.checked[2] = true;
+		////				} else if (name.equals("Sensor4")) {
+		////					this.chosenItems.remove(3);
+		////					this.chosenItems.add(3, true);
+		////					this.checked[3] = true;
+		////				}
+		////			}
+		//		}
 
 		builder = new AlertDialog.Builder(this);
 		builder.setTitle("MultiChoose");
 		builder.setPositiveButton("OK", dHandler);
 		// builder.setNegativeButton("Cancel", dHandler);
 		builder.setMultiChoiceItems(items, checked, this);
+
 	}
 
 	/**

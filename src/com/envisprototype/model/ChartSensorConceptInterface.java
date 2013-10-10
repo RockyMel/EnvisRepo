@@ -10,7 +10,7 @@ import com.androidplot.xy.XYSeries;
  * @date 31/08/2013 11:09:43 AM
  * 
  */
-public interface Sensor {
+public interface ChartSensorConceptInterface {
 	public XYSeries createXYChart(Number[] numbers, String name);
 
 }
