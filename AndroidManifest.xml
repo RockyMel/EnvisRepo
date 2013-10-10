@@ -105,7 +105,8 @@
              android:screenOrientation="landscape"></activity>    
          <activity android:name="com.envisprototype.view.processing.EditMapApplet"
              android:configChanges="orientation"
-             android:screenOrientation="landscape"></activity>  
+             android:screenOrientation="landscape"></activity>
+         <activity android:name=".view.ChooseMapToEditActivity"></activity>  
     </application>
     
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

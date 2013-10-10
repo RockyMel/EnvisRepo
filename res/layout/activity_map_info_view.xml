@@ -65,16 +65,6 @@
         android:text="Notes:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/Delete"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText7"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
-        android:text="Delete" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -97,9 +87,27 @@
         android:id="@+id/show_map_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Delete"
-        android:layout_alignBottom="@+id/Delete"
-        android:layout_toRightOf="@+id/Delete"
-        android:text="Show map" />
+        android:layout_alignTop="@+id/Delete"
+        android:layout_centerHorizontal="true"
+        android:text="Edit map" />
+
+    <Button
+        android:id="@+id/Delete"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_below="@+id/editText7"
+        android:layout_marginTop="65dp"
+        android:text="Delete map" />
+
+    <Button
+        android:id="@+id/Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/show_map_btn"
+        android:layout_alignBottom="@+id/show_map_btn"
+        android:layout_alignRight="@+id/editText7"
+        android:text="Save" />
 
 </RelativeLayout>

@@ -37,11 +37,11 @@
         <item>Nearest Sets</item>
         <item>Scan Set QR code</item>
     </string-array>
-    <string-array name="threed_drop_down">
+    <string-array name="map_drop_down">
         <item>---------------</item>
+        <item>Scan Map QR code</item>
         <item>Maps by name</item>
         <item>Nearest maps</item>
-        <item>Scan Map QR code</item>
     </string-array>
     <string-array name="sensors_admin_options">
         <item>add_set</item>
@@ -69,8 +69,8 @@
      <string name="draw_rect">Draw rect</string>
      <string name="remove_last_node">Remove node</string>
      <string name="add_node">Add node</string>
-     <string name="add_node_step_one">Left node</string>
-     <string name="add_node_step_two">Right node</string>
+     <string name="add_node_step_one">Tap node</string>
+     <string name="add_node_step_two">Tap on map</string>
      <string name="add_node_step_three">Press to add</string>
      <string name="save_sets">Save</string>
      <string name="sets_saved">Saved</string>

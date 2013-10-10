@@ -10,9 +10,9 @@ package com.envisprototype;
 public final class R {
     public static final class array {
         public static final int map_admin_options=0x7f060004;
+        public static final int map_drop_down=0x7f060002;
         public static final int sensors_admin_options=0x7f060003;
         public static final int sort_arrays=0x7f060000;
-        public static final int threed_drop_down=0x7f060002;
         public static final int twod_drop_down=0x7f060001;
     }
     public static final class attr {
@@ -53,17 +53,17 @@ public final class R {
     public static final class id {
         public static final int ADD=0x7f09002a;
         public static final int Add=0x7f09002c;
-        public static final int BRAND=0x7f090025;
+        public static final int BRAND=0x7f090026;
         public static final int DISTANCE=0x7f09003d;
-        public static final int Delete=0x7f09001f;
-        public static final int ID=0x7f090023;
+        public static final int Delete=0x7f090020;
+        public static final int ID=0x7f090024;
         public static final int Mode=0x7f090018;
-        public static final int NAME=0x7f090026;
-        public static final int NOTES=0x7f090027;
+        public static final int NAME=0x7f090027;
+        public static final int NOTES=0x7f090028;
         public static final int Name=0x7f090029;
         public static final int SORTBYOPTION=0x7f09003b;
-        public static final int Save=0x7f090028;
-        public static final int TYPE=0x7f090024;
+        public static final int Save=0x7f090021;
+        public static final int TYPE=0x7f090025;
         public static final int action_settings=0x7f090040;
         public static final int bottom_buttons=0x7f09002e;
         public static final int button=0x7f090019;
@@ -97,7 +97,7 @@ public final class R {
         public static final int list=0x7f09001d;
         public static final int listOfSensors=0x7f09002b;
         public static final int listView1=0x7f09002d;
-        public static final int listViewforMaps=0x7f090022;
+        public static final int listViewforMaps=0x7f090023;
         public static final int mapname=0x7f090038;
         public static final int menuIcon=0x7f090030;
         public static final int menuItemLbl=0x7f090031;
@@ -110,8 +110,8 @@ public final class R {
         public static final int sensorImageBtn=0x7f09002f;
         public static final int sensorTypes=0x7f090013;
         public static final int sensorname=0x7f09003a;
-        public static final int show_map_btn=0x7f090020;
-        public static final int spinner=0x7f090021;
+        public static final int show_map_btn=0x7f09001f;
+        public static final int spinner=0x7f090022;
         public static final int spinner1=0x7f090010;
         public static final int text1=0x7f090034;
         public static final int textView1=0x7f090003;
