@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ChartVisualizationSettingsActivity" >
+
+    <Switch
+        android:id="@+id/switchforrealtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="RealTime" />
+
+    <Button
+        android:id="@+id/SetsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SensorsByTypeButton"
+        android:layout_alignRight="@+id/SensorsByTypeButton"
+        android:layout_below="@+id/SensorsByTypeButton"
+        android:layout_marginTop="24dp"
+        android:text="Sets of Sensors" />
+
+    <Button
+        android:id="@+id/QR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SetsButton"
+        android:layout_alignRight="@+id/SensorsByTypeButton"
+        android:layout_below="@+id/SetsButton"
+        android:layout_marginTop="27dp"
+        android:text="Scan Set QR Code" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/TimeFromButton"
+        android:layout_marginTop="19dp"
+        android:text="Select Sensors for Visualization from the following Lists:" />
+
+    <Button
+        android:id="@+id/DateToButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TimeFromButton"
+        android:layout_alignParentRight="true"
+        android:text="Select Date To" />
+
+    <Button
+        android:id="@+id/TimeToButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/DateToButton"
+        android:text="Select Time To" />
+
+    <Button
+        android:id="@+id/DateFromButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/switchforrealtime"
+        android:text="Select Date From" />
+
+    <Button
+        android:id="@+id/TimeFromButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/DateFromButton"
+        android:text="Select Time From" />
+
+    <Button
+        android:id="@+id/SensorsByTypeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TimeToButton"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="Sensors By Type" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/QR"
+        android:layout_alignTop="@+id/SensorsByTypeButton"
+        android:layout_toLeftOf="@+id/SetsButton" >
+
+    </ListView>
+    
+</RelativeLayout>
