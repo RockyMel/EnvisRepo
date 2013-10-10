@@ -32,7 +32,7 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 			 * This is where to work with 2D vis drop down menu options
 			 * Presumably with sensors
 			 * Position 0 - 	nothing
-			 * Position 1 - 	by type
+			 * Position 1 - 	Configure chart
 			 * Position 2 - 	by name
 			 * Position 3 - 	nearest
 			 * Position 4 - 	scan QR code
@@ -42,22 +42,14 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 				//intent = new Intent(activity,SortByLoc.class);
 			}
 			break;
-			case 1:{
+			case 1:{				
 				intent = new Intent(activity,ChartVisualizationSettingsActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				activity.startActivity(intent);
 			}
 			break;
 			case 2:{
-				intent = new Intent(activity,SensorListActivity.class);
-				activity.startActivity(intent);
-			}
-			break;
-			case 3:{
-				intent = new Intent(activity,SensorListActivity.class);
-				activity.startActivity(intent);
-			}
-			break;
-			case 4:{
 				ImageButton qrBtn = new ImageButton(activity);
 				qrBtn.setOnClickListener(new QRreaderButtonController(activity));
 				qrBtn.performClick();

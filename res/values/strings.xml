@@ -32,9 +32,7 @@
 
     <string-array name="twod_drop_down">
         <item>---------------</item>
-        <item>Sensors by Type</item>
-        <item>Sets by Name</item>
-        <item>Nearest Sets</item>
+        <item>Configure chart</item>
         <item>Scan Set QR code</item>
     </string-array>
     <string-array name="map_drop_down">

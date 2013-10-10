@@ -7,6 +7,7 @@ import com.envisprototype.R;
 import com.envisprototype.R.id;
 import com.envisprototype.R.layout;
 import com.envisprototype.R.menu;
+import com.envisprototype.view.navigation.NavigationMaker;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -48,6 +49,7 @@ public class ChartVisualizationSettingsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chart_visualization_settings);
 		init();
+		NavigationMaker.makeNavigationDrawer(this);
 
 	}
 
