@@ -5,13 +5,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.QRreaderButtonController;
+import com.envisprototype.view.ChartVisualizationSettingsActivity;
 import com.envisprototype.view.MapListActivity;
 import com.envisprototype.view.SensorListActivity;
-import com.envisprototype.view.SensorsExpandableListView;
 
 public class onDropDownItemSelectedListener implements OnNavigationListener{
 	Activity activity;
@@ -44,7 +43,7 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 			}
 			break;
 			case 1:{
-				intent = new Intent(activity,SensorsExpandableListView.class);
+				intent = new Intent(activity,ChartVisualizationSettingsActivity.class);
 				activity.startActivity(intent);
 			}
 			break;

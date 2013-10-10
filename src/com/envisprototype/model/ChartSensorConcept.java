@@ -13,7 +13,7 @@ import com.androidplot.xy.XYSeries;
  * @date 31/08/2013 11:11:10 AM
  * 
  */
-public class TempSensor implements Sensor {
+public class ChartSensorConcept implements ChartSensorConceptInterface {
 
 	@Override
 	public XYSeries createXYChart(Number[] numbers, String name) {
