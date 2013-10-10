@@ -3,15 +3,17 @@ package com.envisprototype.view.processing;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 
-//import com.envisprototype.controller.ModelSaver;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+//import com.envisprototype.controller.ModelSaver;
 
 public abstract class EnvisPApplet extends PApplet{
 	
@@ -30,6 +32,8 @@ public abstract class EnvisPApplet extends PApplet{
 	  public void setup(){
 		  // defalt setup which will be reused
 		  // to specify size of ui elements for different screens
+		  ellipseMode(PConstants.CORNERS);
+		  fill(217,200,33);
 		  MAX_WIDTH =  width-width/7;
 		  DEF_BTN_X = width-width/8;
 		  background(BACKGROUND_COLOR);
@@ -55,8 +59,7 @@ public abstract class EnvisPApplet extends PApplet{
 				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
 				  
 				  Log.i("coors",coors.toString());
-				  envisMap.setRealCoors(coors);
-				  envisMap.setVisCoors(coors);
+				  envisMap.setAllCoors(coors);
 			  }
 		  }
 		  // HERE SENSORS MUST BE ADDED SIMILARLY TO MAP (EXTRAS)
@@ -68,11 +71,6 @@ public abstract class EnvisPApplet extends PApplet{
 		  zoom.setPlace(width/100, width/100);
 		  zoom.setSize(width/50, height-height/20);
 		  axis = new Axis(this);
-		  // as PApplet destroys the model when is reterned, we save it...
-//		  if(MapListModel.getSingletonInstance().getMapList().size() > 0){
-//			  ModelSaver modelSaver = new ModelSaver(this);
-//			  modelSaver.saveMapsToFiles();
-//		  }
 	  }
 	  
 	  public void draw(){

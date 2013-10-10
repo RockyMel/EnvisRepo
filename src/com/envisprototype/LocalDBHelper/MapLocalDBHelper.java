@@ -51,24 +51,21 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		
 	}
 
+	@Override
+	public void editMap(MapInterface map) {
+		// TODO Auto-generated method stub
+		
+		ContentValues values = prepareValues(map);
+		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
+				+ map.getId() + "\"",null);
 	
+			mapModel.addMap(map);
+	}
 	
 	@Override
 	public void addMap(MapInterface map) {
 		// TODO Auto-generated method stub
-		
-		ContentValues values=new ContentValues();
-		values.put(IDCOL, map.getId());
-		values.put(NAMECOL, map.getName());
-		//Log.i("checkDB", newevent.getName());
-		values.put(LATCOL, map.getLocation().getLatitude());
-		values.put(LONGCOL,map.getLocation().getLongitude());
-		
-		values.put(XCOORCOL, map.getRealCoordinates().getXCoorString());
-		values.put(YCOORCOL,  map.getRealCoordinates().getYCoorString());
-		values.put(ZCOORCOL,  map.getzCoordinate());
-		
-		values.put(NOTESCOL, "samplenote");
+		ContentValues values = prepareValues(map);
 		
 		getWritableDatabase().insert(TABLE_NAME, null, values);
 	
@@ -125,10 +122,10 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 					i++;
 					abc = Float.parseFloat((String) Xcoor.nextElement());
 					tempmap.getRealCoordinates().getCoorX().add(abc);
-					Log.i("db helper coor", Integer.toString(i) + " ##### " + abc );
+					//Log.i("db helper coor", Integer.toString(i) + " ##### " + abc );
 					
 				}
-				Log.i("db helper coor", tempmap.getRealCoordinates().getXCoorString());
+				//Log.i("db helper coor", tempmap.getRealCoordinates().getXCoorString());
 				StringTokenizer Ycoor = new StringTokenizer(cursor.getString(5),",");
 				while(Ycoor.hasMoreElements()){
 					tempmap.getRealCoordinates().getCoorY().add(Float.parseFloat((String) Ycoor.nextElement()));
@@ -196,6 +193,22 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	public void setMapList(List<MapInterface> mapList) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private ContentValues prepareValues(MapInterface map) {
+		ContentValues values=new ContentValues();
+		values.put(IDCOL, map.getId());
+		values.put(NAMECOL, map.getName());
+		//Log.i("checkDB", newevent.getName());
+		values.put(LATCOL, map.getLocation().getLatitude());
+		values.put(LONGCOL,map.getLocation().getLongitude());
+		
+		values.put(XCOORCOL, map.getRealCoordinates().getXCoorString());
+		values.put(YCOORCOL,  map.getRealCoordinates().getYCoorString());
+		values.put(ZCOORCOL,  map.getzCoordinate());
+		
+		values.put(NOTESCOL, "samplenote");
+		return values;
 	}
 
 

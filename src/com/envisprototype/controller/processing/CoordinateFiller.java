@@ -99,14 +99,6 @@ public class CoordinateFiller {
 		    	System.out.println(tempEl);
 		    	coorY.add(Float.parseFloat(tempEl));
 		    	}
-//		      String[][] xValues = PApplet.matchAll(line, "x:\\d+");
-//		      String[][] yValues = PApplet.matchAll(line, "y:\\d+");    
-//		      for(int j = 0; j < xValues.length; j++){
-//		         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
-//		         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
-//		         coorX.add(Float.parseFloat(xString));
-//		         coorY.add(Float.parseFloat(yString));
-		      //}
 		    	
 		    }
 		  }

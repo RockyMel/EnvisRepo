@@ -24,6 +24,7 @@ public class DrawMapApplet extends EnvisPApplet {
 	
 public void setup(){
 	super.setup();
+	
 	closeFigure = new EnvisButton(this, "Close");
 	closeFigure.setPlace(DEF_BTN_X, height-height/25);
 	closeFigure.addEventListener(new SaveMapBtnListener(this, "map.txt"));

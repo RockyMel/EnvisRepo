@@ -34,6 +34,22 @@ public class MapListModel implements MapListInterface {
 		
 	}
 	
+
+	@Override
+	public void editMap(MapInterface map) {
+		// TODO Auto-generated method stub
+//		for(MapInterface mapToUpdate: mapList){
+//			if(mapToUpdate.getId() == map.getId()){
+//				mapToUpdate.setLocation(map.getLocation());
+//				mapToUpdate.setName(map.getName());
+//				mapToUpdate.setRealCoordinates(map.getRealCoordinates());
+//				mapToUpdate.setSetCoordinateHashMap(map.getSetCoordinateHashMap());
+//				mapToUpdate.setzCoordinate(map.getzCoordinate());
+//			}
+//		}
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see com.example.envisproto.Model.Maps.MapListInterface#findMapById(java.lang.String)
 	 */

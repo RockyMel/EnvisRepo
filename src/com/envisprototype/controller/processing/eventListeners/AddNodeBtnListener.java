@@ -23,9 +23,21 @@ public class AddNodeBtnListener extends AbstractEditMapListener{
 				EditMapListener.setAdding(true);
 			}
 			else{
-				eButton.setName(eButton.getEpApplet().getString(R.string.add_node));
-				EditMapListener.setAdding(false);
+				switch(EditMapListener.addingStep){
+				case 1:{
+					eButton.setName(eButton.getEpApplet().getString(R.string.add_node_step_two));
+				}
+				break;
+				case 2:{
+					//EditMapListener.setAdding(false);
+					//eButton.setName(eButton.getEpApplet().getString(R.string.add_node));					
+				}
+				break;
+				}
+				
+//				EditMapListener.setAdding(false);
 			}
+			EditMapListener.addingStep++;
 		}
 	}
 

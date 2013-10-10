@@ -14,8 +14,8 @@ public class EditMapListener implements EnvisButtonListener{
 	private static boolean ifDelete = false;
 	private static boolean ifDrag = false;
 	private static boolean isAdding = false;
-	private int addingStep = 0;
-	private int firstIndex, secondIndex;
+	public static int addingStep = 0;
+	private int firstIndex;
 	
 	private EditMapApplet envisPApplet;
 	private Map envisMap;
@@ -25,6 +25,7 @@ public class EditMapListener implements EnvisButtonListener{
 		this.envisMap = envisPApplet.getEnvisMap();
 	}
 
+	
 	@Override
 	public void handleEnvisClassEvent(EventObject e) {
 		// TODO Auto-generated method stub
@@ -49,35 +50,36 @@ public class EditMapListener implements EnvisButtonListener{
 					}
 			}
 			if(isAdding){
-				if(addingStep == 0){
-			          // first step - choose the first point where to add
-				          firstIndex = envisMap.ifHitNode(mouseX, mouseY);
-				          if(firstIndex == -1)
-				        	  return;
-			          envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node_step_two));
-			          }
-			          if(addingStep == 1){
-			        	  // second step
-			        		  secondIndex = envisMap.ifHitNode(mouseX, mouseY);
-			        		  if(secondIndex == -1)
-					        	  return;
-			            envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node_step_three));
-			          }
-				if(addingStep == 2){
+				if(addingStep == 1){
+					// first step - choosing the closest node near which the new node will be added
+					System.out.println("before" + firstIndex);
+						firstIndex = envisMap.ifHitNode(mouseX, mouseY);
+			          if(firstIndex == -1)
+			        	  return;
+		          //envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node_step_two));
+		          envisMap.setHighlightedNode(firstIndex);
+				}
+				if(addingStep >= 2){
 					//adding new sensor
-					envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node));
-					int chosenIndex = (firstIndex > secondIndex )? firstIndex: secondIndex;
+					System.out.println("in step 2");
+					System.out.println("after" + firstIndex);
+//					envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node));
+					//int chosenIndex = (firstIndex > secondIndex )? firstIndex: secondIndex;
 //					float[] center = envisMap.calculateMiddleCoors();
 					envisMap.addNewNode(0, 0);
-					envisMap.shiftNodes(chosenIndex);
-					envisMap.dragNode(chosenIndex, tempX, tempY);
+					envisMap.shiftNodes(envisMap.getHighlightedNode());
+					envisMap.dragNode(envisMap.getHighlightedNode(), tempX, tempY);	
 					addingStep = 0;
+					envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node));
 					isAdding = false;
-				  }
-				  addingStep++;
-			}
-			else{
-				addingStep = 0;
+					envisMap.setHighlightedNode(-1);
+				}
+					
+//				  }
+//				  addingStep++;
+//			}
+//			else{
+//				addingStep = 0;
 			}
 	}
 

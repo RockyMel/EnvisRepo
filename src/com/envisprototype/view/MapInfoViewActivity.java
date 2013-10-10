@@ -1,18 +1,24 @@
 package com.envisprototype.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DeleteMapButtonController;
-import com.envisprototype.controller.Show3DMapBtnListener;
+import com.envisprototype.controller.EditMapBtnListener;
+import com.envisprototype.controller.SaveMapToAddBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
+import com.envisprototype.model.processing.Coordinates;
 
 
 public class MapInfoViewActivity extends Activity {
@@ -20,10 +26,9 @@ public class MapInfoViewActivity extends Activity {
 	EditText name;
 	EditText location;
 	EditText notes;
-	Button delete;
 	String mapid;
 	MapInterface map;
-	Button show3DMapBtn;
+	Button delete, editMapCoorsBtn, saveMapInfoBtn;
 	boolean secondTime = false;
 	public static Boolean del = false;
 	@Override
@@ -53,34 +58,23 @@ public class MapInfoViewActivity extends Activity {
 		name.setText(map.getName());
 		delete = (Button)findViewById(R.id.Delete);
 		delete.setOnClickListener(new DeleteMapButtonController(map.getId(),this));
-		show3DMapBtn = (Button) findViewById(R.id.show_map_btn);
-		show3DMapBtn.setOnClickListener(new Show3DMapBtnListener(map.getId()));
+		editMapCoorsBtn = (Button) findViewById(R.id.show_map_btn);
+		editMapCoorsBtn.setOnClickListener(new EditMapBtnListener(map.getId()));
+		saveMapInfoBtn = (Button)findViewById(R.id.Save);
+		saveMapInfoBtn.setOnClickListener(new SaveMapToAddBtnListener(this, false, id, name));
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-
-//		if(!del){
-//		map.setId(id.getText().toString());
-//		map.setName(name.getText().toString());
-//		MapListModel.getSingletonInstance().removeMap(map);
-//		MapListModel.getSingletonInstance().addMap(map);
-//		}
-//		else
-//			del = false;
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-//		if(secondTime)
-//			MapListModel.getSingletonInstance().resetModel(this);
-//		init();
-//		secondTime = true;
-		
+		//MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 		
 	}
 	@Override

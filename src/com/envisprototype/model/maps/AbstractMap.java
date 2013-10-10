@@ -133,6 +133,7 @@ public abstract class AbstractMap implements MapInterface {
 	public void setSetCoordinateHashMap(HashMap<String, SetCoordinate> setCoordinateHashMap) {
 		SetCoordinateHashMap = setCoordinateHashMap;
 	}
+	
 
 
 	

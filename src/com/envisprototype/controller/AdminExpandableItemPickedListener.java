@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 
 import com.envisprototype.R;
 import com.envisprototype.view.AddMapActivity;
+import com.envisprototype.view.ChooseMapToEditActivity;
 import com.envisprototype.view.InputIDActivity;
 import com.envisprototype.view.SensorListActivity;
 import com.envisprototype.view.SetListActivity;
@@ -57,7 +58,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 			intent = new Intent(adminkaActivity, AddMapActivity.class);
 		}
 		if(tag.equals(menuOptions[1])){
-			intent = new Intent(adminkaActivity, EditMapApplet.class);
+			intent = new Intent(adminkaActivity, ChooseMapToEditActivity.class);
 		}
 		adminkaActivity.startActivity(intent);
 	}

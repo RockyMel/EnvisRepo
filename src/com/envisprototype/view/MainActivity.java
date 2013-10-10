@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 public class MainActivity extends Activity {
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		NavigationMaker.makeNavigationDrawer(this);
+		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 
 	}
 

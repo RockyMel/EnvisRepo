@@ -77,6 +77,7 @@ public class MapListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//sensors.clear();
+		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 		maps = MapListModel.getSingletonInstance().getMapList();
 		Log.i("TEST", maps.toString());
 		mla = new MapListAdapter(this,0,maps);

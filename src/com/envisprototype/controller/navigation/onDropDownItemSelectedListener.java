@@ -67,14 +67,16 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 			}
 		}
 		break;
-		case R.array.threed_drop_down:{
+		case R.array.map_drop_down:{
 			/*
+			 * intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			 * This is where to work with 3D vis drop down menu options
 			 * Presumably with maps
 			 * Position 0 - nothing
-			 * Position 1 - by name
-			 * Position 2 - nearest
-			 * Position 3 - scan QR code
+			 * Position 1 - scan QR code
+			 * Position 2 - by name
+			 * Position 3 - nearest
 			 */
 			Log.i("3D", "drop down for maps");
 			switch(itemPosition){
@@ -82,19 +84,21 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 			}
 			break;
 			case 1:{
-				intent = new Intent(activity,MapListActivity.class);
-				activity.startActivity(intent);
-			}
-			break;
-			case 2:{
-				intent = new Intent(activity,MapListActivity.class);
-				activity.startActivity(intent);
-			}
-			break;
-			case 3:{
 				ImageButton qrBtn = new ImageButton(activity);
 				qrBtn.setOnClickListener(new QRreaderButtonController(activity));
 				qrBtn.performClick();
+			}
+			break;
+			case 2:{
+
+				intent = new Intent(activity,MapListActivity.class);
+				activity.startActivity(intent);
+				// !!! ADD FLAG HERE SAYING THAT THUS US 
+			}
+			break;
+			case 3:{
+				intent = new Intent(activity,MapListActivity.class); 
+				activity.startActivity(intent);
 			}
 			}
 		}

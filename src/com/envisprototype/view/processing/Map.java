@@ -14,7 +14,9 @@ public class Map extends UIElement{
 	float newXmag, newYmag = 0; 
 	float zoomValue = 1;
 	float xRotate = 0, yRotate = 0, zRotate = 0;
-
+	
+	private int highlightedNode = -1;
+	
 	private final static int COOR_Z_TOP = -50;
 	final static int COOR_Z_BOTTOM = 50;
 	final static float MIDDLE_COEFF = 1f;
@@ -26,8 +28,8 @@ public class Map extends UIElement{
 	private boolean if3D = false;
 	boolean ifBadPoint = false;
 	CenterPoint center;
-	Coordinates visCoors; // these are to show the map. Will be tampered
-	Coordinates realCoors; 
+	private Coordinates visCoors; // these are to show the map. Will be tampered
+	private Coordinates realCoors; 
 	private String mapId;
 	
 	public void printCoors(){
@@ -50,6 +52,15 @@ public class Map extends UIElement{
 	public void setVisCoors(Coordinates visCoors) {
 		this.visCoors = visCoors;
 	}
+	
+	public void setAllCoors(Coordinates coors){
+		for(int i = 0; i < coors.getCoorX().size(); i++){
+			  visCoors.getCoorX().add(coors.getCoorX().get(i));
+			  visCoors.getCoorY().add(coors.getCoorY().get(i));
+			  realCoors.getCoorX().add(coors.getCoorX().get(i));
+			  realCoors.getCoorY().add(coors.getCoorY().get(i));
+		  }
+	}
 
 	public CenterPoint getCenter() {
 		return center;
@@ -63,12 +74,7 @@ public class Map extends UIElement{
 			ArrayList<Float>coorY) {
 		super(epApplet);
 		visCoors = new Coordinates();
-//		visCoors.setCoorX(coorX);
-//		visCoors.setCoorY(coorY);
-	
 		realCoors = new Coordinates();
-//		realCoors.setCoorX(coorX);
-//		realCoors.setCoorY(coorY);
 		for(int i = 0; i < coorX.size(); i++){
 			realCoors.getCoorX().add(coorX.get(i));
 			realCoors.getCoorY().add(coorY.get(i));
@@ -89,8 +95,10 @@ public class Map extends UIElement{
 			visCoors.getCoorX().remove(nodeToRemove);
 			visCoors.getCoorY().remove(nodeToRemove);
 		}
-		realCoors.getCoorX().remove(nodeToRemove);
-		realCoors.getCoorY().remove(nodeToRemove);
+		if(realCoors.getCoorX().size()>nodeToRemove){
+			realCoors.getCoorX().remove(nodeToRemove);
+			realCoors.getCoorY().remove(nodeToRemove);
+		}
 	}
 	
 	public void addNewNode(float mouseX, float mouseY){
@@ -112,6 +120,7 @@ public class Map extends UIElement{
 	}
 	
 	public void dragNode(int nodeToDrag, float mouseX, float mouseY){
+		//float[] centerArray = calculateMiddleCoors();
 		visCoors.getCoorX().set(nodeToDrag,mouseX- epApplet.width/2);
 		visCoors.getCoorY().set(nodeToDrag,mouseY- epApplet.height/2);
 		realCoors.getCoorX().set(nodeToDrag,mouseX);
@@ -165,7 +174,7 @@ public class Map extends UIElement{
 
 	public void drawMe2D(){
 		float dispX, dispY;
-		epApplet.ellipseMode(PConstants.CORNERS);
+		//epApplet.ellipseMode(PConstants.CORNERS);
 		switch(visCoors.getCoorX().size()){
 		case 0:
 			return;
@@ -187,13 +196,16 @@ public class Map extends UIElement{
 				epApplet.stroke(EnvisPApplet.STROKE_COLOR);
 			    epApplet.line(visCoors.getCoorX().get(i),visCoors.getCoorY().get(i),
 			    		visCoors.getCoorX().get(i-1), visCoors.getCoorY().get(i-1));
-			    epApplet.fill(217,200,33);
+			    //epApplet.fill(217,200,33);
 			    epApplet.text(dispX + ", " + dispY,
 			    visCoors.getCoorX().get(i), visCoors.getCoorY().get(i)+10);
+			    if(i == highlightedNode)
+			    	epApplet.stroke(255,0,0);
 			    epApplet.ellipse(visCoors.getCoorX().get(i)-POINT_RADIUS,
 			    		visCoors.getCoorY().get(i)-POINT_RADIUS,
 			    		visCoors.getCoorX().get(i)+POINT_RADIUS,
 			    		visCoors.getCoorY().get(i)+POINT_RADIUS);
+			    epApplet.stroke(255,255,255);
 			}
 			}
 		}
@@ -206,6 +218,8 @@ public class Map extends UIElement{
 		}
 		epApplet.text(dispX + ", " + dispY,
 				visCoors.getCoorX().get(0), visCoors.getCoorY().get(0)+10);
+		if(highlightedNode == 0)
+	    	epApplet.stroke(255,0,0);
 		epApplet.ellipse(visCoors.getCoorX().get(0)-POINT_RADIUS,
 	    		visCoors.getCoorY().get(0)-POINT_RADIUS,
 	    		visCoors.getCoorX().get(0)+POINT_RADIUS,
@@ -215,8 +229,6 @@ public class Map extends UIElement{
 	public void closeFigure(){
 		if(visCoors.getCoorX().size()<3)
 			return;
-//		visCoors.getCoorX().add(visCoors.getCoorX().get(0));
-//		visCoors.getCoorY().add(visCoors.getCoorY().get(0));
 		float mouseX = visCoors.getCoorX().get(0);
 		float mouseY = visCoors.getCoorY().get(0);
 		try{
@@ -228,10 +240,7 @@ public class Map extends UIElement{
 			PApplet.println("Not a good time to finish");
 			return;
 		}finally{
-//    	visCoors.getCoorX().remove(visCoors.getCoorX().size()-1);
-//    	visCoors.getCoorY().remove(visCoors.getCoorY().size()-1);
     }
-		//if(!ifClosed)
 			if3D = true;
 		ifClosed = true;
 	}
@@ -242,10 +251,6 @@ public class Map extends UIElement{
 			Log.e("fail","no coordinates defined");
 		}
 		epApplet.pushMatrix();
-//		epApplet.rotateX(xRotate);
-//		epApplet.rotateY(yRotate);
-//		epApplet.rotateZ(zRotate);
-		//epApplet.fill(EnvisPApplet.BACKGROUND_COLOR);
 		epApplet.stroke(EnvisPApplet.STROKE_COLOR);
 		epApplet.strokeWeight(EnvisPApplet.STROKE_WEIGHT);
 		epApplet.hint(EnvisPApplet.DISABLE_DEPTH_TEST);
@@ -439,6 +444,14 @@ public boolean ifIntersects(ArrayList<Float> coorX, ArrayList<Float> coorY,
 
 	public void setMapId(String mapId) {
 		this.mapId = mapId;
+	}
+
+	public int getHighlightedNode() {
+		return highlightedNode;
+	}
+
+	public void setHighlightedNode(int highlightedNode) {
+		this.highlightedNode = highlightedNode;
 	}
 
 	class CenterPoint{

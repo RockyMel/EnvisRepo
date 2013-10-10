@@ -5,7 +5,7 @@ import java.util.EventObject;
 import com.envisprototype.R;
 
 
-public class MoveNodeBtnListener extends AbstractEditMapListener{
+public class DragNodeBtnListener extends AbstractEditMapListener{
 
 
 	@Override

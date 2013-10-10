@@ -17,6 +17,7 @@ import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
+import com.envisprototype.controller.SaveMapToAddBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
@@ -54,60 +55,7 @@ public class AddMapActivity extends Activity {
 		drawMapBtn.setOnClickListener(new DrawMapBtnListener(this));
 		final Context context = this;
 		SaveBtn = (Button)findViewById(R.id.savebutton);
-		SaveBtn.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				GPSTracker gps = new GPSTracker(context);
-				double latitude = 0;
-				double longitude = 0;
-				
-				if(gps.canGetLocation()){
-			        	
-			        	latitude = gps.getLatitude();
-			        	longitude = gps.getLongitude();
-			        	
-			        	// \n is for new line
-			        	//Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();	
-			        }else{
-			        	// can't get location
-			        	// GPS or Network is not enabled
-			        	// Ask user to enable GPS/network in settings
-			        	gps.showSettingsAlert();
-			        }
-				CoordinatesReader coorReader = new CoordinatesReader(context);
-				Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
-				Log.i("on Res add map act", realCoors.toString());
-				map.setRealCoordinates(realCoors);
-				
-				myloc.setLatitude(latitude);
-				myloc.setLongitude(longitude);
-				
-				map.setId(id.getText().toString());
-				map.setName(name.getText().toString());
-				map.setLocation(myloc);
-				
-				MapInterface temp = MapListModel.getSingletonInstance().findMapById(id.getText().toString());
-				//MapListModel.getSingletonInstance().resetModel(context);
-				
-				if(temp!=null)
-					{
-					//MapListModel.getSingletonInstance().removeMap(temp);
-					//MapListModel.getSingletonInstance().addMap(map);
-					MapLocalDBHelper.getSingletonInstance(context).addMap(map);
-					}
-				else
-					//MapListModel.getSingletonInstance().addMap(map);
-					MapLocalDBHelper.getSingletonInstance(context).addMap(map);
-				
-				
-					
-				Log.i("on res", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
-				
-			}
-			
-		});
+		SaveBtn.setOnClickListener(new SaveMapToAddBtnListener(this, true, id, name));
 	}
 
 	@Override
@@ -123,12 +71,6 @@ public class AddMapActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-//		 for(int j = 0; j < MapListModel.getSingletonInstance().getMapList().size(); j++){
-//			 Log.i("reset", MapListModel.getSingletonInstance().getMapList().get(j).getId());
-//			  Log.i("reset",  MapListModel.getSingletonInstance().getMapList().get(j).getName());
-//			  Log.i("reset", "###############");
-//		 }
-		
 	
 		
 	}

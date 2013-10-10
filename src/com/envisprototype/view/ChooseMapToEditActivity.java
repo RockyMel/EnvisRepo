@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.envisprototype.R;
 import com.envisprototype.view.navigation.NavigationMaker;
 
-public class ThreeDVisualisation extends Activity {
+public class ChooseMapToEditActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,9 +30,9 @@ public class ThreeDVisualisation extends Activity {
 		case R.id.chooseSensors: {
 			// will launch an activity with ependable Lists for user to
 			// choose sensors
-//			Intent intentForSensorsList = new Intent(ThreeDVisualisation.this,
+//			Intent intentForSensorsList = new Intent(ChooseMapToEditActivity.this,
 //					SensorsExpandableListView.class);
-//			ThreeDVisualisation.this.startActivity(intentForSensorsList);
+//			ChooseMapToEditActivity.this.startActivity(intentForSensorsList);
 		}
 		}
 		return true;

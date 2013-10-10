@@ -19,5 +19,7 @@ public interface MapListInterface {
 	public void setMapList(List<MapInterface> mapList);
 	
 	public void ReplicateMapList();
+	
+	public abstract void editMap(MapInterface map);
 
 }
