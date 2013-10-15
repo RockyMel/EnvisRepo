@@ -107,11 +107,10 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		if(cursor.moveToFirst())
 		{
 			do{
-				//Log.i("asjdhkas", cursor.getString(1));
 				MapInterface tempmap=new MapModel();
 				tempmap.setId(cursor.getString(0));
 				tempmap.setName(cursor.getString(1));
-				//LOCATION....................................................!!!
+				
 				location.setLongitude(cursor.getDouble(2));
 				location.setLatitude(cursor.getDouble(3));
 				

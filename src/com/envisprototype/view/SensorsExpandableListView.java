@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
-import com.envisprototype.controller.ExpandableListAdapter;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.view.model.ExpandableListAdapter;
 
 public class SensorsExpandableListView extends Activity {
 
@@ -36,6 +36,7 @@ public class SensorsExpandableListView extends Activity {
 		expListView.setAdapter(listAdapter);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void prepareListData() {
 		listDataHeader = new ArrayList<String>();
 		listDataChild = new HashMap<String, List<String>>();
@@ -51,13 +52,13 @@ public class SensorsExpandableListView extends Activity {
 		
 
 		// Adding child data
-		List<String> AQ = SensorListModel.getSingletonInstance().getSensorListByType(1);
-		List<String> H = SensorListModel.getSingletonInstance().getSensorListByType(2);
-		List<String> L = SensorListModel.getSingletonInstance().getSensorListByType(3);
-		List<String> M = SensorListModel.getSingletonInstance().getSensorListByType(4);
-		List<String> T = SensorListModel.getSingletonInstance().getSensorListByType(5);
-		List<String> WL = SensorListModel.getSingletonInstance().getSensorListByType(6);
-		List<String> O = SensorListModel.getSingletonInstance().getSensorListByType(7);
+		List<String> AQ = SensorListModel.getSingletonInstance().getSensorIDListByType(1);
+		List<String> H = SensorListModel.getSingletonInstance().getSensorIDListByType(2);
+		List<String> L = SensorListModel.getSingletonInstance().getSensorIDListByType(3);
+		List<String> M = SensorListModel.getSingletonInstance().getSensorIDListByType(4);
+		List<String> T = SensorListModel.getSingletonInstance().getSensorIDListByType(5);
+		List<String> WL = SensorListModel.getSingletonInstance().getSensorIDListByType(6);
+		List<String> O = SensorListModel.getSingletonInstance().getSensorIDListByType(7);
 		
 		
 		listDataChild.put(listDataHeader.get(0), AQ); // Header, Child
@@ -70,4 +71,6 @@ public class SensorsExpandableListView extends Activity {
 
 		
 	}
+
+
 }

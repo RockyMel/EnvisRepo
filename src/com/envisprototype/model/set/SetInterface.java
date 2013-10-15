@@ -25,6 +25,14 @@ public interface SetInterface {
 
 	public abstract void setLocation(Location location);
 
+	public abstract void setMapID(String mapID);
+	public float getX();
+	public void setX(float x);
+	public float getY();
+	public void setY(float y);
+	public float getZ();
+	public void setZ(float z);
+
 	//public abstract List<SensorInterface> getSensors();
 	
 	//public abstract void setSensors(List<SensorInterface> sensors);

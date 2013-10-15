@@ -51,4 +51,28 @@ public class SetListModel implements SetListInterface{
 		return temp;
 	}
 
+	@Override
+	public void setSetList(List<SetInterface> theset) {
+		// TODO Auto-generated method stub
+		this.setList = theset;
+	}
+
+	@Override
+	public void addAssociateSettoMap(String setID, String mapID, float x,
+			float y, float z) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<this.setList.size();i++)
+		{
+			if(this.setList.get(i).getId().equals(setID))
+				{
+				this.setList.get(i).setMapID(mapID);
+				this.setList.get(i).setX(x);
+				this.setList.get(i).setY(y);
+				this.setList.get(i).setZ(z);
+				
+				}
+		}
+		
+	}
+
 }

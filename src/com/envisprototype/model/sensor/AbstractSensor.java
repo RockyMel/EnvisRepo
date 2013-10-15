@@ -8,7 +8,7 @@ public abstract class AbstractSensor implements SensorInterface {
 	
 	private String id;
 	private String name;
-	private String type;
+	private int type;
 	private String brand;
 	private String notes;
 	private String state;
@@ -19,7 +19,7 @@ public abstract class AbstractSensor implements SensorInterface {
 		//this.id=UUID.randomUUID().toString();
 
 	}
-	public AbstractSensor(String name,String type,String brand,String notes,String state, Location location) {
+	public AbstractSensor(String name,int type,String brand,String notes,String state, Location location) {
 		super();
 		this.name = name;
 		this.type=type;
@@ -36,14 +36,14 @@ public abstract class AbstractSensor implements SensorInterface {
 	 * @see com.envisprototype.model.sensor.SensorInterface#getType()
 	 */
 	@Override
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 	/* (non-Javadoc)
 	 * @see com.envisprototype.model.sensor.SensorInterface#setType(java.lang.String)
 	 */
 	@Override
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/* (non-Javadoc)

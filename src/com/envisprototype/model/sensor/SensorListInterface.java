@@ -16,7 +16,11 @@ public interface SensorListInterface {
 
 	List getSensorListBySetID(String ID);
 	
-	List getSensorListByType(int type);
+	List getSensorIDListByType(int type);
+
+	public abstract void setSensorList(List<SensorInterface> thesensor);
+
+	public abstract void addAssociateSensortoSet(String sensorID, String setID);
 	
 
 }

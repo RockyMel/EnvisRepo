@@ -4,9 +4,9 @@ import android.location.Location;
 
 public interface SensorInterface {
 
-	public abstract String getType();
+	public abstract int getType();
 
-	public abstract void setType(String type);
+	public abstract void setType(int type);
 
 	public abstract String getNotes();
 

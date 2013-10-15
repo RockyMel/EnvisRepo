@@ -1,4 +1,4 @@
-package com.envisprototype.controller;
+package com.envisprototype.view.model;
 
 import java.util.List;
 

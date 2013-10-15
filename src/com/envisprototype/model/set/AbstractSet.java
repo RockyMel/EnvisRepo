@@ -14,8 +14,35 @@ public abstract class AbstractSet implements SetInterface {
 	private String name;
 	private String notes;
 	private Location location;
+	private float x,y,z;
+	private String MapID;
+	
 	//private List<String> sensorid;
 	
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
+	public float getZ() {
+		return z;
+	}
+	public void setZ(float z) {
+		this.z = z;
+	}
+	public String getMapID() {
+		return MapID;
+	}
+	public void setMapID(String mapID) {
+		MapID = mapID;
+	}
 	public AbstractSet(){
 		//sensorid = new ArrayList<String>();
 	}
