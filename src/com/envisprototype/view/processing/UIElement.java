@@ -79,6 +79,7 @@ public abstract class UIElement {
 
 	public UIElement(EnvisPApplet epApplet) {
 		this.epApplet = epApplet;
+		this.name = "";
 	}
 	
 	public UIElement(EnvisPApplet epApplet, String name) {

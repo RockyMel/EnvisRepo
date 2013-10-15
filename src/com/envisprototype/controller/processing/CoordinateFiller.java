@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import processing.core.PApplet;
@@ -26,8 +27,8 @@ public class CoordinateFiller {
 		this.epApplet = epApplet;
 	}
 	
-	public ArrayList<SensorSet> prepareSensorsCoordinates(String sensorFileName){
-		ArrayList<SensorSet> envisSensors = new ArrayList<SensorSet>();
+	public HashMap<String, SensorSet> prepareSensorsCoordinates(String sensorFileName){
+		HashMap<String, SensorSet> envisSensors = new HashMap<String, SensorSet>();
 		try {
 			sensorsBReader = new BufferedReader(new FileReader(new 
 			        File(epApplet.getFilesDir()+File.separator+sensorFileName)));
@@ -41,27 +42,21 @@ public class CoordinateFiller {
 			// parsing sensors
 			  if(sensorLine != null){
 				  PApplet. println(line);
-			    {
-			    	String[][] xValues =PApplet. matchAll(sensorLine, "x:\\d+");
-			    	String[][] yValues = PApplet.matchAll(sensorLine, "y:\\d+");
-			    	String[][] zValues = PApplet.matchAll(sensorLine, "z:\\d+");
-			    	//String[][] idValues = PApplet.matchAll(sensorLine, "id:\\d+"); //!!!! must be changed properly
+				  StringTokenizer filecontents = new StringTokenizer(line, "||");
+				  while(filecontents.hasMoreElements()){
+					  String setid =  (String) filecontents.nextElement();
+					  String xyzcoors =  (String) filecontents.nextElement();
+					  StringTokenizer xyzTokenizer = new StringTokenizer(xyzcoors, ",");
+					  String xCoor = (String)xyzTokenizer.nextElement();
+					  String yCoor = (String)xyzTokenizer.nextElement();
+					  String zCoor = (String)xyzTokenizer.nextElement();
+				      envisSensors.put(setid, new SensorSet(epApplet, setid,
+			    			  Float.parseFloat(xCoor),
+			    			  Float.parseFloat(yCoor),
+			    			  Float.parseFloat(zCoor)));
+				  }
 			      
-			      for(int j = 0; j < xValues.length; j++){
-//			         String[][] xValues2 = matchAll(xValues[j][0],"\\d+");
-//			         String[][] yValues2 = matchAll(yValues[j][0],"\\d+");
-			    	// String idString = PApplet.matchAll(idValues[j][0],"\\d+")[0][0];
-			         String xString = PApplet.matchAll(xValues[j][0],"\\d+")[0][0];
-			         String yString = PApplet.matchAll(yValues[j][0],"\\d+")[0][0];
-			         String zString = PApplet.matchAll(zValues[j][0],"\\d+")[0][0];
-			         envisSensors.add(new SensorSet(epApplet, "dummy",
-			    			  Float.parseFloat(xString),
-			    			  Float.parseFloat(yString),
-			    			  Float.parseFloat(zString)));
-			         PApplet.println("zzzzz " + zString);
-			         envisSensors.get(j).printCoors();
-			      }
-			    }
+
 			  }
 		}
 		return envisSensors;

@@ -1,6 +1,5 @@
 package com.envisprototype.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,29 +10,28 @@ import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.view.navigation.NavigationMaker;
 
-public class MainActivity extends Activity {
+public class MainActivity extends EnvisActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		NavigationMaker.makeNavigationDrawer(this);
 		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 
 	}
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-		NavigationMaker.drawerToggle.syncState();
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		NavigationMaker.drawerToggle.onConfigurationChanged(newConfig);
-	}
+//	@Override
+//	protected void onPostCreate(Bundle savedInstanceState) {
+//		super.onPostCreate(savedInstanceState);
+//		NavigationMaker.drawerToggle.syncState();
+//	}
+//
+//	@Override
+//	public void onConfigurationChanged(Configuration newConfig) {
+//		super.onConfigurationChanged(newConfig);
+//		NavigationMaker.drawerToggle.onConfigurationChanged(newConfig);
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

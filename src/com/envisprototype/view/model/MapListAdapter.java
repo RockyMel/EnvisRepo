@@ -2,7 +2,9 @@ package com.envisprototype.view.model;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.envisprototype.R;
 import com.envisprototype.controller.MapViewButtonController;
 import com.envisprototype.model.maps.MapInterface;
+import com.envisprototype.view.ChooseMapActivity;
 
 
 public class MapListAdapter extends ArrayAdapter<MapInterface>{
@@ -68,6 +71,16 @@ public class MapListAdapter extends ArrayAdapter<MapInterface>{
 		
 		
 		MapViewButtonController svbc=new MapViewButtonController(map.getId(),context);
+		Activity act = (Activity)context;
+		Bundle bundle = act.getIntent().getExtras();
+		if(bundle != null){
+			if(bundle.containsKey(context.getString(R.string.request_code))){
+				int mode = bundle.getInt((context.getString(R.string.request_code)));
+				if(mode == ChooseMapActivity.MAP_BY_NAME || mode == ChooseMapActivity.MAP_BY_LOCATION){
+					svbc=new MapViewButtonController(map.getId(),context, mode);
+				}
+			}
+		}
 		editview.setOnClickListener(svbc);
 				
 		return inflatedView;

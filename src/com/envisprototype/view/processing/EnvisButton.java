@@ -22,9 +22,12 @@ public class EnvisButton extends AbstractEnvisButton{
 		textSize = getDefH();
 		setColor(255, 255, 255);
 		tempTextSize  = epApplet.textAscent();
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	public EnvisButton(EnvisPApplet epApplet, String name, String btnID) {
+		this(epApplet, name);
+		this.btnID = btnID;
+	}
 	@Override
 	public void drawMe() {
 		// TODO Auto-generated method stub
@@ -76,6 +79,8 @@ public class EnvisButton extends AbstractEnvisButton{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 	
 	
 

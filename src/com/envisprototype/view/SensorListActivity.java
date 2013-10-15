@@ -39,7 +39,7 @@ public class SensorListActivity extends Activity {
 		setContentView(R.layout.activity_main_temp);
 		
 		//WILL BE REMOVED (TEMPORARY TO DEMO ADD SENSOR)
-		Button addsensor = (Button)findViewById(R.id.button1);
+		Button addsensor = (Button)findViewById(R.id.map_by_name_btn);
 		addsensor.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

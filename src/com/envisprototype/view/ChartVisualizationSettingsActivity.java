@@ -27,7 +27,7 @@ import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 
-public class ChartVisualizationSettingsActivity extends Activity {
+public class ChartVisualizationSettingsActivity extends EnvisActivity {
 
 	Button DateFromPickerButton;
 	Button DateToPickerButton;
@@ -61,7 +61,7 @@ public class ChartVisualizationSettingsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chart_visualization_settings);
 		init();
-		NavigationMaker.makeNavigationDrawer(this);
+		
 
 	}
 

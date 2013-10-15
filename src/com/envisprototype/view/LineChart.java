@@ -37,7 +37,7 @@ import com.envisprototype.view.navigation.NavigationMaker;
  * @date 31/08/2013 11:04:21 AM
  * 
  */
-public class LineChart extends Activity implements OnClickListener,
+public class LineChart extends EnvisActivity implements OnClickListener,
 OnMultiChoiceClickListener {
 
 	public static XYPlot mySimpleXYPlot;
@@ -99,7 +99,6 @@ OnMultiChoiceClickListener {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.line_chart);
-		NavigationMaker.makeNavigationDrawer(this);
 		NavigationMaker.makeDropDownMenu(this, R.array.twod_drop_down);
 
 		this.initalChart();

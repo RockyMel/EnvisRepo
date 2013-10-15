@@ -25,7 +25,7 @@ import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.model.GPSTracker;
 
 
-public class AddMapActivity extends Activity {
+public class AddMapActivity extends EnvisActivity {
 	
 	EditText id;
 	EditText name;

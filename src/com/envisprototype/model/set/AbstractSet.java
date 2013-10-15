@@ -1,12 +1,6 @@
 package com.envisprototype.model.set;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.location.Location;
-
-import com.envisprototype.model.sensor.SensorInterface;
-import com.envisprototype.model.sensor.SensorListInterface;
 
 public abstract class AbstractSet implements SetInterface {
 
@@ -14,6 +8,9 @@ public abstract class AbstractSet implements SetInterface {
 	private String name;
 	private String notes;
 	private Location location;
+	
+	private boolean iftoPlot; 
+	private float x, y, z;
 	//private List<String> sensorid;
 	
 	public AbstractSet(){
@@ -85,6 +82,31 @@ public abstract class AbstractSet implements SetInterface {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	public boolean isIftoPlot() {
+		return iftoPlot;
+	}
+	public void setIftoPlot(boolean iftoPlot) {
+		this.iftoPlot = iftoPlot;
+	}
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
+	public float getZ() {
+		return z;
+	}
+	public void setZ(float z) {
+		this.z = z;
+	}
+	
 	
 	
 //	public  SensorInterface findSensorById(String id){

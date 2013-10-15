@@ -1,12 +1,12 @@
 package com.envisprototype.view;
 
-import android.app.Activity;
-import android.location.Location;
-import android.location.LocationManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,10 +16,9 @@ import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;
-import com.envisprototype.model.set.SetListModel;
-import com.envisprototype.view.model.GPSTracker;
+import com.envisprototype.view.processing.SetPlotPApplet;
 
-public class SensorInfoViewActivity extends Activity {
+public class SensorInfoViewActivity extends EnvisActivity {
 	EditText id;
 	EditText type;
 	EditText brand;
@@ -28,6 +27,7 @@ public class SensorInfoViewActivity extends Activity {
 	EditText notes;
 	Button delete;
 	Button save;
+	//Button plotBtn;
 	String sensorid;
 	SensorInterface sensor;
 	public static Boolean del = false;
@@ -59,6 +59,7 @@ public class SensorInfoViewActivity extends Activity {
 		notes = (EditText)findViewById(R.id.NOTES);
 		save = (Button)findViewById(R.id.Save);
 		delete = (Button)findViewById(R.id.Delete);
+		//plotBtn = (Button) findViewById(R.id.plotSensorBtn);
 
 		save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
 		

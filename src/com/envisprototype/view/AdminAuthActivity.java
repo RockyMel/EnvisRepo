@@ -4,23 +4,21 @@ package com.envisprototype.view;
 
 
 
-import com.envisprototype.view.navigation.NavigationMaker;
-import com.envisprototype.R;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class AdminAuthActivity extends Activity {
+import com.envisprototype.R;
+
+public class AdminAuthActivity extends EnvisActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_linear_layout);
-		NavigationMaker.makeNavigationDrawer(this);
+		
 	}
 
 	@Override

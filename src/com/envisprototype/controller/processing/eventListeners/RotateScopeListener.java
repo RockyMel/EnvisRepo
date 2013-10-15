@@ -112,25 +112,3 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 	
 
 }
-
-
-//@Override
-//public void handleEnvisClassEvent(EventObject e) {
-//	// TODO Auto-generated method stub
-//	if(ifHitTheButton()){
-//		  if(mainApplet.getEnvisMap().isIf3D()){
-//			  mainApplet.getEnvisMap().rotate();
-//			  for(int i = 0; i < mainApplet.getEnvisSensors().size(); i++){
-//				  mainApplet.getEnvisSensors().get(i).drawMe(); //put away
-////				  mainApplet.getEnvisSensors().get(i).wasRotated(0, 
-////						  mainApplet.getEnvisMap().getYmag(), 
-////						  mainApplet.getEnvisMap().getXmag());
-//			  }
-//			  mainApplet.getAxis().wasRotated(0, 
-//					  mainApplet.getEnvisMap().getYmag(), 
-//					  mainApplet.getEnvisMap().getXmag());
-//			  mainApplet.scale(mainApplet.getEnvisMap().getZoomValue());
-//			  //mainApplet.popMatrix();
-//		  }
-//	}
-//}

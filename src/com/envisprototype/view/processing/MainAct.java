@@ -16,7 +16,7 @@ public class MainAct extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_m);
-	    Button visBtn = (Button) findViewById(R.id.button1);
+	    Button visBtn = (Button) findViewById(R.id.map_by_name_btn);
 	    visBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -27,7 +27,7 @@ public class MainAct extends Activity {
 			}
 		});
 	    
-	    Button twoDBtn = (Button) findViewById(R.id.button2);
+	    Button twoDBtn = (Button) findViewById(R.id.nearest_maps_btn);
 	    twoDBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -38,7 +38,7 @@ public class MainAct extends Activity {
 			}
 		});
 	    
-	    Button setSet = (Button) findViewById(R.id.button3);
+	    Button setSet = (Button) findViewById(R.id.scan_qr_btn);
 	    setSet.setOnClickListener(new OnClickListener() {
 			
 			@Override

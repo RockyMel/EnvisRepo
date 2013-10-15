@@ -1,5 +1,6 @@
 package com.envisprototype.controller;
 
+import com.envisprototype.R;
 import com.envisprototype.view.SensorInfoViewActivity;
 import com.envisprototype.view.SetInfoViewActivity;
 
@@ -12,12 +13,13 @@ public class SetViewButtonController implements OnClickListener {
 
 	String id;
 	Context context;
+	String mapId;
 	
-	public SetViewButtonController(String id, Context context) {
+	public SetViewButtonController(String id, Context context, String mapId) {
 		// TODO Auto-generated constructor stub
 	this.context=context;
 	this.id=id;
-	
+	this.mapId = mapId;
 	
 	}
 
@@ -27,6 +29,7 @@ public class SetViewButtonController implements OnClickListener {
 		Intent intent=new Intent(view.getContext(),SetInfoViewActivity.class);
 		intent.putExtra("setid",id);
 		intent.putExtra("flag", "exist");
+		intent.putExtra(view.getContext().getString(R.string.map_id_extra), mapId);
 		view.getContext().startActivity(intent);
 
 		

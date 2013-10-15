@@ -1,6 +1,8 @@
 package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -8,11 +10,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.R;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.model.set.SetInterface;
+import com.envisprototype.model.set.SetListModel;
 //import com.envisprototype.controller.ModelSaver;
 
 public abstract class EnvisPApplet extends PApplet{
@@ -21,16 +25,19 @@ public abstract class EnvisPApplet extends PApplet{
 	public static final int STROKE_COLOR = 0xffffffff;
 	static final int STROKE_WEIGHT = 1;
 	public static int DEF_BTN_X;
-	int MAX_WIDTH;
+	int MAX_WIDTH, MIN_WIDTH = 0;
 	EnvisButton zoom, rotateScope;
 	private Axis axis;
 	public PositionDisplay currentClick;
-	ArrayList<SensorSet> envisSensors;
+	HashMap<String,SensorSet> envisSensors;
 	Map envisMap;
+	String flag;
+	ArrayList<String> setIdFromAndroid;
 	Bundle extras;
+	Iterator setIterator;
 	  
 	  public void setup(){
-		  // defalt setup which will be reused
+		  // default setup which will be reused
 		  // to specify size of ui elements for different screens
 		  ellipseMode(PConstants.CORNERS);
 		  fill(217,200,33);
@@ -41,25 +48,41 @@ public abstract class EnvisPApplet extends PApplet{
 		  // smooth is not available on most devices, but sometimes makes
 		  // the ui prettier
 		  smooth();
-		  envisSensors = new ArrayList<SensorSet>();
+		  envisSensors = new HashMap<String,SensorSet>();
 		  // // current click is showing coordinates of the last finger tap
 		  currentClick = new PositionDisplay(this, "");
 		  currentClick.setPlace(width/15, height/30);
 		  rotateScope = new EnvisButton(this, "");
-		  rotateScope.setPlace(1, 1);
-		  rotateScope.setSize(MAX_WIDTH, height-2);
+		  rotateScope.setPlace(width/40, height-3*height/50);
+		  rotateScope.setSize(width-width/10, 2*height/50);
 		  rotateScope.addEventListener(new RotateScopeListener());
 		  envisMap = new Map(this);
 		  // getting a map id from model.
 		  extras = getIntent().getExtras();
 		  if(extras != null){
-			  if(extras.containsKey("mapId")){
-				  String mapId = extras.getString("mapId");
+			  if(extras.containsKey(getString(R.string.map_id_extra))){
+				  String mapId = extras.getString(getString(R.string.map_id_extra));
 				  envisMap.setMapId(mapId);
 				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
 				  
 				  Log.i("coors",coors.toString());
 				  envisMap.setAllCoors(coors);
+			  }
+			  if(extras.containsKey(getString(R.string.flags))){
+				  flag = extras.getString(getString(R.string.flags));
+				  if(flag.equals(getString(R.string.plot_flag_extra))){
+					  // plotting several sets at the same time
+					  if(extras.containsKey(getString(R.string.sets_id_extra))){
+						  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sets_id_extra));
+						  for(String setId: setIdFromAndroid){
+							  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
+							  SensorSet setToShow = new SensorSet(this, setId, 
+									  setFromModel.getX(), setFromModel.getY(),
+									  setFromModel.getZ());
+							  envisSensors.put(setId, setToShow);
+						  }
+					  }
+				  }
 			  }
 		  }
 		  // HERE SENSORS MUST BE ADDED SIMILARLY TO MAP (EXTRAS)
@@ -102,11 +125,12 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	rotateScope.fireEvent();
 	envisMap.drawMe();
 	//scale(envisMap.getZoomValue());
-	println("coor in threedvissss = " + envisMap.getRealCoors().getCoorX().toString());
+//	println("coor in threedvissss = " + envisMap.getRealCoors().getCoorX().toString());
 	if(ifWithSensors){
-		for(int i = 0; i < envisSensors.size(); i++){
-	    	envisSensors.get(i).drawMe();
-	    }
+		setIterator = envisSensors.keySet().iterator();
+		while(setIterator.hasNext()){
+			envisSensors.get(setIterator.next()).drawMe();
+		}		
 	}
 	popMatrix();
 	axis.drawMe();
@@ -130,10 +154,10 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	public void setZoom(EnvisButton zoom) {
 		this.zoom = zoom;
 	}
-	public ArrayList<SensorSet> getEnvisSensors() {
+	public HashMap<String,SensorSet> getEnvisSensors() {
 		return envisSensors;
 	}
-	public void setEnvisSensors(ArrayList<SensorSet> envisSensors) {
+	public void setEnvisSensors(HashMap<String,SensorSet> envisSensors) {
 		this.envisSensors = envisSensors;
 	}
 	public int getMAX_WIDTH() {
@@ -145,6 +169,21 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	public void setEnvisMap(Map envisMap) {
 		this.envisMap = envisMap;
 	}
+	
+	public ArrayList<String> getSetIdFromAndroid(){
+		return setIdFromAndroid;
+	}
+	
+
+	
+	public EnvisButton getRotateScope() {
+		return rotateScope;
+	}
+
+	public void setRotateScope(EnvisButton rotateScope) {
+		this.rotateScope = rotateScope;
+	}
+
 	public int sketchWidth() {
 			Display display = getWindowManager().getDefaultDisplay();
 		  return display.getWidth(); }

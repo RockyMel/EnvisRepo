@@ -1,21 +1,16 @@
 package com.envisprototype.controller.processing.eventListeners;
 
-import java.util.ArrayList;
 import java.util.EventObject;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.processing.CoordinateWriter;
-import com.envisprototype.view.processing.EnvisButton;
 import com.envisprototype.view.processing.EnvisPApplet;
-import com.envisprototype.view.processing.SensorSet;
 
-public class SaveSetBtnListener extends AbstractEnvisButtonListener{
-	ArrayList<SensorSet> envisSensors;
+public class SaveSetBtnListener extends AbstractPlotBtnListener{
 	String sensorsFileName;
 	CoordinateWriter sensorWriter;
 	
 	public SaveSetBtnListener(EnvisPApplet envisPApplet, String sensorsFileName){
-		this.envisSensors = envisPApplet.getEnvisSensors();
 		this.sensorsFileName = sensorsFileName;
 		sensorWriter = new CoordinateWriter(envisPApplet);
 	}
@@ -23,9 +18,16 @@ public class SaveSetBtnListener extends AbstractEnvisButtonListener{
 	public void handleEnvisClassEvent(EventObject e) {
 		// TODO Auto-generated method stub
 		super.handleEnvisClassEvent(e);
-		if(ifHitTheButton() || eButton.isIfCanFireWithNoClick()){
-			sensorWriter.saveSetsToFile(sensorsFileName, envisSensors);
-			eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
+		if(ifHitTheButton()){
+			if(spApplet.isIfAddingSets()){
+				eButton.setName(eButton.getEpApplet().getString(R.string.save_sets));
+				spApplet.getRotateScope().setDefW(spApplet.getMAX_WIDTH()-spApplet.getRotateScope().getDefX());
+				spApplet.setIfAddingSets(false);
+			}
+			else{
+				eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
+			}
+			sensorWriter.saveSetsToFile(sensorsFileName, spApplet.getEnvisSensors());
 		}
 	}
 

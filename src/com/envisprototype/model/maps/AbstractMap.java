@@ -9,6 +9,7 @@ import com.envisprototype.model.processing.Coordinates;
 public abstract class AbstractMap implements MapInterface {
 	private String id;
 	private String name;
+	private String notes;
 	private Location location;
 	Coordinates realCoordinates;
 	private Float zCoordinate;
@@ -112,6 +113,20 @@ public abstract class AbstractMap implements MapInterface {
 
 	public void setzCoordinate(Float zCoordinate) {
 		this.zCoordinate = zCoordinate;
+	}
+	
+
+	@Override
+	public String getNotes() {
+		return notes;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNotes(String notes) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void addSetToMap(String SetID,SetCoordinate xyz)

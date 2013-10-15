@@ -22,7 +22,7 @@ import com.envisprototype.view.navigation.NavigationMaker;
 //	NavigationMaker.makeNavigationDrawer(this);
 //}
 
-public class AdminkaActivity extends Activity {
+public class AdminkaActivity extends EnvisActivity {
 
 	ExpandableListAdapter listAdapter;
 	ExpandableListView expListView;
@@ -33,7 +33,6 @@ public class AdminkaActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_adminka);
-		NavigationMaker.makeNavigationDrawer(this);
 		// get the listview
 		expListView = (ExpandableListView) findViewById(R.id.sensorTypes);
 

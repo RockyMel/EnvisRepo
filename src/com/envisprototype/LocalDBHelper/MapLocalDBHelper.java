@@ -43,7 +43,6 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	
 	
 	
-	
 	public MapLocalDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
 
@@ -72,12 +71,15 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 			mapModel.addMap(map);
 		
 	}
+	
+	
 
 
 	@Override
 	public void removeMap(MapInterface map) {
 		// TODO Auto-generated method stub
-		
+		getWritableDatabase().delete(TABLE_NAME, IDCOL + "= \""
+				+ map.getId() + "\"",null);
 	}
 
 
@@ -207,7 +209,7 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		values.put(YCOORCOL,  map.getRealCoordinates().getYCoorString());
 		values.put(ZCOORCOL,  map.getzCoordinate());
 		
-		values.put(NOTESCOL, "samplenote");
+		values.put(NOTESCOL, map.getNotes());
 		return values;
 	}
 

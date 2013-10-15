@@ -11,9 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
 
-public class FavoritesTab extends Activity {
-
-	private Fragment favFragment;
+public class FavoritesTab extends EnvisActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +19,6 @@ public class FavoritesTab extends Activity {
 		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 
 		setContentView(R.layout.activity_favorites);
-		NavigationMaker.makeNavigationDrawer(this);
 	}
 
 }

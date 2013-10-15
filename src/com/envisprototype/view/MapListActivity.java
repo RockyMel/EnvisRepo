@@ -35,7 +35,7 @@ public class MapListActivity extends Activity {
 		setContentView(R.layout.activity_map_list);
 
 		//WILL BE REMOVED (TEMPORARY TO DEMO ADD SENSOR)
-		Button addmap = (Button)findViewById(R.id.button1);
+		Button addmap = (Button)findViewById(R.id.map_by_name_btn);
 		addmap.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

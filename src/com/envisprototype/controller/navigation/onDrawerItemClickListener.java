@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.envisprototype.view.AdminkaActivity;
 import com.envisprototype.view.ChartVisualizationSettingsActivity;
+import com.envisprototype.view.ChooseMapActivity;
 import com.envisprototype.view.FavoritesTab;
 import com.envisprototype.view.LineChart;
 import com.envisprototype.view.AdminAuthActivity;
@@ -46,7 +47,7 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 		}
 			break;
 		case 3: {
-			intent = new Intent(v.getContext(), ThreeDVisualisation.class);
+			intent = new Intent(v.getContext(), ChooseMapActivity.class);
 		}
 			break;
 		case 4: {

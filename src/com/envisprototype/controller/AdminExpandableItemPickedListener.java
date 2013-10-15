@@ -8,10 +8,12 @@ import android.view.View.OnClickListener;
 
 import com.envisprototype.R;
 import com.envisprototype.view.AddMapActivity;
-import com.envisprototype.view.ChooseMapToEditActivity;
+import com.envisprototype.view.ChooseMapActivity;
 import com.envisprototype.view.InputIDActivity;
+import com.envisprototype.view.MapInfoViewActivity;
 import com.envisprototype.view.SensorListActivity;
 import com.envisprototype.view.SetListActivity;
+import com.envisprototype.view.ThreeDVisualisation;
 import com.envisprototype.view.processing.DrawMapApplet;
 import com.envisprototype.view.processing.EditMapApplet;
 
@@ -51,14 +53,17 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 			intent = new Intent(adminkaActivity, SensorListActivity.class);
 		}
 		if(tag.equals(menuOptions[2])){
-			intent = new Intent(adminkaActivity, SetListActivity.class);
+			//intent = new Intent(adminkaActivity, SetListActivity.class);
+			intent = new Intent(adminkaActivity, ChooseMapActivity.class);
+			intent.putExtra(adminkaActivity.getString(R.string.flags),
+					adminkaActivity.getString(R.string.plot_flag_extra));
 		}
 		menuOptions = adminkaActivity.getResources().getStringArray(R.array.map_admin_options);
 		if(tag.equals(menuOptions[0])){
 			intent = new Intent(adminkaActivity, AddMapActivity.class);
 		}
 		if(tag.equals(menuOptions[1])){
-			intent = new Intent(adminkaActivity, ChooseMapToEditActivity.class);
+			intent = new Intent(adminkaActivity, MapInfoViewActivity.class);
 		}
 		adminkaActivity.startActivity(intent);
 	}

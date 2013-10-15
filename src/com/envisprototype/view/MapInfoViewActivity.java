@@ -19,9 +19,10 @@ import com.envisprototype.controller.SaveMapToAddBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.view.navigation.NavigationMaker;
 
 
-public class MapInfoViewActivity extends Activity {
+public class MapInfoViewActivity extends EnvisActivity {
 	EditText id;
 	EditText name;
 	EditText location;
@@ -35,7 +36,7 @@ public class MapInfoViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_info_view);
-		init();
+		NavigationMaker.makeDropDownMenu(this, R.array.map_drop_down);
 	}
 
 	private void init() {
@@ -47,21 +48,17 @@ public class MapInfoViewActivity extends Activity {
 		name = (EditText)findViewById(R.id.editText2);
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
-		map = MapListModel.getSingletonInstance().findMapById(mapid);
-		Log.i("model", map +"");
-
-		Log.i("model", "init");
-		Log.i("model", Integer.toString(MapListModel.getSingletonInstance().getMapList().size()));
-		Log.i("model", "**"+ mapid + "**");
-		Log.i("model", map.getId());
-		id.setText(map.getId());
-		name.setText(map.getName());
-		delete = (Button)findViewById(R.id.Delete);
-		delete.setOnClickListener(new DeleteMapButtonController(map.getId(),this));
-		editMapCoorsBtn = (Button) findViewById(R.id.show_map_btn);
-		editMapCoorsBtn.setOnClickListener(new EditMapBtnListener(map.getId()));
-		saveMapInfoBtn = (Button)findViewById(R.id.Save);
-		saveMapInfoBtn.setOnClickListener(new SaveMapToAddBtnListener(this, false, id, name));
+		if(mapid!=null){
+			map = MapListModel.getSingletonInstance().findMapById(mapid);
+			id.setText(map.getId());
+			name.setText(map.getName());
+			delete = (Button)findViewById(R.id.Delete);
+			delete.setOnClickListener(new DeleteMapButtonController(map.getId(),this));
+			editMapCoorsBtn = (Button) findViewById(R.id.show_map_btn);
+			editMapCoorsBtn.setOnClickListener(new EditMapBtnListener(map.getId()));
+			saveMapInfoBtn = (Button)findViewById(R.id.Save);
+			saveMapInfoBtn.setOnClickListener(new SaveMapToAddBtnListener(this, false, id, name));
+		}
 	}
 
 	@Override
@@ -74,6 +71,7 @@ public class MapInfoViewActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		init();
 		//MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 		
 	}

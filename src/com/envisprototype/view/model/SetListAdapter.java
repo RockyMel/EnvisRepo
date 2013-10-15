@@ -7,18 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import com.envisprototype.R;
 import com.envisprototype.controller.SetViewButtonController;
+import com.envisprototype.controller.onSetChosenToPlot;
 import com.envisprototype.model.set.SetInterface;
 
 public class SetListAdapter extends ArrayAdapter<SetInterface>  {
 
 	Context context;
+	String mapId;
 	public SetListAdapter(Context context, int textViewResourceId,
-			List<SetInterface> objects) {
+			List<SetInterface> objects, String mapId) {
 		super(context, textViewResourceId, objects);
 		this.context=context;
+		this.mapId = mapId;
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -36,6 +40,9 @@ public class SetListAdapter extends ArrayAdapter<SetInterface>  {
 		
 		TextView setname =(TextView) inflatedView.findViewById(R.id.NAME);
 		setname.setText(set.getName());
+		
+		CheckBox toPlotCB = (CheckBox) inflatedView.findViewById(R.id.plotCB);
+		toPlotCB.setOnCheckedChangeListener(new onSetChosenToPlot(set.getId()));
 		
 		GPSTracker gps = new GPSTracker(context);
 		double latitude = 0;
@@ -62,7 +69,7 @@ public class SetListAdapter extends ArrayAdapter<SetInterface>  {
 		distance.setText(caldiststr);
 		
 		Button editview = (Button)inflatedView.findViewById(R.id.viewbutton);
-		editview.setOnClickListener(new SetViewButtonController(set.getId(),context));
+		editview.setOnClickListener(new SetViewButtonController(set.getId(),context, mapId));
 				
 		return inflatedView;
 	}

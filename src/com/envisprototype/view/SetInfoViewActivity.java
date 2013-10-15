@@ -3,11 +3,14 @@ package com.envisprototype.view;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,14 +19,13 @@ import com.envisprototype.R;
 import com.envisprototype.controller.AddSensorButtonController;
 import com.envisprototype.controller.SetSaveOnClickController;
 import com.envisprototype.model.sensor.SensorInterface;
-import com.envisprototype.model.sensor.SensorListInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
-import com.envisprototype.model.set.SetModel;
 import com.envisprototype.view.model.Set_SensorListAdapter;
+import com.envisprototype.view.processing.SetPlotPApplet;
 
-public class SetInfoViewActivity extends Activity {
+public class SetInfoViewActivity extends EnvisActivity {
 
 
 	String setid;
@@ -35,10 +37,12 @@ public class SetInfoViewActivity extends Activity {
 	Button Add;
 	Button Save;
 	Button Delete;
+	Button plotSetBtn;
 	SetInterface set;
 	Set_SensorListAdapter sla;
 	List<SensorInterface> list;
 	Location location;
+	String mapId = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class SetInfoViewActivity extends Activity {
 		Add = (Button)findViewById(R.id.ADD);
 		Save = (Button)findViewById(R.id.Save);
 		Delete = (Button)findViewById(R.id.Delete);
+		plotSetBtn = (Button) findViewById(R.id.set_plot_btn);
 
 		if(flag.equals("new"))
 			location=new Location(LocationManager.NETWORK_PROVIDER);
@@ -95,7 +100,32 @@ public class SetInfoViewActivity extends Activity {
 
 		}
 		Add.setOnClickListener(new AddSensorButtonController(setid,list,flag,this));
+		plotSetBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Activity activity = ((Activity)v.getContext());
+				Bundle bundle = activity.getIntent().getExtras();
+				if(bundle != null && 
+						bundle.containsKey(activity.getString(R.string.map_id_extra))){
+					mapId = bundle.getString(activity.getString(R.string.map_id_extra));
+					Intent intent = new Intent(activity, SetPlotPApplet.class);
+					intent.putExtra(getString(R.string.flags), getString(R.string.plot_flag_extra));
+					intent.putExtra(activity.getString(R.string.map_id_extra),mapId);
+					//intent.putExtra(getString(R.string.set_id_extra), set.getId());
+					activity.startActivity(intent);
+				}
+				else{
 
+					Intent intent = new Intent(v.getContext(), ChooseMapActivity.class);
+					//intent.putExtra(getString(R.string.set_id_extra), id.getText());
+					v.getContext().startActivity(intent);
+				}
+			}
+		});
+		
+		
 
 	}
 

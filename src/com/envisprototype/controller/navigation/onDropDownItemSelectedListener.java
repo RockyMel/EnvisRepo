@@ -83,12 +83,16 @@ public class onDropDownItemSelectedListener implements OnNavigationListener{
 			case 2:{
 
 				intent = new Intent(activity,MapListActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(intent);
 				// !!! ADD FLAG HERE SAYING THAT THUS US 
 			}
 			break;
 			case 3:{
 				intent = new Intent(activity,MapListActivity.class); 
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(intent);
 			}
 			}

@@ -19,7 +19,7 @@ import com.envisprototype.controller.IdEnteredOKButtonController;
 import com.envisprototype.zxing.integration.android.IntentIntegrator;
 import com.envisprototype.zxing.integration.android.IntentResult;
 
-public class InputIDActivity extends Activity {
+public class InputIDActivity extends EnvisActivity {
 
 	
 	EditText id;
@@ -56,7 +56,7 @@ public class InputIDActivity extends Activity {
 		// TODO Auto-generated method stub
 		id=(EditText)findViewById(R.id.editText1);
 		QRbutton = (ImageButton)findViewById(R.id.imageButton1);
-		ok=(Button)findViewById(R.id.button1);
+		ok=(Button)findViewById(R.id.map_by_name_btn);
 		
 		QRbutton.setOnClickListener(new QRreaderButtonController(this));
 		

@@ -24,6 +24,12 @@ public class SensorSet extends UIElement{
 		printCoors();
 	}
 	
+	public SensorSet(EnvisPApplet epApplet, String id, String name, float x, float y, float z) {
+		this(epApplet, id, x, y, z);
+		this.name = name;
+		printCoors();
+	}
+	
 	public void printCoors(){
 		Log.i("sets", "vis: "+ x + ", " + y + ", " + z + " \n"+
 	" real: " + realX + ", " + realY + ", " + realZ);
@@ -72,6 +78,7 @@ public class SensorSet extends UIElement{
 		float[] coors = map.calculateMiddleCoors();
 		realX+=coors[Map.indexX]-epApplet.width/2;
 		realY+=coors[Map.indexY]-epApplet.height/2;
+		realZ+=coors[Map.indexZ];
 		x-=epApplet.width/2;
 		y-=epApplet.height/2;
 		Log.i("sets", "for file");

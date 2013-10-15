@@ -17,8 +17,9 @@ public class Map extends UIElement{
 	
 	private int highlightedNode = -1;
 	
-	private final static int COOR_Z_TOP = -50;
-	final static int COOR_Z_BOTTOM = 50;
+//	private final static int COOR_Z_TOP = 50;
+//	final static int COOR_Z_BOTTOM = -50;
+	private int COOR_Z = 100;
 	final static float MIDDLE_COEFF = 1f;
 	public final static int indexX = 0;
 	public final static int indexY = 1;
@@ -265,12 +266,12 @@ public class Map extends UIElement{
 		visCoors.getCoorY().add(visCoors.getCoorY().get(0));
 		epApplet.beginShape();
 		for(int j = 0; j < visCoors.getCoorX().size()-1; j++){
-			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),getCoorZTop());          
-			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),getCoorZTop());
-			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),COOR_Z_BOTTOM);
-			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),COOR_Z_BOTTOM);
-			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),getCoorZTop());
-			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),getCoorZTop());
+			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),COOR_Z/2);          
+			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),COOR_Z/2);
+			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),-COOR_Z/2);
+			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),-COOR_Z/2);
+			epApplet.vertex(visCoors.getCoorX().get(j),visCoors.getCoorY().get(j),COOR_Z/2);
+			epApplet.vertex(visCoors.getCoorX().get(j+1),visCoors.getCoorY().get(j+1),COOR_Z/2);
 			}
 		epApplet.endShape(PConstants.CLOSE);
 		visCoors.getCoorX().remove(visCoors.getCoorX().size()-1);
@@ -385,7 +386,7 @@ public boolean ifIntersects(ArrayList<Float> coorX, ArrayList<Float> coorY,
 		  }
 		  coors[0] = (maxX+minX)/2;
 		  coors[1] = (maxY+minY)/2;
-		  coors[2] = (Map.COOR_Z_BOTTOM+Map.getCoorZTop())/2;
+		  coors[2] = (COOR_Z)/2;
 		  return coors;
 	}
 	
@@ -425,9 +426,15 @@ public boolean ifIntersects(ArrayList<Float> coorX, ArrayList<Float> coorY,
 	public void setIfCentered(boolean ifCentered) {
 		this.ifClosed = ifCentered;
 	}
+	
+	
 
-	public static int getCoorZTop() {
-		return COOR_Z_TOP;
+	public int getCOOR_Z() {
+		return COOR_Z;
+	}
+
+	public void setCOOR_Z(int cOOR_Z) {
+		COOR_Z = cOOR_Z;
 	}
 
 	public boolean isIf3D() {
