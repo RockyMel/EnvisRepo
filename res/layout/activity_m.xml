@@ -5,17 +5,17 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/map_by_name_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3D" />
      <Button
-        android:id="@+id/button2"
+        android:id="@+id/nearest_maps_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2D" />
      <Button
-        android:id="@+id/button3"
+        android:id="@+id/scan_qr_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set" />

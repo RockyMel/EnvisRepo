@@ -21,6 +21,7 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinner1" >
 
@@ -43,5 +44,13 @@
         android:layout_alignLeft="@+id/listView1"
         android:text="Sort By:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/plot_sets_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/listView1"
+        android:text="Plot them all!" />
 
 </RelativeLayout>

@@ -1,3 +1,8 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -38,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/mapIDTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -59,7 +64,7 @@
         android:id="@+id/BRAND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignBottom="@+id/mapIDTV"
         android:layout_alignLeft="@+id/NAME"
         android:ems="10" />
 
@@ -131,20 +136,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/NAME"
-        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignLeft="@+id/mapIDTV"
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/Delete"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/NOTES"
-        android:layout_below="@+id/NOTES"
-        android:layout_marginRight="58dp"
-        android:layout_marginTop="58dp"
-        android:text="Delete" />
 
     <Button
         android:id="@+id/Save"
@@ -156,4 +150,24 @@
         android:layout_toRightOf="@+id/textView1"
         android:text="Save" />
 
+    <Button
+        android:id="@+id/Delete"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NOTES"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/plotSensorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/NOTES"
+        android:layout_alignTop="@+id/Delete"
+        android:text="Plot sensor" />
+
 </RelativeLayout>
+<include layout="@layout/for_drawer" />
+</android.support.v4.widget.DrawerLayout>

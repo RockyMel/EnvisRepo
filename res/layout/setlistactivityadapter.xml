@@ -40,4 +40,12 @@
         android:layout_alignParentTop="true"
         android:text=">>>>>" />
 
+    <CheckBox
+        android:id="@+id/plotCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/DISTANCE"
+        android:layout_toLeftOf="@+id/viewbutton"
+        android:text="Plot me" />
+
 </RelativeLayout>
