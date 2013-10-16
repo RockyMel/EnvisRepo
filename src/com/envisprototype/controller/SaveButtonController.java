@@ -73,7 +73,7 @@ public class SaveButtonController implements OnClickListener {
 
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
-		sensor.setType(type.getText().toString());
+		sensor.setType(Integer.parseInt(type.getText().toString()));
 		sensor.setSetid(setid);
 		//SensorInterface temp = set.getSensor(id.getText().toString());
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());

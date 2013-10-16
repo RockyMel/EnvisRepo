@@ -29,6 +29,9 @@ public interface SetInterface {
 	public abstract float getZ();
 	public abstract void setZ(float z);
 
+	public abstract void setMapID(String mapID);
+
+
 	//public abstract List<SensorInterface> getSensors();
 	
 	//public abstract void setSensors(List<SensorInterface> sensors);

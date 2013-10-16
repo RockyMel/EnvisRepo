@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
-import com.envisprototype.controller.ExpandableAdminAdapter;
-import com.envisprototype.controller.ExpandableListAdapter;
+import com.envisprototype.view.model.ExpandableAdminAdapter;
+import com.envisprototype.view.model.ExpandableListAdapter;
 import com.envisprototype.view.navigation.NavigationMaker;
 //@Override
 //public void onCreate(Bundle savedInstanceState) {

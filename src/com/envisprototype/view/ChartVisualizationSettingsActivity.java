@@ -19,12 +19,15 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
+import com.envisprototype.view.model.ChartVisualizationSettingsModel;
+import com.envisprototype.view.model.ChartVisualizationSettingsListAdapter;
 
 
 public class ChartVisualizationSettingsActivity extends EnvisActivity {
@@ -38,6 +41,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 	Button QRButton;
 	Switch RealTimeSwitch;
 	Button VisualizationButton;
+	ListView sensorlist;
 
 	protected static final int From_DATE_PICKER_DIALOG = 0;
 	protected static final int To_DATE_PICKER_DIALOG = 1;
@@ -76,7 +80,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		SetsButton = (Button)findViewById(R.id.SetsButton);
 		QRButton = (Button)findViewById(R.id.QR);
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
-
+		sensorlist = (ListView)findViewById(R.id.chosensensorslist);
 		VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
 		final Context context = this;
 
@@ -314,5 +318,36 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 				date.getTime()));
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		ChartVisualizationSettingsListAdapter cvsla = new ChartVisualizationSettingsListAdapter(this,0,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs());
+
+		sensorlist.setAdapter(cvsla);
+
+	}
+
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		if(MODE==1)
+		{
+			ChartVisualizationSettingsModel.getSingletonInstance().setRealtimeornot(true);
+		}
+		else
+			ChartVisualizationSettingsModel.getSingletonInstance().setRealtimeornot(false);
+
+		ChartVisualizationSettingsModel.getSingletonInstance().setFrom(this.calfrom);
+		ChartVisualizationSettingsModel.getSingletonInstance().setTo(this.calto);
+		
+		
+		
+		
+		
+		
+	}
 
 }

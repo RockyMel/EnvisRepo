@@ -16,10 +16,10 @@ import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
 import com.envisprototype.R;
-import com.envisprototype.controller.NavigationDrawerAdapter;
 import com.envisprototype.controller.navigation.onDrawerItemClickListener;
 import com.envisprototype.controller.navigation.onDropDownItemSelectedListener;
 import com.envisprototype.model.drawer.DrawerMenuItem;
+import com.envisprototype.view.model.NavigationDrawerAdapter;
 
 public class NavigationMaker implements OnNavigationListener{
 	public static NavigationDrawerAdapter listAdapter;

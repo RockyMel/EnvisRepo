@@ -11,6 +11,11 @@ public interface SetListInterface {
 	public abstract SetInterface findSetById(String id);
 	
 	public abstract List<SetInterface> getSetList();
+
+	public abstract void setSetList(List<SetInterface> theset);
+
+	public abstract void addAssociateSettoMap(String setID, String mapID,
+			float x, float y, float z);
 	
 	
 	

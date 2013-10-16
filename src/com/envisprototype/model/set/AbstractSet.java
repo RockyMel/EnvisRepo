@@ -11,6 +11,7 @@ public abstract class AbstractSet implements SetInterface {
 	
 	private boolean iftoPlot; 
 	private float x, y, z;
+	private String MapID;
 	//private List<String> sensorid;
 	
 	public AbstractSet(){
@@ -105,6 +106,12 @@ public abstract class AbstractSet implements SetInterface {
 	}
 	public void setZ(float z) {
 		this.z = z;
+	}
+	public String getMapID() {
+		return MapID;
+	}
+	public void setMapID(String mapID) {
+		MapID = mapID;
 	}
 	
 	

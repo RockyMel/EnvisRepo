@@ -1,11 +1,16 @@
 // Modified from http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
-package com.envisprototype.controller;
+package com.envisprototype.view.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.OneSensorChosenListener;
+import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetListModel;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -64,7 +69,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		// Getting one sensor with a layout
-		final String childText = (String) getChild(groupPos, childPos);
+		final String sensorID = (String) getChild(groupPos, childPos);
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) this.context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,9 +77,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		}
 
 		CheckBox childBox = (CheckBox) convertView.findViewById(R.id.sensorBox);
-		if (childText != null){
-			childBox.setText(childText);
-			childBox.setOnCheckedChangeListener(new OneSensorChosenListener());
+		if(ChartVisualizationSettingsModel.getSingletonInstance().isSensorPresent(sensorID))
+			childBox.setChecked(true);
+		if (sensorID != null){
+			SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensorID);
+			SetListModel.getSingletonInstance().findSetById(temp.getSetid()).getName();
+			childBox.setText(SetListModel.getSingletonInstance().findSetById(temp.getSetid()).getName() + "::" + temp.getName());
+			childBox.setOnCheckedChangeListener(new OneSensorChosenListener(context,sensorID));
 		}
 		return convertView;
 	}

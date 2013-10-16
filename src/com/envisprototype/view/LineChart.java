@@ -27,6 +27,7 @@ import com.envisprototype.controller.DialogHandler;
 import com.envisprototype.model.SeriesContainer;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 /**
@@ -51,42 +52,51 @@ OnMultiChoiceClickListener {
 
 	public LineChart() {
 
-		List<SensorInterface> tempsensorlist = SensorListModel.getSingletonInstance().getSensorList();
+		List<String> tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs();
 
 		String[] names = null;
 		Number[][] data = null;
-		if(tempsensorlist.size()>0){
+		if(tempsensoridlist.size()>0){
 
 
-			for(int i=0;i<tempsensorlist.size();i++){
+			for(int i=0;i<tempsensoridlist.size();i++){
+				SensorInterface tempsensor = SensorListModel.getSingletonInstance().findSensorById(tempsensoridlist.get(i));
 				if(i==0)
 				{
-					items = new CharSequence[tempsensorlist.size()];
-					names = new String[tempsensorlist.size()];
-					checked = new boolean[tempsensorlist.size()];
+					items = new CharSequence[tempsensoridlist.size()];
+					names = new String[tempsensoridlist.size()];
+					checked = new boolean[tempsensoridlist.size()];
 				}
 
-				items[i]=tempsensorlist.get(i).getSetid()+"::"+tempsensorlist.get(i).getName();
+				items[i]=tempsensor.getSetid()+"::"+tempsensor.getName();
 				checked[i]=false;
-				names[i]=tempsensorlist.get(i).getSetid()+"::"+tempsensorlist.get(i).getName();
+				names[i]=tempsensor.getSetid()+"::"+tempsensor.getName();
 
 
 			}
 			int sizej=10;
-			data = new Number[tempsensorlist.size()][sizej];
-			Log.i("size", tempsensorlist.size() + " " +data.length+ " " + data[0].length);
-			for(int i=0;i<tempsensorlist.size();i++){
+			data = new Number[tempsensoridlist.size()][sizej];
+			Log.i("size", tempsensoridlist.size() + " " +data.length+ " " + data[0].length);
+			for(int i=0;i<tempsensoridlist.size();i++){
 				//data[i] = new Number[10];
-
+				if(i==0){
 				for(int j=0;j<10;j++){
 
 					data[i][j]=(j+1)*4;
+				}}
+				else
+				{
+					for(int j=0;j<10;j++){
+
+						data[i][j]=(j+2)*4;
+					}
+					
 				}
 
 			}
 
 			this.dHandler = new DialogHandler();
-			dHandler.init(tempsensorlist.size());
+			dHandler.init(tempsensoridlist.size());
 			dHandler.setDataForVis(data, names);
 
 			this.chosenItems = this.dHandler.getChosenItems();
@@ -188,7 +198,7 @@ OnMultiChoiceClickListener {
 	 */
 	private void initalChart() {
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
-		mySimpleXYPlot.setDomainBoundaries(0, 24, BoundaryMode.FIXED);
+		mySimpleXYPlot.setDomainBoundaries(0, 24, BoundaryMode.GROW);
 		mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
 		mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
 		// mySimpleXYPlot.setDomainStepValue(24);

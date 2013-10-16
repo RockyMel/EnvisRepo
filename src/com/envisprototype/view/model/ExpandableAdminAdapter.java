@@ -1,4 +1,4 @@
-package com.envisprototype.controller;
+package com.envisprototype.view.model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.AdminExpandableItemPickedListener;
 
 public class ExpandableAdminAdapter extends ExpandableListAdapter{
 
