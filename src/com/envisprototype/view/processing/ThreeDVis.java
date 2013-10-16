@@ -6,6 +6,7 @@ import java.util.Collections;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
+import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.TopViewButtnoListener;
 
 public class ThreeDVis extends EnvisPApplet{
@@ -32,6 +33,7 @@ public void setup(){
     topViewButton = new EnvisButton(this, "Top View");
     topViewButton.setPlace(DEF_BTN_X, 7*height/30);
     topViewButton.addEventListener(new TopViewButtnoListener());
+    RotateScopeListener.setIfTop(true);
     for(int i = 0; i < envisSensors.size(); i++){
     	envisSensors.get(i).translateSensorsForMap(envisMap);
     }
@@ -39,7 +41,7 @@ public void setup(){
 public void draw(){
 	super.draw();
 	threeDDrawPreset(DRAW_WITH_SENSORS); // true - drawing with sensors
-	rotateButton.drawMe();
+	//rotateButton.drawMe();
 	frontViewButton.drawMe();
 	leftSideViewButton.drawMe();
 	topViewButton.drawMe();
@@ -52,7 +54,7 @@ public void mouseDragged(){
 }
 
 public void mouseReleased(){
-	rotateButton.fireEvent();
+	//rotateButton.fireEvent();
 	frontViewButton.fireEvent();
 	leftSideViewButton.fireEvent();
 	topViewButton.fireEvent();

@@ -16,9 +16,9 @@ public class RotateButtonListener extends AbstractEnvisButtonListener{
 			}
 			else{
 				RotateScopeListener.setIfRotate(true);
-				RotateScopeListener.setIfFront(false);
-				RotateScopeListener.setIfLeftSide(false);
-				RotateScopeListener.setIfTop(false);
+//				RotateScopeListener.setIfFront(false);
+//				RotateScopeListener.setIfLeftSide(false);
+//				RotateScopeListener.setIfTop(false);
 			}
 		}
 	}

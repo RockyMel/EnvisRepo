@@ -22,7 +22,7 @@ public class SensitiveListener extends AbstractPlotBtnListener{
 			if(spApplet.getCurrentIdToPlot() == null){
 				Log.i("id", "id = null");
 			}
-			if(spApplet.isIfAddingSets()){
+			if(spApplet.isIfAddingSets() && spApplet.getCurrentIdToPlot() != null) {
 				Log.i("id", "id = " + spApplet.getCurrentIdToPlot());
 				float tempX = eButton.getEpApplet().mouseX;
 				float tempY = eButton.getEpApplet().mouseY;

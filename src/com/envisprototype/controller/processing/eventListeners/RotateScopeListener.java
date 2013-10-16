@@ -23,15 +23,21 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 		if(mainApplet == null)
 			mainApplet = eButton.getEpApplet();
 		if(ifHitTheButton()){
-			if(ifRotate){
+			//if(ifRotate){
 				float[] rotationVals = calcRotation();
-				xRotate = rotationVals[X_ROT];
-				yRotate = rotationVals[Y_ROT];
-				zRotate = rotationVals[Z_ROT];
-			}
+				if(ifFront)
+					zRotate = rotationVals[Z_ROT];
+				if(ifLeftSide)
+					xRotate = rotationVals[Z_ROT];
+				if(ifTop)
+					zRotate = rotationVals[Z_ROT];
+//				xRotate = rotationVals[X_ROT];
+//				yRotate = rotationVals[Y_ROT];
+//				zRotate = rotationVals[Z_ROT];
+			//}
 		}
 		else{
-			if(!ifRotate){
+			//if(!ifRotate){
 				if(ifFront){
 					Log.i("rotate","front");
 					xRotate = PConstants.PI/2;
@@ -49,7 +55,7 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 					xRotate = 0;
 					yRotate = 0;
 					zRotate = 0;
-				}
+			//	}
 			}
 		}
 		mainApplet.getEnvisMap().rotate(xRotate, yRotate, zRotate);
@@ -66,12 +72,12 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 		float newYmag = mainApplet.mouseY/PApplet.parseFloat(mainApplet.height) * PConstants.TWO_PI;
 		float diff = zmag-newXmag;
 		  if (mainApplet.abs(diff) >  0.01f) { 
-			  zmag -= diff/10.0f; 
+			  zmag -= diff/5.0f; 
 		  }
 		  
 		  diff = ymag-newYmag;
 		  if (mainApplet.abs(diff) >  0.01f) { 
-		    ymag -= diff/10.0f; 
+		    ymag -= diff/5.0f; 
 		  }
 		  float[] rotationVals = {xmag, ymag, zmag};
 		  return rotationVals;
