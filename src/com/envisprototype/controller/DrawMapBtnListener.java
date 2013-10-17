@@ -1,26 +1,35 @@
 package com.envisprototype.controller;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
+import com.envisprototype.R;
+import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.processing.DrawMapApplet;
 
 public class DrawMapBtnListener implements OnClickListener{
-	Activity context;
+	String mapId;
 	
-	public DrawMapBtnListener(Context context){
-		this.context = (Activity) context;
+	public DrawMapBtnListener(String mapId){
+		this.mapId = mapId;
 	}
 
+
 	@Override
-	public void onClick(View arg0) {
+	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Intent intent = new Intent(context, DrawMapApplet.class);
-		context.startActivity(intent);
+		if(MapListModel.getSingletonInstance().findMapById(mapId)!=null){
+			Intent intent = new Intent(v.getContext(), DrawMapApplet.class);
+			intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+			v.getContext().startActivity(intent);
+		}
+		else{
+			// map must be saved
+			Toast.makeText(v.getContext().getApplicationContext(), "SaveMapFirst",
+					   Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	

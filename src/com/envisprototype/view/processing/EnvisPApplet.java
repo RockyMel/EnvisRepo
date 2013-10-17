@@ -63,10 +63,12 @@ public abstract class EnvisPApplet extends PApplet{
 			  if(extras.containsKey(getString(R.string.map_id_extra))){
 				  String mapId = extras.getString(getString(R.string.map_id_extra));
 				  envisMap.setMapId(mapId);
-				  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
-				  
-				  Log.i("coors",coors.toString());
-				  envisMap.setAllCoors(coors);
+				  if(MapListModel.getSingletonInstance().findMapById(mapId)!= null){
+					  Coordinates coors = MapListModel.getSingletonInstance().findMapById(mapId).getRealCoordinates();
+					  
+					  Log.i("coors",coors.toString());
+					  envisMap.setAllCoors(coors); 
+				  }
 			  }
 			  if(extras.containsKey(getString(R.string.flags))){
 				  flag = extras.getString(getString(R.string.flags));

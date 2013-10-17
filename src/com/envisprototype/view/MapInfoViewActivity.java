@@ -1,25 +1,18 @@
 package com.envisprototype.view;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
-import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DeleteMapButtonController;
 import com.envisprototype.controller.EditMapBtnListener;
 import com.envisprototype.controller.SaveMapToAddBtnListener;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
-import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 

@@ -4,7 +4,9 @@ import java.util.EventObject;
 
 import android.util.Log;
 
-import com.envisprototype.controller.processing.CoordinateWriter;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+//import com.envisprototype.controller.processing.CoordinateWriter;
+import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.Map;
 
 public class AddToDrawingScopeListener extends AbstractDrawMapListener{
@@ -42,9 +44,11 @@ public class AddToDrawingScopeListener extends AbstractDrawMapListener{
 						envisMap.addNewNode(envisMap.getRealCoors().getCoorX().get(0),
 								envisMap.getRealCoors().getCoorY().get(0)+height/2);
 						envisMap.setIfCentered(true);
-						CoordinateWriter output = new CoordinateWriter(drawMapApplet);
-						
-						output.saveMapToFile("map.txt");
+//						CoordinateWriter output = new CoordinateWriter(drawMapApplet);
+//						output.saveMapToFile("map.txt");
+						Coordinates coorsToSave = drawMapApplet.getEnvisMap().getRealCoors();
+						MapLocalDBHelper.getSingletonInstance(drawMapApplet).
+						saveCoorsForMap(drawMapApplet.getEnvisMap().getMapId(), coorsToSave, drawMapApplet.getEnvisMap().getCOOR_Z());
 						eButton.getEpApplet().getEnvisMap().translateToMiddle();
 						Log.i("edit","saved");
 						break;

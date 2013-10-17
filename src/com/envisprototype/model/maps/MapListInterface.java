@@ -2,6 +2,8 @@ package com.envisprototype.model.maps;
 
 import java.util.List;
 
+import com.envisprototype.model.processing.Coordinates;
+
 import android.content.Context;
 
 public interface MapListInterface {
@@ -21,5 +23,7 @@ public interface MapListInterface {
 	public void ReplicateMapList();
 	
 	public abstract void editMap(MapInterface map);
+
+	public abstract void saveCoorsForMap(String mapId, Coordinates coorsToSave, float zCoor);
 
 }

@@ -53,10 +53,10 @@ public class SaveMapToAddBtnListener implements OnClickListener{
 	        	// Ask user to enable GPS/network in settings
 	        	gps.showSettingsAlert();
 	        }
-		CoordinatesReader coorReader = new CoordinatesReader(context);
-		Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
-		Log.i("on Res add map act", realCoors.toString());
-		map.setRealCoordinates(realCoors);
+//		CoordinatesReader coorReader = new CoordinatesReader(context);
+//		Coordinates realCoors = coorReader.prepareMapCoordinates("map.txt");
+//		Log.i("on Res add map act", realCoors.toString());
+//		map.setRealCoordinates(realCoors);
 		
 		myloc.setLatitude(latitude);
 		myloc.setLongitude(longitude);

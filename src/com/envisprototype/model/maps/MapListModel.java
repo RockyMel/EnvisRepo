@@ -3,6 +3,8 @@ package com.envisprototype.model.maps;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.envisprototype.model.processing.Coordinates;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -108,6 +110,13 @@ public class MapListModel implements MapListInterface {
 
 	@Override
 	public void ReplicateMapList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveCoorsForMap(String mapId, Coordinates coorsToSave,
+			float zCoor) {
 		// TODO Auto-generated method stub
 		
 	}

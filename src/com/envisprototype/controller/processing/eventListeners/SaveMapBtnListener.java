@@ -4,15 +4,16 @@ import java.util.EventObject;
 
 import android.util.Log;
 
-import com.envisprototype.controller.processing.CoordinateWriter;
+import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.EnvisPApplet;
 
 public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 
-	CoordinateWriter output;
+	//CoordinateWriter output;
 	String mapFileName;
 	public SaveMapBtnListener(EnvisPApplet epApplet, String mapFileName){
-		output = new CoordinateWriter(epApplet);
+		//output = new CoordinateWriter(epApplet);
 		this.mapFileName = mapFileName;
 	}
 	
@@ -24,7 +25,11 @@ public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 			// closing figure
 			eButton.getEpApplet().getEnvisMap().closeFigure();
 			if(eButton.getEpApplet().getEnvisMap().isIfCentered()){
-				output.saveMapToFile(mapFileName);
+				Coordinates coorsToSave = eButton.getEpApplet().getEnvisMap().getRealCoors();
+				MapLocalDBHelper.getSingletonInstance(eButton.getEpApplet()).
+				saveCoorsForMap(eButton.getEpApplet().
+						getEnvisMap().getMapId(), coorsToSave, eButton.getEpApplet().
+						getEnvisMap().getCOOR_Z());
 				eButton.getEpApplet().getEnvisMap().translateToMiddle();
 				Log.i("edit","saved");
 			}

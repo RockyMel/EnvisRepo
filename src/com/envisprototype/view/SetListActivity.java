@@ -19,7 +19,6 @@ import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
-import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.PlotSetsBtnListener;
 import com.envisprototype.model.processing.SetCoordinates;
 import com.envisprototype.model.set.SetInterface;
@@ -97,19 +96,19 @@ public class SetListActivity extends Activity {
 		// 2. associate plotted sets with the map
 		Button plotSetsBtn = (Button) findViewById(R.id.plot_sets_btn);
 		plotSetsBtn.setOnClickListener(new PlotSetsBtnListener(mapId));
-		CoordinatesReader setCoorReader = new CoordinatesReader(this);
-		HashMap<String, SetCoordinates> tempSetCoors = setCoorReader.prepareSensorsCoordinates("sensor.txt");
-		Iterator<String> iterator = tempSetCoors.keySet().iterator();
-		while(iterator.hasNext()){
-			String setId = iterator.next();
-			SetCoordinates coors = tempSetCoors.get(setId);
-			SetInterface set = SetListModel.getSingletonInstance().findSetById(setId);
-			if(set!= null){
-				//SetLocalDBHelper.getSingletonInstance(this).editSet(set);
-				MapSetAssociationDBHelper.getSingletoneInstance(this).
-				associateSetWithMap(setId, mapId, coors.getX(), coors.getY(), coors.getZ());
-			}
-		}
+		//CoordinatesReader setCoorReader = new CoordinatesReader(this);
+		//HashMap<String, SetCoordinates> tempSetCoors = setCoorReader.prepareSensorsCoordinates("sensor.txt");
+		//Iterator<String> iterator = tempSetCoors.keySet().iterator();
+//		while(iterator.hasNext()){
+//			String setId = iterator.next();
+//			SetCoordinates coors = tempSetCoors.get(setId);
+//			SetInterface set = SetListModel.getSingletonInstance().findSetById(setId);
+//			if(set!= null){
+//				//SetLocalDBHelper.getSingletonInstance(this).editSet(set);
+//				MapSetAssociationDBHelper.getSingletoneInstance(this).
+//				associateSetWithMap(setId, mapId, coors.getX(), coors.getY(), coors.getZ());
+//			}
+//		}
 	}
 
 

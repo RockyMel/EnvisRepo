@@ -20,6 +20,7 @@ import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
+import com.envisprototype.model.processing.Coordinates;
 
 
 public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterface  {
@@ -58,6 +59,15 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 				+ map.getId() + "\"",null);
 	
 			mapModel.editMap(map);
+	}
+	@Override
+	public void saveCoorsForMap(String mapId, Coordinates coorsToSave, float zCoor){
+		ContentValues values = new ContentValues();
+		values.put(XCOORCOL, coorsToSave.getXCoorString());
+		values.put(YCOORCOL, coorsToSave.getYCoorString());
+		values.put(ZCOORCOL,  zCoor);
+		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
+				+ mapId + "\"",null);
 	}
 	
 	@Override
