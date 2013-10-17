@@ -37,16 +37,15 @@ public class MapListModel implements MapListInterface {
 
 	@Override
 	public void editMap(MapInterface map) {
-		// TODO Auto-generated method stub
-//		for(MapInterface mapToUpdate: mapList){
-//			if(mapToUpdate.getId() == map.getId()){
-//				mapToUpdate.setLocation(map.getLocation());
-//				mapToUpdate.setName(map.getName());
-//				mapToUpdate.setRealCoordinates(map.getRealCoordinates());
-//				mapToUpdate.setSetCoordinateHashMap(map.getSetCoordinateHashMap());
-//				mapToUpdate.setzCoordinate(map.getzCoordinate());
-//			}
-//		}
+		for(MapInterface mapToEdit: mapList){
+			if(mapToEdit.getId().equals(map.getId())){
+				mapToEdit.setName(map.getName());
+				mapToEdit.setLocation(map.getLocation());
+				mapToEdit.setRealCoordinates(map.getRealCoordinates());
+				mapToEdit.setNotes(map.getNotes());
+				mapToEdit.setzCoordinate(map.getzCoordinate());
+			}
+		}
 	}
 	
 	

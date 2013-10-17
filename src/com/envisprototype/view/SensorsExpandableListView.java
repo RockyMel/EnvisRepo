@@ -2,14 +2,18 @@ package com.envisprototype.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.model.ExpandableListAdapter;
 
 public class SensorsExpandableListView extends Activity {
@@ -59,6 +63,39 @@ public class SensorsExpandableListView extends Activity {
 		List<String> T = SensorListModel.getSingletonInstance().getSensorIDListByType(5);
 		List<String> WL = SensorListModel.getSingletonInstance().getSensorIDListByType(6);
 		List<String> O = SensorListModel.getSingletonInstance().getSensorIDListByType(7);
+		
+//		Bundle bundle = getIntent().getExtras();
+//		if(bundle != null){
+//			if(bundle.containsKey(getString(R.string.map_id_extra))){
+//				String mapId = bundle.getString(getString(R.string.map_id_extra));
+//				// maybe modify to get lists only if they are associated rather than
+//				// removing those who don't
+//				ArrayList<String> setIds = MapSetAssociationDBHelper.
+//						getSingletoneInstance(this).getListOfSensorsAssosiatedWithMap(mapId);
+//				Set AQCommon = new HashSet(AQ);
+//				Set HCommon = new HashSet(H);
+//				Set LCommon = new HashSet(L);
+//				Set MCommon = new HashSet(M);
+//				Set TCommon = new HashSet(T);
+//				Set WLCommon = new HashSet(WL);
+//				Set OCommon = new HashSet(O);
+//				AQCommon.retainAll(setIds);
+//				HCommon.retainAll(setIds);
+//				LCommon.retainAll(setIds);
+//				MCommon.retainAll(setIds);
+//				TCommon.retainAll(setIds);
+//				WLCommon.retainAll(setIds);
+//				OCommon.retainAll(setIds);
+//				AQ = new ArrayList<String>(AQCommon);
+//				H = new ArrayList<String>(HCommon);
+//				L = new ArrayList<String>(LCommon);
+//				M = new ArrayList<String>(MCommon);
+//				T = new ArrayList<String>(TCommon);
+//				WL = new ArrayList<String>(WLCommon);
+//				O = new ArrayList<String>(OCommon);
+//				
+//			}
+//		}
 		
 		
 		listDataChild.put(listDataHeader.get(0), AQ); // Header, Child

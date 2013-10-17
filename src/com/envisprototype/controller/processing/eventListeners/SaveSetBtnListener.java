@@ -3,6 +3,7 @@ package com.envisprototype.controller.processing.eventListeners;
 import java.util.EventObject;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.processing.CoordinateWriter;
 import com.envisprototype.view.processing.EnvisPApplet;
 
@@ -28,6 +29,8 @@ public class SaveSetBtnListener extends AbstractPlotBtnListener{
 				eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
 			}
 			sensorWriter.saveSetsToFile(sensorsFileName, spApplet.getEnvisSensors());
+			MapSetAssociationDBHelper.getSingletoneInstance(spApplet).
+			associateEnvisSensorsWithMap(spApplet.getEnvisSensors(), spApplet.getEnvisMap().getMapId());
 		}
 	}
 

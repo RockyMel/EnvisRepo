@@ -60,6 +60,8 @@ public class Show3DMapBtnListener implements OnClickListener{
 		Context context = v.getContext();
 		Intent intent = new Intent(context, ThreeDVis.class);
 		intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+		// !!!!! add sets + sensors ids + coordinates
+		//intent.putExtra(v.getContext().getString(R.string.set_coor_extra, value)
 		context.startActivity(intent);
 	}
 

@@ -44,9 +44,10 @@ public class CoordinateWriter {
                     File(epApplet.getFilesDir()+File.separator+mapFileName)));
 			  Iterator<String> iterator = sensorSets.keySet().iterator();
 			  String stringToWrite = new String();
+			  //stringToWrite = this.epApplet.getEnvisMap().getMapId() + "||";
 			  while(iterator.hasNext()){
 				  SensorSet setToWrite = sensorSets.get(iterator.next());
-				  stringToWrite = setToWrite.getId();
+				  stringToWrite += setToWrite.getId();
 				  stringToWrite += "||";
 				  stringToWrite += Float.toString(setToWrite.getRealX());
 				  stringToWrite += ",";

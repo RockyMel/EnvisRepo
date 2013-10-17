@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import processing.core.PApplet;
@@ -16,6 +17,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.model.processing.SetCoordinates;
+import com.envisprototype.view.processing.SensorSet;
 
 public class CoordinatesReader {
 	BufferedReader mapBReader, sensorsBReader;
@@ -80,5 +83,40 @@ public class CoordinatesReader {
 		} 
 		  return coors;
 	  }
+	}
+	
+	public HashMap<String, SetCoordinates> prepareSensorsCoordinates(String sensorFileName){
+		HashMap<String, SetCoordinates> envisSensors = new HashMap<String, SetCoordinates>();
+		try {
+			sensorsBReader = new BufferedReader(new FileReader(new 
+			        File(context.getFilesDir()+File.separator+sensorFileName)));
+			sensorLine = sensorsBReader.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			sensorLine = null;
+			e.printStackTrace();
+		}
+		if(sensorLine != null){
+			// parsing sensors
+			  if(sensorLine != null){
+				  PApplet. println(line);
+				  StringTokenizer filecontents = new StringTokenizer(line, "||");
+				  while(filecontents.hasMoreElements()){
+					  String setid =  (String) filecontents.nextElement();
+					  String xyzcoors =  (String) filecontents.nextElement();
+					  StringTokenizer xyzTokenizer = new StringTokenizer(xyzcoors, ",");
+					  String xCoor = (String)xyzTokenizer.nextElement();
+					  String yCoor = (String)xyzTokenizer.nextElement();
+					  String zCoor = (String)xyzTokenizer.nextElement();
+				      envisSensors.put(setid, new SetCoordinates(
+				    		  Float.parseFloat(xCoor),
+			    			  Float.parseFloat(yCoor),
+			    			  Float.parseFloat(zCoor)));
+				  }
+			      
+
+			  }
+		}
+		return envisSensors;
 	}
 }

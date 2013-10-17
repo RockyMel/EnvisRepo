@@ -11,10 +11,14 @@ public class SensorSet extends UIElement{
 	float x,y,z;
 	float realX, realY, realZ;
 	private int SET_STROKE_WEIGHT = 20;
-
-	public SensorSet(EnvisPApplet epApplet, String id, float x, float y, float z) {
+	
+	public SensorSet(EnvisPApplet epApplet, String id){
 		super(epApplet);
 		this.id = id;
+	}
+
+	public SensorSet(EnvisPApplet epApplet, String id, float x, float y, float z) {
+		this(epApplet,id);
 		this.x = x;
 		this.y = y;
 		this.z = z;

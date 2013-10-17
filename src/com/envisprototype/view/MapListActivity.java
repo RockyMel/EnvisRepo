@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
 import com.envisprototype.model.maps.MapInterface;
@@ -77,7 +78,7 @@ public class MapListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//sensors.clear();
-		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 		maps = MapListModel.getSingletonInstance().getMapList();
 		Log.i("TEST", maps.toString());
 		mla = new MapListAdapter(this,0,maps);

@@ -7,7 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
+import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 public class MainActivity extends EnvisActivity {
@@ -17,8 +22,7 @@ public class MainActivity extends EnvisActivity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
-
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 	}
 
 //	@Override

@@ -23,8 +23,6 @@ public interface MapInterface {
 	public abstract void setzCoordinate(Float zCoordinate);
 	public abstract void addSetToMap(String SetID,SetCoordinate xyz);
 	public abstract void removeSetFromMap(String SetID);
-	public abstract HashMap<String, SetCoordinate> getSetCoordinateHashMap();
-	public abstract void setSetCoordinateHashMap(HashMap<String, SetCoordinate> setCoordinateHashMap);
 	public abstract String getNotes();
 	public abstract void setNotes(String notes);
 

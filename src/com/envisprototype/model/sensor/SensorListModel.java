@@ -126,6 +126,18 @@ public class SensorListModel implements SensorListInterface  {
 		}
 	}
 
+	@Override
+	public void ReplicateSensorList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void editSensor(SensorInterface sensor) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

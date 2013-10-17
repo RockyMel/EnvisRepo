@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
@@ -74,6 +75,16 @@ public class ThreeDVisualisation extends EnvisActivity {
 	
 
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
+	}
+
+
+
+
 	private void init() {
 		// TODO Auto-generated method stub
 		Bundle bundle = getIntent().getExtras();
@@ -91,6 +102,18 @@ public class ThreeDVisualisation extends EnvisActivity {
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
 		VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this,mapId,SetIds,SensorIds,MODE,calfrom,calto));
 		final Context context = this;
+		
+		SetsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context,SetListActivity.class);
+				intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+				intent.putExtra((v.getContext().getString(R.string.flags)), v.getContext().getString(R.string.sets_to_vis_extra));
+				v.getContext().startActivity(intent);
+			}
+		});
 
 		SensorsByType.setOnClickListener(new OnClickListener(){
 
@@ -98,6 +121,7 @@ public class ThreeDVisualisation extends EnvisActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(context,SensorsExpandableListView.class);
+				intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
 				v.getContext().startActivity(intent);
 			}
 			
@@ -178,6 +202,7 @@ public class ThreeDVisualisation extends EnvisActivity {
 		}); 
 
 	}
+	
 
 
 	@Override

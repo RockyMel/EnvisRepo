@@ -76,9 +76,7 @@ public abstract class EnvisPApplet extends PApplet{
 						  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sets_id_extra));
 						  for(String setId: setIdFromAndroid){
 							  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
-							  SensorSet setToShow = new SensorSet(this, setId, 
-									  setFromModel.getX(), setFromModel.getY(),
-									  setFromModel.getZ());
+							  SensorSet setToShow = new SensorSet(this, setId);
 							  envisSensors.put(setId, setToShow);
 						  }
 					  }

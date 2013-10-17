@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.DeleteSensorButtonController;
 import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
@@ -164,6 +165,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 	}
 
 	@Override

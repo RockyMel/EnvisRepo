@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DeleteMapButtonController;
@@ -72,7 +73,7 @@ public class MapInfoViewActivity extends EnvisActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		init();
-		//MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 		
 	}
 	@Override

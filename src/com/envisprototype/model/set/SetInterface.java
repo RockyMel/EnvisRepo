@@ -20,14 +20,7 @@ public interface SetInterface {
 
 	public abstract void setLocation(Location location);
 	public abstract boolean isIftoPlot();
-	public abstract void setIftoPlot(boolean iftoPlot);
-	
-	public abstract float getX();
-	public abstract void setX(float x);
-	public abstract float getY();
-	public abstract void setY(float y);
-	public abstract float getZ();
-	public abstract void setZ(float z);
+	public abstract void setIftoPlot(boolean iftoPlot);	
 
 	public abstract void setMapID(String mapID);
 

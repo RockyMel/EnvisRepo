@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.DBHelper.SetInfoDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetInterface;
@@ -90,6 +91,7 @@ public class SetSaveOnClickController implements OnClickListener {
 				public void run() {
 					//System.out.println("asdsaD" + sensor.getBrand());
 					SetInfoDBHelper.addSet(set);
+					SetLocalDBHelper.getSingletonInstance(context).addSet(set);
 				}
 			};
 			thread.start();

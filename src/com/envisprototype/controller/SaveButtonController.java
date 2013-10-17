@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.DBHelper.SensorInfoDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
@@ -56,14 +58,14 @@ public class SaveButtonController implements OnClickListener {
 		Location myloc=null;
 		SetInterface set=SetListModel.getSingletonInstance().findSetById(setid);
 
-		Log.i("SETID@SAVEBUTTONCONTROLLER", setid);
-		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getId());
-		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getName());
-		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getNotes());
-		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getLocation().getLongitude()+"");
+//		Log.i("SETID@SAVEBUTTONCONTROLLER", setid);
+//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getId());
+//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getName());
+//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getNotes());
+//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getLocation().getLongitude()+"");
 		myloc=set.getLocation();
 
-		Log.i("testing location1", myloc.getLongitude()+myloc.getLongitude()+"");
+		//Log.i("testing location1", myloc.getLongitude()+myloc.getLongitude()+"");
 
 		final SensorInterface sensor = new SensorModel();
 
@@ -73,7 +75,11 @@ public class SaveButtonController implements OnClickListener {
 
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
+		try{
 		sensor.setType(Integer.parseInt(type.getText().toString()));
+		}catch(NumberFormatException nfe){
+			sensor.setType(0);
+		}
 		sensor.setSetid(setid);
 		//SensorInterface temp = set.getSensor(id.getText().toString());
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
@@ -84,23 +90,34 @@ public class SaveButtonController implements OnClickListener {
 			//set.addSensor(sensor);
 			SensorListModel.getSingletonInstance().removeSensor(temp);
 			SensorListModel.getSingletonInstance().addSensor(sensor);
+			Thread thread = new Thread()
+			{
+				@Override
+				public void run() {
+					System.out.println("asdsaD" + sensor.getBrand());
+					SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensor);
+				}
+			};
+			thread.start();
 
 		}
 		else
 		{
 			SensorListModel.getSingletonInstance().addSensor(sensor);
 
-			/*
+			
 			Thread thread = new Thread()
 			{
 				@Override
 				public void run() {
 					System.out.println("asdsaD" + sensor.getBrand());
-					SensorInfoDBHelper.addSensor(sensor);
+					SensorLocalDBHelper.getSingletonInstance(context).addSensor(sensor);
+					// add sensor set association
+					SetSensorAssociationLocalDBHelper.getSingletonInstance(context).associateSensorWithSet(id.getText().toString(), setid);
 				}
 			};
 			thread.start();
-			 */
+			 
 		}
 		delete.setVisibility(Button.VISIBLE);
 

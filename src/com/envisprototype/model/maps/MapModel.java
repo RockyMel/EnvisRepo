@@ -14,4 +14,16 @@ public class MapModel extends AbstractMap {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void addSetToMap(String SetID, SetCoordinate xyz) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeSetFromMap(String SetID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

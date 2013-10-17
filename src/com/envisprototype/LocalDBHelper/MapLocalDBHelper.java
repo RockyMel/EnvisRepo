@@ -28,9 +28,7 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	//class to store events "list" works better with array adapter(which needs a list)
 	private MapListInterface mapModel=MapListModel.getSingletonInstance();
 	
-	private static final String DBNAME="EnvisDB.db";
-	private static final int VERSION=1;
-	
+	private Context context;
 	private static final String TABLE_NAME="Maps";
 	private static final String IDCOL="MapID";
 	private static final String NAMECOL="MapName";
@@ -40,14 +38,15 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	private static final String YCOORCOL="Y";
 	private static final String ZCOORCOL="Z";
 	private static final String NOTESCOL="Notes";
+	private static final String CREATE_MAP_TABLE_QUERY = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s DOUBLE,%s DOUBLE,%s TEXT,%s TEXT,%s FLOAT,%s TEXT);", TABLE_NAME,IDCOL,
+			NAMECOL,LONGCOL,LATCOL,XCOORCOL,YCOORCOL,ZCOORCOL,NOTESCOL);
 	
 	
 	
-	public MapLocalDBHelper(Context context) {
+	private MapLocalDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
-
-		super(context.getApplicationContext(),DBNAME,null,VERSION);
-		
+		super(context.getApplicationContext(),EnvisDBAdapter.getDbname(),null,EnvisDBAdapter.getVersion());
+		this.context = context;
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
 				+ map.getId() + "\"",null);
 	
-			mapModel.addMap(map);
+			mapModel.editMap(map);
 	}
 	
 	@Override
@@ -158,10 +157,9 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-
-		String queryString = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s DOUBLE,%s DOUBLE,%s TEXT,%s TEXT,%s FLOAT,%s TEXT);", TABLE_NAME,IDCOL,
-				NAMECOL,LONGCOL,LATCOL,XCOORCOL,YCOORCOL,ZCOORCOL,NOTESCOL);
-		db.execSQL(queryString);
+		Log.i("mapdb","in map oncreate");
+		//db.execSQL(queryString);
+		EnvisDBAdapter.getSingletonInstance(context).onCreate(db);
 		
 	}
 
@@ -196,6 +194,12 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		
 	}
 	
+	
+	
+	public static String getCreateMapTableQuery() {
+		return CREATE_MAP_TABLE_QUERY;
+	}
+
 	private ContentValues prepareValues(MapInterface map) {
 		ContentValues values=new ContentValues();
 		values.put(IDCOL, map.getId());

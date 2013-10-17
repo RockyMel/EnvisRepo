@@ -67,5 +67,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		}
 		adminkaActivity.startActivity(intent);
 	}
+	
+	
 
 }

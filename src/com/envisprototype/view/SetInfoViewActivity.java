@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.AddSensorButtonController;
 import com.envisprototype.controller.SetSaveOnClickController;
 import com.envisprototype.model.sensor.SensorInterface;
@@ -136,6 +137,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 		//if(SetListModel.getSingletonInstance().findSetById(setid)!=null){
 			//SetInterface tempset= SetListModel.getSingletonInstance().findSetById(setid);
 			//list= (List<SensorInterface>) tempset.getSensors();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 			list=SensorListModel.getSingletonInstance().getSensorListBySetID(setid);
 
 			sla = new Set_SensorListAdapter(this,0,list,setid);

@@ -1,5 +1,8 @@
 package com.envisprototype.view;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,8 +16,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.R;
-import com.envisprototype.R.id;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
+import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.PlotSetsBtnListener;
+import com.envisprototype.model.processing.SetCoordinates;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.model.SetListAdapter;
@@ -53,18 +60,59 @@ public class SetListActivity extends Activity {
 			}
 		});
 		
+		
+		
+	}
+	
+	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
+		Log.i("id", "After SetPlotPapplet " + SetLocalDBHelper.getSingletonInstance(this).getSetList().size());
+		Log.i("id", "After SetPlotPapplet " + mapId);
 		sets = SetListModel.getSingletonInstance().getSetList();
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null){
+			if(bundle.containsKey(getString(R.string.flags))){
+				String flag = bundle.getString(getString(R.string.flags));
+				if(flag.equals(getString(R.string.sets_to_vis_extra))){
+					// getting those sets that belong to this map
+					ArrayList<String> setIds = MapSetAssociationDBHelper.
+							getSingletoneInstance(this).getListOfSensorsAssosiatedWithMap(mapId);
+					sets = SetListModel.getSingletonInstance().getSetListByIds(setIds);
+				}
+			}
+		}
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		//addListenerOnSpinnerItemSelection();
 		//Collections.sort(sets,new SortBySetAlph());
 		sla = new SetListAdapter(this,0,sets, mapId);
 		lv=(ListView)findViewById(R.id.listView1);
 		lv.setAdapter(sla);
-		
+		// here we need to put coordinates of sets into the system
+		// 1. associate them with the sets
+		// 2. associate plotted sets with the map
 		Button plotSetsBtn = (Button) findViewById(R.id.plot_sets_btn);
 		plotSetsBtn.setOnClickListener(new PlotSetsBtnListener(mapId));
-		
+		CoordinatesReader setCoorReader = new CoordinatesReader(this);
+		HashMap<String, SetCoordinates> tempSetCoors = setCoorReader.prepareSensorsCoordinates("sensor.txt");
+		Iterator<String> iterator = tempSetCoors.keySet().iterator();
+		while(iterator.hasNext()){
+			String setId = iterator.next();
+			SetCoordinates coors = tempSetCoors.get(setId);
+			SetInterface set = SetListModel.getSingletonInstance().findSetById(setId);
+			if(set!= null){
+				//SetLocalDBHelper.getSingletonInstance(this).editSet(set);
+				MapSetAssociationDBHelper.getSingletoneInstance(this).
+				associateSetWithMap(setId, mapId, coors.getX(), coors.getY(), coors.getZ());
+			}
+		}
 	}
+
+
 
 	private void addListenerOnSpinnerItemSelection() {
 		// TODO Auto-generated method stub

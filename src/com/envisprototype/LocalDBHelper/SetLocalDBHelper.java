@@ -29,9 +29,8 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	private static SetLocalDBHelper singletonInstance;
 	//class to store events "list" works better with array adapter(which needs a list)
 	private SetListInterface setModel=SetListModel.getSingletonInstance();
+	private Context context;
 
-	private static final String DBNAME="EnvisDB.db";
-	private static final int VERSION=1;
 
 	private static final String TABLE_NAME="Sets";
 	private static final String IDCOL="SetID";
@@ -40,22 +39,24 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	private static final String LONGITUDECOL="Longitude";
 	private static final String LATITUDECOL="Latitude";
 	private static final String NOTESCOL="Notes";
-
+	
+	private static final String CREATE_SET_TABLE_QUERY = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s DOUBLE,%s DOUBLE,%s TEXT);", TABLE_NAME,
+			IDCOL,NAMECOL,LONGITUDECOL,LATITUDECOL,NOTESCOL);
 
 	public SetLocalDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
 
-		super(context.getApplicationContext(),DBNAME,null,VERSION);
-
+		super(context.getApplicationContext(),EnvisDBAdapter.getDbname(),null,EnvisDBAdapter.getVersion());
+		this.context = context;
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-
-		String queryString = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s DOUBLE,%s DOUBLE,%s TEXT);", TABLE_NAME,
-				IDCOL,NAMECOL,LONGITUDECOL,LATITUDECOL,NOTESCOL);
-		db.execSQL(queryString);
+		EnvisDBAdapter.getSingletonInstance(context).onCreate(db);
+		
+		Log.i("setdb","in set oncreate");
+		//db.execSQL(queryString);
 	}
 
 	@Override
@@ -69,16 +70,31 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	@Override
 	public void addSet(SetInterface newset) {
 		// TODO Auto-generated method stub
+		ContentValues values= prepareValues(newset);
+
+		getWritableDatabase().insert(TABLE_NAME, null, values);
+
+		setModel.addSet(newset);
+	}
+	
+	public void editSet(SetInterface newset) {
+		// TODO Auto-generated method stub
+		
+		ContentValues values = prepareValues(newset);
+		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
+				+ newset.getId() + "\"",null);
+	
+		setModel.editSet(newset);
+	}
+	
+	private ContentValues prepareValues(SetInterface newset) {
 		ContentValues values=new ContentValues();
 		values.put(IDCOL, newset.getId());
 		values.put(NAMECOL, newset.getName());
 		values.put(LONGITUDECOL, newset.getLocation().getLongitude());
 		values.put(LATITUDECOL, newset.getLocation().getLatitude());
 		values.put(NOTESCOL, "samplenote");
-
-		getWritableDatabase().insert(TABLE_NAME, null, values);
-
-		setModel.addSet(newset);
+		return values;
 	}
 
 	@Override
@@ -131,7 +147,7 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	}
 
 	
-	public void ReplicateMapList() {
+	public void ReplicateSetList() {
 		// TODO Auto-generated method stub
 
 		List<SetInterface> theset = getSetList();
@@ -152,5 +168,16 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 		
 	}
 
+	public static String getCreateSetTableQuery() {
+		return CREATE_SET_TABLE_QUERY;
+	}
 
+	@Override
+	public List<SetInterface> getSetListByIds(List<String> setIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 }

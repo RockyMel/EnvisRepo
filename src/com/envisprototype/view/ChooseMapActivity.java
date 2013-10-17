@@ -3,6 +3,7 @@ package com.envisprototype.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.R.string;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 
@@ -138,7 +138,10 @@ public class ChooseMapActivity extends EnvisActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 if(resultCode == RESULT_OK){   
 			 if((mapId = data.getExtras().getString("mapId"))!=null){
+				 //Log.i("id","in choose map result id = " + mapId);
 				 MapInterface map = MapListModel.getSingletonInstance().findMapById(mapId);
+				 init();
+				 Log.i("id","in choose map result id = " + map.getId());
 				 mapIdTv.setText(map.getId());
 				 mapNameTv.setText(map.getName());
 				 mapLocationTv.setText(map.getLocation().toString());

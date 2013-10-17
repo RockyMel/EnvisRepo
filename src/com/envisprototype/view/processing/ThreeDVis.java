@@ -34,6 +34,7 @@ public void setup(){
     topViewButton.setPlace(DEF_BTN_X, 7*height/30);
     topViewButton.addEventListener(new TopViewButtnoListener());
     RotateScopeListener.setIfTop(true);
+    // need to get coordinates for the sensors
     for(int i = 0; i < envisSensors.size(); i++){
     	envisSensors.get(i).translateSensorsForMap(envisMap);
     }

@@ -19,8 +19,11 @@ public interface SensorListInterface {
 	List getSensorIDListByType(int type);
 
 	public abstract void setSensorList(List<SensorInterface> thesensor);
+	public abstract void ReplicateSensorList();
 
 	public abstract void addAssociateSensortoSet(String sensorID, String setID);
+
+	public abstract void editSensor(SensorInterface sensor);
 	
 
 }

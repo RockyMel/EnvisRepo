@@ -13,7 +13,6 @@ public abstract class AbstractMap implements MapInterface {
 	private Location location;
 	Coordinates realCoordinates;
 	private Float zCoordinate;
-	HashMap<String,SetCoordinate> SetCoordinateHashMap;
 
 	public AbstractMap() {
 
@@ -28,7 +27,6 @@ public abstract class AbstractMap implements MapInterface {
 		this.name = name;
 		this.location = location;
 		this.realCoordinates=new Coordinates();
-		this.SetCoordinateHashMap=new HashMap<String,SetCoordinate>();
 	}
 	/* (non-Javadoc)
 	 * @see com.example.envisproto.Model.SensorInterface#getName()
@@ -127,26 +125,6 @@ public abstract class AbstractMap implements MapInterface {
 	public void setNotes(String notes) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public void addSetToMap(String SetID,SetCoordinate xyz)
-	{
-		this.SetCoordinateHashMap.put(SetID, xyz);
-
-
-	}
-
-	public void removeSetFromMap(String SetID)
-	{
-		this.SetCoordinateHashMap.remove(SetID);
-
-
-	}
-	public HashMap<String, SetCoordinate> getSetCoordinateHashMap() {
-		return SetCoordinateHashMap;
-	}
-	public void setSetCoordinateHashMap(HashMap<String, SetCoordinate> setCoordinateHashMap) {
-		SetCoordinateHashMap = setCoordinateHashMap;
 	}
 	
 

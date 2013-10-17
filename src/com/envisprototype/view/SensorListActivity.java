@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForSensors;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
@@ -130,6 +131,8 @@ public class SensorListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//sensors.clear();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
+		
 		sensors = SensorListModel.getSingletonInstance().getSensorList();
 		Log.i("TEST", sensors.toString());
 		sla = new SensorListAdapter(this,0,sensors);

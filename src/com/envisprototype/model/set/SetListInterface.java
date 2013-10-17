@@ -13,9 +13,14 @@ public interface SetListInterface {
 	public abstract List<SetInterface> getSetList();
 
 	public abstract void setSetList(List<SetInterface> theset);
+	public abstract void ReplicateSetList();
 
 	public abstract void addAssociateSettoMap(String setID, String mapID,
 			float x, float y, float z);
+
+	public abstract void editSet(SetInterface set);
+
+	public List<SetInterface> getSetListByIds(List<String> setIds);
 	
 	
 	

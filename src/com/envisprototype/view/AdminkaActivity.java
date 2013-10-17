@@ -4,23 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.view.model.ExpandableAdminAdapter;
 import com.envisprototype.view.model.ExpandableListAdapter;
-import com.envisprototype.view.navigation.NavigationMaker;
-//@Override
-//public void onCreate(Bundle savedInstanceState) {
-//	super.onCreate(savedInstanceState);
-//	// Get the view from fragment2.xml
-//	setContentView(R.layout.activity_admin);
-//	Button drawMapBtn = (Button) findViewById(R.id.drawMapBtn);
-//	drawMapBtn.setOnClickListener(new onDrawMapClickListener());
-//	NavigationMaker.makeNavigationDrawer(this);
-//}
 
 public class AdminkaActivity extends EnvisActivity {
 
@@ -71,4 +61,13 @@ public class AdminkaActivity extends EnvisActivity {
 																// data
 		listDataChild.put(listDataHeader.get(1), secondGroup);
 	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//EnvisDBAdapter.getSingletonInstance(this).replecateDB();
+	}
+	
+	
 }

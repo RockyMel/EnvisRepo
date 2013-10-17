@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CoordinatesReader;
 import com.envisprototype.controller.DrawMapBtnListener;
@@ -63,7 +64,7 @@ public class AddMapActivity extends EnvisActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//CODE TO SET THE TEXT FIELDS FROM QR READER
-		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 		
 	}
 	

@@ -1,7 +1,8 @@
 package com.envisprototype.LocalDBHelper;
 
-import com.envisprototype.model.sensor.SensorListModel;
-import com.envisprototype.model.set.SetListModel;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,14 +10,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.envisprototype.model.set.SetListModel;
+import com.envisprototype.view.processing.SensorSet;
+
 
 public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	private static MapSetAssociationDBHelper singletonInstance;
 	//class to store events "list" works better with array adapter(which needs a list)
 	//private SensorListInterface sensorModel=SensorListModel.getSingletonInstance();
 	
-	private static final String DBNAME="EnvisDB.db";
-	private static final int VERSION=1;
 	
 	private static final String TABLE_NAME="MapSetAssociation";
 	private static final String SETIDCOL="SetID";
@@ -24,25 +26,46 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	private static final String XCOL="X";
 	private static final String YCOL="Y";
 	private static final String ZCOL="Z";
+	private static final String CREATE_MAP_SET_ASS_TABLE_QUERY = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s FLOAT,%s FLOAT,%s FLOAT);", TABLE_NAME,SETIDCOL,
+			MAPIDCOL,XCOL,YCOL,ZCOL);
+
+
+	private Context context;
 	
-	public MapSetAssociationDBHelper(Context context) {
+	private MapSetAssociationDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
 
-		super(context.getApplicationContext(),DBNAME,null,VERSION);
-		
+		super(context.getApplicationContext(),EnvisDBAdapter.getDbname(),null,EnvisDBAdapter.getVersion());
+		this.context = context;
+	}
+	
+	public static MapSetAssociationDBHelper getSingletoneInstance(Context context){
+		if(singletonInstance == null)
+			singletonInstance = new MapSetAssociationDBHelper(context);
+		return singletonInstance;
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		String queryString = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%f FLOAT,%f FLOAT,%f FLOAT);", TABLE_NAME,SETIDCOL,
-				MAPIDCOL,XCOL,YCOL,ZCOL);
-		db.execSQL(queryString);
+		EnvisDBAdapter.getSingletonInstance(context).onCreate(db);
+		//db.execSQL(CREATE_MAP_SET_ASS_TABLE_QUERY);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void associateEnvisSensorsWithMap( HashMap<String,SensorSet> envisSensors, String mapId){
+		Iterator iterator = envisSensors.keySet().iterator();
+		ContentValues values=new ContentValues();
+		while(iterator.hasNext()){
+			SensorSet tempSet = envisSensors.get(iterator.next());
+			associateSetWithMap(tempSet.getId(), mapId, tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
+		}
 		
 	}
 	
@@ -61,7 +84,7 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		
 	}
 	
-	public void ReplicateAllSetAndSensorAssociations(){
+	public void ReplicateAllMapAndSensorAssociations(){
 		
 
 		String query="SELECT * FROM " + TABLE_NAME + ";";
@@ -76,4 +99,24 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		}	
 		
 	}
+	
+	public ArrayList<String> getListOfSensorsAssosiatedWithMap(String mapId){
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  MAPIDCOL + " = " + "'" + mapId + "'" +  ";";
+		ArrayList<String> setIds = new ArrayList<String>();		
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.moveToFirst()){
+			do{
+				setIds.add(cursor.getString(0));
+			}while(cursor.moveToNext());
+		}
+		return setIds;
+	}
+
+	public static String getCreateMapSetAssTableQuery() {
+		return CREATE_MAP_SET_ASS_TABLE_QUERY;
+	}
+
+
+	
+	
 }
