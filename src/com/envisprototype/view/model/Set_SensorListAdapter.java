@@ -45,8 +45,6 @@ public class Set_SensorListAdapter extends ArrayAdapter<SensorInterface>{
 		sensorname.setText(sensor.getName());
 		TextView id =(TextView) inflatedView.findViewById(R.id.ID);
 		id.setText(sensor.getId());
-		CheckBox plotSensorsCb = (CheckBox)inflatedView.findViewById(R.id.plot_sensor_cb);
-		plotSensorsCb.setOnCheckedChangeListener(new onSetChosenToPlot(sensor.getId()));
 		//Button del = (Button)inflatedView.findViewById(R.id.del);
 		//del.setOnClickListener(new DeleteSensorButtonController(sensor.getId(),setid,context));
 		
