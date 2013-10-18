@@ -50,7 +50,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 			
 		}
 		if(tag.equals(menuOptions[1])){
-			intent = new Intent(adminkaActivity, SensorListActivity.class);
+			intent = new Intent(adminkaActivity, SetListActivity.class);
 		}
 		if(tag.equals(menuOptions[2])){
 			//intent = new Intent(adminkaActivity, SetListActivity.class);

@@ -20,6 +20,7 @@ import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.controller.PlotSetsBtnListener;
+import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.SetCoordinates;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
@@ -82,6 +83,17 @@ public class SetListActivity extends Activity {
 					ArrayList<String> setIds = MapSetAssociationDBHelper.
 							getSingletoneInstance(this).getListOfSensorsAssosiatedWithMap(mapId);
 					sets = SetListModel.getSingletonInstance().getSetListByIds(setIds);
+				}
+				if(bundle.getString(getString(R.string.flags)).equals(getString(R.string.plot_flag_extra))){
+						// get rid of the sets that has already been plotted
+					Iterator<SetInterface> iterator = sets.iterator();
+					SetInterface setToRemove;
+					while(iterator.hasNext()){
+						setToRemove = iterator.next();
+						if(MapSetAssociationDBHelper.getSingletoneInstance(this).isPlotted(setToRemove.getId())){
+							iterator.remove();
+						}
+					}
 				}
 			}
 		}

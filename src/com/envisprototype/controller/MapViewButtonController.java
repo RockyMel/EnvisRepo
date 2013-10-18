@@ -41,6 +41,8 @@ public class MapViewButtonController implements OnClickListener{
 				// it means we will plot sets or sensors to this map
 				intent=new Intent(view.getContext(),SetListActivity.class);
 				intent.putExtra(context.getString(R.string.map_id_extra), id);
+				intent.putExtra(view.getContext().getString(R.string.flags),
+						view.getContext().getString(R.string.plot_flag_extra));
 				((Activity) view.getContext()).startActivity(intent);
 			}
 		}

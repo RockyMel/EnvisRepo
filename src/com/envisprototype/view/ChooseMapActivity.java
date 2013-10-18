@@ -119,15 +119,16 @@ public class ChooseMapActivity extends EnvisActivity {
 			}
 		});
 		
-		plotToMapBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				intent.putExtra(getString(R.string.map_id_extra), mapId);
-				v.getContext().startActivity(intent);
-			}
-		});
+//		plotToMapBtn.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				intent.putExtra(getString(R.string.map_id_extra), mapId);
+//				intent.putExtra(getString(R.string.flags), getString(R.string.plot_flag_extra));
+//				v.getContext().startActivity(intent);
+//			}
+//		});
 	}
 	
 	@Override

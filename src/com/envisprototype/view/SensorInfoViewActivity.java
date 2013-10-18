@@ -1,12 +1,9 @@
 package com.envisprototype.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,7 +14,6 @@ import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;
-import com.envisprototype.view.processing.SetPlotPApplet;
 
 public class SensorInfoViewActivity extends EnvisActivity {
 	EditText id;
@@ -84,9 +80,9 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		{
 			id.setText(sensor.getId().toString());
 			name.setText(sensor.getName());
-			type.setText(sensor.getType());
 			brand.setText(sensor.getBrand());
 			notes.setText(sensor.getNotes());
+			type.setText(Integer.toString(sensor.getType()));
 
 		}
 

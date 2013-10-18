@@ -58,6 +58,15 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean isPlotted(String setId){
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.getCount() > 0)
+			return true;
+		else 
+			return false;
+	}
 
 	
 	public void associateEnvisSensorsSetsWithMap( HashMap<String,SensorSet> envisSensors, String mapId){

@@ -26,6 +26,7 @@
     <string name="flags">flags</string>
     <string name="plot_flag_extra">plotExtra</string>
     <string name="three_d_vis_flag_extra">three_d_vis_flag_extra</string>
+    <string name="edit_sets_flag">editSetFlag</string>
     <string name="request_code">request code</string>
     
 
