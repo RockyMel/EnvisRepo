@@ -1,15 +1,25 @@
 package com.envisprototype.view;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import android.app.Activity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +35,7 @@ import com.androidplot.xy.XYStepMode;
 import com.envisprototype.R;
 import com.envisprototype.controller.DialogHandler;
 import com.envisprototype.model.SeriesContainer;
+import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
@@ -49,13 +60,67 @@ OnMultiChoiceClickListener {
 	private CharSequence[] items;
 	private boolean[] checked;
 	private HashMap<XYSeries, LineAndPointFormatter> tempMap;
+	Number[][] data = null;
+	
+	private class GetSensorReadingTask extends AsyncTask<String, Void, String> {
+		int index;
+		GetSensorReadingTask(int index){
+			this.index=index;
+		}
+	    @Override
+	    protected String doInBackground(String... args) {
+	      String response = "";
+	      response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON("S1ZZZ", "2013-10-18 18:10:50", "2013-10-18 18:15:50");
+	      return response;
+	    }
 
+	    @Override
+	    protected void onPostExecute(String result) {
+	     // textView.setText(result);
+	    	Log.i("asdasD", result);
+	    	try {
+				JSONObject obj = new JSONObject(result);
+				Iterator tempkeys = obj.keys();
+				//while(tempkeys.hasNext()){
+				//	Object element = tempkeys.next();
+				//	Log.i("chkthis", element.toString());
+				//}
+				int i=1;
+				while(true)
+				{
+					if(obj.getJSONArray(i+"")!=null){
+						data[index][i-1]=obj.getJSONArray(i+"").getInt(2);
+						Log.i("chkthis",obj.getJSONArray(i+"").getString(2)+"");
+						}
+					else
+						break;
+					i++;
+				}
+//				Log.i("chkthis",obj.getJSONArray("1")+"");
+//				Log.i("chkthis",obj.getJSONArray("2")+"");
+//				Log.i("chkthis",obj.getJSONArray("3")+"");
+//				Log.i("chkthis",obj.getJSONArray("4")+"");
+//				Log.i("chkthis",obj.getJSONArray("5")+"");
+//				Log.i("chkthis",obj.getJSONArray("6")+"");
+//				Log.i("chkthis",obj.getJSONArray("7")+"");
+//				Log.i("chkthis",obj.getJSONArray("8")+"");
+//				Log.i("chkthis",obj.getJSONArray("9")+"");
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	    	Log.i(":async", "done");
+	    }
+	  }
+	
+	
 	public LineChart() {
 
 		List<String> tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs();
 
 		String[] names = null;
-		Number[][] data = null;
+		
 		if(tempsensoridlist.size()>0){
 
 
@@ -77,21 +142,25 @@ OnMultiChoiceClickListener {
 			int sizej=10;
 			data = new Number[tempsensoridlist.size()][sizej];
 			Log.i("size", tempsensoridlist.size() + " " +data.length+ " " + data[0].length);
+		  
+		    
 			for(int i=0;i<tempsensoridlist.size();i++){
+				  GetSensorReadingTask task = new GetSensorReadingTask(i);
+				    task.execute(new String[]{"dummy"});
 				//data[i] = new Number[10];
-				if(i==0){
-				for(int j=0;j<10;j++){
-
-					data[i][j]=(j+1)*4;
-				}}
-				else
-				{
-					for(int j=0;j<10;j++){
-
-						data[i][j]=(j+2)*4;
-					}
-					
-				}
+//				if(i==0){
+//				for(int j=0;j<10;j++){
+//
+//					data[i][j]=(j+1)*4;
+//				}}
+//				else
+//				{
+//					for(int j=0;j<10;j++){
+//
+//						data[i][j]=(j+2)*4;
+//					}
+//					
+//				}
 
 			}
 
@@ -152,34 +221,6 @@ OnMultiChoiceClickListener {
 
 		imageBut = (ImageButton) findViewById(R.id.imageButton1);
 		imageBut.setOnClickListener(this);
-
-		//		tempMap = SeriesContainer.getContainer();
-		//		if (!tempMap.isEmpty()) {
-		//			Iterator iter = tempMap.keySet().iterator();
-		//			String name = "";
-		//			// this.chosenItems.clear();
-		////			while (iter.hasNext()) {
-		////				name = ((XYSeries) iter.next()).getTitle();
-		////				if (name.equals("Sensor1")) {
-		////					this.chosenItems.remove(0);
-		////					this.chosenItems.add(0, true);
-		////					this.checked[0] = true;
-		////				} else if (name.equals("Sensor2")) {
-		////					this.chosenItems.remove(1);
-		////					this.chosenItems.add(1, true);
-		////					this.checked[1] = true;
-		////				} else if (name.equals("Sensor3")) {
-		////					this.chosenItems.remove(2);
-		////					this.chosenItems.add(2, true);
-		////					this.checked[2] = true;
-		////				} else if (name.equals("Sensor4")) {
-		////					this.chosenItems.remove(3);
-		////					this.chosenItems.add(3, true);
-		////					this.checked[3] = true;
-		////				}
-		////			}
-		//		}
-
 		builder = new AlertDialog.Builder(this);
 		builder.setTitle("MultiChoose");
 		builder.setPositiveButton("OK", dHandler);
@@ -198,16 +239,16 @@ OnMultiChoiceClickListener {
 	 */
 	private void initalChart() {
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
-		mySimpleXYPlot.setDomainBoundaries(0, 24, BoundaryMode.GROW);
-		mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
-		mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
+		mySimpleXYPlot.setDomainBoundaries(0, 100, BoundaryMode.SHRINNK);
+	//	mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
+	//	mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
 		// mySimpleXYPlot.setDomainStepValue(24);
 		// mySimpleXYPlot.setTicksPerDomainLabel(1);
 		// mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
-		mySimpleXYPlot.setRangeBoundaries(0, 50, BoundaryMode.FIXED);
-		mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
-		mySimpleXYPlot.setRangeValueFormat(new DecimalFormat("#"));
-
+		mySimpleXYPlot.setRangeBoundaries(0, 100, BoundaryMode.SHRINNK);
+		//mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
+	//	mySimpleXYPlot.setRangeValueFormat(new DecimalFormat("#"));
+//
 		tempMap = SeriesContainer.getContainer();
 		if (!tempMap.isEmpty()) {
 			XYSeries key;
