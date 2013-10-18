@@ -83,30 +83,45 @@ public abstract class AbstractSet implements SetInterface {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	
 	public boolean isIftoPlot() {
 		return iftoPlot;
 	}
 	public void setIftoPlot(boolean iftoPlot) {
 		this.iftoPlot = iftoPlot;
 	}
+	
+	@Override
 	public float getX() {
 		return x;
 	}
+	
+	@Override
 	public void setX(float x) {
 		this.x = x;
 	}
+	
+	@Override
 	public float getY() {
 		return y;
 	}
+	
+	@Override
 	public void setY(float y) {
 		this.y = y;
 	}
+	
+	@Override
 	public float getZ() {
 		return z;
 	}
+	
+	@Override
 	public void setZ(float z) {
 		this.z = z;
 	}
+	
+	
 	public String getMapID() {
 		return MapID;
 	}

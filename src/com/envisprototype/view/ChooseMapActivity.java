@@ -111,7 +111,9 @@ public class ChooseMapActivity extends EnvisActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(context, ThreeDVisualisation.class);
+				//Intent intent = new Intent(context, ThreeDVisualisation.class);
+				Intent intent = new Intent(context, ChartVisualizationSettingsActivity.class);
+				intent.putExtra(getString(R.string.flags), getString(R.string.three_d_vis_flag_extra));
 				intent.putExtra(getString(R.string.map_id_extra), mapId);
 				context.startActivity(intent);
 			}

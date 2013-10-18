@@ -26,8 +26,10 @@ public class SensitiveListener extends AbstractPlotBtnListener{
 				Log.i("id", "id = " + spApplet.getCurrentIdToPlot());
 				float tempX = eButton.getEpApplet().mouseX;
 				float tempY = eButton.getEpApplet().mouseY;
-				SensorSet setToAdd = new SensorSet(eButton.getEpApplet(),
-				spApplet.getCurrentIdToPlot(),  tempX, tempY, 0);
+				SensorSet setToAdd = spApplet.getEnvisSensors().get(spApplet.getCurrentIdToPlot());
+				setToAdd.setAllCoors(tempX, tempY, setToAdd.getRealZ());
+//				SensorSet setToAdd = new SensorSet(eButton.getEpApplet(),
+//				spApplet.getCurrentIdToPlot(),  tempX, tempY, 0);
 				setToAdd.translateSensorsForFile(eButton.getEpApplet().getEnvisMap());
 				eButton.getEpApplet().getEnvisSensors().put(spApplet.getCurrentIdToPlot(),setToAdd);
 				//ePlotApplet.setIfAddingSets(false);

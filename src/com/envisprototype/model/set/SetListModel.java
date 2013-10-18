@@ -81,7 +81,10 @@ public class SetListModel implements SetListInterface{
 		{
 			if(this.setList.get(i).getId().equals(setID))
 				{
-				this.setList.get(i).setMapID(mapID);				
+				this.setList.get(i).setMapID(mapID);	
+				this.setList.get(i).setX(x);
+				this.setList.get(i).setY(y);
+				this.setList.get(i).setZ(z);
 				}
 		}
 		

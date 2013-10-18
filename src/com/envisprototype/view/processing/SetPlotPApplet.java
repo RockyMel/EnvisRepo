@@ -18,6 +18,8 @@ public class SetPlotPApplet extends EnvisPApplet {
 	Iterator iterator;
 	ArrayList<EnvisButton> idButtons;
 	
+	private float curZ;
+	
 	private boolean ifAddingSets = true;
 
 public void setup(){
@@ -42,7 +44,7 @@ public void setup(){
 	downSetIdBtn = new EnvisButton(this, "DOWN");
 	upSetIdBtn.setPlace(MAX_WIDTH, height/20);
 	okBtn = new EnvisButton(this, "Ok");
-	okBtn.addEventListener(new SaveSetBtnListener(this, "sensors.txt"));
+	okBtn.addEventListener(new SaveSetBtnListener());
 	idButtons = new ArrayList<EnvisButton>();
 	int setBtnHeight = 2*height/20;
 	for(String id: setIdFromAndroid){
@@ -131,6 +133,14 @@ public EnvisButton findidButtonById(String id){
 		if(btn.getBtnID().equals(id))
 			return btn;
 	return null;
+}
+
+public float getCurZ() {
+	return curZ;
+}
+
+public void setCurZ(float curZ) {
+	this.curZ = curZ;
 }
 
 

@@ -27,6 +27,8 @@ import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
+import com.envisprototype.view.model.ChartVisualizationSettingsListAdapter;
+import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 
@@ -58,8 +60,8 @@ public class ThreeDVisualisation extends EnvisActivity {
 
 	int MODE=0;
 
-	List<String> SetIds = new ArrayList<String>();
-	List<String> SensorIds = new ArrayList<String>();
+	ArrayList<String> SetIds = new ArrayList<String>();
+	ArrayList<String> SensorIds = new ArrayList<String>();
 
 
 
@@ -108,7 +110,8 @@ public class ThreeDVisualisation extends EnvisActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(context,SetListActivity.class);
+//				Intent intent = new Intent(context,SetListActivity.class);
+				Intent intent = new Intent(context,SetsForMapExpandableListView.class);
 				intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
 				intent.putExtra((v.getContext().getString(R.string.flags)), v.getContext().getString(R.string.sets_to_vis_extra));
 				v.getContext().startActivity(intent);

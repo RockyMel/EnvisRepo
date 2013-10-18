@@ -114,14 +114,6 @@
         android:layout_centerHorizontal="true"
         android:text="Delete" />
 
-    <Button
-        android:id="@+id/set_plot_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/listOfSensors"
-        android:layout_below="@+id/listOfSensors"
-        android:text="Plot a set" />
-
 </RelativeLayout>
 
 <include layout="@layout/for_drawer" />

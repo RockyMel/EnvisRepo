@@ -36,13 +36,13 @@ public class EnvisDBAdapter extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		String queryToCreate = MapLocalDBHelper.getCreateMapTableQuery();
 		db.execSQL(queryToCreate);
-		queryToCreate = MapSetAssociationDBHelper.getCreateMapSetAssTableQuery();
+		queryToCreate = SetLocalDBHelper.getCreateSetTableQuery();
 		db.execSQL(queryToCreate);
 		queryToCreate = SensorLocalDBHelper.getCreateSensorTableQuery();
 		db.execSQL(queryToCreate);
 		queryToCreate = SetSensorAssociationLocalDBHelper.getCreateSetSensorAssTableQuery();
 		db.execSQL(queryToCreate);
-		queryToCreate = SetLocalDBHelper.getCreateSetTableQuery();
+		queryToCreate = MapSetAssociationDBHelper.getCreateMapSetAssTableQuery();
 		db.execSQL(queryToCreate);
 	}
 	@Override
@@ -53,9 +53,9 @@ public class EnvisDBAdapter extends SQLiteOpenHelper{
 	
 	public void replecateDB(){
 		MapLocalDBHelper.getSingletonInstance(context).ReplicateMapList();
-		MapSetAssociationDBHelper.getSingletoneInstance(context).ReplicateAllMapAndSensorAssociations();
-		SensorLocalDBHelper.getSingletonInstance(context).ReplicateSensorList();
 		SetLocalDBHelper.getSingletonInstance(context).ReplicateSetList();
+		SensorLocalDBHelper.getSingletonInstance(context).ReplicateSensorList();
+		MapSetAssociationDBHelper.getSingletoneInstance(context).ReplicateAllMapAndSensorAssociations();
 		SetSensorAssociationLocalDBHelper.getSingletonInstance(context).ReplicateAllSetAndSensorAssociations();
 	}
 	

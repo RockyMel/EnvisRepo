@@ -74,6 +74,7 @@ public class SensorSet extends UIElement{
 			return;
 		x-=coors[Map.indexX];
 		y-=coors[Map.indexY];
+		z-=coors[Map.indexZ];
 		Log.i("sets", "for map");
 		printCoors();
 	}
@@ -82,7 +83,7 @@ public class SensorSet extends UIElement{
 		float[] coors = map.calculateMiddleCoors();
 		realX+=coors[Map.indexX]-epApplet.width/2;
 		realY+=coors[Map.indexY]-epApplet.height/2;
-		realZ+=coors[Map.indexZ];
+		//realZ+=coors[Map.indexZ];
 		x-=epApplet.width/2;
 		y-=epApplet.height/2;
 		Log.i("sets", "for file");
@@ -153,6 +154,15 @@ public class SensorSet extends UIElement{
 		this.realZ = realZ;
 	}
 
+	public void setAllCoors(float x, float y, float z){
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.realX = x;
+		this.realY = y;
+		this.realZ = z;
+	}
+	
 	@Override
 	public void rotate(float xRotate, float yRotate, float zRotate) {
 		// TODO Auto-generated method stub

@@ -55,19 +55,20 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		// TODO Auto-generated method stub
 		
 		ContentValues values = prepareValues(map);
-		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
-				+ map.getId() + "\"",null);
+		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= '"
+				+ map.getId() + "'",null);
 	
 			mapModel.editMap(map);
 	}
 	@Override
 	public void saveCoorsForMap(String mapId, Coordinates coorsToSave, float zCoor){
 		ContentValues values = new ContentValues();
+		String asdf = coorsToSave.getXCoorString();
 		values.put(XCOORCOL, coorsToSave.getXCoorString());
 		values.put(YCOORCOL, coorsToSave.getYCoorString());
 		values.put(ZCOORCOL,  zCoor);
-		getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= \""
-				+ mapId + "\"",null);
+		int result = getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= '"
+				+ mapId + "'",null);
 	}
 	
 	@Override

@@ -43,7 +43,7 @@ public class AddMapActivity extends EnvisActivity {
 		notes = (EditText)findViewById(R.id.editText7);
 		map = new MapModel();
 		drawMapBtn = (Button) findViewById(R.id.draw_map_btn);
-		drawMapBtn.setOnClickListener(new DrawMapBtnListener(id.getText().toString()));
+		drawMapBtn.setOnClickListener(new DrawMapBtnListener(id));
 		final Context context = this;
 		SaveBtn = (Button)findViewById(R.id.savebutton);
 		SaveBtn.setOnClickListener(new SaveMapToAddBtnListener(this, true, id, name));

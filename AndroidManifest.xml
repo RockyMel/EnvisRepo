@@ -111,7 +111,8 @@
             android:name="com.envisprototype.view.ChartVisualizationSettingsActivity"
             android:label="@string/title_activity_chart_visualization_settings" >
         </activity>
-         <activity android:name=".view.ChooseMapActivity"></activity> 
+         <activity android:name=".view.ChooseMapActivity"></activity>
+         <activity android:name=".view.SetsForMapExpandableListView"></activity> 
     </application>
     
  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

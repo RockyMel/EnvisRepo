@@ -29,7 +29,6 @@ public void setup(){
 	closeFigure.setPlace(DEF_BTN_X, height-height/25);
 	closeFigure.addEventListener(new SaveMapBtnListener(this, "map.txt"));
 	closeFigure.setIfCanFireWithNoClick(true);
-	envisMap = new Map(this);
 	rectMapBtn = new EnvisButton(this, "Draw rect");
 	rectMapBtn.setPlace(DEF_BTN_X, height/29);
 	rectMapBtn.addEventListener(new DrawRectMapBtnListener());

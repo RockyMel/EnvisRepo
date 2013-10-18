@@ -44,7 +44,7 @@ public class SensorsExpandableListView extends Activity {
 	private void prepareListData() {
 		listDataHeader = new ArrayList<String>();
 		listDataChild = new HashMap<String, List<String>>();
-
+		
 		// Adding child data
 		listDataHeader.add("Air Quality");
 		listDataHeader.add("Humidity");

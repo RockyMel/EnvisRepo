@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ChartVisualizationSettingsModel {
 
-	List<String> SensorIDs;
-	List<String> SetIDs;
+	ArrayList<String> SensorIDs;
+	ArrayList<String> SetIDs;
 	Calendar from;
 	Calendar to;
 	boolean realtimeornot;
@@ -40,19 +40,19 @@ public class ChartVisualizationSettingsModel {
 		this.realtimeornot = realtimeornot;
 	}
 
-	public List<String> getSensorIDs() {
+	public ArrayList<String> getSensorIDs() {
 		return SensorIDs;
 	}
 
-	public void setSensorIDs(List<String> sensorIDs) {
+	public void setSensorIDs(ArrayList<String> sensorIDs) {
 		SensorIDs = sensorIDs;
 	}
 
-	public List<String> getSetIDs() {
+	public ArrayList<String> getSetIDs() {
 		return SetIDs;
 	}
 
-	public void setSetIDs(List<String> setIDs) {
+	public void setSetIDs(ArrayList<String> setIDs) {
 		SetIDs = setIDs;
 	}
 

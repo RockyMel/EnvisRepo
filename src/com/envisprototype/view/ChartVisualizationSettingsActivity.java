@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
@@ -42,6 +43,8 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 	Switch RealTimeSwitch;
 	Button VisualizationButton;
 	ListView sensorlist;
+	
+	String mapId = null;
 
 	protected static final int From_DATE_PICKER_DIALOG = 0;
 	protected static final int To_DATE_PICKER_DIALOG = 1;
@@ -54,9 +57,10 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 	final Calendar calto=Calendar.getInstance();
 
 	int MODE=0;
+	boolean if3DVis = false;
 
-	List<String> SetIds = new ArrayList<String>();
-	List<String> SensorIds = new ArrayList<String>();
+	ArrayList<String> SetIds = new ArrayList<String>();
+	ArrayList<String> SensorIds = new ArrayList<String>();
 
 
 
@@ -72,6 +76,16 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 
 	private void init() {
 		// TODO Auto-generated method stub
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null){
+			if(bundle.containsKey(getString(R.string.flags))){
+				if(bundle.getString(getString(R.string.flags)).equals(getString(R.string.three_d_vis_flag_extra))){
+					if3DVis = true;
+				}
+			}
+			if(bundle.containsKey(getString(R.string.map_id_extra)))
+				mapId = bundle.getString(getString(R.string.map_id_extra));
+		}
 		DateFromPickerButton =(Button)findViewById(R.id.DateFromButton);
 		DateToPickerButton = (Button)findViewById(R.id.DateToButton);
 		TimeFromPickerButton =(Button)findViewById(R.id.TimeFromButton);
@@ -81,8 +95,27 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		QRButton = (Button)findViewById(R.id.QR);
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
 		sensorlist = (ListView)findViewById(R.id.chosensensorslist);
-		VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+		if(if3DVis == false)
+			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+		else{
+			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+		}
 		final Context context = this;
+		
+SetsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				Intent intent = new Intent(context,SetListActivity.class);
+				Intent intent = new Intent(context,SetsForMapExpandableListView.class);
+				if(mapId!= null){
+					intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+					intent.putExtra((v.getContext().getString(R.string.flags)), v.getContext().getString(R.string.sets_to_vis_extra));
+				}
+				v.getContext().startActivity(intent);
+			}
+		});
 
 		SensorsByType.setOnClickListener(new OnClickListener(){
 
@@ -90,6 +123,9 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(context,SensorsExpandableListView.class);
+				if(mapId != null){
+					intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+				}
 				v.getContext().startActivity(intent);
 			}
 			
@@ -325,6 +361,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		ChartVisualizationSettingsListAdapter cvsla = new ChartVisualizationSettingsListAdapter(this,0,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs());
 
 		sensorlist.setAdapter(cvsla);
+		
 
 	}
 

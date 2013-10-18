@@ -1,6 +1,8 @@
 package com.envisprototype.LocalDBHelper;
 
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.sensorSetAssosiation.SensorSetAssosiationModel;
 
 public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 	
@@ -75,6 +78,18 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 		values.put(SETIDCOL, SetID);
 		getWritableDatabase().insert(TABLE_NAME, null, values);
 		return values;
+	}
+	
+	public ArrayList<String> getListOfSensorsAssosiatedWithSet(String setId){
+		String query="SELECT " + SENSORIDCOL + " FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
+		ArrayList<String> setIds = new ArrayList<String>();		
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.moveToFirst()){
+			do{
+				setIds.add(cursor.getString(0));
+			}while(cursor.moveToNext());
+		}
+		return setIds;
 	}
 	
 	public void ReplicateAllSetAndSensorAssociations(){

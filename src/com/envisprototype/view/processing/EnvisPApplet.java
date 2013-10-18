@@ -15,6 +15,7 @@ import com.envisprototype.controller.processing.eventListeners.RotateScopeListen
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 //import com.envisprototype.controller.ModelSaver;
@@ -34,7 +35,7 @@ public abstract class EnvisPApplet extends PApplet{
 	String flag;
 	ArrayList<String> setIdFromAndroid;
 	Bundle extras;
-	Iterator setIterator;
+	Iterator<String> setIterator;
 	  
 	  public void setup(){
 		  // default setup which will be reused
@@ -84,7 +85,16 @@ public abstract class EnvisPApplet extends PApplet{
 					  }
 				  }
 			  }
+			  if(extras.containsKey(getString(R.string.sensors_to_vis_extra))){
+				  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensors_to_vis_extra));
+				  for(String setId: setIdFromAndroid){
+					  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
+					  SensorSet setToShow = new SensorSet(this, setId);
+					  envisSensors.put(setId, setToShow);
+				  }
+			  }
 		  }
+		   
 		  // HERE SENSORS MUST BE ADDED SIMILARLY TO MAP (EXTRAS)
 		  //envisSensors = filler.prepareSensorsCoordinates("sensors.txt");
 		  // zoom works only in 3D

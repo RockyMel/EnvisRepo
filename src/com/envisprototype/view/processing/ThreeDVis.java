@@ -2,12 +2,16 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.TopViewButtnoListener;
+import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetInterface;
+import com.envisprototype.model.set.SetListModel;
 
 public class ThreeDVis extends EnvisPApplet{
 	
@@ -35,8 +39,32 @@ public void setup(){
     topViewButton.addEventListener(new TopViewButtnoListener());
     RotateScopeListener.setIfTop(true);
     // need to get coordinates for the sensors
-    for(int i = 0; i < envisSensors.size(); i++){
-    	envisSensors.get(i).translateSensorsForMap(envisMap);
+    {
+    String sensorId, setId;
+    setIterator = envisSensors.keySet().iterator();
+    while(setIterator.hasNext()){
+    	sensorId = setIterator.next();
+    	if(!SensorListModel.getSingletonInstance().findSensorById(sensorId).isIfDefaultCoors()){
+    		envisSensors.get(sensorId).setRealX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
+        	envisSensors.get(sensorId).setRealY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
+        	envisSensors.get(sensorId).setRealZ(SensorListModel.getSingletonInstance().findSensorById(sensorId).getZ());
+        	envisSensors.get(sensorId).setX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
+        	envisSensors.get(sensorId).setY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
+        	envisSensors.get(sensorId).setZ(SensorListModel.getSingletonInstance().findSensorById(sensorId).getZ());
+    	}
+    	else{
+    		// set xyz as in set that this sensor belongs to
+    		setId = SensorListModel.getSingletonInstance().findSensorById(sensorId).getSetid();
+    		List<SetInterface> asdf = SetListModel.getSingletonInstance().getSetList();
+    		envisSensors.get(sensorId).setRealX(SetListModel.getSingletonInstance().findSetById(setId).getX());
+        	envisSensors.get(sensorId).setRealY(SetListModel.getSingletonInstance().findSetById(setId).getY());
+        	envisSensors.get(sensorId).setRealZ(SetListModel.getSingletonInstance().findSetById(setId).getZ());
+        	envisSensors.get(sensorId).setX(SetListModel.getSingletonInstance().findSetById(setId).getX());
+        	envisSensors.get(sensorId).setY(SetListModel.getSingletonInstance().findSetById(setId).getY());
+        	envisSensors.get(sensorId).setZ(SetListModel.getSingletonInstance().findSetById(setId).getZ());
+    	}
+    	envisSensors.get(sensorId).translateSensorsForMap(envisMap);
+    }		    	
     }
 }
 public void draw(){

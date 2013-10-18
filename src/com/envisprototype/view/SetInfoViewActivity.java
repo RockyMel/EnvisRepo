@@ -38,7 +38,6 @@ public class SetInfoViewActivity extends EnvisActivity {
 	Button Add;
 	Button Save;
 	Button Delete;
-	Button plotSetBtn;
 	SetInterface set;
 	Set_SensorListAdapter sla;
 	List<SensorInterface> list;
@@ -69,7 +68,6 @@ public class SetInfoViewActivity extends EnvisActivity {
 		Add = (Button)findViewById(R.id.ADD);
 		Save = (Button)findViewById(R.id.Save);
 		Delete = (Button)findViewById(R.id.Delete);
-		plotSetBtn = (Button) findViewById(R.id.set_plot_btn);
 
 		if(flag.equals("new"))
 			location=new Location(LocationManager.NETWORK_PROVIDER);
@@ -101,30 +99,6 @@ public class SetInfoViewActivity extends EnvisActivity {
 
 		}
 		Add.setOnClickListener(new AddSensorButtonController(setid,list,flag,this));
-		plotSetBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Activity activity = ((Activity)v.getContext());
-				Bundle bundle = activity.getIntent().getExtras();
-				if(bundle != null && 
-						bundle.containsKey(activity.getString(R.string.map_id_extra))){
-					mapId = bundle.getString(activity.getString(R.string.map_id_extra));
-					Intent intent = new Intent(activity, SetPlotPApplet.class);
-					intent.putExtra(getString(R.string.flags), getString(R.string.plot_flag_extra));
-					intent.putExtra(activity.getString(R.string.map_id_extra),mapId);
-					//intent.putExtra(getString(R.string.set_id_extra), set.getId());
-					activity.startActivity(intent);
-				}
-				else{
-
-					Intent intent = new Intent(v.getContext(), ChooseMapActivity.class);
-					//intent.putExtra(getString(R.string.set_id_extra), id.getText());
-					v.getContext().startActivity(intent);
-				}
-			}
-		});
 		
 		
 

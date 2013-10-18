@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.processing.SensorSet;
@@ -59,7 +60,7 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	}
 
 	
-	public void associateEnvisSensorsWithMap( HashMap<String,SensorSet> envisSensors, String mapId){
+	public void associateEnvisSensorsSetsWithMap( HashMap<String,SensorSet> envisSensors, String mapId){
 		Iterator iterator = envisSensors.keySet().iterator();
 		ContentValues values=new ContentValues();
 		while(iterator.hasNext()){
@@ -76,9 +77,13 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		values.put(XCOL, x);
 		values.put(YCOL, y);
 		values.put(ZCOL, z);
-
 		
-		getWritableDatabase().insert(TABLE_NAME, null, values);
+		long success = getWritableDatabase().insert(TABLE_NAME, null, values);
+		if(success == -1){
+			int res = getWritableDatabase().update(TABLE_NAME, values, SETIDCOL + "= '"
+					+ SetID + "'",null);
+			Log.i("z","in ass z = " + res);
+		}
 		
 	SetListModel.getSingletonInstance().addAssociateSettoMap(SetID,MapID,x,y,z);
 		

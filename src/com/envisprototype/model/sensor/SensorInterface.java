@@ -1,5 +1,7 @@
 package com.envisprototype.model.sensor;
 
+import com.envisprototype.model.processing.SetCoordinates;
+
 import android.location.Location;
 
 public interface SensorInterface {
@@ -35,4 +37,25 @@ public interface SensorInterface {
 	public abstract String getSetid();
 	
 	public abstract void setSetid(String setid);
+
+	public abstract float getX();
+	
+	public abstract void setX(float x);
+	
+	public abstract float getY();
+	
+	public abstract void setY(float y);
+	
+	public abstract float getZ();
+	
+	public abstract void setZ(float z);
+	
+	public abstract boolean isIfDefaultCoors();
+	
+	public abstract void setIfDefaultCoors(boolean ifDefaultCoors);
+
+	boolean isIftoPlot();
+
+	void setIftoPlot(boolean iftoPlot);
+	
 }

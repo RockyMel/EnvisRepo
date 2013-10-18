@@ -23,6 +23,18 @@ public interface SetInterface {
 	public abstract void setIftoPlot(boolean iftoPlot);	
 
 	public abstract void setMapID(String mapID);
+	
+	public abstract float getX();
+	
+	public abstract void setX(float x);
+	
+	public abstract float getY();
+	
+	public abstract void setY(float y);
+	
+	public abstract float getZ();
+	
+	public abstract void setZ(float z);
 
 
 	//public abstract List<SensorInterface> getSensors();

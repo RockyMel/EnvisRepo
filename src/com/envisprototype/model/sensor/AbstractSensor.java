@@ -1,5 +1,7 @@
 package com.envisprototype.model.sensor;
 
+import com.envisprototype.model.processing.SetCoordinates;
+
 import android.location.Location;
 
 public abstract class AbstractSensor implements SensorInterface {
@@ -13,6 +15,9 @@ public abstract class AbstractSensor implements SensorInterface {
 	private String notes;
 	private String state;
 	private Location location;
+	private boolean ifDefaultCoors = true;
+	private boolean iftoPlot; 
+	private float x,y,z;
 	
 	public AbstractSensor() {
 
@@ -137,5 +142,55 @@ public abstract class AbstractSensor implements SensorInterface {
 	public void setSetid(String setid) {
 		this.setid = setid;
 	}
+
+	@Override
+	public float getX() {
+		return x;
+	}
+	
+	@Override
+	public void setX(float x) {
+		this.x = x;
+	}
+	
+	@Override
+	public float getY() {
+		return y;
+	}
+	
+	@Override
+	public void setY(float y) {
+		this.y = y;
+	}
+	
+	@Override
+	public float getZ() {
+		return z;
+	}
+	
+	@Override
+	public void setZ(float z) {
+		this.z = z;
+	}
+	
+	@Override
+	public boolean isIfDefaultCoors() {
+		return ifDefaultCoors;
+	}
+	
+	@Override
+	public void setIfDefaultCoors(boolean ifDefaultCoors) {
+		this.ifDefaultCoors = ifDefaultCoors;
+	}
+	@Override
+	public boolean isIftoPlot() {
+		return iftoPlot;
+	}
+	@Override
+	public void setIftoPlot(boolean iftoPlot) {
+		this.iftoPlot = iftoPlot;
+	}
+	
+	
 	
 }

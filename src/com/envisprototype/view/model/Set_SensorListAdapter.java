@@ -5,6 +5,7 @@ import java.util.List;
 import com.envisprototype.R;
 import com.envisprototype.controller.DeleteSensorButtonController;
 import com.envisprototype.controller.SensorViewButtonController;
+import com.envisprototype.controller.onSetChosenToPlot;
 import com.envisprototype.model.sensor.SensorInterface;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class Set_SensorListAdapter extends ArrayAdapter<SensorInterface>{
@@ -43,7 +45,8 @@ public class Set_SensorListAdapter extends ArrayAdapter<SensorInterface>{
 		sensorname.setText(sensor.getName());
 		TextView id =(TextView) inflatedView.findViewById(R.id.ID);
 		id.setText(sensor.getId());
-		
+		CheckBox plotSensorsCb = (CheckBox)inflatedView.findViewById(R.id.plot_sensor_cb);
+		plotSensorsCb.setOnCheckedChangeListener(new onSetChosenToPlot(sensor.getId()));
 		//Button del = (Button)inflatedView.findViewById(R.id.del);
 		//del.setOnClickListener(new DeleteSensorButtonController(sensor.getId(),setid,context));
 		

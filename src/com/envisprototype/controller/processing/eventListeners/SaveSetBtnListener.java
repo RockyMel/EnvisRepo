@@ -2,6 +2,8 @@ package com.envisprototype.controller.processing.eventListeners;
 
 import java.util.EventObject;
 
+import processing.core.PApplet;
+
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
@@ -9,13 +11,7 @@ import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.EnvisPApplet;
 
 public class SaveSetBtnListener extends AbstractPlotBtnListener{
-	String sensorsFileName;
-	//CoordinateWriter sensorWriter;
 	
-	public SaveSetBtnListener(EnvisPApplet envisPApplet, String sensorsFileName){
-		this.sensorsFileName = sensorsFileName;
-		//sensorWriter = new CoordinateWriter(envisPApplet);
-	}
 	@Override
 	public void handleEnvisClassEvent(EventObject e) {
 		// TODO Auto-generated method stub
@@ -29,11 +25,18 @@ public class SaveSetBtnListener extends AbstractPlotBtnListener{
 			else{
 				eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
 			}
-			Coordinates coorsToSave = spApplet.getEnvisMap().getRealCoors();
-			MapLocalDBHelper.getSingletonInstance(spApplet).
-			saveCoorsForMap(spApplet.getEnvisMap().getMapId(), coorsToSave, spApplet.getEnvisMap().getCOOR_Z());
-			MapSetAssociationDBHelper.getSingletoneInstance(spApplet).
-			associateEnvisSensorsWithMap(spApplet.getEnvisSensors(), spApplet.getEnvisMap().getMapId());
+		//	Coordinates coorsToSave = spApplet.getEnvisMap().getRealCoors();
+//			MapLocalDBHelper.getSingletonInstance(spApplet).
+//			saveCoorsForMap(spApplet.getEnvisMap().getMapId(), coorsToSave, spApplet.getEnvisMap().getCOOR_Z());
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					MapSetAssociationDBHelper.getSingletoneInstance(spApplet).
+					associateEnvisSensorsSetsWithMap(spApplet.getEnvisSensors(), spApplet.getEnvisMap().getMapId());
+				}
+			}).start();
 		}
 	}
 

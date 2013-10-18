@@ -1,10 +1,11 @@
 package com.envisprototype.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -14,8 +15,8 @@ import com.envisprototype.view.processing.ThreeDVis;
 public class Show3DMapBtnListener implements OnClickListener{
 	String mapId;
 	Context context;
-	List<String> setIds;
-	List<String> sensorIds;
+	ArrayList<String> setIds;
+	ArrayList<String> sensorIds;
 	int MODE;
 	Calendar calfrom;
 	Calendar calto;
@@ -28,7 +29,7 @@ public class Show3DMapBtnListener implements OnClickListener{
 	//FOR HISTORICAL
 	public Show3DMapBtnListener(
 			Context context, String mapId,
-			List<String> setIds, List<String> sensorIds,int MODE,Calendar calfrom,Calendar calto) {
+			ArrayList<String> setIds, ArrayList<String> sensorIds,int MODE,Calendar calfrom,Calendar calto) {
 		// TODO Auto-generated constructor stub
 		this.mapId = mapId;
 		this.context = context;
@@ -45,7 +46,7 @@ public class Show3DMapBtnListener implements OnClickListener{
 	//FOR REAL TIME
 	public Show3DMapBtnListener(
 			Context context, String mapId,
-			List<String> setIds, List<String> sensorIds,int MODE) {
+			ArrayList<String> setIds, ArrayList<String> sensorIds,int MODE) {
 		// TODO Auto-generated constructor stub
 		this.mapId = mapId;
 		this.context = context;
@@ -60,6 +61,8 @@ public class Show3DMapBtnListener implements OnClickListener{
 		Context context = v.getContext();
 		Intent intent = new Intent(context, ThreeDVis.class);
 		intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
+		intent.putStringArrayListExtra(v.getContext().getString(R.string.sets_to_vis_extra), setIds);
+		intent.putStringArrayListExtra(v.getContext().getString(R.string.sensors_to_vis_extra), sensorIds);
 		// !!!!! add sets + sensors ids + coordinates
 		//intent.putExtra(v.getContext().getString(R.string.set_coor_extra, value)
 		context.startActivity(intent);

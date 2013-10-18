@@ -20,10 +20,12 @@
     <string name="sensor_id_extra">sensorId</string>
     <string name="set_coor_extra">setCoors</string>
     <string name="sets_to_vis_extra">chooseSetsToVisualise</string>
+    <string name="sensors_to_vis_extra">chooseSetsToVisualise</string>
    
     <string name="sets_id_extra">setsId</string>
     <string name="flags">flags</string>
     <string name="plot_flag_extra">plotExtra</string>
+    <string name="three_d_vis_flag_extra">three_d_vis_flag_extra</string>
     <string name="request_code">request code</string>
     
 
