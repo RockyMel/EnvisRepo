@@ -2,6 +2,7 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
@@ -16,6 +17,7 @@ import com.envisprototype.model.set.SetListModel;
 public class ThreeDVis extends EnvisPApplet{
 	
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton; 
+	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 
 
@@ -64,6 +66,7 @@ public void setup(){
         	envisSensors.get(sensorId).setZ(SetListModel.getSingletonInstance().findSetById(setId).getZ());
     	}
     	envisSensors.get(sensorId).translateSensorsForMap(envisMap);
+    	
     }		    	
     }
 }
@@ -74,6 +77,7 @@ public void draw(){
 	frontViewButton.drawMe();
 	leftSideViewButton.drawMe();
 	topViewButton.drawMe();
+	
 }
 
 @Override

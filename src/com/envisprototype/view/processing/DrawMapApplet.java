@@ -21,6 +21,7 @@ public class DrawMapApplet extends EnvisPApplet {
 	private boolean ifFreeshape = false;
 	private boolean ifRectMap = false;
 	private boolean ifFreePolygon = false;
+	private BarGraph barGraphTest;
 	
 public void setup(){
 	super.setup();
@@ -46,6 +47,8 @@ public void setup(){
 	removeLastNodeBtn = new EnvisButton(this, getString(R.string.remove_last_node));
 	removeLastNodeBtn.setPlace(DEF_BTN_X, 7*height/29);
 	removeLastNodeBtn.addEventListener(new RemoveLastNodeBtnListener());
+	
+	barGraphTest = new BarGraph(this, 50, 1);
 }
 
 public void draw(){

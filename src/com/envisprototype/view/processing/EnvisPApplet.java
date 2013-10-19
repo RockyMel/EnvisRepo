@@ -33,9 +33,11 @@ public abstract class EnvisPApplet extends PApplet{
 	HashMap<String,SensorSet> envisSensors;
 	Map envisMap;
 	String flag;
+	BarGraphSet barGraphSet;
 	ArrayList<String> setIdFromAndroid;
 	Bundle extras;
 	Iterator<String> setIterator;
+	
 	  
 	  public void setup(){
 		  // default setup which will be reused
@@ -91,6 +93,9 @@ public abstract class EnvisPApplet extends PApplet{
 					  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
 					  SensorSet setToShow = new SensorSet(this, setId);
 					  envisSensors.put(setId, setToShow);
+					  Iterator<String> iterator = envisSensors.keySet().iterator();
+				    	if(iterator.hasNext())
+				    		barGraphSet = new BarGraphSet(this, "", iterator.next(), 1);
 				  }
 			  }
 		  }
@@ -141,6 +146,7 @@ public void threeDDrawPreset(boolean ifWithSensors){
 		while(setIterator.hasNext()){
 			envisSensors.get(setIterator.next()).drawMe();
 		}		
+		barGraphSet.drawMe();
 	}
 	popMatrix();
 	axis.drawMe();

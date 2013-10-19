@@ -76,7 +76,7 @@ OnMultiChoiceClickListener {
     }
 	public static XYPlot mySimpleXYPlot;
 	private ImageButton imageBut;
-	private ArrayList<Boolean> chosenItems;
+	private ArrayList<Boolean> chosenItems = new ArrayList<Boolean>();
 	private DialogHandler dHandler;
 	private AlertDialog.Builder builder;
 	private CharSequence[] items;
