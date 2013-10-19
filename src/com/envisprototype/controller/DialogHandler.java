@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
+import android.util.Log;
 
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
@@ -47,13 +48,12 @@ public class DialogHandler implements OnClickListener {
 
 		}
 	}
+	
 	public ArrayList getChosenItems() {
 		return chosenItems;
 	}
 
-	public void setChosenItems(ArrayList chosenItems) {
-		this.chosenItems = chosenItems;
-	}
+	
 
 	public void setDataForVis(Number[][] data,String[] names){
 		this.data = data;
@@ -65,11 +65,16 @@ public class DialogHandler implements OnClickListener {
 	
 	@Override
 	public void onClick(DialogInterface arg0, int arg1) {
-		if (arg1 == arg0.BUTTON_POSITIVE) {
-			boolean flag = false;
-			XYPlot plot = LineChart.mySimpleXYPlot;
-			ChartSensorConceptInterface sensor = new ChartSensorConcept();
-			FormatFactory format = new LinePointFormat();
+	//	if (arg1 == arg0.BUTTON_POSITIVE) {
+			//boolean flag = false;
+		XYPlot plot = LineChart.mySimpleXYPlot;
+		ChartSensorConceptInterface sensor = new ChartSensorConcept();
+		FormatFactory format = new LinePointFormat();
+		if(chosenItems.size()==0){
+			plot.clear();
+		}
+		else{
+			
 
 			for(int i=0;i<=names.length-1;i++){
 
@@ -84,7 +89,7 @@ public class DialogHandler implements OnClickListener {
 				pclist.add(temp);
 				
 			}
-			
+			Log.i("yahaan tak", "ji haan 1");
 
 			plot.clear();
 
@@ -92,7 +97,7 @@ public class DialogHandler implements OnClickListener {
 			LineAndPointFormatter tempFormat = null;
 			container = SeriesContainer.getContainer();
 			container.clear();
-
+			Log.i("yahaan tak", "ji haan 2");
 			for (int i = 0; i < this.chosenItems.size(); i++)
 			{
 				if(chosenItems.get(i))
@@ -103,13 +108,14 @@ public class DialogHandler implements OnClickListener {
 					plot.addSeries(tempSeries, tempFormat);
 				}
 			}
-			
+			Log.i("yahaan tak", "ji haan 3");
 			
 			plot.redraw();
-
-		} else if (arg1 == arg0.BUTTON_NEGATIVE) {
-			System.out.println("Cancel button has been clicked!!!");
+			Log.i("yahaan tak", "ji haan 4");
 		}
+//		} else if (arg1 == arg0.BUTTON_NEGATIVE) {
+//			System.out.println("Cancel button has been clicked!!!");
+//		}
 
 	}
 

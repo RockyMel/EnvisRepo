@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
+import com.androidplot.Plot;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
@@ -34,10 +38,16 @@ import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.XYStepMode;
 import com.envisprototype.R;
 import com.envisprototype.controller.DialogHandler;
+import com.envisprototype.model.ChartSensorConcept;
+import com.envisprototype.model.ChartSensorConceptInterface;
+import com.envisprototype.model.FormatFactory;
+import com.envisprototype.model.LinePointFormat;
+import com.envisprototype.model.ParameterConstruct;
 import com.envisprototype.model.SeriesContainer;
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.view.model.ChartData;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.envisprototype.view.navigation.NavigationMaker;
 
@@ -51,7 +61,19 @@ import com.envisprototype.view.navigation.NavigationMaker;
  */
 public class LineChart extends EnvisActivity implements OnClickListener,
 OnMultiChoiceClickListener {
+	
+	private class MyPlotUpdater implements Observer {
+        Plot plot;
 
+        public MyPlotUpdater(Plot plot) {
+            this.plot = plot;
+        }        
+
+        @Override
+        public void update(Observable o, Object arg) {
+            plot.redraw();
+        }
+    }
 	public static XYPlot mySimpleXYPlot;
 	private ImageButton imageBut;
 	private ArrayList<Boolean> chosenItems;
@@ -60,16 +82,23 @@ OnMultiChoiceClickListener {
 	private CharSequence[] items;
 	private boolean[] checked;
 	private HashMap<XYSeries, LineAndPointFormatter> tempMap;
+	ChartData cdata;
 	Number[][] data = null;
+	private MyPlotUpdater potty;
+	List<String> tempsensoridlist;
+	String[] names = null;
+	
 	
 	private class GetSensorReadingTask extends AsyncTask<String, Void, String> {
 		int index;
+		
 		GetSensorReadingTask(int index){
 			this.index=index;
 		}
 	    @Override
 	    protected String doInBackground(String... args) {
 	      String response = "";
+	      
 	      response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON("S1ZZZ", "2013-10-18 18:10:50", "2013-10-18 18:15:50");
 	      return response;
 	    }
@@ -77,6 +106,8 @@ OnMultiChoiceClickListener {
 	    @Override
 	    protected void onPostExecute(String result) {
 	     // textView.setText(result);
+	    	List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
+
 	    	Log.i("asdasD", result);
 	    	try {
 				JSONObject obj = new JSONObject(result);
@@ -96,31 +127,78 @@ OnMultiChoiceClickListener {
 						break;
 					i++;
 				}
-//				Log.i("chkthis",obj.getJSONArray("1")+"");
-//				Log.i("chkthis",obj.getJSONArray("2")+"");
-//				Log.i("chkthis",obj.getJSONArray("3")+"");
-//				Log.i("chkthis",obj.getJSONArray("4")+"");
-//				Log.i("chkthis",obj.getJSONArray("5")+"");
-//				Log.i("chkthis",obj.getJSONArray("6")+"");
-//				Log.i("chkthis",obj.getJSONArray("7")+"");
-//				Log.i("chkthis",obj.getJSONArray("8")+"");
-//				Log.i("chkthis",obj.getJSONArray("9")+"");
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
+	    	cdata.setData(data);
+	    	cdata.notifyObservers();
+
+	    	//chosenItems = new ArrayList<Boolean>();
+//	    	Log.i("this1",tempsensoridlist.size()+"");
+//			for(int i=0;i<tempsensoridlist.size();i++)
+//			{
+//				Log.i("this2",i+"");
+//				chosenItems.add(i, true);
+//
+//			}
+	    	HashMap<XYSeries, LineAndPointFormatter> container;
+
+	    	
+			ChartSensorConceptInterface sensor = new ChartSensorConcept();
+			FormatFactory format = new LinePointFormat();
+
+			for(int i=0;i<=names.length-1;i++){
+
+				List<Integer> parameter1 = new ArrayList<Integer>();
+				
+				parameter1.add(Color.RED);
+				parameter1.add(null);
+				parameter1.add(null);
+				parameter1.add(Color.WHITE);
+				
+				ParameterConstruct temp = new ParameterConstruct(names[i],parameter1,data[i]);
+				pclist.add(temp);
+				
+			}
+			
+
+			mySimpleXYPlot.clear();
+
+			XYSeries tempSeries = null;
+			LineAndPointFormatter tempFormat = null;
+			container = SeriesContainer.getContainer();
+			container.clear();
+			
+			for (int i = 0; i < chosenItems.size(); i++)
+			{
+				
+				if(chosenItems.get(i))
+				{
+					//Log.i("this2",chosenItems.get(i) +"" );
+					tempSeries = sensor.createXYChart(pclist.get(i).getNumber1(), pclist.get(i).getName());
+					
+					tempFormat = format.createFormat(pclist.get(i).getParameter1());
+					container.put(tempSeries, tempFormat);
+					mySimpleXYPlot.addSeries(tempSeries, tempFormat);
+				}
+				
+			}
+			
+			
+			mySimpleXYPlot.redraw();
+	    	//mySimpleXYPlot.redraw();
 	    	Log.i(":async", "done");
+
 	    }
 	  }
 	
 	
 	public LineChart() {
-
-		List<String> tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs();
-
-		String[] names = null;
 		
+		tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs();
+
 		if(tempsensoridlist.size()>0){
 
 
@@ -171,6 +249,14 @@ OnMultiChoiceClickListener {
 			this.chosenItems = this.dHandler.getChosenItems();
 		}
 		//checked = new boolean[] { false, false, false, false };
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//Log.i("pungi", "asjdh");
+		
 	}
 
 	@Override
@@ -238,7 +324,13 @@ OnMultiChoiceClickListener {
 	 * @throws
 	 */
 	private void initalChart() {
+		 cdata = new ChartData();
+		 cdata.setData(data);
+		 
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
+		
+		potty = new MyPlotUpdater(mySimpleXYPlot);
+		cdata.addObserver(potty);
 		mySimpleXYPlot.setDomainBoundaries(0, 100, BoundaryMode.SHRINNK);
 	//	mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
 	//	mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
