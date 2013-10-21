@@ -1,20 +1,13 @@
 package com.envisprototype.view;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.StringTokenizer;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +28,6 @@ import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
-import com.androidplot.xy.XYStepMode;
 import com.envisprototype.R;
 import com.envisprototype.controller.DialogHandler;
 import com.envisprototype.model.ChartSensorConcept;
@@ -61,108 +53,122 @@ import com.envisprototype.view.navigation.NavigationMaker;
  */
 public class LineChart extends EnvisActivity implements OnClickListener,
 OnMultiChoiceClickListener {
-	
-	private class MyPlotUpdater implements Observer {
-        Plot plot;
 
-        public MyPlotUpdater(Plot plot) {
-            this.plot = plot;
-        }        
-
-        @Override
-        public void update(Observable o, Object arg) {
-            plot.redraw();
-        }
-    }
+//	private class MyPlotUpdater implements Observer {
+//		Plot plot;
+//
+//		public MyPlotUpdater(Plot plot) {
+//			this.plot = plot;
+//		}        
+//
+//		@Override
+//		public void update(Observable o, Object arg) {
+//			plot.redraw();
+//		}
+//	}
 	public static XYPlot mySimpleXYPlot;
 	private ImageButton imageBut;
-	private ArrayList<Boolean> chosenItems;
+	//private ArrayList<Boolean> chosenItems;
 	private DialogHandler dHandler;
 	private AlertDialog.Builder builder;
 	private CharSequence[] items;
 	private boolean[] checked;
 	private HashMap<XYSeries, LineAndPointFormatter> tempMap;
 	ChartData cdata;
-	Number[][] data = null;
-	private MyPlotUpdater potty;
+	//Number[][] data = null;
+	//private MyPlotUpdater potty;
 	List<String> tempsensoridlist;
 	String[] names = null;
-	
-	
+
+
 	private class GetSensorReadingTask extends AsyncTask<String, Void, String> {
-		int index;
-		
-		GetSensorReadingTask(int index){
-			this.index=index;
+		//int index;
+
+		GetSensorReadingTask(/*int index*/){
+			//this.index=index;
 		}
-	    @Override
-	    protected String doInBackground(String... args) {
-	      String response = "";
-	      
-	      response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON("S1ZZZ", "2013-10-18 18:10:50", "2013-10-18 18:15:50");
-	      return response;
-	    }
+		@Override
+		protected String doInBackground(String... args) {
+			String response = "";
 
-	    @Override
-	    protected void onPostExecute(String result) {
-	     // textView.setText(result);
-	    	List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
-
-	    	Log.i("asdasD", result);
-	    	try {
-				JSONObject obj = new JSONObject(result);
-				Iterator tempkeys = obj.keys();
-				//while(tempkeys.hasNext()){
-				//	Object element = tempkeys.next();
-				//	Log.i("chkthis", element.toString());
-				//}
-				int i=1;
-				while(true)
+			for(int i=0;i<tempsensoridlist.size();i++)
 				{
-					if(obj.getJSONArray(i+"")!=null){
-						data[index][i-1]=obj.getJSONArray(i+"").getInt(2);
-						Log.i("chkthis",obj.getJSONArray(i+"").getString(2)+"");
-						}
-					else
-						break;
-					i++;
+				if(i>0)
+					response = response + "###" + SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(tempsensoridlist.get(i), "2013-10-18 18:10:50", "2013-10-18 18:15:50");
+				else
+					response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(tempsensoridlist.get(i), "2013-10-18 18:10:50", "2013-10-18 18:15:50");
 				}
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	    	cdata.setData(data);
-	    	cdata.notifyObservers();
+			return response;
+		}
 
-	    	//chosenItems = new ArrayList<Boolean>();
-//	    	Log.i("this1",tempsensoridlist.size()+"");
-//			for(int i=0;i<tempsensoridlist.size();i++)
-//			{
-//				Log.i("this2",i+"");
-//				chosenItems.add(i, true);
-//
-//			}
-	    	HashMap<XYSeries, LineAndPointFormatter> container;
+		@Override
+		protected void onPostExecute(String result) {
+			// textView.setText(result);
+			List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
+			StringTokenizer strtok = new StringTokenizer(result,"###");
+			int index = 0;
+			while(strtok.hasMoreElements()){
+				Log.i("asdasD", result);
+				try {
+					String temp = strtok.nextToken();
+					System.out.println("---" + temp);
+					JSONObject obj = new JSONObject(temp);
+					//Iterator tempkeys = obj.keys();
+					//while(tempkeys.hasNext()){
+					//	Object element = tempkeys.next();
+					//	Log.i("chkthis", element.toString());
+					//}
 
-	    	
+
+
+					int i=1;
+					while(true)
+					{
+						if(obj.getJSONArray(i+"")!=null){
+							DialogHandler.data[index][i-1]=obj.getJSONArray(i+"").getInt(2);
+							Log.i("chkthis",obj.getJSONArray(i+"").getString(2)+"");
+						}
+						else
+							break;
+						i++;
+					}
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+
+				index++;
+			}
+			
+			for(int i=0;i<DialogHandler.data.length;i++){
+				for(int j=0;j<DialogHandler.data[i].length;j++)
+					System.out.println(DialogHandler.data[i][j]);
+				System.out.println("aaaaaaaa");
+			}
+//			cdata.setData(data);
+//			cdata.notifyObservers();
+
+			HashMap<XYSeries, LineAndPointFormatter> container;
+
+
 			ChartSensorConceptInterface sensor = new ChartSensorConcept();
 			FormatFactory format = new LinePointFormat();
 
 			for(int i=0;i<=names.length-1;i++){
 
 				List<Integer> parameter1 = new ArrayList<Integer>();
-				
+
 				parameter1.add(Color.RED);
 				parameter1.add(null);
 				parameter1.add(null);
 				parameter1.add(Color.WHITE);
-				
-				ParameterConstruct temp = new ParameterConstruct(names[i],parameter1,data[i]);
+
+				ParameterConstruct temp = new ParameterConstruct(names[i],parameter1,DialogHandler.data[i]);
 				pclist.add(temp);
-				
+
 			}
-			
+
 
 			mySimpleXYPlot.clear();
 
@@ -170,33 +176,33 @@ OnMultiChoiceClickListener {
 			LineAndPointFormatter tempFormat = null;
 			container = SeriesContainer.getContainer();
 			container.clear();
-			
-			for (int i = 0; i < chosenItems.size(); i++)
+
+			for (int i = 0; i < DialogHandler.chosenItems.size(); i++)
 			{
-				
-				if(chosenItems.get(i))
+
+				if(DialogHandler.chosenItems.get(i))
 				{
 					//Log.i("this2",chosenItems.get(i) +"" );
-					tempSeries = sensor.createXYChart(pclist.get(i).getNumber1(), pclist.get(i).getName());
-					
+					tempSeries = sensor.createXYChart(pclist.get(i).getData(), pclist.get(i).getName());
+
 					tempFormat = format.createFormat(pclist.get(i).getParameter1());
 					container.put(tempSeries, tempFormat);
 					mySimpleXYPlot.addSeries(tempSeries, tempFormat);
 				}
-				
-			}
-			
-			
-			mySimpleXYPlot.redraw();
-	    	//mySimpleXYPlot.redraw();
-	    	Log.i(":async", "done");
 
-	    }
-	  }
-	
-	
+			}
+
+
+			mySimpleXYPlot.redraw();
+			//mySimpleXYPlot.redraw();
+			Log.i(":async", "done");
+
+		}
+	}
+
+
 	public LineChart() {
-		
+
 		tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs();
 
 		if(tempsensoridlist.size()>0){
@@ -218,35 +224,35 @@ OnMultiChoiceClickListener {
 
 			}
 			int sizej=10;
-			data = new Number[tempsensoridlist.size()][sizej];
-			Log.i("size", tempsensoridlist.size() + " " +data.length+ " " + data[0].length);
-		  
-		    
-			for(int i=0;i<tempsensoridlist.size();i++){
-				  GetSensorReadingTask task = new GetSensorReadingTask(i);
-				    task.execute(new String[]{"dummy"});
-				//data[i] = new Number[10];
-//				if(i==0){
-//				for(int j=0;j<10;j++){
-//
-//					data[i][j]=(j+1)*4;
-//				}}
-//				else
-//				{
-//					for(int j=0;j<10;j++){
-//
-//						data[i][j]=(j+2)*4;
-//					}
-//					
-//				}
+			DialogHandler.data = new Number[tempsensoridlist.size()][sizej];
+			Log.i("size", tempsensoridlist.size() + " " +DialogHandler.data.length+ " " + DialogHandler.data[0].length);
 
-			}
+
+			//for(int i=0;i<tempsensoridlist.size();i++){
+			GetSensorReadingTask task = new GetSensorReadingTask();
+			task.execute("dummy");
+			//data[i] = new Number[10];
+			//				if(i==0){
+			//				for(int j=0;j<10;j++){
+			//
+			//					data[i][j]=(j+1)*4;
+			//				}}
+			//				else
+			//				{
+			//					for(int j=0;j<10;j++){
+			//
+			//						data[i][j]=(j+2)*4;
+			//					}
+			//					
+			//				}
+
+			//	}
 
 			this.dHandler = new DialogHandler();
 			dHandler.init(tempsensoridlist.size());
-			dHandler.setDataForVis(data, names);
+			dHandler.setDataForVis(names);
 
-			this.chosenItems = this.dHandler.getChosenItems();
+			DialogHandler.chosenItems = this.dHandler.getChosenItems();
 		}
 		//checked = new boolean[] { false, false, false, false };
 	}
@@ -256,7 +262,7 @@ OnMultiChoiceClickListener {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//Log.i("pungi", "asjdh");
-		
+
 	}
 
 	@Override
@@ -282,17 +288,18 @@ OnMultiChoiceClickListener {
 	public void onClick(View arg0) {
 
 		checked = new boolean[] { false, false, false, false };
-		for (int i = 0; i < this.chosenItems.size(); i++) {
+		for (int i = 0; i < DialogHandler.chosenItems.size(); i++) {
 
-			checked[i] = (Boolean) chosenItems.get(i);
+			checked[i] = (Boolean) DialogHandler.chosenItems.get(i);
 
 		}
 		builder.show();
 	}
 
 	@Override
-	public void onClick(DialogInterface arg0, int arg1, boolean arg2) {
-		chosenItems.set(arg1, arg2);
+	public void onClick(DialogInterface arg0, int pos, boolean flag) {
+		Log.i("youcalled me",flag+"");
+		DialogHandler.chosenItems.set(pos, flag);
 	}
 
 	/**
@@ -324,23 +331,23 @@ OnMultiChoiceClickListener {
 	 * @throws
 	 */
 	private void initalChart() {
-		 cdata = new ChartData();
-		 cdata.setData(data);
-		 
+		//cdata = new ChartData();
+		//cdata.setData(data);
+
 		mySimpleXYPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
-		
-		potty = new MyPlotUpdater(mySimpleXYPlot);
-		cdata.addObserver(potty);
+
+		//potty = new MyPlotUpdater(mySimpleXYPlot);
+		//cdata.addObserver(potty);
 		mySimpleXYPlot.setDomainBoundaries(0, 100, BoundaryMode.SHRINNK);
-	//	mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
-	//	mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
+		//	mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 2);
+		//	mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("#"));
 		// mySimpleXYPlot.setDomainStepValue(24);
 		// mySimpleXYPlot.setTicksPerDomainLabel(1);
 		// mySimpleXYPlot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
 		mySimpleXYPlot.setRangeBoundaries(0, 100, BoundaryMode.SHRINNK);
 		//mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 5);
-	//	mySimpleXYPlot.setRangeValueFormat(new DecimalFormat("#"));
-//
+		//	mySimpleXYPlot.setRangeValueFormat(new DecimalFormat("#"));
+		//
 		tempMap = SeriesContainer.getContainer();
 		if (!tempMap.isEmpty()) {
 			XYSeries key;

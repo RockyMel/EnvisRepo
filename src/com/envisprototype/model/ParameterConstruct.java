@@ -7,19 +7,19 @@ public class ParameterConstruct {
 
 	String name;
 	List<Integer> parameter1 = new ArrayList<Integer>();
-	Number[] number1;
+	Number[] data;
 
-	public Number[] getNumber1() {
-		return number1;
+	public Number[] getData() {
+		return data;
 	}
-	public void setNumber1(Number[] number1) {
-		this.number1 = number1;
+	public void setData(Number[] number1) {
+		this.data = number1;
 	}
 	public ParameterConstruct(String name, List<Integer> parameter12, Number[] data) {
 		// TODO Auto-generated constructor stub
 		this.name = name;
 		this.parameter1 = parameter12;
-		this.number1=data;
+		this.data=data;
 		
 	}
 	public String getName() {

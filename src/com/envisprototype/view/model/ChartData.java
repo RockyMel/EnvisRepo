@@ -1,28 +1,21 @@
 package com.envisprototype.view.model;
 
-import java.util.Observable;
-import java.util.Observer;
+	
+import com.jjoe64.graphview.GraphView.GraphViewData;
 
-import android.util.Log;
 
-public class ChartData extends Observable{
+public class ChartData{
 
-	Number[][] data;
+	public GraphViewData[][] data;
+	//public ArrayList<>
+	public static ChartData singletonInstance;
+	
+	
+	public static ChartData getSingletonInstance() {
+		if(singletonInstance==null)
+			singletonInstance=new ChartData();
 
-	public Number[][] getData() {
-		return data;
-	}
-
-	public void setData(Number[][] data) {
-		this.data = data;
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		setChanged();
-		super.notifyObservers();
-		Log.i("ChartData", "now");
+		return singletonInstance;
 	}
 
 	

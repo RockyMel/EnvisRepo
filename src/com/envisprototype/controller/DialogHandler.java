@@ -30,10 +30,10 @@ import com.envisprototype.view.LineChart;
  */
 public class DialogHandler implements OnClickListener {
 
-	private ArrayList<Boolean> chosenItems;
-	private HashMap<XYSeries, LineAndPointFormatter> container;
-	private Number[][] data;
-	private String[] names;
+	public static ArrayList<Boolean> chosenItems;
+	public static HashMap<XYSeries, LineAndPointFormatter> container;
+	public static Number[][] data;
+	public static String[] names;
 
 	public DialogHandler() {
 
@@ -55,7 +55,7 @@ public class DialogHandler implements OnClickListener {
 
 	
 
-	public void setDataForVis(Number[][] data,String[] names){
+	public void setDataForVis(String[] names){
 		this.data = data;
 		this.names = names;
 		
@@ -84,7 +84,7 @@ public class DialogHandler implements OnClickListener {
 				parameter1.add(null);
 				parameter1.add(null);
 				parameter1.add(Color.WHITE);
-				
+				Log.i("yeh dekh abhi",data[i].toString());
 				ParameterConstruct temp = new ParameterConstruct(names[i],parameter1,data[i]);
 				pclist.add(temp);
 				
@@ -98,11 +98,13 @@ public class DialogHandler implements OnClickListener {
 			container = SeriesContainer.getContainer();
 			container.clear();
 			Log.i("yahaan tak", "ji haan 2");
-			for (int i = 0; i < this.chosenItems.size(); i++)
+			Log.i("SIZEOFCHOSEN", chosenItems.size()+"");
+			for (int i = 0; i < chosenItems.size(); i++)
 			{
 				if(chosenItems.get(i))
 				{
-					tempSeries = sensor.createXYChart(pclist.get(i).getNumber1(), pclist.get(i).getName());
+					Log.i("thisisit", pclist.get(i).getData()+"");
+					tempSeries = sensor.createXYChart(pclist.get(i).getData(), pclist.get(i).getName());
 					tempFormat = format.createFormat(pclist.get(i).getParameter1());
 					container.put(tempSeries, tempFormat);
 					plot.addSeries(tempSeries, tempFormat);
