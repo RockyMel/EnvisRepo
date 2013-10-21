@@ -2,22 +2,22 @@ package com.envisprototype.controller;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.envisprototype.LocalDBHelper.MapSensorAssociationDBHelper;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
 import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
-import com.envisprototype.model.DBHelper.SensorInfoDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
+import com.envisprototype.view.processing.Coords;
 
 public class SaveButtonController implements OnClickListener {
 
@@ -117,12 +117,22 @@ public class SaveButtonController implements OnClickListener {
 					// add sensor set association
 					SetSensorAssociationLocalDBHelper.getSingletonInstance(context).associateSensorWithSet(id.getText().toString(), setid);
 					// also if set has already been plotted, set sensor's xyz to the one of the set
-					SetInterface tempSet = SetLocalDBHelper.getSingletonInstance(context).findSetById(setid);
-					SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensor.getId());
-					sensorToPlot.setX(tempSet.getX());
-					sensorToPlot.setY(tempSet.getY());
-					sensorToPlot.setZ(tempSet.getZ());
-					SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensorToPlot);
+					
+					//SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensor.getId());
+					Coords coords = MapSetAssociationDBHelper.getSingletoneInstance(context).getCoordsForSet(setid);
+					if(coords!=null){
+						SetInterface tempSet = SetLocalDBHelper.getSingletonInstance(context).findSetById(setid);
+						tempSet.setX(coords.getX());
+						tempSet.setY(coords.getY());
+						tempSet.setZ(coords.getZ());
+						MapSensorAssociationDBHelper.getSingletoneInstance(context).associateSensorWithMap(sensor.getId(),
+								tempSet.getX(), tempSet.getY(), tempSet.getZ());
+						SensorListModel.getSingletonInstance().findSensorById(sensor.getId()).setX(tempSet.getX());
+						SensorListModel.getSingletonInstance().findSensorById(sensor.getId()).setX(tempSet.getY());
+						SensorListModel.getSingletonInstance().findSensorById(sensor.getId()).setX(tempSet.getZ());
+					}
+					
+					
 				}
 			};
 			thread.start();

@@ -58,12 +58,12 @@ public void setup(){
     		// set xyz as in set that this sensor belongs to
     		setId = SensorListModel.getSingletonInstance().findSensorById(sensorId).getSetid();
     		List<SetInterface> asdf = SetListModel.getSingletonInstance().getSetList();
-    		envisSensors.get(sensorId).setRealX(SetListModel.getSingletonInstance().findSetById(setId).getX());
-        	envisSensors.get(sensorId).setRealY(SetListModel.getSingletonInstance().findSetById(setId).getY());
-        	envisSensors.get(sensorId).setRealZ(SetListModel.getSingletonInstance().findSetById(setId).getZ());
-        	envisSensors.get(sensorId).setX(SetListModel.getSingletonInstance().findSetById(setId).getX());
-        	envisSensors.get(sensorId).setY(SetListModel.getSingletonInstance().findSetById(setId).getY());
-        	envisSensors.get(sensorId).setZ(SetListModel.getSingletonInstance().findSetById(setId).getZ());
+    		envisSensors.get(sensorId).setRealX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
+        	envisSensors.get(sensorId).setRealY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
+        	envisSensors.get(sensorId).setRealZ(SensorListModel.getSingletonInstance().findSensorById(sensorId).getZ());
+        	envisSensors.get(sensorId).setX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
+        	envisSensors.get(sensorId).setY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
+        	envisSensors.get(sensorId).setZ(SensorListModel.getSingletonInstance().findSensorById(sensorId).getZ());
     	}
     	envisSensors.get(sensorId).translateSensorsForMap(envisMap);
     	

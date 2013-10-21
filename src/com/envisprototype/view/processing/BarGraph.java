@@ -24,7 +24,7 @@ public class BarGraph {
 		
 		p = parent;
 		reading = r;
-		h = -r;
+		h = r;
 		sensorType = type;
 		float[] colorRGB = { 0, 0, 0 };
 		

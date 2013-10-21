@@ -10,7 +10,8 @@ public class SensorSet extends UIElement{
 	String id;
 	float x,y,z;
 	float realX, realY, realZ;
-	private int SET_STROKE_WEIGHT = 20;
+	protected int SET_STROKE_WEIGHT = 20;
+	private boolean ifSensor = true;
 	
 	public SensorSet(EnvisPApplet epApplet, String id){
 		super(epApplet);
@@ -169,6 +170,14 @@ public class SensorSet extends UIElement{
 		epApplet.rotateX(xRotate);
 		epApplet.rotateY(yRotate);
 		epApplet.rotateZ(zRotate);
+	}
+
+	public boolean isIfSensor() {
+		return ifSensor;
+	}
+
+	public void setIfSensor(boolean ifSensor) {
+		this.ifSensor = ifSensor;
 	}
 	
 	

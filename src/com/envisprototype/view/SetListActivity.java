@@ -83,8 +83,19 @@ public class SetListActivity extends Activity {
 							getSingletoneInstance(this).getListOfSensorsAssosiatedWithMap(mapId);
 					sets = SetListModel.getSingletonInstance().getSetListByIds(setIds);
 				}
+				if(bundle.getString(getString(R.string.flags)).equals(getString(R.string.plot_flag_extra))){
+						// get rid of the sets that has already been plotted
+					Iterator<SetInterface> iterator = sets.iterator();
+					SetInterface setToRemove;
+					while(iterator.hasNext()){
+						setToRemove = iterator.next();
+						if(MapSetAssociationDBHelper.getSingletoneInstance(this).isPlotted(setToRemove.getId())){
+							iterator.remove();
+						}
+					}
+				}
 			}
-		}
+		}      
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		//addListenerOnSpinnerItemSelection();
 		//Collections.sort(sets,new SortBySetAlph());

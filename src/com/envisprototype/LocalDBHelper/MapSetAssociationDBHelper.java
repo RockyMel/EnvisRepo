@@ -11,8 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetListModel;
+import com.envisprototype.view.processing.Coords;
 import com.envisprototype.view.processing.SensorSet;
 
 
@@ -66,14 +66,14 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		ContentValues values=new ContentValues();
 		while(iterator.hasNext()){
 			SensorSet tempSet = envisSensors.get(iterator.next());
-			associateSetWithMap(tempSet.getId(), mapId, tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
-			ArrayList<String> associatedSensorsIds = SetSensorAssociationLocalDBHelper.getSingletonInstance(context).getListOfSensorsAssosiatedWithSet(tempSet.getId());
-			for(String sensorId: associatedSensorsIds){
-				SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensorId);
-				sensorToPlot.setX(tempSet.getRealX());
-				sensorToPlot.setY(tempSet.getRealY());
-				sensorToPlot.setZ(tempSet.getRealZ());
-				SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensorToPlot);
+			if(!tempSet.isIfSensor()){
+				associateSetWithMap(tempSet.getId(), mapId, tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
+				ArrayList<String> sensors = SetSensorAssociationLocalDBHelper.
+						getSingletonInstance(context).getListOfSensorsAssosiatedWithSet(tempSet.getId());
+				for(String sensorId: sensors){
+					MapSensorAssociationDBHelper.getSingletoneInstance(context).
+					associateSensorWithMap(sensorId, tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
+				}
 			}
 		}
 		
@@ -114,6 +114,16 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		
 	}
 	
+	public Coords getCoordsForSet(String setId){
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
+		Coords tempCoords = null;
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.moveToFirst()){
+			tempCoords =  new Coords(cursor.getFloat(2),cursor.getFloat(3),cursor.getFloat(4));
+		}
+		return tempCoords;
+	}
+	
 	public ArrayList<String> getListOfSensorsAssosiatedWithMap(String mapId){
 		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  MAPIDCOL + " = " + "'" + mapId + "'" +  ";";
 		ArrayList<String> setIds = new ArrayList<String>();		
@@ -124,6 +134,15 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 			}while(cursor.moveToNext());
 		}
 		return setIds;
+	}
+	
+	public boolean isPlotted(String setId){
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.getCount() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 	public static String getCreateMapSetAssTableQuery() {

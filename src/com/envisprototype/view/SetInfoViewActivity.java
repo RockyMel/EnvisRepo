@@ -1,30 +1,29 @@
 package com.envisprototype.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.AddSensorButtonController;
+import com.envisprototype.controller.PlotSensorsBtnListener;
 import com.envisprototype.controller.SetSaveOnClickController;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.model.Set_SensorListAdapter;
-import com.envisprototype.view.processing.SetPlotPApplet;
 
 public class SetInfoViewActivity extends EnvisActivity {
 
@@ -51,7 +50,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 		setid = getIntent().getStringExtra("setid");
 		flag=getIntent().getStringExtra("flag");
 
-		init();
+		
 
 
 	}
@@ -68,6 +67,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 		Add = (Button)findViewById(R.id.ADD);
 		Save = (Button)findViewById(R.id.Save);
 		Delete = (Button)findViewById(R.id.Delete);
+		Button plotSensors = (Button) findViewById(R.id.plot_sensors_btn);
 
 		if(flag.equals("new"))
 			location=new Location(LocationManager.NETWORK_PROVIDER);
@@ -96,6 +96,21 @@ public class SetInfoViewActivity extends EnvisActivity {
 			list=SensorListModel.getSingletonInstance().getSensorListBySetID(setid);
 			sla = new Set_SensorListAdapter(this,0,list,setid);
 			sensorlistview.setAdapter(sla);
+			mapId = set.getMapID();
+			if(MapSetAssociationDBHelper.getSingletoneInstance(this).getCoordsForSet(setid)!=null){
+				plotSensors.setVisibility(View.VISIBLE);
+				ArrayList<String> sensorIdsToPlot = new ArrayList<String>();
+				for(SensorInterface sensor: list){
+						sensorIdsToPlot.add(sensor.getId());
+				}
+				plotSensors.setOnClickListener(new PlotSensorsBtnListener(sensorIdsToPlot, mapId));
+				// need to get ids for sensors belonging to this set that are to be plotted
+				
+				
+			}
+			else{
+				plotSensors.setVisibility(View.INVISIBLE);
+			}
 
 		}
 		Add.setOnClickListener(new AddSensorButtonController(setid,list,flag,this));
@@ -108,10 +123,12 @@ public class SetInfoViewActivity extends EnvisActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
 		//if(SetListModel.getSingletonInstance().findSetById(setid)!=null){
 			//SetInterface tempset= SetListModel.getSingletonInstance().findSetById(setid);
 			//list= (List<SensorInterface>) tempset.getSensors();
 		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
+		init();
 			list=SensorListModel.getSingletonInstance().getSensorListBySetID(setid);
 
 			sla = new Set_SensorListAdapter(this,0,list,setid);

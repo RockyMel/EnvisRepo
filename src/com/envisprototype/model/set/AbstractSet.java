@@ -121,10 +121,11 @@ public abstract class AbstractSet implements SetInterface {
 		this.z = z;
 	}
 	
-	
+	@Override
 	public String getMapID() {
 		return MapID;
 	}
+	@Override
 	public void setMapID(String mapID) {
 		MapID = mapID;
 	}

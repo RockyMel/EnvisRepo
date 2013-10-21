@@ -2,12 +2,6 @@ package com.envisprototype.view.model;
 
 import java.util.List;
 
-import com.envisprototype.R;
-import com.envisprototype.controller.DeleteSensorButtonController;
-import com.envisprototype.controller.SensorViewButtonController;
-import com.envisprototype.controller.onSetChosenToPlot;
-import com.envisprototype.model.sensor.SensorInterface;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.controller.OnSensorPlotCheckBoxChangedListener;
+import com.envisprototype.controller.SensorViewButtonController;
+import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.set.SetListModel;
 
 public class Set_SensorListAdapter extends ArrayAdapter<SensorInterface>{
 
@@ -45,6 +48,15 @@ public class Set_SensorListAdapter extends ArrayAdapter<SensorInterface>{
 		sensorname.setText(sensor.getName());
 		TextView id =(TextView) inflatedView.findViewById(R.id.ID);
 		id.setText(sensor.getId());
+		CheckBox plotSensorCb = (CheckBox) inflatedView.findViewById(R.id.plot_sensor_cb);
+		if(MapSetAssociationDBHelper.getSingletoneInstance(context).getCoordsForSet(setid) == null){
+			plotSensorCb.setVisibility(View.INVISIBLE);
+			
+		}
+		else{
+			plotSensorCb.setVisibility(View.VISIBLE);
+			plotSensorCb.setOnCheckedChangeListener(new OnSensorPlotCheckBoxChangedListener(sensor));
+		}
 		//Button del = (Button)inflatedView.findViewById(R.id.del);
 		//del.setOnClickListener(new DeleteSensorButtonController(sensor.getId(),setid,context));
 		

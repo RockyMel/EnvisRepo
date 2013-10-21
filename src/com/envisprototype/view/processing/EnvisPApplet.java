@@ -15,6 +15,7 @@ import com.envisprototype.controller.processing.eventListeners.RotateScopeListen
 import com.envisprototype.controller.processing.eventListeners.ZoomListener;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
@@ -83,7 +84,17 @@ public abstract class EnvisPApplet extends PApplet{
 						  for(String setId: setIdFromAndroid){
 							  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
 							  SensorSet setToShow = new SensorSet(this, setId);
+							  setToShow.setIfSensor(false);
 							  envisSensors.put(setId, setToShow);
+						  }
+					  }
+					  if(extras.containsKey(getString(R.string.sensor_id_extra))){
+						  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensor_id_extra));
+						  for(String setId: setIdFromAndroid){
+							  SensorInterface setFromModel =  SensorListModel.getSingletonInstance().findSensorById(setId);
+							  EnvisSensor sensorToShow = new EnvisSensor(this, setId);
+							  sensorToShow.setIfSensor(true);
+							  envisSensors.put(setId, sensorToShow);
 						  }
 					  }
 				  }
@@ -148,7 +159,8 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	if(ifWithSensors){
 		setIterator = envisSensors.keySet().iterator();
 		while(setIterator.hasNext()){
-			envisSensors.get(setIterator.next()).drawMe();
+			SensorSet temp = envisSensors.get(setIterator.next());
+				temp.drawMe();
 		}		
 		for(BarGraphSet barToShow: barGraphSetList){
 			barToShow.drawMe();

@@ -66,7 +66,7 @@ public class MapSensorAssociationDBHelper extends SQLiteOpenHelper{
 		ContentValues values=new ContentValues();
 		while(iterator.hasNext()){
 			SensorSet tempSet = envisSensors.get(iterator.next());
-			associateSensorWithMap(tempSet.getId(), tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
+			//associateSensorWithMap(tempSet.getId(), tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
 			ArrayList<String> associatedSensorsIds = SetSensorAssociationLocalDBHelper.getSingletonInstance(context).getListOfSensorsAssosiatedWithSet(tempSet.getId());
 			for(String sensorId: associatedSensorsIds){
 				SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensorId);

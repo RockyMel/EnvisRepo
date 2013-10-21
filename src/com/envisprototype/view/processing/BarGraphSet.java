@@ -64,30 +64,35 @@ public class BarGraphSet extends AbstractEnvisButton {
 		
       /*generating and storing coordinate values*/
 		    
-	    if (sensorCoords.x < midpoint_x)
-	    {
-	      tempx = (int)p.random(0, midpoint_x);
-	      tempx = tempx - (sensorCoords.getX()/2);
-	    }
-	    else if (sensorCoords.x > midpoint_x)
-	    {
-	      tempx = (int)p.random(midpoint_x, p.displayWidth);
-	      tempx = tempx - (sensorCoords.getX()/2);
-	    }
-		    
-	    if (sensorCoords.getY() < midpoint_y)
-	    {
-	      tempy = (int)p.random(-p.displayHeight/4, 0);
-	      tempy = tempy - (sensorCoords.getY()/2);
-	    }
-		    
-	    else if (sensorCoords.getY() > midpoint_y)
-	    {
-	      tempy = (int)p.random(0, p.displayHeight/4);
-	      tempy = tempy + (sensorCoords.getY()/2);
-	    }
+//	    if (sensorCoords.x < midpoint_x)
+//	    {
+//	      tempx = (int)p.random(0, midpoint_x);
+//	      tempx = tempx - (sensorCoords.getX()/2);
+//	    }
+//	    else if (sensorCoords.x > midpoint_x)
+//	    {
+//	      tempx = (int)p.random(midpoint_x, p.displayWidth);
+//	      tempx = tempx - (sensorCoords.getX()/2);
+//	    }
+//		    
+//	    if (sensorCoords.getY() < midpoint_y)
+//	    {
+//	      tempy = (int)p.random(-p.displayHeight/4, 0);
+//	      tempy = tempy - (sensorCoords.getY()/2);
+//	    }
+//		    
+//	    else if (sensorCoords.getY() > midpoint_y)
+//	    {
+//	      tempy = (int)p.random(0, p.displayHeight/4);
+//	      tempy = tempy + (sensorCoords.getY()/2);
+//	    }
+		
+		tempx = sensorCoords.getX();
+		tempx = (int)p.random(tempx, tempx+p.width/10);
+		tempy = sensorCoords.getX();
+		tempy = (int)p.random(tempy, tempy+p.height/10);
 	    
-	    Coords newCoords = new Coords((int)tempx, (int)tempy, 0);
+	    Coords newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/10);
 	    return newCoords;
 	}
 	
@@ -104,14 +109,22 @@ public class BarGraphSet extends AbstractEnvisButton {
 	public void drawMe() {
 		for (int j = 0; j < barGraphList.size(); j++) {
 			
-			p.translate(p.getEnvisSensors().get(sensorID).getX(), 
-					p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
+//			p.translate(p.getEnvisSensors().get(sensorID).getX(), 
+//					p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
 //			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
-			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
-					-graphCoords.get(j).getX(), -graphCoords.get(j).getY(), 
-					-graphCoords.get(j).getZ());
-			
+//			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
+//					-graphCoords.get(j).getX(), -graphCoords.get(j).getY(), 
+//					-graphCoords.get(j).getZ());
+//			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
+//					-p.getEnvisSensors().get(sensorID).getX(), -p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
+			p.line(p.getEnvisSensors().get(sensorID).getX(), p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ(), 
+					graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
+			p.pushMatrix();
+			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			barGraphList.get(j).display();
+			p.popMatrix();
+//			p.translate(-p.getEnvisSensors().get(sensorID).getX(), 
+//					-p.getEnvisSensors().get(sensorID).getY(), -p.getEnvisSensors().get(sensorID).getZ());
 
 		}
 	}
