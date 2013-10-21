@@ -137,7 +137,19 @@ public class SensorListModel implements SensorListInterface  {
 		// TODO Auto-generated method stub
 		
 	}
-
-
+	
+	public void addAssociateSensortoMap(String sensorId,
+			float x, float y, float z){
+		// TODO Auto-generated method stub
+				for(int i=0;i<this.sensorList.size();i++)
+				{
+					if(this.sensorList.get(i).getId().equals(sensorId))
+						{
+						this.sensorList.get(i).setX(x);
+						this.sensorList.get(i).setY(y);
+						this.sensorList.get(i).setZ(z);
+						}
+				}
+	}
 
 }

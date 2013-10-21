@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.DBHelper.SensorInfoDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
@@ -81,6 +82,7 @@ public class SaveButtonController implements OnClickListener {
 			sensor.setType(0);
 		}
 		sensor.setSetid(setid);
+		
 		//SensorInterface temp = set.getSensor(id.getText().toString());
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
 
@@ -114,6 +116,13 @@ public class SaveButtonController implements OnClickListener {
 					SensorLocalDBHelper.getSingletonInstance(context).addSensor(sensor);
 					// add sensor set association
 					SetSensorAssociationLocalDBHelper.getSingletonInstance(context).associateSensorWithSet(id.getText().toString(), setid);
+					// also if set has already been plotted, set sensor's xyz to the one of the set
+					SetInterface tempSet = SetLocalDBHelper.getSingletonInstance(context).findSetById(setid);
+					SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensor.getId());
+					sensorToPlot.setX(tempSet.getX());
+					sensorToPlot.setY(tempSet.getY());
+					sensorToPlot.setZ(tempSet.getZ());
+					SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensorToPlot);
 				}
 			};
 			thread.start();

@@ -44,6 +44,8 @@ public class EnvisDBAdapter extends SQLiteOpenHelper{
 		db.execSQL(queryToCreate);
 		queryToCreate = MapSetAssociationDBHelper.getCreateMapSetAssTableQuery();
 		db.execSQL(queryToCreate);
+		queryToCreate = MapSensorAssociationDBHelper.getCreateMapSetAssTableQuery();
+		db.execSQL(queryToCreate);
 	}
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -57,6 +59,7 @@ public class EnvisDBAdapter extends SQLiteOpenHelper{
 		SensorLocalDBHelper.getSingletonInstance(context).ReplicateSensorList();
 		MapSetAssociationDBHelper.getSingletoneInstance(context).ReplicateAllMapAndSensorAssociations();
 		SetSensorAssociationLocalDBHelper.getSingletonInstance(context).ReplicateAllSetAndSensorAssociations();
+		MapSensorAssociationDBHelper.getSingletoneInstance(context).ReplicateAllMapAndSensorAssociations();
 	}
 	
 	

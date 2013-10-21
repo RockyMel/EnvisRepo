@@ -43,6 +43,10 @@ public class ChartVisualizationSettingsListAdapter extends ArrayAdapter<String> 
 		
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(ID);
 		Log.i("TESTSTST1", temp.getId() +"  "+ temp.getSetid());
+		Log.i("coors", temp.getId() +"  "+ temp.getId());
+		Log.i("coors", temp.getId() +"  "+ temp.getX());
+		Log.i("coors", temp.getId() +"  "+ temp.getY());
+		Log.i("coors", temp.getId() +"  "+ temp.getZ());
 		SetInterface tempset =SetListModel.getSingletonInstance().findSetById(temp.getSetid());
 		Log.i("TESTSTST2", tempset.getId() +"  "+ tempset.getName());
 		setplussensor.setText(tempset.getName()+"::"+temp.getName());

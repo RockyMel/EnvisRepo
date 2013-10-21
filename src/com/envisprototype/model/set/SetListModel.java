@@ -108,4 +108,10 @@ public class SetListModel implements SetListInterface{
 		}
 	}
 
+	@Override
+	public void addAssociateSensorToMap(String setID, float x, float y, float z) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

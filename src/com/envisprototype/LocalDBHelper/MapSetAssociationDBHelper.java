@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.processing.SensorSet;
 
@@ -66,6 +67,14 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		while(iterator.hasNext()){
 			SensorSet tempSet = envisSensors.get(iterator.next());
 			associateSetWithMap(tempSet.getId(), mapId, tempSet.getRealX(), tempSet.getRealY(), tempSet.getRealZ());
+			ArrayList<String> associatedSensorsIds = SetSensorAssociationLocalDBHelper.getSingletonInstance(context).getListOfSensorsAssosiatedWithSet(tempSet.getId());
+			for(String sensorId: associatedSensorsIds){
+				SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensorId);
+				sensorToPlot.setX(tempSet.getRealX());
+				sensorToPlot.setY(tempSet.getRealY());
+				sensorToPlot.setZ(tempSet.getRealZ());
+				SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensorToPlot);
+			}
 		}
 		
 	}

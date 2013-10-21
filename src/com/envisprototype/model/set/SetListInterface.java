@@ -21,6 +21,9 @@ public interface SetListInterface {
 	public abstract void editSet(SetInterface set);
 
 	public List<SetInterface> getSetListByIds(List<String> setIds);
+
+	public abstract void addAssociateSensorToMap(String setID, float x,
+			float y, float z);
 	
 	
 	

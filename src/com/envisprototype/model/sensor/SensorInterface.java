@@ -58,4 +58,5 @@ public interface SensorInterface {
 
 	void setIftoPlot(boolean iftoPlot);
 	
+	
 }

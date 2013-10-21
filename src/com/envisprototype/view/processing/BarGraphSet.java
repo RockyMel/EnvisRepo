@@ -106,7 +106,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 			
 			p.translate(p.getEnvisSensors().get(sensorID).getX(), 
 					p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
-			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
+//			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
 					-graphCoords.get(j).getX(), -graphCoords.get(j).getY(), 
 					-graphCoords.get(j).getZ());

@@ -82,7 +82,23 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 	@Override
 	public SensorInterface findSensorById(String Id) {
 		// NOT IMPLEMENTED
-		return null;
+		
+		SensorInterface tempsensor=new SensorModel();
+		
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +
+				 IDCOL + " = " + "'" +  Id +  "'" + ";";
+		
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		if(cursor.moveToFirst()){
+				tempsensor.setId(cursor.getString(0));
+				tempsensor.setName(cursor.getString(1));
+				tempsensor.setType(cursor.getInt(2));
+				tempsensor.setBrand(cursor.getString(3));
+				tempsensor.setNotes(cursor.getString(4));
+		}
+		
+		
+		return tempsensor;
 	}
 	
 	public void editSensor(SensorInterface sensor) {
@@ -173,6 +189,12 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 
 	public static String getCreateSensorTableQuery() {
 		return CREATE_SENSOR_TABLE_QUERY;
+	}
+
+	@Override
+	public void addAssociateSensortoMap(String setID, float x, float y, float z) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

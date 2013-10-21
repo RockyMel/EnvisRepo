@@ -2,13 +2,9 @@ package com.envisprototype.controller.processing.eventListeners;
 
 import java.util.EventObject;
 
-import processing.core.PApplet;
-
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.LocalDBHelper.MapSensorAssociationDBHelper;
 import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
-import com.envisprototype.model.processing.Coordinates;
-import com.envisprototype.view.processing.EnvisPApplet;
 
 public class SaveSetBtnListener extends AbstractPlotBtnListener{
 	
@@ -35,6 +31,9 @@ public class SaveSetBtnListener extends AbstractPlotBtnListener{
 					// TODO Auto-generated method stub
 					MapSetAssociationDBHelper.getSingletoneInstance(spApplet).
 					associateEnvisSensorsSetsWithMap(spApplet.getEnvisSensors(), spApplet.getEnvisMap().getMapId());
+					MapSensorAssociationDBHelper.getSingletoneInstance(spApplet).
+					associateEnvisSensorsWithMap(spApplet.getEnvisSensors());
+					
 				}
 			}).start();
 		}

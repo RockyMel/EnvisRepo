@@ -33,7 +33,7 @@ public abstract class EnvisPApplet extends PApplet{
 	HashMap<String,SensorSet> envisSensors;
 	Map envisMap;
 	String flag;
-	BarGraphSet barGraphSet;
+	ArrayList<BarGraphSet> barGraphSetList;
 	ArrayList<String> setIdFromAndroid;
 	Bundle extras;
 	Iterator<String> setIterator;
@@ -60,6 +60,7 @@ public abstract class EnvisPApplet extends PApplet{
 		  rotateScope.setSize(width-width/10, 2*height/50);
 		  rotateScope.addEventListener(new RotateScopeListener());
 		  envisMap = new Map(this);
+		  barGraphSetList = new ArrayList<BarGraphSet>();
 		  // getting a map id from model.
 		  extras = getIntent().getExtras();
 		  if(extras != null){
@@ -94,8 +95,11 @@ public abstract class EnvisPApplet extends PApplet{
 					  SensorSet setToShow = new SensorSet(this, setId);
 					  envisSensors.put(setId, setToShow);
 					  Iterator<String> iterator = envisSensors.keySet().iterator();
-				    	if(iterator.hasNext())
-				    		barGraphSet = new BarGraphSet(this, "", iterator.next(), 1);
+				    	if(iterator.hasNext()){
+				    		barGraphSetList.add(new BarGraphSet(this, "", iterator.next(), 1));
+				    	}
+				    		//barGraphSet = new BarGraphSet(this, "", iterator.next(), 1);
+				    	
 				  }
 			  }
 		  }
@@ -146,7 +150,9 @@ public void threeDDrawPreset(boolean ifWithSensors){
 		while(setIterator.hasNext()){
 			envisSensors.get(setIterator.next()).drawMe();
 		}		
-		barGraphSet.drawMe();
+		for(BarGraphSet barToShow: barGraphSetList){
+			barToShow.drawMe();
+		}
 	}
 	popMatrix();
 	axis.drawMe();

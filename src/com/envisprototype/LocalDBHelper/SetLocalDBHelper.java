@@ -17,8 +17,10 @@ import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
+import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListInterface;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.sensor.SensorModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListInterface;
 import com.envisprototype.model.set.SetListModel;
@@ -106,7 +108,26 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	@Override
 	public SetInterface findSetById(String id) {
 		// NOT IMPLEMENTED
-		return null;
+		SetInterface tempset=new SetModel();
+		
+		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +
+				 IDCOL + " = " + "'" +  id +  "'" + ";";
+		
+		Cursor cursor = getWritableDatabase().rawQuery(query, null);
+		Location location =  new Location(LocationManager.NETWORK_PROVIDER);
+		if(cursor.moveToFirst()){
+				tempset.setId(cursor.getString(0));
+				tempset.setName(cursor.getString(1));
+
+				location.setLongitude(cursor.getDouble(2));
+				location.setLatitude(cursor.getDouble(3));
+
+				tempset.setLocation(location);
+				tempset.setNotes(cursor.getString(4));
+		}
+		
+		
+		return tempset;
 	}
 
 	@Override
@@ -176,6 +197,12 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	public List<SetInterface> getSetListByIds(List<String> setIds) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addAssociateSensorToMap(String setID, float x, float y, float z) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
