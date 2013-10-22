@@ -11,6 +11,11 @@ public class BarGraph {
 	private int z = 20; // bar graph width or z
 	private int x = 20; // bar graph length or x
 	private float h, reading;
+	public void setReading(float reading) {
+		this.reading = reading;
+		this.h = PApplet.map(reading, 0, 1000, 0, 100);
+	}
+
 	private int offset = 15; // value to offset sensor reading text
 	private int SENSORTYPE_TEMP = 1;
 	private int SENSORTYPE_LIGHT = 2;
@@ -26,8 +31,9 @@ public class BarGraph {
 		reading = r;
 		h = r;
 		sensorType = type;
-		float[] colorRGB = { 0, 0, 0 };
 		
+
+		float[] colorRGB = { 0, 0, 0 };
 		color_hoverTrue = p.color(252, 216, 8);
 		color_hoverFalse = p.color(250);
 		color_selectedTrue = p.color(255, 202, 54);
@@ -60,6 +66,8 @@ public class BarGraph {
 	
 	
 	public void display() {
+		
+		
 		
 		/* displaying the sensor reading */
 	    p.pushMatrix();

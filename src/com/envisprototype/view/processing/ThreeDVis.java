@@ -69,6 +69,10 @@ public void setup(){
     	
     }		    	
     }
+    for(BarGraphSet barset: barGraphSetList){
+    	//if(barset.getSensorID())
+    	barset.startRealTime();
+    }
 }
 public void draw(){
 	super.draw();

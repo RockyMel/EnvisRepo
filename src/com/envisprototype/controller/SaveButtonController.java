@@ -64,6 +64,7 @@ public class SaveButtonController implements OnClickListener {
 //		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getName());
 //		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getNotes());
 //		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getLocation().getLongitude()+"");
+		
 		myloc=set.getLocation();
 
 		//Log.i("testing location1", myloc.getLongitude()+myloc.getLongitude()+"");

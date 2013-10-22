@@ -2,7 +2,21 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 
-import processing.core.PApplet;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.envisprototype.controller.RealTimeThreeDVis;
+import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
+import com.envisprototype.view.RealTimeChartActivity;
+import com.envisprototype.view.model.ChartVisualizationSettingsModel;
+import com.jjoe64.graphview.GraphView.GraphViewData;
 
 
 /* collection of bar graphs for one set */
@@ -16,25 +30,57 @@ public class BarGraphSet extends AbstractEnvisButton {
 	boolean selected = false;
 	boolean secondClick = false;
 	
+	RealTimeThreeDVis realTimeUpdates;
+	public static Handler mHandler;
+	
 	private static int SENSORTYPE_TEMP = 1;
 	
-	ArrayList<Float> readingsList;
+	private ArrayList<Float> readingsList;
+	public ArrayList<Float> getReadingsList() {
+		return readingsList;
+	}
+
+	public void setReadingsList(ArrayList<Float> readingsList) {
+		this.readingsList = readingsList;
+	}
+
+
+
 	private String sensorID;
+
+	public String getSensorID() {
+		return sensorID;
+	}
+
+	public void setSensorID(String sensorID) {
+		this.sensorID = sensorID;
+	}
 
 	public BarGraphSet(EnvisPApplet epApplet, String name, String sensorID, int timeRangeType) {
 		super(epApplet, name);
 		p = epApplet;
 		midpoint_x = p.displayWidth/2;
 		midpoint_y = p.displayHeight/2;
+		if(mHandler == null){
+			 Activity activity=(Activity) this.epApplet; 
+			    activity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						mHandler = new Handler();
+					}
+				});
+		}
 		
 		barGraphList = new ArrayList<BarGraph>();
 		graphCoords = new ArrayList<Coords>();
 		this.sensorID = sensorID;
 		
 		readingsList = new ArrayList<Float>();
-		readingsList.add((float) 100.0);
-		readingsList.add((float)24.6);
-		readingsList.add((float)88.4);
+		readingsList.add(100.0f);
+//		readingsList.add((float)24.6);
+//		readingsList.add((float)88.4);
 		
 		/* timeRangeType == 1 is for real time */
 		if (timeRangeType == 1) {
@@ -53,7 +99,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 //		}
 		
 		p.getEnvisSensors().get(sensorID);
-		
+		realTimeUpdates = new RealTimeThreeDVis(sensorID, p, this);
 		
 	}
 	
@@ -90,9 +136,9 @@ public class BarGraphSet extends AbstractEnvisButton {
 		tempx = sensorCoords.getX();
 		tempx = (int)p.random(tempx, tempx+p.width/10);
 		tempy = sensorCoords.getX();
-		tempy = (int)p.random(tempy, tempy+p.height/10);
+		tempy = (int)p.random(tempy, tempy+p.height/50);
 	    
-	    Coords newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/10);
+	    Coords newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/50);
 	    return newCoords;
 	}
 	
@@ -121,6 +167,8 @@ public class BarGraphSet extends AbstractEnvisButton {
 					graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			p.pushMatrix();
 			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
+			barGraphList.get(j).setReading(readingsList.get(0));
+			barGraphList.get(j).setReading(readingsList.get(0));
 			barGraphList.get(j).display();
 			p.popMatrix();
 //			p.translate(-p.getEnvisSensors().get(sensorID).getX(), 
@@ -135,6 +183,10 @@ public class BarGraphSet extends AbstractEnvisButton {
 	public void rotate(float xRotate, float yRotate, float zRotate) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void startRealTime(){
+		mHandler.postDelayed(realTimeUpdates, 200);
 	}
 
 }

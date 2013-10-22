@@ -51,7 +51,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 	protected static final int From_TIME_PICKER_DIALOG = 2;
 	protected static final int To_TIME_PICKER_DIALOG = 3;
 
-	private static final String TIME_FORMAT = "kk:mm";
+	private static final String TIME_FORMAT = "kk:mm:ss";
 
 	final Calendar calfrom=Calendar.getInstance();
 	final Calendar calto=Calendar.getInstance();

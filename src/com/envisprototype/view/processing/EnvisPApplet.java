@@ -7,6 +7,7 @@ import java.util.Iterator;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 

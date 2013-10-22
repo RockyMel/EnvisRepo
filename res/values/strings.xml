@@ -21,13 +21,11 @@
     <string name="set_coor_extra">setCoors</string>
     <string name="sets_to_vis_extra">chooseSetsToVisualise</string>
     <string name="sensors_to_vis_extra">chooseSetsToVisualise</string>
-   
     <string name="sets_id_extra">setsId</string>
     <string name="flags">flags</string>
     <string name="plot_flag_extra">plotExtra</string>
     <string name="three_d_vis_flag_extra">three_d_vis_flag_extra</string>
     <string name="request_code">request code</string>
-    
 
     <string-array name="sort_arrays">
         <item>Alphabetical Order</item>
@@ -66,27 +64,29 @@
     <string name="title_activity_set_info_view">SetInfoViewActivity</string>
     <string name="title_activity_set_list">SetListActivity</string>
     <string name="title_activity_chart_visualization_settings">ChartVisualizationSettingsActivity</string>
-
-     <string name="delete_node_btn">Delete node</string>
-     <string name="choose_node_to_delete">press node</string>
-     <string name="drag_node_btn">Drag nodes</string>
-     <string name="stop_drag_node_btn">Stop dragging</string>
-     <string name="draw_polygon">Draw polygon</string>
-     <string name="stop_draw_polygon">Stop polygon</string>
-     <string name="draw_free_shape">Free shape</string>
-     <string name="stop_draw_free_shape">Stop shape</string>
-     <string name="disabled">disabled</string>
-     <string name="draw_rect">Draw rect</string>
-     <string name="remove_last_node">Remove node</string>
-     <string name="add_node">Add node</string>
-     <string name="add_node_step_one">Tap node</string>
-     <string name="add_node_step_two">Tap on map</string>
-     <string name="add_node_step_three">Press to add</string>
-     <string name="save_sets">Save</string>
-     <string name="sets_saved">Saved</string>
-     <string name="remove_sets">Remove set</string>
-     <string name="stop_remove_sets">Stop removing</string>
-     <string name="add_set">Add set</string>
-     <string name="stop_add_set">Stop adding</string>
+    <string name="delete_node_btn">Delete node</string>
+    <string name="choose_node_to_delete">press node</string>
+    <string name="drag_node_btn">Drag nodes</string>
+    <string name="stop_drag_node_btn">Stop dragging</string>
+    <string name="draw_polygon">Draw polygon</string>
+    <string name="stop_draw_polygon">Stop polygon</string>
+    <string name="draw_free_shape">Free shape</string>
+    <string name="stop_draw_free_shape">Stop shape</string>
+    <string name="disabled">disabled</string>
+    <string name="draw_rect">Draw rect</string>
+    <string name="remove_last_node">Remove node</string>
+    <string name="add_node">Add node</string>
+    <string name="add_node_step_one">Tap node</string>
+    <string name="add_node_step_two">Tap on map</string>
+    <string name="add_node_step_three">Press to add</string>
+    <string name="save_sets">Save</string>
+    <string name="sets_saved">Saved</string>
+    <string name="remove_sets">Remove set</string>
+    <string name="stop_remove_sets">Stop removing</string>
+    <string name="add_set">Add set</string>
+    <string name="stop_add_set">Stop adding</string>
+    <string name="title_activity_new_chart">NewChartActivity</string>
+    <string name="title_activity_real_time_chart">RealTimeChartActivity</string>
+    <string name="title_activity_real_time_chart_list">RealTimeChartListActivity</string>
 
 </resources>
