@@ -2,21 +2,12 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import processing.core.PFont;
 import android.app.Activity;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.envisprototype.controller.RealTimeThreeDVis;
-import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
-import com.envisprototype.view.RealTimeChartActivity;
-import com.envisprototype.view.model.ChartVisualizationSettingsModel;
-import com.jjoe64.graphview.GraphView.GraphViewData;
 
 
 /* collection of bar graphs for one set */
@@ -29,6 +20,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 	boolean hover = false;
 	boolean selected = false;
 	boolean secondClick = false;
+	PFont font;
 	
 	RealTimeThreeDVis realTimeUpdates;
 	public static Handler mHandler;
@@ -59,6 +51,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 	public BarGraphSet(EnvisPApplet epApplet, String name, String sensorID, int timeRangeType) {
 		super(epApplet, name);
 		p = epApplet;
+		font = p.createFont("Arial",14,true);
 		midpoint_x = p.displayWidth/2;
 		midpoint_y = p.displayHeight/2;
 		if(mHandler == null){
@@ -134,9 +127,12 @@ public class BarGraphSet extends AbstractEnvisButton {
 //	    }
 		
 		tempx = sensorCoords.getX();
+		tempy = sensorCoords.getY();
+		Log.i("coords", tempx + " " + tempy);
 		tempx = (int)p.random(tempx, tempx+p.width/10);
-		tempy = sensorCoords.getX();
 		tempy = (int)p.random(tempy, tempy+p.height/50);
+		
+		Log.i("coords", tempx + " " + tempy);
 	    
 	    Coords newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/50);
 	    return newCoords;
@@ -167,7 +163,10 @@ public class BarGraphSet extends AbstractEnvisButton {
 					graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			p.pushMatrix();
 			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
-			barGraphList.get(j).setReading(readingsList.get(0));
+			p.fill(255,255,0);
+			p.textFont(font);
+			p.text(sensorID, 0,	0,barGraphList.get(j).getHeight());
+			//barGraphList.get(j).setReading(readingsList.get(0));
 			barGraphList.get(j).setReading(readingsList.get(0));
 			barGraphList.get(j).display();
 			p.popMatrix();

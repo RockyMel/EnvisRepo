@@ -11,7 +11,7 @@ public abstract class AbstractSet implements SetInterface {
 	
 	private boolean iftoPlot; 
 	private float x, y, z;
-	private String MapID;
+	private String MapID = null;
 	//private List<String> sensorid;
 	
 	public AbstractSet(){

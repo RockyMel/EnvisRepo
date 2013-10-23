@@ -43,6 +43,8 @@ public class SetListAdapter extends ArrayAdapter<SetInterface>  {
 		
 		CheckBox toPlotCB = (CheckBox) inflatedView.findViewById(R.id.plotCB);
 		toPlotCB.setOnCheckedChangeListener(new onSetChosenToPlot(set.getId()));
+		if(set.isIftoPlot())
+			toPlotCB.setChecked(true);
 		
 		GPSTracker gps = new GPSTracker(context);
 		double latitude = 0;

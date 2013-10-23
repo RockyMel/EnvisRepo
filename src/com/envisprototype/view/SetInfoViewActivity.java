@@ -19,6 +19,7 @@ import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.AddSensorButtonController;
 import com.envisprototype.controller.PlotSensorsBtnListener;
 import com.envisprototype.controller.SetSaveOnClickController;
+import com.envisprototype.controller.UnplotSetBtnListener;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -68,6 +69,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 		Save = (Button)findViewById(R.id.Save);
 		Delete = (Button)findViewById(R.id.Delete);
 		Button plotSensors = (Button) findViewById(R.id.plot_sensors_btn);
+		Button unplotSet = (Button) findViewById(R.id.unplot_set);
 
 		if(flag.equals("new"))
 			location=new Location(LocationManager.NETWORK_PROVIDER);
@@ -99,17 +101,20 @@ public class SetInfoViewActivity extends EnvisActivity {
 			mapId = set.getMapID();
 			if(MapSetAssociationDBHelper.getSingletoneInstance(this).getCoordsForSet(setid)!=null){
 				plotSensors.setVisibility(View.VISIBLE);
+				unplotSet.setVisibility(View.VISIBLE);
 				ArrayList<String> sensorIdsToPlot = new ArrayList<String>();
 				for(SensorInterface sensor: list){
 						sensorIdsToPlot.add(sensor.getId());
 				}
 				plotSensors.setOnClickListener(new PlotSensorsBtnListener(sensorIdsToPlot, mapId));
+				unplotSet.setOnClickListener(new UnplotSetBtnListener(setid));
 				// need to get ids for sensors belonging to this set that are to be plotted
 				
 				
 			}
 			else{
 				plotSensors.setVisibility(View.INVISIBLE);
+				unplotSet.setVisibility(View.INVISIBLE);
 			}
 
 		}

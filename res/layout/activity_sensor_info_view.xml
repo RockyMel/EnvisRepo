@@ -161,12 +161,12 @@
         android:text="Delete" />
 
     <Button
-        android:id="@+id/plotSensorBtn"
+        android:id="@+id/bring_to_default_coors_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/NOTES"
         android:layout_alignTop="@+id/Delete"
-        android:text="Plot sensor" />
+        android:text="Default xyz" />
 
 </RelativeLayout>
 <include layout="@layout/for_drawer" />

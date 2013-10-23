@@ -98,6 +98,10 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		
 	}
 	
+	public void removeAssociation(String setId){
+		getWritableDatabase().delete(TABLE_NAME, SETIDCOL + " = '" + setId + "'", null);
+	}
+	
 	public void ReplicateAllMapAndSensorAssociations(){
 		
 

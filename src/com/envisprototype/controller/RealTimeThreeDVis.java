@@ -83,6 +83,7 @@ public class RealTimeThreeDVis  implements Runnable{
 			}
 			Log.i("DATAFORREALTIME",tempdata+"");
 			//exampleSeries2.appendData(new GraphViewData(graph1LastXValue, tempdata ), true, 10);
+				if(tempdata!=null)
 			barGraphSet.getReadingsList().set(0,new Float(tempdata));
 		}
 

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.envisprototype.R;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
@@ -42,7 +43,7 @@ public void setup(){
     RotateScopeListener.setIfTop(true);
     // need to get coordinates for the sensors
     {
-    String sensorId, setId;
+    String sensorId;// setId;
     setIterator = envisSensors.keySet().iterator();
     while(setIterator.hasNext()){
     	sensorId = setIterator.next();
@@ -56,7 +57,7 @@ public void setup(){
     	}
     	else{
     		// set xyz as in set that this sensor belongs to
-    		setId = SensorListModel.getSingletonInstance().findSensorById(sensorId).getSetid();
+    		//setId = SensorListModel.getSingletonInstance().findSensorById(sensorId).getSetid();
     		List<SetInterface> asdf = SetListModel.getSingletonInstance().getSetList();
     		envisSensors.get(sensorId).setRealX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
         	envisSensors.get(sensorId).setRealY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
@@ -69,6 +70,14 @@ public void setup(){
     	
     }		    	
     }
+    
+    if(extras.containsKey(getString(R.string.sensors_to_vis_extra))){
+		  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensors_to_vis_extra));
+		  for(String setId: setIdFromAndroid){
+			  barGraphSetList.add(new BarGraphSet(this, "", setId, 1));
+		  }
+	  }
+    
     for(BarGraphSet barset: barGraphSetList){
     	//if(barset.getSensorID())
     	barset.startRealTime();

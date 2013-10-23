@@ -98,6 +98,7 @@ public class MapSensorAssociationDBHelper extends SQLiteOpenHelper{
 		
 	}
 	
+	
 	public void ReplicateAllMapAndSensorAssociations(){
 		
 
@@ -113,6 +114,10 @@ public class MapSensorAssociationDBHelper extends SQLiteOpenHelper{
 			}while(cursor.moveToNext());
 		}	
 		
+	}
+	
+	public void removeAssociation(String sensorId){
+		getWritableDatabase().delete(TABLE_NAME, SENSORIDCOL + " = '" + sensorId + "'", null);
 	}
 	
 

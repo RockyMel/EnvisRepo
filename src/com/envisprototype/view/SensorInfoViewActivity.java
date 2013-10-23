@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.controller.DefaultXYZSensorBtnListener;
 import com.envisprototype.controller.DeleteSensorButtonController;
 import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
@@ -28,6 +29,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 	EditText notes;
 	Button delete;
 	Button save;
+	Button defaultXYZBtn;
 	//Button plotBtn;
 	String sensorid;
 	SensorInterface sensor;
@@ -60,7 +62,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		notes = (EditText)findViewById(R.id.NOTES);
 		save = (Button)findViewById(R.id.Save);
 		delete = (Button)findViewById(R.id.Delete);
-		//plotBtn = (Button) findViewById(R.id.plotSensorBtn);
+		defaultXYZBtn = (Button) findViewById(R.id.bring_to_default_coors_btn);
 
 		save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
 		
@@ -84,12 +86,13 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		{
 			id.setText(sensor.getId().toString());
 			name.setText(sensor.getName());
-			type.setText(sensor.getType());
+			type.setText(Integer.toString(sensor.getType()));
 			brand.setText(sensor.getBrand());
 			notes.setText(sensor.getNotes());
 
 		}
-
+		
+		defaultXYZBtn.setOnClickListener(new DefaultXYZSensorBtnListener(sensorid));
 
 
 	}

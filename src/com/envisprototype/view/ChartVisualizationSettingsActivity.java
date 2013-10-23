@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
@@ -359,6 +360,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		ChartVisualizationSettingsListAdapter cvsla = new ChartVisualizationSettingsListAdapter(this,0,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs());
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 
 		sensorlist.setAdapter(cvsla);
 		

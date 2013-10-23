@@ -17,7 +17,7 @@ public abstract class AbstractSensor implements SensorInterface {
 	private Location location;
 	private boolean ifDefaultCoors = true;
 	private boolean iftoPlot; 
-	private float x,y,z;
+	private float x,y,z = -1;
 	
 	public AbstractSensor() {
 

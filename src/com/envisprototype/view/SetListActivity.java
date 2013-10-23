@@ -90,7 +90,11 @@ public class SetListActivity extends Activity {
 					while(iterator.hasNext()){
 						setToRemove = iterator.next();
 						if(MapSetAssociationDBHelper.getSingletoneInstance(this).isPlotted(setToRemove.getId())){
-							iterator.remove();
+							if(!setToRemove.getMapID().equals(mapId))
+								iterator.remove();
+							else{
+								setToRemove.setIftoPlot(true);
+							}
 						}
 					}
 				}

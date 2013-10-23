@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.processing.SetPlotPApplet;
@@ -23,6 +24,7 @@ public class PlotSetsBtnListener implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		ArrayList<String> listToPlot = new ArrayList<String>();
+		//listToPlot = MapSetAssociationDBHelper.getSingletoneInstance(v.getContext()).getListOfSensorsAssosiatedWithMap(mapId);
 		for(SetInterface setToPlot: SetListModel.getSingletonInstance().getSetList()){
 			if(setToPlot.isIftoPlot()){
 				listToPlot.add(setToPlot.getId());
@@ -31,6 +33,7 @@ public class PlotSetsBtnListener implements OnClickListener{
 		
 		// now we have all the setids to plot
 		Intent intent = new Intent(v.getContext(),SetPlotPApplet.class);
+		SetListModel.getSingletonInstance().getSetList();
 		intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
 		intent.putExtra(v.getContext().getString(R.string.flags),
 				v.getContext().getString(R.string.plot_flag_extra));

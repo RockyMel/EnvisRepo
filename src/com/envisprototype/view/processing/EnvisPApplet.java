@@ -83,7 +83,7 @@ public abstract class EnvisPApplet extends PApplet{
 					  if(extras.containsKey(getString(R.string.sets_id_extra))){
 						  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sets_id_extra));
 						  for(String setId: setIdFromAndroid){
-							  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
+							 // SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
 							  SensorSet setToShow = new SensorSet(this, setId);
 							  setToShow.setIfSensor(false);
 							  envisSensors.put(setId, setToShow);
@@ -91,11 +91,11 @@ public abstract class EnvisPApplet extends PApplet{
 					  }
 					  if(extras.containsKey(getString(R.string.sensor_id_extra))){
 						  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensor_id_extra));
-						  for(String setId: setIdFromAndroid){
-							  SensorInterface setFromModel =  SensorListModel.getSingletonInstance().findSensorById(setId);
-							  EnvisSensor sensorToShow = new EnvisSensor(this, setId);
+						  for(String sensorId: setIdFromAndroid){
+							  //SensorInterface setFromModel =  SensorListModel.getSingletonInstance().findSensorById(setId);
+							  EnvisSensor sensorToShow = new EnvisSensor(this, sensorId);
 							  sensorToShow.setIfSensor(true);
-							  envisSensors.put(setId, sensorToShow);
+							  envisSensors.put(sensorId, sensorToShow);
 						  }
 					  }
 				  }
@@ -103,13 +103,14 @@ public abstract class EnvisPApplet extends PApplet{
 			  if(extras.containsKey(getString(R.string.sensors_to_vis_extra))){
 				  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensors_to_vis_extra));
 				  for(String setId: setIdFromAndroid){
-					  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
+			//		  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
 					  SensorSet setToShow = new SensorSet(this, setId);
 					  envisSensors.put(setId, setToShow);
-					  Iterator<String> iterator = envisSensors.keySet().iterator();
-				    	if(iterator.hasNext()){
-				    		barGraphSetList.add(new BarGraphSet(this, "", iterator.next(), 1));
-				    	}
+//					  Iterator<String> iterator = envisSensors.keySet().iterator();
+//				    	if(iterator.hasNext()){
+//				    		barGraphSetList.add(new BarGraphSet(this, "", iterator.next(), 1));
+//				    	}
+					 // barGraphSetList.add(new BarGraphSet(this, "", setId, 1));
 				    		//barGraphSet = new BarGraphSet(this, "", iterator.next(), 1);
 				    	
 				  }
