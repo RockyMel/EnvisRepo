@@ -7,14 +7,16 @@ import com.envisprototype.view.processing.AbstractEnvisButton;
 import com.envisprototype.view.processing.EnvisButton;
 
 public abstract class AbstractEnvisButtonListener implements EnvisButtonListener, EnvisDragListener{
-	AbstractEnvisButton eButton;
+	protected AbstractEnvisButton eButton;
 	
 	public void handleEnvisClassEvent(EventObject e){
-		this.eButton = (EnvisButton) e.getSource();
+		if(this.eButton == null)
+			this.eButton = (EnvisButton) e.getSource();
 	}
 	
 	public void handleEnvisDragEvent(EventObject e){
-		this.eButton = (EnvisButton) e.getSource();
+		if(this.eButton == null)
+			this.eButton = (EnvisButton) e.getSource();
 	}
 	
 	public boolean ifHitTheButton(){

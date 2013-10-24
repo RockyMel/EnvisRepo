@@ -40,7 +40,6 @@ public class InputIDActivity extends EnvisActivity {
 		{
 			ModeId.setText("Set ID");
 			
-			
 		}
 		else
 		{

@@ -6,8 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.processing.dragListeners.BarGraphSetDragListener;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
+import com.envisprototype.controller.processing.eventListeners.RegenerateBarsBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.TopViewButtnoListener;
@@ -17,7 +19,8 @@ import com.envisprototype.model.set.SetListModel;
 
 public class ThreeDVis extends EnvisPApplet{
 	
-	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton; 
+	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton,
+	regenerateBarSetCoors; 
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 
@@ -40,6 +43,9 @@ public void setup(){
     topViewButton = new EnvisButton(this, "Top View");
     topViewButton.setPlace(DEF_BTN_X, 7*height/30);
     topViewButton.addEventListener(new TopViewButtnoListener());
+    regenerateBarSetCoors = new EnvisButton(this, "Regenerate");
+    regenerateBarSetCoors.setPlace(DEF_BTN_X, 11*height/30);
+    regenerateBarSetCoors.addEventListener(new RegenerateBarsBtnListener());
     RotateScopeListener.setIfTop(true);
     // need to get coordinates for the sensors
     {
@@ -74,7 +80,9 @@ public void setup(){
     if(extras.containsKey(getString(R.string.sensors_to_vis_extra))){
 		  setIdFromAndroid = extras.getStringArrayList(getString(R.string.sensors_to_vis_extra));
 		  for(String setId: setIdFromAndroid){
-			  barGraphSetList.add(new BarGraphSet(this, "", setId, 1));
+			  BarGraphSet barSetToAdd = new BarGraphSet(this, "", setId, 1);
+			  //barSetToAdd.addDragEventListener(new BarGraphSetDragListener(this));
+			  barGraphSetList.add(barSetToAdd);
 		  }
 	  }
     
@@ -90,6 +98,7 @@ public void draw(){
 	frontViewButton.drawMe();
 	leftSideViewButton.drawMe();
 	topViewButton.drawMe();
+	regenerateBarSetCoors.drawMe();
 	
 }
 
@@ -104,6 +113,7 @@ public void mouseReleased(){
 	frontViewButton.fireEvent();
 	leftSideViewButton.fireEvent();
 	topViewButton.fireEvent();
+	regenerateBarSetCoors.fireEvent();
 }
 
 public float medianValue(ArrayList<Float> list){

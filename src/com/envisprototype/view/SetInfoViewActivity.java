@@ -107,7 +107,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 						sensorIdsToPlot.add(sensor.getId());
 				}
 				plotSensors.setOnClickListener(new PlotSensorsBtnListener(sensorIdsToPlot, mapId));
-				unplotSet.setOnClickListener(new UnplotSetBtnListener(setid));
+				unplotSet.setOnClickListener(new UnplotSetBtnListener(setid, plotSensors));
 				// need to get ids for sensors belonging to this set that are to be plotted
 				
 				

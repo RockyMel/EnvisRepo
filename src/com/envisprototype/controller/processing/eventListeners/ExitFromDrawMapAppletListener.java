@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.processing.dragListeners.AbstractDrawMapListener;
 
 public class ExitFromDrawMapAppletListener extends AbstractDrawMapListener{
 	

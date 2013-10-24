@@ -48,7 +48,7 @@ public class RealTimeThreeDVis  implements Runnable{
 		
 		String response = "";
 
-		response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(sensorId, context);
+		response = SensorReadingDBHelper.getSensorReadingByRealTime(sensorId, context ,1);//getDataReadingBySensorIDJSON(sensorId, context);
 		Log.i("NETCONNECTION3", response);
 		return response;
 	}

@@ -2,6 +2,7 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 
+import processing.core.PApplet;
 import processing.core.PFont;
 import android.app.Activity;
 import android.os.Handler;
@@ -21,6 +22,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 	boolean selected = false;
 	boolean secondClick = false;
 	PFont font;
+	int timeRangeType;
 	
 	RealTimeThreeDVis realTimeUpdates;
 	public static Handler mHandler;
@@ -51,6 +53,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 	public BarGraphSet(EnvisPApplet epApplet, String name, String sensorID, int timeRangeType) {
 		super(epApplet, name);
 		p = epApplet;
+		this.timeRangeType = timeRangeType;
 		font = p.createFont("Arial",14,true);
 		midpoint_x = p.displayWidth/2;
 		midpoint_y = p.displayHeight/2;
@@ -67,7 +70,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 		}
 		
 		barGraphList = new ArrayList<BarGraph>();
-		graphCoords = new ArrayList<Coords>();
+		//graphCoords = new ArrayList<Coords>();
 		this.sensorID = sensorID;
 		
 		readingsList = new ArrayList<Float>();
@@ -78,8 +81,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 		/* timeRangeType == 1 is for real time */
 		if (timeRangeType == 1) {
 			barGraphList.add(new BarGraph(p, readingsList.get(0), SENSORTYPE_TEMP));
-			graphCoords.add(generateCoords(new Coords(p.getEnvisSensors().get(sensorID).getX(),
-					p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ())));
+			addGeneratedCoors();
 		}
 		
 		/* timeRangeType == 2 is for historical and requires an array of readings */
@@ -96,46 +98,61 @@ public class BarGraphSet extends AbstractEnvisButton {
 		
 	}
 	
+	public void addGeneratedCoors(){
+		graphCoords = new ArrayList<Coords>();
+		graphCoords.add(generateCoords(new Coords(p.getEnvisSensors().get(sensorID).getX(),
+				p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ())));
+	}
+	
 	public Coords generateCoords(Coords sensorCoords) {
-		
-		float tempx = 0;
-		float tempy = 0;
-		
-      /*generating and storing coordinate values*/
+		Coords newCoords = null;
+		float tempx;
+		float tempy;
+		float xTocheck, yTocheck;
+		int size;
+		boolean ifOverlaps;
+		do{
+			ifOverlaps = false;
+			tempx = 0;
+			tempy = 0;
+			
+	      /*generating and storing coordinate values*/
+			
+			tempx = sensorCoords.getX();
+			tempy = sensorCoords.getY();
+			Log.i("coords", tempx + " " + tempy);
+			tempx = (int)p.random(tempx-p.width/10, tempx+p.width/10);
+			tempy = (int)p.random(tempy-p.height/10, tempy+p.height/10);
+			
+			Log.i("coords", tempx + " " + tempy);
 		    
-//	    if (sensorCoords.x < midpoint_x)
-//	    {
-//	      tempx = (int)p.random(0, midpoint_x);
-//	      tempx = tempx - (sensorCoords.getX()/2);
-//	    }
-//	    else if (sensorCoords.x > midpoint_x)
-//	    {
-//	      tempx = (int)p.random(midpoint_x, p.displayWidth);
-//	      tempx = tempx - (sensorCoords.getX()/2);
-//	    }
-//		    
-//	    if (sensorCoords.getY() < midpoint_y)
-//	    {
-//	      tempy = (int)p.random(-p.displayHeight/4, 0);
-//	      tempy = tempy - (sensorCoords.getY()/2);
-//	    }
-//		    
-//	    else if (sensorCoords.getY() > midpoint_y)
-//	    {
-//	      tempy = (int)p.random(0, p.displayHeight/4);
-//	      tempy = tempy + (sensorCoords.getY()/2);
-//	    }
+		    newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/50);
+		    for(BarGraphSet setToCheck: p.getBarGraphSetList()){
+				
+			    size = p.getBarGraphSetList().size();
+			    if(size > 1 && setToCheck != this){
+			    	xTocheck = setToCheck.getBarGraphCoords(0).getX();
+			    	yTocheck = setToCheck.getBarGraphCoords(0).getY();
+			    	if(PApplet.abs(xTocheck-newCoords.getX())<=barGraphList.get(0).getWidth()
+				    		&& PApplet.abs(yTocheck-newCoords.getY())<=barGraphList.get(0).getWidth()){
+				    	ifOverlaps = true;
+				    }
+			    }
+		    }
+		    }while(ifOverlaps);
 		
-		tempx = sensorCoords.getX();
-		tempy = sensorCoords.getY();
-		Log.i("coords", tempx + " " + tempy);
-		tempx = (int)p.random(tempx, tempx+p.width/10);
-		tempy = (int)p.random(tempy, tempy+p.height/50);
 		
-		Log.i("coords", tempx + " " + tempy);
-	    
-	    Coords newCoords = new Coords((int)tempx, (int)tempy, p.getEnvisMap().getCOOR_Z()+p.height/50);
+		
 	    return newCoords;
+	}
+	
+	private void changeFirstCoord(int x, int y){
+		if (timeRangeType == 1) {
+			// real-time
+			
+			int z = (int) graphCoords.get(0).getZ();
+			graphCoords.get(0).setCoords(x, y, z);
+		}
 	}
 	
 	
@@ -167,6 +184,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 			p.textFont(font);
 			p.text(sensorID, 0,	0,barGraphList.get(j).getHeight());
 			//barGraphList.get(j).setReading(readingsList.get(0));
+			//hover(j);
 			barGraphList.get(j).setReading(readingsList.get(0));
 			barGraphList.get(j).display();
 			p.popMatrix();
@@ -175,8 +193,67 @@ public class BarGraphSet extends AbstractEnvisButton {
 
 		}
 	}
+	
+	public ArrayList<Coords> getGraphCoords() {
+		return graphCoords;
+	}
 
+	public void setGraphCoords(ArrayList<Coords> graphCoords) {
+		this.graphCoords = graphCoords;
+	}
 
+	@Override
+	public void setPlace(int defX, int defY) {
+		// TODO Auto-generated method stub
+		super.setPlace(defX, defY);
+		changeFirstCoord(defX, defY);
+		
+	}
+	
+//	public boolean hover(int i) {
+//	float tempx = graphCoords.get(i).getX() + (p.displayWidth/2);
+//	float tempy = graphCoords.get(i).getY() + (p.displayHeight/2);
+//	
+//
+//    p.text(tempx + "-" + tempy, 300, 300, 0);
+//	
+//	/* mouse hovers over a bar graph */ 
+//		if ((tempx - p.mouseX < 300) && (tempx - p.mouseX > -300) && 
+//				  (tempy - p.mouseY < 300) && 
+//				  (tempy - p.mouseY > -300)) {
+//	        hover = true; 
+//	        barGraphList.get(i).setHover(hover);
+//	        barGraphList.get(i).setSelected(true);
+//	        
+////	        if (p.mousePressed) {
+////	        	selected = true;
+////	        	barGraphList.get(i).setSelected(selected);
+////	          
+////	        }
+//	        
+//	      } 
+//	    
+//	    else {
+//	      hover = false;
+//	      barGraphList.get(i).setHover(hover);
+//	      
+////	      /* click on new location for bar graph */
+////	      if (p.mousePressed) {
+////
+////		        if (barGraphList.get(i).isSelected()) {
+////		        	float newPos_x = p.mouseX - ((p.displayWidth/2) + p.getEnvisSensors().get(sensorID).getX());
+////		        	float newPos_y = p.mouseY - ((p.displayHeight/2) + p.getEnvisSensors().get(sensorID).getY());
+////		        	
+////		        	graphCoords.get(i).setCoords((int)newPos_x, (int)newPos_y, 0);
+////		        	
+////		        	selected = false;
+////		        	barGraphList.get(i).setSelected(selected);
+////		        }
+////	      }
+//		    }
+//		return hover;
+//	
+//	}
 
 	@Override
 	public void rotate(float xRotate, float yRotate, float zRotate) {

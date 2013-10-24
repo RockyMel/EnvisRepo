@@ -166,6 +166,7 @@ public void threeDDrawPreset(boolean ifWithSensors){
 		}		
 		for(BarGraphSet barToShow: barGraphSetList){
 			barToShow.drawMe();
+			//barToShow.fireDragEvent();
 		}
 	}
 	popMatrix();
@@ -208,6 +209,14 @@ public void threeDDrawPreset(boolean ifWithSensors){
 	
 	public ArrayList<String> getSetIdFromAndroid(){
 		return setIdFromAndroid;
+	}
+	
+	public ArrayList<BarGraphSet> getBarGraphSetList() {
+		return barGraphSetList;
+	}
+
+	public void setBarGraphSetList(ArrayList<BarGraphSet> barGraphSetList) {
+		this.barGraphSetList = barGraphSetList;
 	}
 	
 

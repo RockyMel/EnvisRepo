@@ -111,6 +111,8 @@ public class SetListActivity extends Activity {
 		// 2. associate plotted sets with the map
 		Button plotSetsBtn = (Button) findViewById(R.id.plot_sets_btn);
 		plotSetsBtn.setOnClickListener(new PlotSetsBtnListener(mapId));
+		if(mapId == null)
+			plotSetsBtn.setVisibility(Button.INVISIBLE);
 		//CoordinatesReader setCoorReader = new CoordinatesReader(this);
 		//HashMap<String, SetCoordinates> tempSetCoors = setCoorReader.prepareSensorsCoordinates("sensor.txt");
 		//Iterator<String> iterator = tempSetCoors.keySet().iterator();

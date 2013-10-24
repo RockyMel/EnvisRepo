@@ -81,6 +81,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		{
 			id.setText(sensorid);
 			delete.setVisibility(Button.INVISIBLE);
+			defaultXYZBtn.setVisibility(Button.INVISIBLE);
 		}
 		else
 		{

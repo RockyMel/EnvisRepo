@@ -4,10 +4,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.processing.dragListeners.DrawFreePolygonBtnListener;
+import com.envisprototype.controller.processing.dragListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.dragListeners.DrawingScopeListener;
 import com.envisprototype.controller.processing.eventListeners.AddToDrawingScopeListener;
-import com.envisprototype.controller.processing.eventListeners.DrawFreePolygonBtnListener;
-import com.envisprototype.controller.processing.eventListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.DrawRectMapBtnListener;
 import com.envisprototype.controller.processing.eventListeners.ExitFromDrawMapAppletListener;
 import com.envisprototype.controller.processing.eventListeners.RemoveLastNodeBtnListener;

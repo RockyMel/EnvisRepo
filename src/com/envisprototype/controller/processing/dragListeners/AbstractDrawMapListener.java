@@ -1,7 +1,8 @@
-package com.envisprototype.controller.processing.eventListeners;
+package com.envisprototype.controller.processing.dragListeners;
 
 import java.util.EventObject;
 
+import com.envisprototype.controller.processing.eventListeners.AbstractEnvisButtonListener;
 import com.envisprototype.view.processing.DrawMapApplet;
 
 public abstract class AbstractDrawMapListener extends AbstractEnvisButtonListener{

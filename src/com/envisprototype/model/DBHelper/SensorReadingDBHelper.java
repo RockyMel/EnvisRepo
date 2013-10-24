@@ -123,5 +123,47 @@ public class SensorReadingDBHelper {
 		}
 		return false;
 	}
+	public static String getSensorReadingByRealTime(String sensorId, Context context ,int dataType) {
+		Log.i("idddddd", sensorId);
+		String methodName = "getSensorReadingByRealTime";
+		String soapAction = nameSpace + "/" + methodName;
+
+		//Boolean response;
+
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+	
+		rpc.addProperty("sensorID", sensorId);
+		rpc.addProperty("dataType", 1);
+
+
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);
+		String temp = null;
+		if(isConnectingToInternet(context))
+		{
+			HttpTransportSE transport = new HttpTransportSE(endPoint); 
+			SoapPrimitive resultsRequestSOAP = null;
+			try {
+				transport.call(soapAction, envelope);
+				resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+				temp = resultsRequestSOAP.toString();
+				System.out.println(resultsRequestSOAP.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (XmlPullParserException e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			temp = "Not";
+			Log.i("NETCONNECTION1", "NO");
+			Log.i("NETCONNECTION2", temp);
+			
+		}
+		Log.i("DBHELPER", "done");
+		return temp;
+	}
 
 }

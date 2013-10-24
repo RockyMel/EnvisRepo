@@ -96,11 +96,11 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		QRButton = (Button)findViewById(R.id.QR);
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
 		sensorlist = (ListView)findViewById(R.id.chosensensorslist);
-		if(if3DVis == false)
-			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
-		else{
-			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
-		}
+//		if(if3DVis == false)
+//			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+//		else{
+//			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+//		}
 		final Context context = this;
 		
 SetsButton.setOnClickListener(new OnClickListener() {
@@ -147,14 +147,25 @@ SetsButton.setOnClickListener(new OnClickListener() {
 					TimeFromPickerButton.setVisibility(Button.INVISIBLE);
 					TimeToPickerButton.setVisibility(Button.INVISIBLE);
 					MODE = 1;
-					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+					if(if3DVis == false)
+						// for real time now !!!!
+						VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+					else{
+						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+					}
+					//VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
 				} else {
 					DateFromPickerButton.setVisibility(Button.VISIBLE);
 					DateToPickerButton.setVisibility(Button.VISIBLE);
 					TimeFromPickerButton.setVisibility(Button.VISIBLE);
 					TimeToPickerButton.setVisibility(Button.VISIBLE);
 					MODE = 0;
-					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					if(if3DVis == false)
+						VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					else{
+						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+					}
+					//VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
 				}
 
 			}

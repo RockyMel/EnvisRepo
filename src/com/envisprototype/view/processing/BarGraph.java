@@ -128,7 +128,7 @@ public class BarGraph {
 	      p.vertex(0, z, h);
 	      p.endShape(PConstants.CLOSE);
 	      
-	      /* back face */
+	      /* back face (top face here) */
 	      p.beginShape();
 	      p.vertex(0, z, h);
 	      p.vertex(0, 0, h);
@@ -157,6 +157,10 @@ public class BarGraph {
 	}
 	
 	public int getWidth() {
+		return z;
+	}
+	
+	public int getLength() {
 		return z;
 	}
 	
