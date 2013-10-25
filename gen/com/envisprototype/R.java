@@ -248,13 +248,13 @@ public final class R {
         public static final int remove_last_node=0x7f05002d;
         public static final int remove_sets=0x7f050034;
         public static final int request_code=0x7f050018;
-        public static final int save_sets=0x7f050032;
+        public static final int save=0x7f050032;
+        public static final int saved=0x7f050033;
         public static final int sensor_id_extra=0x7f050010;
         public static final int sensors_to_vis_extra=0x7f050013;
         public static final int set_coor_extra=0x7f050011;
         public static final int set_higlt_lbl=0x7f05000b;
         public static final int sets_id_extra=0x7f050014;
-        public static final int sets_saved=0x7f050033;
         public static final int sets_to_vis_extra=0x7f050012;
         public static final int sort_prompt=0x7f05000d;
         public static final int stop_add_set=0x7f050037;

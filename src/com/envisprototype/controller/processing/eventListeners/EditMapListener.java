@@ -40,12 +40,14 @@ public class EditMapListener implements EnvisButtonListener{
 				Log.i("edit", "Node to remove id: " + nodeToModify);
 				if(nodeToModify != -1){
 					envisMap.removeNode(nodeToModify);
+					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
 					//ifDelete = false;
 					}
 			}
 			if(ifDrag){
 				if(nodeToModify != -1){
 					envisMap.dragNode(nodeToModify);
+					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
 					//ifDrag = false;
 					}
 			}
@@ -73,6 +75,7 @@ public class EditMapListener implements EnvisButtonListener{
 					envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node));
 					isAdding = false;
 					envisMap.setHighlightedNode(-1);
+					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
 				}
 					
 //				  }

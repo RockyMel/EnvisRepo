@@ -9,6 +9,7 @@ import com.envisprototype.R;
 import com.envisprototype.controller.processing.dragListeners.BarGraphSetDragListener;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
+import com.envisprototype.controller.processing.eventListeners.PerspectiveSideBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RegenerateBarsBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
@@ -20,7 +21,7 @@ import com.envisprototype.model.set.SetListModel;
 public class ThreeDVis extends EnvisPApplet{
 	
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton,
-	regenerateBarSetCoors; 
+	prospectiveSideButton, regenerateBarSetCoors; 
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 
@@ -44,8 +45,11 @@ public void setup(){
     topViewButton.setPlace(DEF_BTN_X, 7*height/30);
     topViewButton.addEventListener(new TopViewButtnoListener());
     regenerateBarSetCoors = new EnvisButton(this, "Regenerate");
-    regenerateBarSetCoors.setPlace(DEF_BTN_X, 11*height/30);
+    regenerateBarSetCoors.setPlace(DEF_BTN_X, 13*height/30);
     regenerateBarSetCoors.addEventListener(new RegenerateBarsBtnListener());
+    prospectiveSideButton = new EnvisButton(this, "Perspective");
+    prospectiveSideButton.setPlace(DEF_BTN_X, 9*height/30);
+    prospectiveSideButton.addEventListener(new PerspectiveSideBtnListener());
     RotateScopeListener.setIfTop(true);
     // need to get coordinates for the sensors
     {
@@ -99,6 +103,7 @@ public void draw(){
 	leftSideViewButton.drawMe();
 	topViewButton.drawMe();
 	regenerateBarSetCoors.drawMe();
+	prospectiveSideButton.drawMe();
 	
 }
 
@@ -114,6 +119,7 @@ public void mouseReleased(){
 	leftSideViewButton.fireEvent();
 	topViewButton.fireEvent();
 	regenerateBarSetCoors.fireEvent();
+	prospectiveSideButton.fireEvent();
 }
 
 public float medianValue(ArrayList<Float> list){

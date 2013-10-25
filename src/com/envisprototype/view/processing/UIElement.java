@@ -19,8 +19,8 @@ public abstract class UIElement {
 	public void setName(String name) {
 		this.name = name;
 	}
-	float[] color = {123,123,123};
-	final int R = 0, G = 1, B = 2;
+	public static float[] color = {123,123,123};
+	public static final int R = 0, G = 1, B = 2;
 	private List _listeners = new ArrayList();
 	private List _drag_listeners = new ArrayList();
 	

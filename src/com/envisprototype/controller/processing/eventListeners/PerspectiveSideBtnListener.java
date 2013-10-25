@@ -2,21 +2,22 @@ package com.envisprototype.controller.processing.eventListeners;
 
 import java.util.EventObject;
 
-public class FrontViewButtonListener extends AbstractEnvisButtonListener{
+public class PerspectiveSideBtnListener extends AbstractEnvisButtonListener{
+	
 	@Override
 	public void handleEnvisClassEvent(EventObject e) {
 		// TODO Auto-generated method stub
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
 			if(RotateScopeListener.isIfFront()){
-				RotateScopeListener.setIfFront(false);
+				RotateScopeListener.setIfPerspective(false);
 			}
 			else{
-				RotateScopeListener.setIfFront(true);
+				RotateScopeListener.setIfPerspective(true);
 				//RotateScopeListener.setIfRotate(false);
 				RotateScopeListener.setIfLeftSide(false);
 				RotateScopeListener.setIfTop(false);
-				RotateScopeListener.setIfPerspective(false);
+				RotateScopeListener.setIfFront(false);
 			}
 		}
 	}

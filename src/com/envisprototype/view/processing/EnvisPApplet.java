@@ -58,8 +58,8 @@ public abstract class EnvisPApplet extends PApplet{
 		  currentClick = new PositionDisplay(this, "");
 		  currentClick.setPlace(width/15, height/30);
 		  rotateScope = new EnvisButton(this, "");
-		  rotateScope.setPlace(width/40, height-3*height/50);
-		  rotateScope.setSize(width-width/10, 2*height/50);
+		  rotateScope.setPlace(width/40, height-4*height/50);
+		  rotateScope.setSize(width-width/10, 3*height/50);
 		  rotateScope.addEventListener(new RotateScopeListener());
 		  envisMap = new Map(this);
 		  barGraphSetList = new ArrayList<BarGraphSet>();

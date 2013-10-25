@@ -79,8 +79,8 @@
     <string name="add_node_step_one">Tap node</string>
     <string name="add_node_step_two">Tap on map</string>
     <string name="add_node_step_three">Press to add</string>
-    <string name="save_sets">Save</string>
-    <string name="sets_saved">Saved</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
     <string name="remove_sets">Remove set</string>
     <string name="stop_remove_sets">Stop removing</string>
     <string name="add_set">Add set</string>

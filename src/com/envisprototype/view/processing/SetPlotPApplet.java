@@ -6,10 +6,10 @@ import java.util.List;
 
 import android.util.Log;
 
+import com.envisprototype.controller.processing.dragListeners.ZCoorBtnListener;
 import com.envisprototype.controller.processing.eventListeners.IdBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveSetBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SensitiveListener;
-import com.envisprototype.controller.processing.eventListeners.zCoorBtnListener;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -38,7 +38,7 @@ public void setup(){
 	int zCoorY = (currentClick.getDefY() + currentClick.getDefH()/2)-width/60; 
 	zCoorSpinner.setSize(width/30, width/30);
 	zCoorSpinner.setPlace(currentClick.getDefW()+currentClick.getDefX()+width/50,zCoorY);
-	zCoorSpinner.addDragEventListener(new zCoorBtnListener());
+	zCoorSpinner.addDragEventListener(new ZCoorBtnListener());
 	setIterator = envisSensors.keySet().iterator();
 	while(setIterator.hasNext()){
 		envisSensors.get(setIterator.next()).translateSensorsForMap(envisMap);

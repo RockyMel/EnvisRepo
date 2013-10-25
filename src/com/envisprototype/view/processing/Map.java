@@ -17,8 +17,8 @@ public class Map extends UIElement{
 	
 	private int highlightedNode = -1;
 	
-//	private final static int COOR_Z_TOP = 50;
-//	final static int COOR_Z_BOTTOM = -50;
+	public final static int COOR_Z_TOP = 250;
+	public final static int COOR_Z_BOTTOM = 50;
 	private int COOR_Z = 100;
 	final static float MIDDLE_COEFF = 1f;
 	public final static int indexX = 0;
@@ -139,6 +139,8 @@ public class Map extends UIElement{
 	
 	public void drawRectWhileDragging(){
 		if(realCoors.getCoorX().size()>0){
+			epApplet.pushMatrix();
+			epApplet.noFill();
 			float defX = realCoors.getCoorX().get(0);
 			float defY =  realCoors.getCoorY().get(0);
 			int defW = (int) (epApplet.mouseX-realCoors.getCoorX().get(0));
@@ -149,11 +151,13 @@ public class Map extends UIElement{
 			epApplet.text(defW,defX+defW/2,defY);
 			epApplet.text(defH,defX,defY+defH/2);
 			epApplet.popMatrix();
+			epApplet.popMatrix();
 		}
 	}
 	
 	public void drawLineWithDimsWhileDragging(){
 		if(realCoors.getCoorX().size()>0){
+			epApplet.pushMatrix();
 			float startX = realCoors.getCoorX().get(realCoors.getCoorX().size()-1);
 			float startY =  realCoors.getCoorY().get(realCoors.getCoorY().size()-1);
 			int endX = (int) (epApplet.mouseX);
@@ -169,6 +173,7 @@ public class Map extends UIElement{
 			epApplet.textSize(epApplet.height/40);
 			epApplet.line(startX, startY, endX, endY);
 			epApplet.text(lineSize, (startX+endX)/2,epApplet.height/20+(startY+endY)/2);
+			epApplet.popMatrix();
 			epApplet.popMatrix();
 		}
 	}

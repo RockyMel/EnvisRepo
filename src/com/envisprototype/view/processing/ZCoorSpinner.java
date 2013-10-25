@@ -77,5 +77,11 @@ public class ZCoorSpinner extends EnvisButton{
 		return zVal;
 	}
 	
+	public void adjustZ(Map map){
+		float percentage = (epApplet.mouseX-xLine)/(maxX-xLine);
+		float zVal = percentage*(Map.COOR_Z_TOP - Map.COOR_Z_BOTTOM);
+		map.setCOOR_Z((int)zVal);
+	}
+	
 
 }

@@ -17,12 +17,12 @@ public class SaveSetBtnListener extends AbstractPlotBtnListener{
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
 			if(spApplet.isIfAddingSets()){
-				eButton.setName(eButton.getEpApplet().getString(R.string.save_sets));
+				eButton.setName(eButton.getEpApplet().getString(R.string.save));
 				spApplet.getRotateScope().setDefW(spApplet.getMAX_WIDTH()-spApplet.getRotateScope().getDefX());
 				spApplet.setIfAddingSets(false);
 			}
 			else{
-				eButton.setName(eButton.getEpApplet().getString(R.string.sets_saved));
+				eButton.setName(eButton.getEpApplet().getString(R.string.saved));
 			}
 		//	Coordinates coorsToSave = spApplet.getEnvisMap().getRealCoors();
 //			MapLocalDBHelper.getSingletonInstance(spApplet).

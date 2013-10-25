@@ -12,8 +12,8 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 	EnvisPApplet mainApplet = null;
 	float xmag, ymag, zmag = 0;
 	public static int X_ROT = 0, Y_ROT = 1, Z_ROT = 2;
-	private static boolean ifRotate = true,
-			ifFront = false, ifLeftSide = false, ifTop = false;
+	private static boolean ifFront = false, ifLeftSide = false, ifTop = false,
+			ifPerspective = true;
 	float xRotate, yRotate, zRotate;
 
 	@Override
@@ -31,6 +31,9 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 					xRotate = rotationVals[Z_ROT];
 				if(ifTop)
 					zRotate = rotationVals[Z_ROT];
+				if(ifPerspective){
+					zRotate = rotationVals[Z_ROT];
+				}
 //				xRotate = rotationVals[X_ROT];
 //				yRotate = rotationVals[Y_ROT];
 //				zRotate = rotationVals[Z_ROT];
@@ -39,24 +42,30 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 		else{
 			//if(!ifRotate){
 				if(ifFront){
-					Log.i("rotate","front");
+					//Log.i("rotate","front");
 					xRotate = PConstants.PI/2;
 					yRotate = 0;
 					zRotate = 0;
 				}
 				if(ifLeftSide){
-					Log.i("rotate","left");
+					//Log.i("rotate","left");
 					xRotate = PConstants.PI/2;
 					yRotate = 0;
 					zRotate = 3*PConstants.PI/2;
 					}
 				if(ifTop){
-					Log.i("rotate","top");
+					//Log.i("rotate","top");
 					xRotate = 0;
 					yRotate = 0;
 					zRotate = 0;
-			//	}
-			}
+				}
+				if(ifPerspective){
+					//Log.i("rotate","left");
+					xRotate = PConstants.PI/4;
+					yRotate = 0;
+					zRotate = 3*PConstants.PI/4;
+					}
+			//}
 		}
 		mainApplet.getEnvisMap().rotate(xRotate, yRotate, zRotate);
 //		for(int i = 0; i < mainApplet.getEnvisSensors().size(); i++){
@@ -82,14 +91,6 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 		  float[] rotationVals = {xmag, ymag, zmag};
 		  return rotationVals;
 	}
-	
-	public static boolean isIfRotate() {
-		return ifRotate;
-	}
-
-	public static void setIfRotate(boolean ifRotate) {
-		RotateScopeListener.ifRotate = ifRotate;
-	}
 
 	public static boolean isIfFront() {
 		return ifFront;
@@ -113,6 +114,14 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 
 	public static void setIfTop(boolean ifTop) {
 		RotateScopeListener.ifTop = ifTop;
+	}
+
+	public static boolean isIfPerspective() {
+		return ifPerspective;
+	}
+
+	public static void setIfPerspective(boolean ifPerspective) {
+		RotateScopeListener.ifPerspective = ifPerspective;
 	}
 	
 	

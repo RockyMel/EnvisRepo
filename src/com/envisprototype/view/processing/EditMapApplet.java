@@ -35,7 +35,7 @@ public void setup(){
 	envisMap.addEventListener(new EditMapListener(this));
 	saveMap = new EnvisButton(this, "Save map");
 	saveMap.setPlace(DEF_BTN_X, height-height/20);
-	saveMap.addEventListener(new SaveMapBtnListener(this, "map.txt"));
+	saveMap.addEventListener(new SaveMapBtnListener());
 	envisMap.setIfCentered(true);
 	
 }
@@ -78,6 +78,14 @@ public EnvisButton getDeleteNodeBtn() {
 
 public EnvisButton getMoveNodeBtn() {
 	return dragNodeBtn;
+}
+
+public EnvisButton getSaveMap() {
+	return saveMap;
+}
+
+public void setSaveMap(EnvisButton saveMap) {
+	this.saveMap = saveMap;
 }
 
 

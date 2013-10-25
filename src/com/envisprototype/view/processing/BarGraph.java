@@ -68,7 +68,7 @@ public class BarGraph {
 	public void display() {
 		
 		
-		
+		p.pushMatrix();
 		/* displaying the sensor reading */
 	    p.pushMatrix();
 	    p.textFont(f);
@@ -144,7 +144,9 @@ public class BarGraph {
 	      p.vertex(x, z, 0);
 	      p.endShape(PConstants.CLOSE);
 	      
-	      p.stroke(255);
+	      //p.stroke(255);
+	      p.stroke(UIElement.color[UIElement.R],UIElement.color[UIElement.R],UIElement.color[UIElement.R]);
+	      p.popMatrix();
 	      p.popMatrix();
 	}
 	
