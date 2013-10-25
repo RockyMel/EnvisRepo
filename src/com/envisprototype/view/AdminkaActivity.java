@@ -41,7 +41,7 @@ public class AdminkaActivity extends EnvisActivity {
 		listDataChild = new HashMap<String, List<String>>();
 
 		// Adding child data
-		listDataHeader.add("Sensors");
+		listDataHeader.add("Sets");
 		listDataHeader.add("Maps");
 
 		// Adding child data

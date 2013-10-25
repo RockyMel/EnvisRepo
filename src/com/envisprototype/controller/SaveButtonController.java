@@ -74,10 +74,17 @@ public class SaveButtonController implements OnClickListener {
 		SetInterface set=SetListModel.getSingletonInstance().findSetById(setid);
 
 		myloc=set.getLocation();
+		Location location=new Location(LocationManager.NETWORK_PROVIDER);
+		location.setLatitude(myloc.getLatitude());
+		location.setLongitude(myloc.getLongitude());
+		
+		Log.i("sadadsf1", myloc.getLatitude()+" "+myloc.getLongitude());
+		Log.i("sadadsf2", location.getLatitude()+" "+location.getLongitude());
+
 		final SensorInterface sensor = new SensorModel();
 		sensor.setId(id.getText().toString());
 		sensor.setName(name.getText().toString());
-		sensor.setLocation(myloc);
+		sensor.setLocation(location);
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
 		Log.i("wqertytuyio", setid);
@@ -104,7 +111,8 @@ public class SaveButtonController implements OnClickListener {
 		else
 		{
 			SensorListModel.getSingletonInstance().addSensor(sensor);
-
+		
+			Log.i("jdsha.f", SensorListModel.getSingletonInstance().findSensorById(id.getText().toString()).getLocation()+"");
 			
 			Thread thread = new Thread()
 			{
@@ -112,8 +120,8 @@ public class SaveButtonController implements OnClickListener {
 				public void run() {
 					System.out.println("asdsaD" + sensor.getBrand());
 					SensorLocalDBHelper.getSingletonInstance(context).addSensor(sensor);
-					// add sensor set association
 					SetSensorAssociationLocalDBHelper.getSingletonInstance(context).associateSensorWithSet(id.getText().toString(), setid);
+					SensorInfoDBHelper.addSensor(sensor);
 				}
 			};
 			thread.start();

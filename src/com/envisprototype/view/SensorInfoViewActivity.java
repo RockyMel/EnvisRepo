@@ -37,7 +37,8 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		//sensorid = getIntent().getStringExtra("sensorid");
 		setid= getIntent().getStringExtra("setid");
 		flag=getIntent().getStringExtra("flag");
-		typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
+		if(flag.equals("new"))
+			typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
 		init();
 	}
 

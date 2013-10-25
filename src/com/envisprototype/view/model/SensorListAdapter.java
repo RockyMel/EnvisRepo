@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.envisprototype.R;
 import com.envisprototype.controller.SensorViewButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.set.SetListModel;
 
 
 public class SensorListAdapter extends ArrayAdapter<SensorInterface> {
@@ -37,6 +38,9 @@ public class SensorListAdapter extends ArrayAdapter<SensorInterface> {
 		SensorInterface sensor = getItem(position);
 		TextView sensorname =(TextView) inflatedView.findViewById(R.id.sensorname);
 		sensorname.setText(sensor.getName());
+		Log.i("chkthisout1", sensor.getName()+"");
+		
+		Log.i("chkthisout2", sensor.getLocation()+"");
 		GPSTracker gps = new GPSTracker(context);
 		double latitude = 0;
 		double longitude = 0;
@@ -56,8 +60,9 @@ public class SensorListAdapter extends ArrayAdapter<SensorInterface> {
 	        }
 		
 		TextView distance =(TextView) inflatedView.findViewById(R.id.distance);
-		Log.i("teststst", sensor.getLocation().getLongitude()+"");
-		double caldist = this.distFrom(latitude,longitude,sensor.getLocation().getLatitude(),sensor.getLocation().getLongitude());
+		//Log.i("teststst", sensor.getLocation().getLongitude()+"");
+		//double caldist = this.distFrom(latitude,longitude,sensor.getLocation().getLatitude(),sensor.getLocation().getLongitude());
+		double caldist = this.distFrom(latitude, longitude, SetListModel.getSingletonInstance().findSetById(sensor.getSetid()).getLocation().getLatitude(), SetListModel.getSingletonInstance().findSetById(sensor.getSetid()).getLocation().getLatitude());
 		String caldiststr = String.valueOf(caldist);
 		distance.setText(caldiststr);
 		

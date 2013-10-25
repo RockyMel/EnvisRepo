@@ -1,11 +1,12 @@
 package com.envisprototype.controller;
 
-import com.envisprototype.view.SensorInfoViewActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.envisprototype.view.NewSensorInfoViewActivity;
 
 
 public class SensorViewButtonController implements OnClickListener {
@@ -23,7 +24,7 @@ public class SensorViewButtonController implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 
-		Intent intent=new Intent(view.getContext(),SensorInfoViewActivity.class);
+		Intent intent=new Intent(view.getContext(),NewSensorInfoViewActivity.class);
 		intent.putExtra("sensorid",id);
 		intent.putExtra("flag", "exist");
 		Log.i("Yahaan Par 2", setid);

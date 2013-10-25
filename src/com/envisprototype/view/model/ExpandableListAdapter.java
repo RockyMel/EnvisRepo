@@ -33,7 +33,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		this.context = context;
 		this.listDataHeader = listDataHeader; // storing names for sensor types
 		this.listDataChild = listDataChild; // storing names for particular
-											// sensors
+		// sensors
 		checkIfChildNull();
 	}
 

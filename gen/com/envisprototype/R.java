@@ -221,12 +221,15 @@ containing a value of this type.
         public static final int plus_bullet=0x7f020031;
         public static final int save=0x7f020032;
         public static final int savebutton=0x7f020033;
-        public static final int setimage=0x7f020034;
-        public static final int settings=0x7f020035;
-        public static final int temp=0x7f020036;
-        public static final int temp_icon=0x7f020037;
-        public static final int three_d_vis=0x7f020038;
-        public static final int waterlevel=0x7f020039;
+        public static final int set=0x7f020034;
+        public static final int setimage=0x7f020035;
+        public static final int settings=0x7f020036;
+        public static final int temp=0x7f020037;
+        public static final int temp_icon=0x7f020038;
+        public static final int three_d_vis=0x7f020039;
+        public static final int waterlevel=0x7f02003a;
+        public static final int yellow=0x7f02003b;
+        public static final int yellow_rectangle=0x7f02003c;
     }
     public static final class id {
         public static final int ADD=0x7f050048;

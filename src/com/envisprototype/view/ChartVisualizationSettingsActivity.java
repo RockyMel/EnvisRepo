@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.NewShowChartVisualizationButtonController;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
@@ -153,7 +154,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 					TimeFromPickerButton.setVisibility(Button.VISIBLE);
 					TimeToPickerButton.setVisibility(Button.VISIBLE);
 					MODE = 0;
-					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
 				}
 
 			}

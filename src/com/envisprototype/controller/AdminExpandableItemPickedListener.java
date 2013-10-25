@@ -11,7 +11,7 @@ import com.envisprototype.view.AddMapActivity;
 import com.envisprototype.view.ChooseMapActivity;
 import com.envisprototype.view.MapInfoViewActivity;
 import com.envisprototype.view.NewSetInfoViewActivity;
-import com.envisprototype.view.SensorListActivity;
+import com.envisprototype.view.SetListActivity;
 
 public class AdminExpandableItemPickedListener implements OnClickListener{
 	String tag;
@@ -47,7 +47,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 			
 		}
 		if(tag.equals(menuOptions[1])){
-			intent = new Intent(adminkaActivity, SensorListActivity.class);
+			intent = new Intent(adminkaActivity, SetListActivity.class);
 		}
 		if(tag.equals(menuOptions[2])){
 			//intent = new Intent(adminkaActivity, SetListActivity.class);

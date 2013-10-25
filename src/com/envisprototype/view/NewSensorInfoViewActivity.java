@@ -34,12 +34,12 @@ public class NewSensorInfoViewActivity extends Activity{
 	private EditText brand;
 	private EditText name;
 	private EditText notes;
-	
+
 	private ImageView typeImage;
-	
+
 	private ImageButton delete;
 	private ImageButton save;
-	
+
 	private GoogleMap map;
 
 	private LatLng LOCATION_SENSOR;
@@ -52,7 +52,7 @@ public class NewSensorInfoViewActivity extends Activity{
 	String flag;
 	String setid;
 	int typercvd;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,7 +60,10 @@ public class NewSensorInfoViewActivity extends Activity{
 		setid= getIntent().getStringExtra("setid");
 		Log.i("nsiva", setid);
 		flag=getIntent().getStringExtra("flag");
-		typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
+		if(flag.equals("new"))
+			typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
+		else
+			sensorid= getIntent().getStringExtra("sensorid");
 		init();
 	}
 
@@ -77,10 +80,10 @@ public class NewSensorInfoViewActivity extends Activity{
 		typeImage = (ImageView)findViewById(R.id.TypeImage);
 		sensortype = (TextView)findViewById(R.id.SensorTypeInfo);
 		SetInterface set=SetListModel.getSingletonInstance().findSetById(setid);
-		
+
 		Double lat = (Double)set.getLocation().getLatitude();
 		Double lng = (Double)set.getLocation().getLongitude();
-		
+
 		LOCATION_SENSOR = new LatLng(lat,lng);
 		map  = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		map.addMarker(new MarkerOptions().position(LOCATION_SENSOR).title("Your New Sensor").icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
@@ -90,7 +93,7 @@ public class NewSensorInfoViewActivity extends Activity{
 		map.animateCamera(update);
 		update = CameraUpdateFactory.newLatLngZoom(LOCATION_SENSOR, 14);
 		map.animateCamera(update);
-		
+
 		if(typercvd == 1){
 			typeImage.setImageResource(R.drawable.airquality);
 			sensortype.setText("New Air Quality Sensor");
@@ -120,19 +123,19 @@ public class NewSensorInfoViewActivity extends Activity{
 			typeImage.setImageResource(R.drawable.others);
 			sensortype.setText("New Sensor");
 		}
-			
-		
+
+
 		save = (ImageButton)findViewById(R.id.Save);
 		delete = (ImageButton)findViewById(R.id.Delete);
 
 		save.setOnClickListener(new SaveButtonController(flag,id,name,brand,notes,delete,setid,this));
-		
+
 		if(flag.equals("new"))
 			sensor=new SensorModel();
 		else
 			sensor = SensorListModel.getSingletonInstance().findSensorById(sensorid);
-		
-			
+
+
 		delete = (ImageButton)findViewById(R.id.Delete);
 		delete.setOnClickListener(new DeleteSensorButtonController(sensorid,setid,this));
 
@@ -141,12 +144,12 @@ public class NewSensorInfoViewActivity extends Activity{
 		{
 			id.setText("S1ZZZ");
 			sensor.setSetid(setid);
-		//	type.setText(typercvd+"");
+			//	type.setText(typercvd+"");
 			delete.setVisibility(ImageButton.INVISIBLE);
 		}
 		else
 		{
-			//id.setText(sensor.getId().toString());
+			id.setText(sensor.getId().toString());
 			name.setText(sensor.getName());
 			//type.setText(sensor.getType());
 			brand.setText(sensor.getBrand());
@@ -163,7 +166,7 @@ public class NewSensorInfoViewActivity extends Activity{
 		// TODO Auto-generated method stub
 
 		super.onPause();
-/*
+		/*
 		Location myloc=  new Location(LocationManager.NETWORK_PROVIDER);
 		if(flag.equals("new"))
 		{
@@ -197,7 +200,7 @@ public class NewSensorInfoViewActivity extends Activity{
 			sensor.setNotes(notes.getText().toString());
 			sensor.setType(type.getText().toString());
 			sensor.setSetid(setid);
-			
+
 			SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(id.getText().toString());
 			if(temp!=null)
 			{
@@ -221,7 +224,7 @@ public class NewSensorInfoViewActivity extends Activity{
 			del = false;
 
 
-*/
+		 */
 
 	}
 
