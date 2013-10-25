@@ -3,6 +3,8 @@ package com.envisprototype.model.sensor;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 import com.envisprototype.model.set.SetListInterface;
 import com.envisprototype.model.set.SetListModel;
 
@@ -76,10 +78,14 @@ public class SensorListModel implements SensorListInterface  {
 	@Override
 	public List<SensorInterface> getSensorListBySetID(String ID)
 	{
+		Log.i("gSLBSI1",ID);
 		List<SensorInterface> temp = new ArrayList();
-
+		
 		for(SensorInterface sensor: sensorList){
+			Log.i("gSLBSI2",sensor.getSetid());
+			Log.i("gSLBSI3",sensor.getId());
 			if(sensor.getSetid().equals(ID))
+				
 				temp.add(sensor);
 		}
 
@@ -135,7 +141,13 @@ public class SensorListModel implements SensorListInterface  {
 	@Override
 	public void editSensor(SensorInterface sensor) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<sensorList.size();i++){
+			if(sensor.getId().equals(sensorList.get(i).getId()))
+			{
+				sensorList.remove(i);
+				sensorList.add(sensor);
+			}
+		}
 	}
 
 

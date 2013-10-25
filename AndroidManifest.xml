@@ -62,6 +62,10 @@
             android:label="@string/title_activity_sensor_info_view" >
         </activity>
         <activity
+            android:name="com.envisprototype.view.NewSensorInfoViewActivity"
+            android:label="@string/title_activity_sensor_info_view" >
+        </activity>
+        <activity
             android:name="com.envisprototype.view.MapInfoviewActivity"
             android:label="@string/title_activity_map_info_view" >
         </activity>
@@ -131,12 +135,38 @@
             android:name="com.envisprototype.view.RealTimeChartListActivity"
             android:label="@string/title_activity_real_time_chart_list" >
         </activity>
+        <activity
+            android:name="com.envisprototype.view.ChooseSensorTypeActivity"
+            android:label="@string/title_activity_choose_sensor_type" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAfQaD2LEkvDVbRVEI47B7DoPTM7Y3-YDY" />
+
+        <activity
+            android:name="com.envisprototype.view.NewSetInfoViewActivity"
+            android:label="@string/title_activity_new_set_info_view" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+        
+    <permission
+        android:name="com.example.maptestpackage.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.maptestpackage.permission.MAPS_RECEIVE" />
+     	
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
 </manifest>

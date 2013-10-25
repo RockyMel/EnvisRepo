@@ -5,6 +5,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetInterface;
+import com.envisprototype.model.set.SetListModel;
+
 public class DeleteSensorButtonController implements OnClickListener {
 
 	String id;
@@ -24,9 +29,9 @@ public class DeleteSensorButtonController implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
-		//SensorInterface sensor = SensorListModel.getSingletonInstance().findSensorById(id);
+		SensorInterface sensor = SensorListModel.getSingletonInstance().findSensorById(id);
 		
-		//SensorListModel.getSingletonInstance().removeSensor(sensor);
+		SensorListModel.getSingletonInstance().removeSensor(sensor);
 		
 		//SensorInfoViewActivity.del=true;
 		//SetInterface tempset=SetListModel.getSingletonInstance().findSetById(setid);

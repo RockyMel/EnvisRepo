@@ -9,13 +9,9 @@ import android.view.View.OnClickListener;
 import com.envisprototype.R;
 import com.envisprototype.view.AddMapActivity;
 import com.envisprototype.view.ChooseMapActivity;
-import com.envisprototype.view.InputIDActivity;
 import com.envisprototype.view.MapInfoViewActivity;
+import com.envisprototype.view.NewSetInfoViewActivity;
 import com.envisprototype.view.SensorListActivity;
-import com.envisprototype.view.SetListActivity;
-import com.envisprototype.view.ThreeDVisualisation;
-import com.envisprototype.view.processing.DrawMapApplet;
-import com.envisprototype.view.processing.EditMapApplet;
 
 public class AdminExpandableItemPickedListener implements OnClickListener{
 	String tag;
@@ -45,8 +41,9 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		Intent intent = new Intent();
 		String[] menuOptions = adminkaActivity.getResources().getStringArray(R.array.sensors_admin_options);
 		if(tag.equals(menuOptions[0])){
-			intent = new Intent(adminkaActivity, InputIDActivity.class);
-			intent.putExtra("mode", "set");
+			intent = new Intent(adminkaActivity, NewSetInfoViewActivity.class);
+			//intent.putExtra("mode", "set");
+			intent.putExtra("flag", "new");
 			
 		}
 		if(tag.equals(menuOptions[1])){

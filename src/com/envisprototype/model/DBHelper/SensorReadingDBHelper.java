@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class SensorReadingDBHelper {
 	final static String nameSpace = "http://api.webservice.envis.com";  
-	final static String endPoint = "http://rmitenvis-env.elasticbeanstalk.com/services/DataProvider?wsdl";  
+	final static String endPoint = "http://115.146.92.166:8080/EnvisAWS/services/DataProvider?wsdl";  
 
 
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.DBHelper.SetInfoDBHelper;
@@ -25,22 +26,40 @@ public class SetSaveOnClickController implements OnClickListener {
 
 	String setid;
 	List<SensorInterface> sli;
-	Button delete;
+	ImageButton delete;
 	String flag;
 	SetInterface set;
+	EditText id;
 	EditText name;
 	EditText notes;
 	Location location;
 	Context context;
 	SetListInterface temp;
-	Button add;
+	ImageButton add;
 
-	public SetSaveOnClickController(SetInterface set, String setid, EditText name, EditText notes, List<SensorInterface> sli,
-			Button delete, Button add, String flag,Location location, Context context) {
+	//	public SetSaveOnClickController(SetInterface set, String setid, EditText name, EditText notes, List<SensorInterface> sli,
+	//			Button delete, Button add, String flag,Location location, Context context) {
+	//		// TODO Auto-generated constructor stub
+	//		this.set = set;
+	//		this.setid=setid;
+	//		this.sli=sli;
+	//		this.delete = delete;
+	//		this.name=name;
+	//		this.notes=notes;
+	//		this.location=location;
+	//		this.context=context;
+	//		this.flag=flag;
+	//		this.add=add;
+	//
+	//	}
+
+	public SetSaveOnClickController(SetInterface set, EditText id, String setid,
+			EditText name, EditText notes, 
+			ImageButton delete, ImageButton add, String flag,
+			Location location, Context context) {
 		// TODO Auto-generated constructor stub
 		this.set = set;
 		this.setid=setid;
-		this.sli=sli;
 		this.delete = delete;
 		this.name=name;
 		this.notes=notes;
@@ -48,7 +67,7 @@ public class SetSaveOnClickController implements OnClickListener {
 		this.context=context;
 		this.flag=flag;
 		this.add=add;
-
+		this.id=id;
 	}
 
 	@Override
@@ -58,40 +77,40 @@ public class SetSaveOnClickController implements OnClickListener {
 		{
 			flag="exist";
 			set=new SetModel();
-			set.setId(setid);
+			//set.setId(setid);
+			set.setId(id.getText().toString());
+			//Log.i("qwertyu", setid);
 			set.setName(name.getText().toString());
 			set.setNotes(notes.getText().toString());
-			delete.setVisibility(Button.VISIBLE);
-			add.setVisibility(Button.VISIBLE);
+			delete.setVisibility(ImageButton.VISIBLE);
+			add.setVisibility(ImageButton.VISIBLE);
+
 			GPSTracker gps = new GPSTracker(context);
 			double latitude = 0;
 			double longitude = 0;
-			if(gps.canGetLocation()){
-
+			if(gps.canGetLocation())
+			{
 				latitude = gps.getLatitude();
 				longitude = gps.getLongitude();
-
-				//Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();	
-			}else{
-				// can't get location
-				// GPS or Network is not enabled
-				// Ask user to enable GPS/network in settings
+			}
+			else
+			{
 				gps.showSettingsAlert();
 			}
 
 			location.setLatitude(latitude);
 			location.setLongitude(longitude);
-			Log.i("asljd", location.getLatitude() + " " + location.getLongitude());
 			set.setLocation(location);
+			
 			SetListModel.getSingletonInstance().addSet(set);
-
+			//Log.i("hkg",SetListModel.getSingletonInstance().findSetById(setid)+"");
 			Thread thread = new Thread()
 			{
 				@Override
 				public void run() {
 					//System.out.println("asdsaD" + sensor.getBrand());
-					SetInfoDBHelper.addSet(set);
 					SetLocalDBHelper.getSingletonInstance(context).addSet(set);
+					SetInfoDBHelper.addSet(set);
 				}
 			};
 			thread.start();
@@ -99,7 +118,7 @@ public class SetSaveOnClickController implements OnClickListener {
 		}
 		else
 		{
-			//set.setId(setid);
+			
 			set.setName(name.getText().toString());
 			set.setNotes(notes.getText().toString());
 

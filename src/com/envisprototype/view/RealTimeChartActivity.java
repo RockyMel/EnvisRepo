@@ -1,7 +1,5 @@
 package com.envisprototype.view;
 
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,9 +28,13 @@ public class RealTimeChartActivity extends Activity {
 	private Runnable mTimer1;
 	private Runnable mTimer2;
 	private GraphView graphView;
+	private GraphView graphView2;
+	
 	private GraphViewSeries exampleSeries1;
 	private GraphViewSeries exampleSeries2;
 	private double graph2LastXValue = 0.0d;
+	private double graph1LastXValue = 0.0d;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,8 @@ public class RealTimeChartActivity extends Activity {
 		StrictMode.setThreadPolicy(policy);
 		View view = this.getWindow().getDecorView();
 		view.setBackgroundColor(Color.BLACK);
-		LinearLayout layout;// = (LinearLayout) findViewById(R.id.graph1);
+		
+		LinearLayout layout1;// = (LinearLayout) findViewById(R.id.graph1);
 		//		layout.addView(graphView);
 
 		// ----------
@@ -51,13 +54,6 @@ public class RealTimeChartActivity extends Activity {
 
 		});
 
-		// graph with custom labels and drawBackground
-		//		if (getIntent().getStringExtra("type").equals("bar")) {
-		//			graphView = new BarGraphView(
-		//					this
-		//					, "GraphViewDemo"
-		//			);
-		//		} else {
 		graphView = new LineGraphView(
 				this
 				, "GraphViewDemo"
@@ -68,8 +64,32 @@ public class RealTimeChartActivity extends Activity {
 		graphView.setViewPort(1, 8);
 		graphView.setScalable(true);
 
-		layout = (LinearLayout) findViewById(R.id.graph2);
-		layout.addView(graphView);
+		layout1 = (LinearLayout) findViewById(R.id.graph1);
+		layout1.addView(graphView);
+		//layout1.setVisibility(View.GONE);
+		LinearLayout layout2;// = (LinearLayout) findViewById(R.id.graph1);
+		//		layout.addView(graphView);
+
+		// ----------
+		exampleSeries2 = new GraphViewSeries(new GraphViewData[] {
+				new GraphViewData(1, 0.0d)
+
+		});
+
+		graphView2 = new LineGraphView(
+				this
+				, "GraphViewDemo"
+				);
+		((LineGraphView) graphView2).setDrawBackground(true);
+
+		graphView2.addSeries(exampleSeries2); // data
+		graphView2.setViewPort(1, 8);
+		graphView2.setScalable(true);
+
+		layout2 = (LinearLayout) findViewById(R.id.graph2);
+		layout2.addView(graphView2);
+
+		layout2.requestFocus();
 
 	}
 
@@ -155,7 +175,75 @@ public class RealTimeChartActivity extends Activity {
 
 			}
 		};
-		mHandler.postDelayed(mTimer1, 1000);
+		mTimer2 = new Runnable() {
+			class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
+				//int index;
+				
+				Runnable runnable;
+				GetRTSensorReadingTask(Runnable runnable){
+					//this.index=index;
+					//		this.view = view;
+					this.runnable = runnable;
+				}
+				@Override
+				protected String doInBackground(String... args) {
+
+					String response = "";
+
+					response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().get(1),RealTimeChartActivity.this);
+					Log.i("NETCONNECTION3", response);
+					return response;
+				}
+
+				@Override
+				protected void onPostExecute(String result) {
+					// textView.setText(result);
+					graph1LastXValue += 1d;
+					//String response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().get(0));
+					if(result.equals("Not"))
+					{
+						Toast.makeText(RealTimeChartActivity.this, "No Internet Coonnection", Toast.LENGTH_SHORT);
+					}
+					else
+					{
+						JSONObject obj = null;
+						try {
+							obj = new JSONObject(result);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						//	obj.getJSONArray();
+						Double tempdata = null;
+						try {
+							tempdata = Double.parseDouble(obj.getString("Reading"));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						Log.i("DATAFORREALTIME",tempdata+"");
+						exampleSeries2.appendData(new GraphViewData(graph1LastXValue, tempdata ), true, 10);
+					}
+
+					mHandler.postDelayed(mTimer2, 200);
+
+				}
+			}
+
+			@Override
+			public void run() {
+				GetRTSensorReadingTask task = new GetRTSensorReadingTask(this);
+				task.execute("dummy");
+
+			}
+		};
+
+		mHandler.postDelayed(mTimer1, 200);
+		mHandler.postDelayed(mTimer2, 200);
+
 	}
 
 

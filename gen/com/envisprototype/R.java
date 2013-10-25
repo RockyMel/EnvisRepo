@@ -9,13 +9,147 @@ package com.envisprototype;
 
 public final class R {
     public static final class array {
-        public static final int map_admin_options=0x7f060004;
-        public static final int map_drop_down=0x7f060002;
-        public static final int sensors_admin_options=0x7f060003;
-        public static final int sort_arrays=0x7f060000;
-        public static final int twod_drop_down=0x7f060001;
+        public static final int map_admin_options=0x7f080004;
+        public static final int map_drop_down=0x7f080002;
+        public static final int sensors_admin_options=0x7f080003;
+        public static final int sort_arrays=0x7f080000;
+        public static final int twod_drop_down=0x7f080001;
     }
     public static final class attr {
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraBearing=0x7f010001;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLat=0x7f010002;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLng=0x7f010003;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTilt=0x7f010004;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraZoom=0x7f010005;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+         */
+        public static final int mapType=0x7f010000;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiCompass=0x7f010006;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiRotateGestures=0x7f010007;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiScrollGestures=0x7f010008;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiTiltGestures=0x7f010009;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomControls=0x7f01000a;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomGestures=0x7f01000b;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int useViewLifecycle=0x7f01000c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int zOrderOnTop=0x7f01000d;
+    }
+    public static final class color {
+        public static final int common_action_bar_splitter=0x7f040009;
+        /**  Sign-in Button Colors 
+         */
+        public static final int common_signin_btn_dark_text_default=0x7f040000;
+        public static final int common_signin_btn_dark_text_disabled=0x7f040002;
+        public static final int common_signin_btn_dark_text_focused=0x7f040003;
+        public static final int common_signin_btn_dark_text_pressed=0x7f040001;
+        public static final int common_signin_btn_default_background=0x7f040008;
+        public static final int common_signin_btn_light_text_default=0x7f040004;
+        public static final int common_signin_btn_light_text_disabled=0x7f040006;
+        public static final int common_signin_btn_light_text_focused=0x7f040007;
+        public static final int common_signin_btn_light_text_pressed=0x7f040005;
+        public static final int common_signin_btn_text_dark=0x7f04000a;
+        public static final int common_signin_btn_text_light=0x7f04000b;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -24,129 +158,188 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
-        public static final int domain_label_font_size=0x7f040004;
-        public static final int domain_tick_label_font_size=0x7f040007;
-        public static final int legend_text_font_size=0x7f040008;
-        public static final int pie_segment_label_font_size=0x7f040002;
-        public static final int range_label_font_size=0x7f040005;
-        public static final int range_tick_label_font_size=0x7f040006;
-        public static final int title_font_size=0x7f040003;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
+        public static final int domain_label_font_size=0x7f070004;
+        public static final int domain_tick_label_font_size=0x7f070007;
+        public static final int legend_text_font_size=0x7f070008;
+        public static final int pie_segment_label_font_size=0x7f070002;
+        public static final int range_label_font_size=0x7f070005;
+        public static final int range_tick_label_font_size=0x7f070006;
+        public static final int title_font_size=0x7f070003;
     }
     public static final class drawable {
-        public static final int add_map=0x7f020000;
-        public static final int add_sensor=0x7f020001;
-        public static final int admin=0x7f020002;
-        public static final int bar_bg=0x7f020003;
-        public static final int chart=0x7f020004;
-        public static final int edit_del_map=0x7f020005;
-        public static final int edit_del_sensor=0x7f020006;
-        public static final int favorites=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int ic_qrlauncher=0x7f020009;
-        public static final int plot_sensor=0x7f02000a;
-        public static final int plus_bullet=0x7f02000b;
-        public static final int settings=0x7f02000c;
-        public static final int three_d_vis=0x7f02000d;
+        public static final int add=0x7f020000;
+        public static final int add_map=0x7f020001;
+        public static final int add_sensor=0x7f020002;
+        public static final int addsesnor=0x7f020003;
+        public static final int admin=0x7f020004;
+        public static final int airquality=0x7f020005;
+        public static final int arrow=0x7f020006;
+        public static final int bar_bg=0x7f020007;
+        public static final int chart=0x7f020008;
+        public static final int common_signin_btn_icon_dark=0x7f020009;
+        public static final int common_signin_btn_icon_disabled_dark=0x7f02000a;
+        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f02000b;
+        public static final int common_signin_btn_icon_disabled_focus_light=0x7f02000c;
+        public static final int common_signin_btn_icon_disabled_light=0x7f02000d;
+        public static final int common_signin_btn_icon_focus_dark=0x7f02000e;
+        public static final int common_signin_btn_icon_focus_light=0x7f02000f;
+        public static final int common_signin_btn_icon_light=0x7f020010;
+        public static final int common_signin_btn_icon_normal_dark=0x7f020011;
+        public static final int common_signin_btn_icon_normal_light=0x7f020012;
+        public static final int common_signin_btn_icon_pressed_dark=0x7f020013;
+        public static final int common_signin_btn_icon_pressed_light=0x7f020014;
+        public static final int common_signin_btn_text_dark=0x7f020015;
+        public static final int common_signin_btn_text_disabled_dark=0x7f020016;
+        public static final int common_signin_btn_text_disabled_focus_dark=0x7f020017;
+        public static final int common_signin_btn_text_disabled_focus_light=0x7f020018;
+        public static final int common_signin_btn_text_disabled_light=0x7f020019;
+        public static final int common_signin_btn_text_focus_dark=0x7f02001a;
+        public static final int common_signin_btn_text_focus_light=0x7f02001b;
+        public static final int common_signin_btn_text_light=0x7f02001c;
+        public static final int common_signin_btn_text_normal_dark=0x7f02001d;
+        public static final int common_signin_btn_text_normal_light=0x7f02001e;
+        public static final int common_signin_btn_text_pressed_dark=0x7f02001f;
+        public static final int common_signin_btn_text_pressed_light=0x7f020020;
+        public static final int delete=0x7f020021;
+        public static final int edit_del_map=0x7f020022;
+        public static final int edit_del_sensor=0x7f020023;
+        public static final int favorites=0x7f020024;
+        public static final int humdity=0x7f020025;
+        public static final int humidity=0x7f020026;
+        public static final int ic_launcher=0x7f020027;
+        public static final int ic_plusone_medium_off_client=0x7f020028;
+        public static final int ic_plusone_small_off_client=0x7f020029;
+        public static final int ic_plusone_standard_off_client=0x7f02002a;
+        public static final int ic_plusone_tall_off_client=0x7f02002b;
+        public static final int ic_qrlauncher=0x7f02002c;
+        public static final int ir=0x7f02002d;
+        public static final int light=0x7f02002e;
+        public static final int others=0x7f02002f;
+        public static final int plot_sensor=0x7f020030;
+        public static final int plus_bullet=0x7f020031;
+        public static final int save=0x7f020032;
+        public static final int savebutton=0x7f020033;
+        public static final int setimage=0x7f020034;
+        public static final int settings=0x7f020035;
+        public static final int temp=0x7f020036;
+        public static final int temp_icon=0x7f020037;
+        public static final int three_d_vis=0x7f020038;
+        public static final int waterlevel=0x7f020039;
     }
     public static final class id {
-        public static final int ADD=0x7f09003e;
-        public static final int Add=0x7f090040;
-        public static final int BRAND=0x7f090039;
-        public static final int DISTANCE=0x7f090054;
-        public static final int DateFromButton=0x7f090006;
-        public static final int DateToButton=0x7f090004;
-        public static final int Delete=0x7f090030;
-        public static final int ID=0x7f090037;
-        public static final int Mode=0x7f09002b;
-        public static final int NAME=0x7f09003a;
-        public static final int NOTES=0x7f09003b;
-        public static final int Name=0x7f09003d;
-        public static final int QR=0x7f090009;
-        public static final int SORTBYOPTION=0x7f090052;
-        public static final int Save=0x7f090032;
-        public static final int SensorsByTypeButton=0x7f090007;
-        public static final int SetPlusSensor=0x7f090044;
-        public static final int SetsButton=0x7f09000a;
-        public static final int TYPE=0x7f090038;
-        public static final int TimeFromButton=0x7f090003;
-        public static final int TimeToButton=0x7f090005;
-        public static final int VisualizationButton=0x7f09000b;
-        public static final int action_settings=0x7f090058;
-        public static final int bottom_buttons=0x7f090045;
-        public static final int button=0x7f09002c;
-        public static final int button1=0x7f090041;
-        public static final int button4=0x7f09002d;
-        public static final int chooseSensors=0x7f09005f;
-        public static final int chooseSensorsBtn=0x7f090026;
-        public static final int chosensensorslist=0x7f09001f;
-        public static final int deletebutton=0x7f090043;
-        public static final int distance=0x7f090050;
-        public static final int drawMapBtn=0x7f09001c;
-        public static final int draw_map_btn=0x7f090013;
-        public static final int drawer_layout=0x7f090000;
-        public static final int edit=0x7f09004e;
-        public static final int editText1=0x7f09000c;
-        public static final int editText2=0x7f09000f;
-        public static final int editText3=0x7f09000e;
-        public static final int editText4=0x7f090017;
-        public static final int editText5=0x7f090018;
-        public static final int editText7=0x7f090011;
-        public static final int graph1=0x7f090035;
-        public static final int graph2=0x7f090036;
-        public static final int id_map=0x7f09002f;
-        public static final int image=0x7f09004a;
-        public static final int imageButton1=0x7f09001b;
-        public static final int itemAdd=0x7f09005a;
-        public static final int itemAdd2=0x7f09005b;
-        public static final int itemAdd4=0x7f09005d;
-        public static final int lblListHeader=0x7f09004d;
-        public static final int leftEx=0x7f090049;
-        public static final int list=0x7f09002e;
-        public static final int listOfSensors=0x7f09003f;
-        public static final int listView1=0x7f090008;
-        public static final int listViewforMaps=0x7f090034;
-        public static final int mapIDTV=0x7f090016;
-        public static final int mapLocationTV=0x7f090028;
-        public static final int mapNameTV=0x7f090027;
-        public static final int mapNotesTV=0x7f090029;
-        public static final int map_by_name_btn=0x7f09001e;
-        public static final int mapname=0x7f09004f;
-        public static final int menuIcon=0x7f090047;
-        public static final int menuItemLbl=0x7f090048;
-        public static final int menu_settings=0x7f090057;
-        public static final int menu_spinner1=0x7f090059;
-        public static final int mySimpleXYPlot=0x7f09004c;
-        public static final int nearest_maps_btn=0x7f090023;
-        public static final int planets_spinner=0x7f09005e;
-        public static final int plotCB=0x7f090056;
-        public static final int plotSensorBtn=0x7f09003c;
-        public static final int plot_sets_btn=0x7f090042;
-        public static final int plot_to_map_btn=0x7f09002a;
-        public static final int savebutton=0x7f090014;
-        public static final int scan_qr_btn=0x7f090025;
-        public static final int sensorBox=0x7f090053;
-        public static final int sensorImageBtn=0x7f090046;
-        public static final int sensorTypes=0x7f09001d;
-        public static final int sensorname=0x7f090051;
-        public static final int show_map_btn=0x7f090031;
-        public static final int spinner=0x7f090033;
-        public static final int spinner1=0x7f09001a;
-        public static final int switchforrealtime=0x7f090001;
-        public static final int tableRow1=0x7f090020;
-        public static final int tableRow2=0x7f090022;
-        public static final int tableRow3=0x7f090024;
-        public static final int tableRow4=0x7f090021;
-        public static final int text1=0x7f09004b;
-        public static final int textView1=0x7f090002;
-        public static final int textView2=0x7f090010;
-        public static final int textView3=0x7f09000d;
-        public static final int textView4=0x7f090015;
-        public static final int textView6=0x7f090019;
-        public static final int textView7=0x7f090012;
-        public static final int threeDVisualisationItem=0x7f09005c;
-        public static final int viewbutton=0x7f090055;
+        public static final int ADD=0x7f050048;
+        public static final int Add=0x7f05003f;
+        public static final int BRAND=0x7f050045;
+        public static final int DISTANCE=0x7f050063;
+        public static final int DateFromButton=0x7f05000b;
+        public static final int DateToButton=0x7f050009;
+        public static final int Delete=0x7f050035;
+        public static final int ID=0x7f05003b;
+        public static final int Mode=0x7f050030;
+        public static final int NAME=0x7f050039;
+        public static final int NOTES=0x7f05003c;
+        public static final int Name=0x7f050047;
+        public static final int NameText=0x7f05003a;
+        public static final int NextButton=0x7f050051;
+        public static final int QR=0x7f05000e;
+        public static final int SORTBYOPTION=0x7f050061;
+        public static final int Save=0x7f050037;
+        public static final int SensorDesc=0x7f05004f;
+        public static final int SensorHeading=0x7f05004d;
+        public static final int SensorImage=0x7f05004e;
+        public static final int SensorTypeInfo=0x7f05005c;
+        public static final int SensorsByTypeButton=0x7f05000c;
+        public static final int SetPlusSensor=0x7f05004c;
+        public static final int SetsButton=0x7f05000f;
+        public static final int TYPE=0x7f050044;
+        public static final int TimeFromButton=0x7f050008;
+        public static final int TimeToButton=0x7f05000a;
+        public static final int TypeImage=0x7f05005b;
+        public static final int VisualizationButton=0x7f050010;
+        public static final int action_settings=0x7f050067;
+        public static final int bottom_buttons=0x7f050052;
+        public static final int button=0x7f050031;
+        public static final int button1=0x7f050049;
+        public static final int button4=0x7f050032;
+        public static final int chooseSensors=0x7f05006e;
+        public static final int chooseSensorsBtn=0x7f05002b;
+        public static final int chosensensorslist=0x7f050024;
+        public static final int deletebutton=0x7f05004b;
+        public static final int distance=0x7f05005f;
+        public static final int drawMapBtn=0x7f050021;
+        public static final int draw_map_btn=0x7f050018;
+        public static final int drawer_layout=0x7f050005;
+        public static final int edit=0x7f05005d;
+        public static final int editText1=0x7f050011;
+        public static final int editText2=0x7f050014;
+        public static final int editText3=0x7f050013;
+        public static final int editText4=0x7f05001c;
+        public static final int editText5=0x7f05001d;
+        public static final int editText7=0x7f050016;
+        public static final int graph1=0x7f050042;
+        public static final int graph2=0x7f050043;
+        public static final int hybrid=0x7f050004;
+        public static final int id_map=0x7f050034;
+        public static final int image=0x7f050057;
+        public static final int imageButton1=0x7f050020;
+        public static final int imageButton2=0x7f050050;
+        public static final int imageView1=0x7f050038;
+        public static final int itemAdd=0x7f050069;
+        public static final int itemAdd2=0x7f05006a;
+        public static final int itemAdd4=0x7f05006c;
+        public static final int lblListHeader=0x7f05005a;
+        public static final int leftEx=0x7f050056;
+        public static final int list=0x7f050033;
+        public static final int listOfSensors=0x7f05003e;
+        public static final int listView1=0x7f05000d;
+        public static final int listViewforMaps=0x7f050041;
+        public static final int map=0x7f05003d;
+        public static final int mapIDTV=0x7f05001b;
+        public static final int mapLocationTV=0x7f05002d;
+        public static final int mapNameTV=0x7f05002c;
+        public static final int mapNotesTV=0x7f05002e;
+        public static final int map_by_name_btn=0x7f050023;
+        public static final int mapname=0x7f05005e;
+        public static final int menuIcon=0x7f050054;
+        public static final int menuItemLbl=0x7f050055;
+        public static final int menu_settings=0x7f050066;
+        public static final int menu_spinner1=0x7f050068;
+        public static final int mySimpleXYPlot=0x7f050059;
+        public static final int nearest_maps_btn=0x7f050028;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int planets_spinner=0x7f05006d;
+        public static final int plotCB=0x7f050065;
+        public static final int plotSensorBtn=0x7f050046;
+        public static final int plot_sets_btn=0x7f05004a;
+        public static final int plot_to_map_btn=0x7f05002f;
+        public static final int satellite=0x7f050002;
+        public static final int savebutton=0x7f050019;
+        public static final int scan_qr_btn=0x7f05002a;
+        public static final int sensorBox=0x7f050062;
+        public static final int sensorImageBtn=0x7f050053;
+        public static final int sensorTypes=0x7f050022;
+        public static final int sensorname=0x7f050060;
+        public static final int show_map_btn=0x7f050036;
+        public static final int spinner=0x7f050040;
+        public static final int spinner1=0x7f05001f;
+        public static final int switchforrealtime=0x7f050006;
+        public static final int tableRow1=0x7f050025;
+        public static final int tableRow2=0x7f050027;
+        public static final int tableRow3=0x7f050029;
+        public static final int tableRow4=0x7f050026;
+        public static final int terrain=0x7f050003;
+        public static final int text1=0x7f050058;
+        public static final int textView1=0x7f050007;
+        public static final int textView2=0x7f050015;
+        public static final int textView3=0x7f050012;
+        public static final int textView4=0x7f05001a;
+        public static final int textView6=0x7f05001e;
+        public static final int textView7=0x7f050017;
+        public static final int threeDVisualisationItem=0x7f05006b;
+        public static final int viewbutton=0x7f050064;
     }
     public static final class layout {
         public static final int activity_3d_visualisation=0x7f030000;
@@ -156,123 +349,221 @@ public final class R {
         public static final int activity_adminka=0x7f030004;
         public static final int activity_chart_visualization_settings=0x7f030005;
         public static final int activity_choose_map=0x7f030006;
-        public static final int activity_favorites=0x7f030007;
-        public static final int activity_input_sensor_id=0x7f030008;
-        public static final int activity_linear_layout=0x7f030009;
-        public static final int activity_m=0x7f03000a;
-        public static final int activity_main=0x7f03000b;
-        public static final int activity_main_temp=0x7f03000c;
-        public static final int activity_map_info_view=0x7f03000d;
-        public static final int activity_map_list=0x7f03000e;
-        public static final int activity_new_chart=0x7f03000f;
-        public static final int activity_plot_sensor_to=0x7f030010;
-        public static final int activity_real_time_chart=0x7f030011;
-        public static final int activity_real_time_chart_list=0x7f030012;
-        public static final int activity_sensor_info_view=0x7f030013;
-        public static final int activity_sensors_exp_view=0x7f030014;
-        public static final int activity_set_info_view=0x7f030015;
-        public static final int activity_set_list=0x7f030016;
-        public static final int adapterforchartvisualizationsettinglist=0x7f030017;
-        public static final int bottom_bar=0x7f030018;
-        public static final int childrow=0x7f030019;
-        public static final int drawer_example=0x7f03001a;
-        public static final int for_drawer=0x7f03001b;
-        public static final int fragment_historical_data=0x7f03001c;
-        public static final int fragment_recent_data=0x7f03001d;
-        public static final int grouprow=0x7f03001e;
-        public static final int line_chart=0x7f03001f;
-        public static final int list_group=0x7f030020;
-        public static final int main=0x7f030021;
-        public static final int row_adapter_for_sensor_list_in_setinfoscreen=0x7f030022;
-        public static final int row_adapter_maps_with_location=0x7f030023;
-        public static final int row_adapter_sensors_with_location=0x7f030024;
-        public static final int row_adapter_sort_options=0x7f030025;
-        public static final int rowadpterforchartviz=0x7f030026;
-        public static final int sensors_child_list=0x7f030027;
-        public static final int setlistactivityadapter=0x7f030028;
-        public static final int spinner=0x7f030029;
-        public static final int style_dropdown=0x7f03002a;
+        public static final int activity_choose_sensor_type=0x7f030007;
+        public static final int activity_favorites=0x7f030008;
+        public static final int activity_input_sensor_id=0x7f030009;
+        public static final int activity_linear_layout=0x7f03000a;
+        public static final int activity_m=0x7f03000b;
+        public static final int activity_main=0x7f03000c;
+        public static final int activity_main_temp=0x7f03000d;
+        public static final int activity_map_info_view=0x7f03000e;
+        public static final int activity_map_list=0x7f03000f;
+        public static final int activity_new_chart=0x7f030010;
+        public static final int activity_new_set_info_view=0x7f030011;
+        public static final int activity_plot_sensor_to=0x7f030012;
+        public static final int activity_real_time_chart=0x7f030013;
+        public static final int activity_real_time_chart_list=0x7f030014;
+        public static final int activity_sensor_info_view=0x7f030015;
+        public static final int activity_sensors_exp_view=0x7f030016;
+        public static final int activity_set_info_view=0x7f030017;
+        public static final int activity_set_list=0x7f030018;
+        public static final int adapterforchartvisualizationsettinglist=0x7f030019;
+        public static final int adapterforsensortype=0x7f03001a;
+        public static final int bottom_bar=0x7f03001b;
+        public static final int childrow=0x7f03001c;
+        public static final int drawer_example=0x7f03001d;
+        public static final int for_drawer=0x7f03001e;
+        public static final int fragment_historical_data=0x7f03001f;
+        public static final int fragment_recent_data=0x7f030020;
+        public static final int grouprow=0x7f030021;
+        public static final int line_chart=0x7f030022;
+        public static final int list_group=0x7f030023;
+        public static final int main=0x7f030024;
+        public static final int new_sensor_info_view=0x7f030025;
+        public static final int row_adapter_for_sensor_list_in_setinfoscreen=0x7f030026;
+        public static final int row_adapter_maps_with_location=0x7f030027;
+        public static final int row_adapter_sensors_with_location=0x7f030028;
+        public static final int row_adapter_sort_options=0x7f030029;
+        public static final int rowadpterforchartviz=0x7f03002a;
+        public static final int sensors_child_list=0x7f03002b;
+        public static final int setlistactivityadapter=0x7f03002c;
+        public static final int spinner=0x7f03002d;
+        public static final int style_dropdown=0x7f03002e;
     }
     public static final class menu {
-        public static final int activity_linear_layout=0x7f080000;
-        public static final int add_map=0x7f080001;
-        public static final int add_sensor=0x7f080002;
-        public static final int chart_menu=0x7f080003;
-        public static final int chart_visualization_settings=0x7f080004;
-        public static final int expandable_list_main=0x7f080005;
-        public static final int input_sensor_id=0x7f080006;
-        public static final int line_chart=0x7f080007;
-        public static final int main=0x7f080008;
-        public static final int map_info_view=0x7f080009;
-        public static final int map_list=0x7f08000a;
-        public static final int new_chart=0x7f08000b;
-        public static final int real_time_chart=0x7f08000c;
-        public static final int real_time_chart_list=0x7f08000d;
-        public static final int sensor_info_view=0x7f08000e;
-        public static final int set_info_view=0x7f08000f;
-        public static final int set_list=0x7f080010;
-        public static final int visualisation=0x7f080011;
+        public static final int activity_linear_layout=0x7f0a0000;
+        public static final int add_map=0x7f0a0001;
+        public static final int add_sensor=0x7f0a0002;
+        public static final int chart_menu=0x7f0a0003;
+        public static final int chart_visualization_settings=0x7f0a0004;
+        public static final int choose_sensor_type=0x7f0a0005;
+        public static final int expandable_list_main=0x7f0a0006;
+        public static final int input_sensor_id=0x7f0a0007;
+        public static final int line_chart=0x7f0a0008;
+        public static final int main=0x7f0a0009;
+        public static final int map_info_view=0x7f0a000a;
+        public static final int map_list=0x7f0a000b;
+        public static final int new_chart=0x7f0a000c;
+        public static final int new_set_info_view=0x7f0a000d;
+        public static final int real_time_chart=0x7f0a000e;
+        public static final int real_time_chart_list=0x7f0a000f;
+        public static final int sensor_info_view=0x7f0a0010;
+        public static final int set_info_view=0x7f0a0011;
+        public static final int set_list=0x7f0a0012;
+        public static final int visualisation=0x7f0a0013;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int add_node=0x7f05002e;
-        public static final int add_node_step_one=0x7f05002f;
-        public static final int add_node_step_three=0x7f050031;
-        public static final int add_node_step_two=0x7f050030;
-        public static final int add_set=0x7f050036;
-        public static final int admin_string=0x7f050004;
-        public static final int app_name=0x7f050000;
-        public static final int choose_node_to_delete=0x7f050024;
-        public static final int delete_node_btn=0x7f050023;
-        public static final int disabled=0x7f05002b;
-        public static final int drag_node_btn=0x7f050025;
-        public static final int draw_free_shape=0x7f050029;
-        public static final int draw_polygon=0x7f050027;
-        public static final int draw_rect=0x7f05002c;
-        public static final int fav_string=0x7f050003;
-        public static final int flags=0x7f050015;
-        public static final int hello_world=0x7f050002;
-        public static final int hist_data=0x7f050009;
-        public static final int map_id_extra=0x7f05000f;
-        public static final int menu_settings=0x7f05000e;
-        public static final int ok_btn=0x7f05000c;
-        public static final int optFour=0x7f050008;
-        public static final int optOne=0x7f050005;
-        public static final int optThree=0x7f050007;
-        public static final int optTwo=0x7f050006;
-        public static final int plot_flag_extra=0x7f050016;
-        public static final int recent_data=0x7f05000a;
-        public static final int remove_last_node=0x7f05002d;
-        public static final int remove_sets=0x7f050034;
-        public static final int request_code=0x7f050018;
-        public static final int save_sets=0x7f050032;
-        public static final int sensor_id_extra=0x7f050010;
-        public static final int sensors_to_vis_extra=0x7f050013;
-        public static final int set_coor_extra=0x7f050011;
-        public static final int set_higlt_lbl=0x7f05000b;
-        public static final int sets_id_extra=0x7f050014;
-        public static final int sets_saved=0x7f050033;
-        public static final int sets_to_vis_extra=0x7f050012;
-        public static final int sort_prompt=0x7f05000d;
-        public static final int stop_add_set=0x7f050037;
-        public static final int stop_drag_node_btn=0x7f050026;
-        public static final int stop_draw_free_shape=0x7f05002a;
-        public static final int stop_draw_polygon=0x7f050028;
-        public static final int stop_remove_sets=0x7f050035;
-        public static final int three_d_vis_flag_extra=0x7f050017;
-        public static final int title_activity_add_map=0x7f05001e;
-        public static final int title_activity_add_sensor=0x7f05001b;
-        public static final int title_activity_chart_visualization_settings=0x7f050022;
-        public static final int title_activity_home=0x7f05001f;
-        public static final int title_activity_map_info_view=0x7f05001d;
-        public static final int title_activity_map_list=0x7f050019;
-        public static final int title_activity_new_chart=0x7f050038;
-        public static final int title_activity_plot_sensor_to=0x7f05001a;
-        public static final int title_activity_real_time_chart=0x7f050039;
-        public static final int title_activity_real_time_chart_list=0x7f05003a;
-        public static final int title_activity_sensor_info_view=0x7f05001c;
-        public static final int title_activity_set_info_view=0x7f050020;
-        public static final int title_activity_set_list=0x7f050021;
+        public static final int action_settings=0x7f06001a;
+        public static final int add_node=0x7f060047;
+        public static final int add_node_step_one=0x7f060048;
+        public static final int add_node_step_three=0x7f06004a;
+        public static final int add_node_step_two=0x7f060049;
+        public static final int add_set=0x7f06004f;
+        public static final int admin_string=0x7f06001d;
+        public static final int app_name=0x7f060019;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        enabled for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_enabling_title=0x7f060014;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        installed for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_installation_title=0x7f060015;
+        /**   Title for notification shown when GooglePlayServices needs to be
+        udpated for a application to work. [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_needs_update_title=0x7f060016;
+        /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
+         */
+        public static final int auth_client_play_services_err_notification_msg=0x7f060017;
+        /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
+         */
+        public static final int auth_client_requested_by_msg=0x7f060018;
+        /**   Title for notification shown when a bad version of GooglePlayServices
+        has been installed and needs correction for an application to work.
+        [CHAR LIMIT=70] 
+         */
+        public static final int auth_client_using_bad_version_title=0x7f060013;
+        public static final int choose_node_to_delete=0x7f06003d;
+        /**  Button in confirmation dialog to enable Google Play services.  Clicking it
+        will direct user to application settings of Google Play services where they
+        can enable it [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_button=0x7f060006;
+        /**  Message in confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_enable_text=0x7f060005;
+        /**  Title of confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_title=0x7f060004;
+        /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_button=0x7f060003;
+        /**  (For phones) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_phone=0x7f060001;
+        /**  (For tablets) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_tablet=0x7f060002;
+        /**  Title of confirmation dialog informing user that they need to install
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_title=0x7f060000;
+        /**  Message in confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_invalid_account_text=0x7f06000c;
+        /**  Title of confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_invalid_account_title=0x7f06000b;
+        /**  Message in confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_network_error_text=0x7f06000a;
+        /**  Title of confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_network_error_title=0x7f060009;
+        /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
+        services [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unknown_issue=0x7f06000d;
+        /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unsupported_text=0x7f06000f;
+        /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_unsupported_title=0x7f06000e;
+        /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_button=0x7f060010;
+        /**  Message in confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_update_text=0x7f060008;
+        /**  Title of confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_title=0x7f060007;
+        /**  Sign-in button text [CHAR LIMIT=15] 
+         */
+        public static final int common_signin_button_text=0x7f060011;
+        /**  Long form sign-in button text [CHAR LIMIT=30] 
+         */
+        public static final int common_signin_button_text_long=0x7f060012;
+        public static final int delete_node_btn=0x7f06003c;
+        public static final int disabled=0x7f060044;
+        public static final int drag_node_btn=0x7f06003e;
+        public static final int draw_free_shape=0x7f060042;
+        public static final int draw_polygon=0x7f060040;
+        public static final int draw_rect=0x7f060045;
+        public static final int fav_string=0x7f06001c;
+        public static final int flags=0x7f06002e;
+        public static final int hello_world=0x7f06001b;
+        public static final int hist_data=0x7f060022;
+        public static final int map_id_extra=0x7f060028;
+        public static final int menu_settings=0x7f060027;
+        public static final int ok_btn=0x7f060025;
+        public static final int optFour=0x7f060021;
+        public static final int optOne=0x7f06001e;
+        public static final int optThree=0x7f060020;
+        public static final int optTwo=0x7f06001f;
+        public static final int plot_flag_extra=0x7f06002f;
+        public static final int recent_data=0x7f060023;
+        public static final int remove_last_node=0x7f060046;
+        public static final int remove_sets=0x7f06004d;
+        public static final int request_code=0x7f060031;
+        public static final int save_sets=0x7f06004b;
+        public static final int sensor_id_extra=0x7f060029;
+        public static final int sensors_to_vis_extra=0x7f06002c;
+        public static final int set_coor_extra=0x7f06002a;
+        public static final int set_higlt_lbl=0x7f060024;
+        public static final int sets_id_extra=0x7f06002d;
+        public static final int sets_saved=0x7f06004c;
+        public static final int sets_to_vis_extra=0x7f06002b;
+        public static final int sort_prompt=0x7f060026;
+        public static final int stop_add_set=0x7f060050;
+        public static final int stop_drag_node_btn=0x7f06003f;
+        public static final int stop_draw_free_shape=0x7f060043;
+        public static final int stop_draw_polygon=0x7f060041;
+        public static final int stop_remove_sets=0x7f06004e;
+        public static final int three_d_vis_flag_extra=0x7f060030;
+        public static final int title_activity_add_map=0x7f060037;
+        public static final int title_activity_add_sensor=0x7f060034;
+        public static final int title_activity_chart_visualization_settings=0x7f06003b;
+        public static final int title_activity_choose_sensor_type=0x7f060054;
+        public static final int title_activity_home=0x7f060038;
+        public static final int title_activity_map_info_view=0x7f060036;
+        public static final int title_activity_map_list=0x7f060032;
+        public static final int title_activity_new_chart=0x7f060051;
+        public static final int title_activity_new_set_info_view=0x7f060055;
+        public static final int title_activity_plot_sensor_to=0x7f060033;
+        public static final int title_activity_real_time_chart=0x7f060052;
+        public static final int title_activity_real_time_chart_list=0x7f060053;
+        public static final int title_activity_sensor_info_view=0x7f060035;
+        public static final int title_activity_set_info_view=0x7f060039;
+        public static final int title_activity_set_list=0x7f06003a;
     }
     public static final class style {
         /** 
@@ -296,12 +587,258 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int SettingCodeFont=0x7f070003;
-        public static final int SettingCodeFontBold=0x7f070002;
+        public static final int AppTheme=0x7f090001;
+        public static final int SettingCodeFont=0x7f090003;
+        public static final int SettingCodeFontBold=0x7f090002;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a MapAttrs.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #MapAttrs_cameraBearing com.envisprototype:cameraBearing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.envisprototype:cameraTargetLat}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.envisprototype:cameraTargetLng}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTilt com.envisprototype:cameraTilt}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraZoom com.envisprototype:cameraZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_mapType com.envisprototype:mapType}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiCompass com.envisprototype:uiCompass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.envisprototype:uiRotateGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.envisprototype:uiScrollGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.envisprototype:uiTiltGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomControls com.envisprototype:uiZoomControls}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.envisprototype:uiZoomGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.envisprototype:useViewLifecycle}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.envisprototype:zOrderOnTop}</code></td><td></td></tr>
+           </table>
+           @see #MapAttrs_cameraBearing
+           @see #MapAttrs_cameraTargetLat
+           @see #MapAttrs_cameraTargetLng
+           @see #MapAttrs_cameraTilt
+           @see #MapAttrs_cameraZoom
+           @see #MapAttrs_mapType
+           @see #MapAttrs_uiCompass
+           @see #MapAttrs_uiRotateGestures
+           @see #MapAttrs_uiScrollGestures
+           @see #MapAttrs_uiTiltGestures
+           @see #MapAttrs_uiZoomControls
+           @see #MapAttrs_uiZoomGestures
+           @see #MapAttrs_useViewLifecycle
+           @see #MapAttrs_zOrderOnTop
+         */
+        public static final int[] MapAttrs = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b,
+            0x7f01000c, 0x7f01000d
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#cameraBearing}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:cameraBearing
+        */
+        public static final int MapAttrs_cameraBearing = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#cameraTargetLat}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:cameraTargetLat
+        */
+        public static final int MapAttrs_cameraTargetLat = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#cameraTargetLng}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:cameraTargetLng
+        */
+        public static final int MapAttrs_cameraTargetLng = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#cameraTilt}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:cameraTilt
+        */
+        public static final int MapAttrs_cameraTilt = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#cameraZoom}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:cameraZoom
+        */
+        public static final int MapAttrs_cameraZoom = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#mapType}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+          @attr name com.envisprototype:mapType
+        */
+        public static final int MapAttrs_mapType = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiCompass}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiCompass
+        */
+        public static final int MapAttrs_uiCompass = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiRotateGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiRotateGestures
+        */
+        public static final int MapAttrs_uiRotateGestures = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiScrollGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiScrollGestures
+        */
+        public static final int MapAttrs_uiScrollGestures = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiTiltGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiTiltGestures
+        */
+        public static final int MapAttrs_uiTiltGestures = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiZoomControls}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiZoomControls
+        */
+        public static final int MapAttrs_uiZoomControls = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#uiZoomGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:uiZoomGestures
+        */
+        public static final int MapAttrs_uiZoomGestures = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#useViewLifecycle}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:useViewLifecycle
+        */
+        public static final int MapAttrs_useViewLifecycle = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.envisprototype.R.attr#zOrderOnTop}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.envisprototype:zOrderOnTop
+        */
+        public static final int MapAttrs_zOrderOnTop = 13;
+    };
 }

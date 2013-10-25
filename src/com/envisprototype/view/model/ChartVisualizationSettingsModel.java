@@ -2,7 +2,8 @@ package com.envisprototype.view.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
+import com.envisprototype.model.sensor.SensorListModel;
 
 public class ChartVisualizationSettingsModel {
 
@@ -108,6 +109,18 @@ public class ChartVisualizationSettingsModel {
 		return singletonInstance;
 	}
 	
+	public ArrayList<String> getSensorIDListByType(int Type){
+		ArrayList<String> temp = new ArrayList<String>();
+		for(int i=0;i<this.SensorIDs.size();i++){
+			if(SensorListModel.getSingletonInstance().findSensorById(this.SensorIDs.get(i)).getType()==Type)
+			{
+				temp.add(this.SensorIDs.get(i));
+			}
+						
+		}
+		
+		return temp;
+	}
 	
 	
 }

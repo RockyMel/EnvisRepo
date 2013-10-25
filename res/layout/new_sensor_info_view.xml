@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/TypeImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/airquality" />
+
+        <TextView
+            android:id="@+id/SensorTypeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/TypeImage"
+            android:text="New ... Sensor"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+ 
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TypeImage"
+            android:layout_marginTop="15dp"
+            android:layout_toLeftOf="@+id/textView1"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/NAME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignLeft="@+id/BRAND"
+            android:layout_alignRight="@+id/SensorTypeInfo"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/BRAND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/SensorTypeInfo"
+            android:layout_below="@+id/NAME"
+            android:layout_toRightOf="@+id/textView7"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/mapIDTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/BRAND"
+            android:layout_toLeftOf="@+id/textView1"
+            android:text="Brand"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/NOTES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView7"
+            android:layout_alignRight="@+id/BRAND"
+            android:layout_toRightOf="@+id/textView7"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mapIDTV"
+            android:layout_below="@+id/BRAND"
+            android:layout_marginTop="14dp"
+            android:text="Notes:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/NOTES" />
+
+        <ImageButton
+            android:id="@+id/Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/NAME"
+            android:background="@null"
+            android:src="@drawable/save" />
+
+        <ImageButton
+            android:id="@+id/Delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/map"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:src="@drawable/delete" />
+
+        <EditText
+            android:id="@+id/ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/TypeImage"
+            android:layout_alignLeft="@+id/NAME"
+            android:layout_alignRight="@+id/SensorTypeInfo"
+            android:ems="10" />
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
 import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
@@ -23,30 +25,43 @@ public class SaveButtonController implements OnClickListener {
 	String flag;
 	EditText id;
 	EditText name;
-	EditText location;
-	EditText type;
 	EditText brand;
 	EditText notes;
-	Button delete;
+	ImageButton delete;
 	String setid;
 	Context context;
 
 
-	public SaveButtonController(String flag, EditText id, EditText name,
-			EditText location,EditText type,EditText brand,
-			EditText notes,Button delete, String setid, Context context) {
-		// TODO Auto-generated constructor stub
-		this.flag=flag;
-		this.id=id;
-		this.name=name;
-		this.location=location;
-		this.type=type;
-		this.brand=brand;
-		this.notes=notes;
-		this.delete=delete;
-		this.context=context;
-		this.setid=setid;
+//	public SaveButtonController(String flag, EditText id, EditText name,
+//			EditText location,EditText type,EditText brand,
+//			EditText notes,Button delete, String setid, Context context) {
+//		// TODO Auto-generated constructor stub
+//		this.flag=flag;
+//		this.id=id;
+//		this.name=name;
+//		this.location=location;
+//		this.type=type;
+//		this.brand=brand;
+//		this.notes=notes;
+//		this.delete=delete;
+//		this.context=context;
+//		this.setid=setid;
+//
+//	}
 
+	public SaveButtonController(String flag, EditText id, EditText name,
+			EditText brand, EditText notes, ImageButton delete,
+			String setid, Context context) {
+		// TODO Auto-generated constructor stub
+		this.flag = flag;
+		this.id = id;
+		this.name = name;
+		this.brand = brand;
+		this.notes = notes;
+		this.delete = delete;
+		this.setid = setid;
+		this.context = context;
+		
 	}
 
 	@Override
@@ -58,39 +73,23 @@ public class SaveButtonController implements OnClickListener {
 		Location myloc=null;
 		SetInterface set=SetListModel.getSingletonInstance().findSetById(setid);
 
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", setid);
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getId());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getName());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getNotes());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getLocation().getLongitude()+"");
-		
 		myloc=set.getLocation();
-
-		//Log.i("testing location1", myloc.getLongitude()+myloc.getLongitude()+"");
-
 		final SensorInterface sensor = new SensorModel();
-
 		sensor.setId(id.getText().toString());
 		sensor.setName(name.getText().toString());
 		sensor.setLocation(myloc);
-
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
-		try{
-		sensor.setType(Integer.parseInt(type.getText().toString()));
-		}catch(NumberFormatException nfe){
-			sensor.setType(0);
-		}
+		Log.i("wqertytuyio", setid);
 		sensor.setSetid(setid);
-		//SensorInterface temp = set.getSensor(id.getText().toString());
+		
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
 
 		if(temp!=null)
 		{
-			//set.removeSensor(temp);
-			//set.addSensor(sensor);
-			SensorListModel.getSingletonInstance().removeSensor(temp);
-			SensorListModel.getSingletonInstance().addSensor(sensor);
+//			SensorListModel.getSingletonInstance().removeSensor(temp);
+//			SensorListModel.getSingletonInstance().addSensor(sensor);
+			SensorListModel.getSingletonInstance().editSensor(sensor);
 			Thread thread = new Thread()
 			{
 				@Override
