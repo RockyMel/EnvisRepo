@@ -3,6 +3,8 @@ package com.envisprototype.view.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 import com.jjoe64.graphview.GraphView.GraphViewData;
 
 public class ChartDataByTypes {
@@ -27,6 +29,14 @@ public class ChartDataByTypes {
 		if(singletonInstance==null)
 		{
 			singletonInstance=new ArrayList<ChartDataByTypes>();
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			singletonInstance.add(new ChartDataByTypes());
+			
 			singletonInstance.get(0).type=1;
 			singletonInstance.get(1).type=2;
 			singletonInstance.get(2).type=3;
@@ -40,14 +50,19 @@ public class ChartDataByTypes {
 		return singletonInstance;
 	}
 	
-	public void addIDForType(String ID,int type){
-		this.singletonInstance.get(type-1).list.add(ID);
+	public static void addIDForType(String ID,int type){
+		//Log.i("asd", type+" "+ID);
+		//Log.i("asd", type+" "+ID);
+		
+		singletonInstance.get(type-1).list.add(ID);
 	}
-	public void addDataForType(GraphViewData[] data,int type,int pos){
-		this.singletonInstance.get(type-1).data[pos]=data;
+	public static void addDataForType(GraphViewData[] data,int type,int pos){
+		///singletonInstance.get(type-1).data[pos]= new GraphViewData();
+		Log.i("position", pos+ " " + type + " " + data + " " + singletonInstance.get(type-1));
+		singletonInstance.get(type-1).data[pos]=data;
 	}
-	public GraphViewData[] getDataForType(int type,int pos){
-		return this.singletonInstance.get(type-1).data[pos];
+	public static GraphViewData[] getDataForType(int type,int pos){
+		return singletonInstance.get(type-1).data[pos];
 	}
 	
 	

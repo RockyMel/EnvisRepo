@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -46,7 +47,28 @@ public class NewChartActivity extends Activity {
 //		if(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(7)!=null)
 //			list.add(new ChartDataByTypes(1,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(7)));
 		
-		ncva = new NewChartVizAdapter(this,0,ChartDataByTypes.getSingletonInstance());
+		List<ChartDataByTypes> temp = new ArrayList<ChartDataByTypes>();
+		int index=0;
+		for(int i=0;i<ChartDataByTypes.getSingletonInstance().size();i++)
+		{
+			System.out.println( i+ ": " + ChartDataByTypes.getSingletonInstance().get(i).type +"");
+			if(ChartDataByTypes.getSingletonInstance().get(i).list.size()>0)
+			{
+				//ChartDataByTypes.singletonInstance.remove(i);
+				temp.add(index	, ChartDataByTypes.getSingletonInstance().get(i));index++;
+			}
+//			for(int j=0;j<ChartDataByTypes.getSingletonInstance().get(i).data.length;j++)
+//			{
+//				System.out.println("data:"+ChartDataByTypes.getSingletonInstance().get(i).data[j]);
+//			}
+//			
+
+		}
+		Log.i("sisisisize1", ChartDataByTypes.singletonInstance.size()+"");
+		Log.i("sisisisize2",temp.size()+"");
+
+		//ncva = new NewChartVizAdapter(this,0,ChartDataByTypes.getSingletonInstance());
+		ncva = new NewChartVizAdapter(this,0,temp);
 		lv=(ListView)findViewById(R.id.listView1);
 		lv.setAdapter(ncva);
 		//lv.setAdapter(cva);

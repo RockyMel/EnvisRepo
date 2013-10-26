@@ -128,7 +128,7 @@ public class NewSensorInfoViewActivity extends Activity{
 		save = (ImageButton)findViewById(R.id.Save);
 		delete = (ImageButton)findViewById(R.id.Delete);
 
-		save.setOnClickListener(new SaveButtonController(flag,id,name,brand,notes,delete,setid,this));
+		save.setOnClickListener(new SaveButtonController(flag,id,name,brand,notes,delete,setid,typercvd,this));
 
 		if(flag.equals("new"))
 			sensor=new SensorModel();

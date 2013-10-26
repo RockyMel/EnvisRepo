@@ -62,7 +62,7 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 		@Override
 		protected String doInBackground(Void... args) {
 			String response = "";
-
+			ChartDataByTypes.getSingletonInstance();
 			for(int j=1;j<8;j++)
 			{
 				List<String> tempsensoridlist = ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(j);
@@ -70,12 +70,14 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 				response = "";
 				for(int i=0;i<tempsensoridlist.size();i++)
 				{
-					((ChartDataByTypes) ChartDataByTypes.getSingletonInstance()).addIDForType(tempsensoridlist.get(i),j);
+					ChartDataByTypes.addIDForType(tempsensoridlist.get(i),j);
 					if(i>0)
 						response = response + "###" + SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(tempsensoridlist.get(i), fromstr, tostr);
 					else
 						response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(tempsensoridlist.get(i), fromstr, tostr);
 				}
+				ChartDataByTypes.getSingletonInstance().get(j-1).data=new GraphViewData[tempsensoridlist.size()][];
+
 				ArrayList<Double> data = new ArrayList<Double>();
 				//List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
 				StringTokenizer strtok = new StringTokenizer(response,"###");
@@ -110,7 +112,7 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 						{
 							tempd[k]=new GraphViewData(k,data.get(k));
 						}
-						((ChartDataByTypes) ChartDataByTypes.getSingletonInstance()).addDataForType(tempd,j,index);
+						 ChartDataByTypes.addDataForType(tempd,j,index);
 						Log.i("SHOW1", data.size()+"");
 
 						//						ChartData.getSingletonInstance().data[index]=tempd;
@@ -130,61 +132,7 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 
 		@Override
 		protected void onPostExecute(String result) {
-			// textView.setText(result);
-//			ChartData.getSingletonInstance().data = new GraphViewData[ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().size()][];
-//			//GraphViewData[] data = new GraphViewData[10];
-//			ArrayList<Double> data = new ArrayList<Double>();
-//			//List<ParameterConstruct> pclist = new ArrayList<ParameterConstruct>();
-//			StringTokenizer strtok = new StringTokenizer(result,"###");
-//			int index = 0;
-//			while(strtok.hasMoreElements()){
-//				Log.i("asdasD", result);
-//				try {
-//					String temp = strtok.nextToken();
-//					System.out.println("---" + temp);
-//					JSONObject obj = new JSONObject(temp);
-//					int i=1;
-//					while(true)
-//					{
-//
-//						try{
-//							if(obj.getJSONArray(i+"")!=null){
-//								//GraphViewData temp = new GraphViewData(i-1,Double.parseDouble(obj.getJSONArray(i+"").getString(2)));
-//								//data[i-1]=new GraphViewData(i-1,Double.parseDouble(obj.getJSONArray(i+"").getString(2)));
-//								data.add(Double.parseDouble(obj.getJSONArray(i+"").getString(2)));
-//								//Log.i("chkthis",data[i-1]+"");
-//							}
-//							else
-//								break;
-//							i++;
-//
-//						}
-//						catch(Exception e){
-//							break;
-//						}
-//					}
-//					GraphViewData[] tempd=new GraphViewData[data.size()];
-//					for(int k=0;k<data.size();k++)
-//					{
-//						tempd[k]=new GraphViewData(k,data.get(k));
-//					}
-//					ChartData.getSingletonInstance().data[index] = new GraphViewData[i-1];
-//					Log.i("SHOW1", data.size()+"");
-//
-//					ChartData.getSingletonInstance().data[index]=tempd;
-//					Log.i("SHOW2", ChartData.getSingletonInstance().data[index].length+"");
-//					index++;
-//					data.clear();
-//
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} 
-//
-//
-//				//				if(index==1)
-//				//					break;
-//			}
+
 
 
 			if (dialog.isShowing()) {

@@ -30,6 +30,7 @@ public class SaveButtonController implements OnClickListener {
 	ImageButton delete;
 	String setid;
 	Context context;
+	private int type;
 
 
 //	public SaveButtonController(String flag, EditText id, EditText name,
@@ -51,7 +52,7 @@ public class SaveButtonController implements OnClickListener {
 
 	public SaveButtonController(String flag, EditText id, EditText name,
 			EditText brand, EditText notes, ImageButton delete,
-			String setid, Context context) {
+			String setid,int type, Context context) {
 		// TODO Auto-generated constructor stub
 		this.flag = flag;
 		this.id = id;
@@ -61,6 +62,7 @@ public class SaveButtonController implements OnClickListener {
 		this.delete = delete;
 		this.setid = setid;
 		this.context = context;
+		this.type = type;
 		
 	}
 
@@ -87,6 +89,7 @@ public class SaveButtonController implements OnClickListener {
 		sensor.setLocation(location);
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
+		sensor.setType(type);
 		Log.i("wqertytuyio", setid);
 		sensor.setSetid(setid);
 		
