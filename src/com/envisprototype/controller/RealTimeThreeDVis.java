@@ -5,25 +5,28 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.view.processing.BarGraphSet;
+import com.envisprototype.view.processing.EnvisPApplet;
+import com.envisprototype.view.processing.SensorSet;
+import com.envisprototype.view.processing.SphereGraphSet;
+import com.envisprototype.view.processing.ThreeDVis;
 
 public class RealTimeThreeDVis  implements Runnable{
 	
 	//Runnable runnable;
 	String sensorId;
 	Context context;
-	BarGraphSet barGraphSet;
-	public RealTimeThreeDVis(String sensorId, Context context, BarGraphSet bargraphSet){
+	//SensorSet sensor;
+	public RealTimeThreeDVis(String sensorId, Context context){
 		//this.index=index;
 		//		this.view = view;
 		this.sensorId = sensorId;
 		this.context = context;
-		this.barGraphSet = bargraphSet;
+		//this.sensor = sensor;
 	}
 	
 	@Override
@@ -83,17 +86,28 @@ public class RealTimeThreeDVis  implements Runnable{
 			}
 			Log.i("DATAFORREALTIME",tempdata+"");
 			//exampleSeries2.appendData(new GraphViewData(graph1LastXValue, tempdata ), true, 10);
-				if(tempdata!=null)
-			barGraphSet.getReadingsList().set(0,new Float(tempdata));
+				if(tempdata!=null){
+					//ThreeDVis.getSensorReadings().put(sensorId, tempdata.floatValue());
+					for(SphereGraphSet spehereSet: EnvisPApplet.getSphereGraphList()){
+						if(spehereSet.getSensorID().equals(sensorId))
+							spehereSet.setReadingForSphere(tempdata.floatValue());
+					}
+					for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
+						if(barSet.getSensorID().equals(sensorId)){
+							barSet.getBarGraphList().get(0).setReading(tempdata.floatValue());
+						}
+					}
+				}
+			//barGraphSet.getReadingsList().set(0,new Float(tempdata));
 		}
 
-		BarGraphSet.mHandler.postDelayed(runnable, 200);
+		SensorSet.mHandler.postDelayed(runnable, 200);
 
 	}
 	
 	
 	public void removeCallbacks() {
-		BarGraphSet.mHandler.removeCallbacks(runnable);
+		SensorSet.mHandler.removeCallbacks(runnable);
 	}
 	
 	}

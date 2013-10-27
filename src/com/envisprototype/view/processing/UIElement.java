@@ -12,12 +12,12 @@ import com.envisprototype.controller.processing.eventListeners.EnvisEventClass;
 
 public abstract class UIElement {
 	protected EnvisPApplet epApplet;
-	protected String name;
-	public String getName() {
-		return name;
+	protected String text;
+	public String getText() {
+		return text;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setText(String text) {
+		this.text = text;
 	}
 	public static float[] color = {123,123,123};
 	public static final int R = 0, G = 1, B = 2;
@@ -79,12 +79,12 @@ public abstract class UIElement {
 
 	public UIElement(EnvisPApplet epApplet) {
 		this.epApplet = epApplet;
-		this.name = "";
+		this.text = "";
 	}
 	
 	public UIElement(EnvisPApplet epApplet, String name) {
 		this.epApplet = epApplet;
-		this.name = name;
+		this.text = name;
 	}
 	
 	public abstract void drawMe();

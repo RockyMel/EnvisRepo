@@ -2,8 +2,11 @@ package com.envisprototype.view.processing;
 
 import processing.core.PApplet;
 
+import com.envisprototype.controller.RealTimeThreeDVis;
 import com.envisprototype.model.processing.Coordinates;
 
+import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
 
 public class SensorSet extends UIElement{
@@ -12,10 +15,24 @@ public class SensorSet extends UIElement{
 	float realX, realY, realZ;
 	protected int SET_STROKE_WEIGHT = 20;
 	private boolean ifSensor = true;
+	RealTimeThreeDVis realTimeUpdates;
+	public static Handler mHandler;
 	
 	public SensorSet(EnvisPApplet epApplet, String id){
 		super(epApplet);
 		this.id = id;
+		if(mHandler == null){
+			 Activity activity=(Activity) this.epApplet; 
+			    activity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						mHandler = new Handler();
+					}
+				});
+		}
+		realTimeUpdates = new RealTimeThreeDVis(id, epApplet);
 	}
 
 	public SensorSet(EnvisPApplet epApplet, String id, float x, float y, float z) {
@@ -26,12 +43,12 @@ public class SensorSet extends UIElement{
 		this.realX = x;
 		this.realY = y;
 		this.realZ = z;
-		printCoors();
+		printCoors();	
 	}
 	
 	public SensorSet(EnvisPApplet epApplet, String id, String name, float x, float y, float z) {
 		this(epApplet, id, x, y, z);
-		this.name = name;
+		this.text = name;
 		printCoors();
 	}
 	
@@ -182,6 +199,8 @@ public class SensorSet extends UIElement{
 		this.ifSensor = ifSensor;
 	}
 	
-	
+	public void startRealTime(){
+		mHandler.postDelayed(realTimeUpdates, 200);
+	}
 
 }

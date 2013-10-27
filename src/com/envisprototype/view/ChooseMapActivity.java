@@ -16,29 +16,29 @@ import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 
 public class ChooseMapActivity extends EnvisActivity {
-	
+
 	String mapId = null;
 	String sensorId = null;
 	String setId = null;
 	String flag = null;
 	Intent intent = new Intent();
-	
+
 	ImageButton mapByNameBtn, scanQRBtn, nearestMapsBtn;
 	Button chooseSensorsBtn, plotToMapBtn;
 	final Activity context = this;
 	TextView mapIdTv, mapNameTv, mapLocationTv, mapNotesTv;
-	
+
 	public static final int MAP_BY_NAME = 1;
 	public static final int MAP_BY_LOCATION = 2;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choose_map);
 		//NavigationMaker.makeDropDownMenu(this,R.array.map_drop_down);
 	}
-	
+
 	@Override
 	public void onResume(){
 		super.onResume();
@@ -61,7 +61,7 @@ public class ChooseMapActivity extends EnvisActivity {
 		//getMenuInflater().inflate(R.menu.visualisation, menu);
 		return true;
 	}
-	
+
 	private void init(){
 		mapIdTv = (TextView) findViewById(R.id.mapIDTV);
 		mapNameTv = (TextView) findViewById(R.id.mapNameTV);
@@ -77,37 +77,37 @@ public class ChooseMapActivity extends EnvisActivity {
 			plotToMapBtn.setVisibility(Button.INVISIBLE);
 		}
 		mapByNameBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(context, MapListActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				if(flag != null)
 					intent.putExtra(v.getContext().getString(R.string.flags),
 							flag);
 				context.startActivityForResult(intent, MAP_BY_NAME);
 			}
 		});
-		
+
 		nearestMapsBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(context, MapListActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				//				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				if(flag != null)
 					intent.putExtra(v.getContext().getString(R.string.flags),
 							flag);
 				context.startActivityForResult(intent, MAP_BY_LOCATION);
 			}
 		});
-		
+
 		chooseSensorsBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -118,9 +118,9 @@ public class ChooseMapActivity extends EnvisActivity {
 				context.startActivity(intent);
 			}
 		});
-		
+
 		plotToMapBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -129,31 +129,31 @@ public class ChooseMapActivity extends EnvisActivity {
 			}
 		});
 	}
-	
+
 	@Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        intent.putExtra(getString(R.string.request_code), requestCode);
-        super.startActivityForResult(intent, requestCode);
-    }
-	
+	public void startActivityForResult(Intent intent, int requestCode) {
+		intent.putExtra(getString(R.string.request_code), requestCode);
+		super.startActivityForResult(intent, requestCode);
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		 if(resultCode == RESULT_OK){   
-			 if((mapId = data.getExtras().getString("mapId"))!=null){
-				 //Log.i("id","in choose map result id = " + mapId);
-				 MapInterface map = MapListModel.getSingletonInstance().findMapById(mapId);
-				 init();
-				 Log.i("id","in choose map result id = " + map.getId());
-				 mapIdTv.setText(map.getId());
-				 mapNameTv.setText(map.getName());
-				 mapLocationTv.setText(map.getLocation().toString());
-				 mapNotesTv.setText(map.getNotes());
-				 chooseSensorsBtn.setVisibility(Button.VISIBLE);
-			 }
-				 
-	     }
-	     if (resultCode == RESULT_CANCELED) {    
-	         //Write your code if there's no result
-	     }
-	  }
+		if(resultCode == RESULT_OK){   
+			if((mapId = data.getExtras().getString("mapId"))!=null){
+				//Log.i("id","in choose map result id = " + mapId);
+				MapInterface map = MapListModel.getSingletonInstance().findMapById(mapId);
+				init();
+				Log.i("id","in choose map result id = " + map.getId());
+				mapIdTv.setText(map.getId());
+				mapNameTv.setText(map.getName());
+				mapLocationTv.setText(map.getLocation().toString());
+				mapNotesTv.setText(map.getNotes());
+				chooseSensorsBtn.setVisibility(Button.VISIBLE);
+			}
+
+		}
+		if (resultCode == RESULT_CANCELED) {    
+			//Write your code if there's no result
+		}
+	}
 }

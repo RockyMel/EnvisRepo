@@ -1,18 +1,27 @@
 package com.envisprototype.view.processing;
 
+import java.util.HashMap;
+import java.util.TreeMap;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 
 public class BarGraph {
 	private PApplet p;
-	private int color_hoverTrue, color_hoverFalse, color_selectedTrue, color_mainFill;
+	private int color_hoverFalse, color_selectedTrue, color_mainFill;
 	private int color_barOutline, color_barFill;
+	float[] colorRGB = { 0, 0, 0 };
 	private int z = 20; // bar graph width or z
 	private int x = 20; // bar graph length or x
 	private float h, reading;
+	private TreeMap<String, Float> readingRange = null;
 	public void setReading(float reading) {
 		this.reading = reading;
+		this.h = PApplet.map(reading, 0, 1000, 0, 100);
+	}
+	public void setReading(String timeStamp) {
+		this.reading = readingRange.get(timeStamp);
 		this.h = PApplet.map(reading, 0, 1000, 0, 100);
 	}
 
@@ -21,7 +30,6 @@ public class BarGraph {
 	private int SENSORTYPE_LIGHT = 2;
 	
 	private boolean selected;
-	private boolean hover;
 	private PFont f;
 	private int sensorType;
 	
@@ -32,15 +40,21 @@ public class BarGraph {
 		h = r;
 		sensorType = type;
 		
-
-		float[] colorRGB = { 0, 0, 0 };
-		color_hoverTrue = p.color(252, 216, 8);
-		color_hoverFalse = p.color(250);
 		color_selectedTrue = p.color(255, 202, 54);
 		color_mainFill = p.color(127);
 		
+		color_barOutline = p.color(255);
+		color_barFill = color_mainFill;
+		
+		selected = false;
+		f = p.createFont("Arial",14,true); 
+	}
+	
+	
+	public void display() {
+		
 		if (sensorType == SENSORTYPE_TEMP) {
-			float color_grad = PApplet.map(reading, 100, 0, 0, 250);
+			float color_grad = PApplet.map(reading, 1000, 0, 0, 250);
 			float[] colorAssigned = { 255, 0, 0 };		// for users to customize colors to sensor type
 			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
 					colorRGB[1]+colorAssigned[1]+color_grad, 
@@ -48,24 +62,21 @@ public class BarGraph {
 		}
 		
 		else if (sensorType == SENSORTYPE_LIGHT) {
-			float color_grad = PApplet.map(reading, 100, 0, 50, 250);
+			float color_grad = PApplet.map(reading, 1000, 0, 50, 250);
 			float[] colorAssigned = { 0, 0, 255 };		// for users to customize colors to sensor type
 			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
 					colorRGB[1]+colorAssigned[1]+color_grad, 
 					colorRGB[2]+colorAssigned[2]+color_grad, 127);
-//			color_mainFill = p.color(42, 223, 232 ,127);
 		}
 		
-		color_barOutline = color_hoverFalse;
-		color_barFill = color_mainFill;
+		if (this.selected) {
+			color_barFill = color_selectedTrue;
+		}
 		
-		selected = false;
-		hover = false;
-		f = p.createFont("Arial",14,true); 
-	}
-	
-	
-	public void display() {
+		else {
+			color_barFill = color_mainFill;
+		}
+		
 		
 		
 		p.pushMatrix();
@@ -78,20 +89,6 @@ public class BarGraph {
 	    
 	    p.pushMatrix();
 	    
-	    if (this.hover) {
-			color_barOutline = color_hoverTrue;
-		}
-		else {
-			color_barOutline = color_hoverFalse;
-		}
-		
-		if (this.selected) {
-			color_barFill = color_selectedTrue;
-		}
-		
-		else {
-			color_barFill = color_mainFill;
-		}
 		
 		p.stroke(color_barOutline);
 		p.fill(color_barFill);
@@ -173,14 +170,13 @@ public class BarGraph {
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
-
-	public boolean isHover() {
-		return hover;
+	public TreeMap<String, Float> getReadingRange() {
+		return readingRange;
+	}
+	public void setReadingRange(TreeMap<String, Float> readingRange) {
+		this.readingRange = readingRange;
 	}
 
-	public void setHover(boolean hover) {
-		this.hover = hover;
-	}
 
 
 }

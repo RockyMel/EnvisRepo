@@ -1,17 +1,14 @@
 package com.envisprototype.view.processing;
 
 import android.util.Log;
-import android.view.KeyEvent;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.processing.dragListeners.DrawFreePolygonBtnListener;
 import com.envisprototype.controller.processing.dragListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.dragListeners.DrawingScopeListener;
-import com.envisprototype.controller.processing.dragListeners.ZCoorBtnListener;
 import com.envisprototype.controller.processing.dragListeners.ZMapSizeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.AddToDrawingScopeListener;
 import com.envisprototype.controller.processing.eventListeners.DrawRectMapBtnListener;
-import com.envisprototype.controller.processing.eventListeners.ExitFromDrawMapAppletListener;
 import com.envisprototype.controller.processing.eventListeners.RemoveLastNodeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
 
@@ -78,6 +75,8 @@ public void draw(){
   else{
 	  threeDDrawPreset(false); // false - no sets of sensors will be displayed
 	  zCoorSpinner.drawMe();
+	  zoom.drawMe();
+	  closeFigure.drawMe();
 	  zCoorSpinner.fireDragEvent();
   }
 }
@@ -92,6 +91,7 @@ public void mouseReleased(){
 		removeLastNodeBtn.fireEvent();
 	}
 	else{
+		closeFigure.fireEvent();
 	}
 }
 

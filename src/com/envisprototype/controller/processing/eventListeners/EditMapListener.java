@@ -40,14 +40,14 @@ public class EditMapListener implements EnvisButtonListener{
 				Log.i("edit", "Node to remove id: " + nodeToModify);
 				if(nodeToModify != -1){
 					envisMap.removeNode(nodeToModify);
-					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
+					envisPApplet.getSaveMap().setText(envisPApplet.getString(R.string.save));
 					//ifDelete = false;
 					}
 			}
 			if(ifDrag){
 				if(nodeToModify != -1){
-					envisMap.dragNode(nodeToModify);
-					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
+					envisMap.dragNode(nodeToModify, mouseX, mouseY);
+					envisPApplet.getSaveMap().setText(envisPApplet.getString(R.string.save));
 					//ifDrag = false;
 					}
 			}
@@ -70,12 +70,14 @@ public class EditMapListener implements EnvisButtonListener{
 //					float[] center = envisMap.calculateMiddleCoors();
 					envisMap.addNewNode(0, 0);
 					envisMap.shiftNodes(envisMap.getHighlightedNode());
-					envisMap.dragNode(envisMap.getHighlightedNode(), tempX, tempY);	
+					//envisMap.dragNode(envisMap.getHighlightedNode(), tempX, tempY);
+					//envisMap.dragNode(envisMap.getHighlightedNode());
+					envisMap.dragNode(envisMap.getHighlightedNode(), mouseX, mouseY);
 					addingStep = 0;
-					envisPApplet.getAddNodeBtn().setName(envisPApplet.getString(R.string.add_node));
+					envisPApplet.getAddNodeBtn().setText(envisPApplet.getString(R.string.add_node));
 					isAdding = false;
 					envisMap.setHighlightedNode(-1);
-					envisPApplet.getSaveMap().setName(envisPApplet.getString(R.string.save));
+					envisPApplet.getSaveMap().setText(envisPApplet.getString(R.string.save));
 				}
 					
 //				  }

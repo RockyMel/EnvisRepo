@@ -24,19 +24,16 @@ public class BarGraphSet extends AbstractEnvisButton {
 	PFont font;
 	int timeRangeType;
 	
-	RealTimeThreeDVis realTimeUpdates;
-	public static Handler mHandler;
-	
 	private static int SENSORTYPE_TEMP = 1;
 	
-	private ArrayList<Float> readingsList;
-	public ArrayList<Float> getReadingsList() {
-		return readingsList;
-	}
-
-	public void setReadingsList(ArrayList<Float> readingsList) {
-		this.readingsList = readingsList;
-	}
+	//private ArrayList<Float> readingsList;
+//	public ArrayList<Float> getReadingsList() {
+//		return readingsList;
+//	}
+//
+//	public void setReadingsList(ArrayList<Float> readingsList) {
+//		this.readingsList = readingsList;
+//	}
 
 
 
@@ -57,30 +54,23 @@ public class BarGraphSet extends AbstractEnvisButton {
 		font = p.createFont("Arial",14,true);
 		midpoint_x = p.displayWidth/2;
 		midpoint_y = p.displayHeight/2;
-		if(mHandler == null){
-			 Activity activity=(Activity) this.epApplet; 
-			    activity.runOnUiThread(new Runnable() {
-					
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						mHandler = new Handler();
-					}
-				});
-		}
+
 		
 		barGraphList = new ArrayList<BarGraph>();
 		//graphCoords = new ArrayList<Coords>();
 		this.sensorID = sensorID;
 		
-		readingsList = new ArrayList<Float>();
-		readingsList.add(100.0f);
+//		readingsList = new ArrayList<Float>();
+//		readingsList.add(100.0f);
 //		readingsList.add((float)24.6);
 //		readingsList.add((float)88.4);
 		
 		/* timeRangeType == 1 is for real time */
 		if (timeRangeType == 1) {
-			barGraphList.add(new BarGraph(p, readingsList.get(0), SENSORTYPE_TEMP));
+			//barGraphList.add(new BarGraph(p, readingsList.get(0), SENSORTYPE_TEMP));
+			BarGraph toAdd = new BarGraph(p, 0, SENSORTYPE_TEMP);
+			barGraphList.add(toAdd);
+			//toAdd.setReading(ThreeDVis.getSensorReadings().get(sensorID));
 			addGeneratedCoors();
 		}
 		
@@ -94,7 +84,6 @@ public class BarGraphSet extends AbstractEnvisButton {
 //		}
 		
 		p.getEnvisSensors().get(sensorID);
-		realTimeUpdates = new RealTimeThreeDVis(sensorID, p, this);
 		
 	}
 	
@@ -185,7 +174,8 @@ public class BarGraphSet extends AbstractEnvisButton {
 			p.text(sensorID, 0,	0,barGraphList.get(j).getHeight());
 			//barGraphList.get(j).setReading(readingsList.get(0));
 			//hover(j);
-			barGraphList.get(j).setReading(readingsList.get(0));
+			//barGraphList.get(j).setReading(readingsList.get(0));
+			//barGraphList.get(j).setReading(ThreeDVis.getSensorReadings().get(sensorID));
 			barGraphList.get(j).display();
 			p.popMatrix();
 //			p.translate(-p.getEnvisSensors().get(sensorID).getX(), 
@@ -261,8 +251,5 @@ public class BarGraphSet extends AbstractEnvisButton {
 		
 	}
 	
-	public void startRealTime(){
-		mHandler.postDelayed(realTimeUpdates, 200);
-	}
 
 }

@@ -27,7 +27,7 @@ public class ZCoorBtnListener extends AbstractPlotBtnListener{
 					if(set != null){
 						set.setZ(((ZCoorSpinner) eButton).calcZ(spApplet.getEnvisMap()));
 						set.setRealZ(((ZCoorSpinner) eButton).calcZ(spApplet.getEnvisMap())+spApplet.getEnvisMap().getCOOR_Z()/2);
-						spApplet.getOkBtn().setName(spApplet.getString(R.string.save));
+						spApplet.getOkBtn().setText(spApplet.getString(R.string.save));
 					}
 				}
 			}

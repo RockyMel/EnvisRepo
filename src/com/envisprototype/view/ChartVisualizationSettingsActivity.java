@@ -44,7 +44,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 	Switch RealTimeSwitch;
 	Button VisualizationButton;
 	ListView sensorlist;
-	
+
 	String mapId = null;
 
 	protected static final int From_DATE_PICKER_DIALOG = 0;
@@ -70,7 +70,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chart_visualization_settings);
 		init();
-		
+
 
 	}
 
@@ -96,19 +96,19 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		QRButton = (Button)findViewById(R.id.QR);
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
 		sensorlist = (ListView)findViewById(R.id.chosensensorslist);
-//		if(if3DVis == false)
-//			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
-//		else{
-//			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
-//		}
+		//		if(if3DVis == false)
+		//			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+		//		else{
+		//			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+		//		}
 		final Context context = this;
-		
-SetsButton.setOnClickListener(new OnClickListener() {
-			
+
+		SetsButton.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				Intent intent = new Intent(context,SetListActivity.class);
+				//				Intent intent = new Intent(context,SetListActivity.class);
 				Intent intent = new Intent(context,SetsForMapExpandableListView.class);
 				if(mapId!= null){
 					intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
@@ -129,7 +129,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 				}
 				v.getContext().startActivity(intent);
 			}
-			
+
 		});
 
 		RealTimeSwitch = (Switch)findViewById(R.id.switchforrealtime);
@@ -374,7 +374,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 
 		sensorlist.setAdapter(cvsla);
-		
+
 
 	}
 
@@ -392,12 +392,12 @@ SetsButton.setOnClickListener(new OnClickListener() {
 
 		ChartVisualizationSettingsModel.getSingletonInstance().setFrom(this.calfrom);
 		ChartVisualizationSettingsModel.getSingletonInstance().setTo(this.calto);
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 	}
 
 }

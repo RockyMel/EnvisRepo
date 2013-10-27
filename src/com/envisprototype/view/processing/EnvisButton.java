@@ -46,8 +46,8 @@ public class EnvisButton extends AbstractEnvisButton{
 	public void drawRect(){
 		epApplet.pushMatrix();
 		epApplet.noFill();
-		if(defW < epApplet.textWidth(name))
-			defW = (int) (epApplet.textWidth(name)+xOffset+1);
+		if(defW < epApplet.textWidth(text))
+			defW = (int) (epApplet.textWidth(text)+xOffset+1);
 		epApplet.rect(defX, defY, defW, defH, radii);
 		epApplet.popMatrix();
 	}
@@ -55,7 +55,7 @@ public class EnvisButton extends AbstractEnvisButton{
 	public void drawText(){
 		epApplet.pushMatrix();
 		epApplet.fill(color[R],color[G], color[B]);
-		epApplet.text(name, defX+xOffset, defY+textSize-yOffset);
+		epApplet.text(text, defX+xOffset, defY+textSize-yOffset);
 		epApplet.popMatrix();
 	};
 

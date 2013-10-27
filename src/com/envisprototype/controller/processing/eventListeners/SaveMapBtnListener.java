@@ -7,6 +7,7 @@ import android.util.Log;
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.view.processing.DrawMapApplet;
 import com.envisprototype.view.processing.EnvisPApplet;
 
 public class SaveMapBtnListener extends AbstractEnvisButtonListener{
@@ -25,11 +26,13 @@ public class SaveMapBtnListener extends AbstractEnvisButtonListener{
 			eButton.getEpApplet().getEnvisMap().closeFigure();
 			if(eButton.getEpApplet().getEnvisMap().isIfCentered()){
 				Coordinates coorsToSave = eButton.getEpApplet().getEnvisMap().getRealCoors();
+				Log.i("zzz",Integer.toString(eButton.getEpApplet().getEnvisMap().getCOOR_Z()));
 				MapLocalDBHelper.getSingletonInstance(eButton.getEpApplet()).
 				saveCoorsForMap(eButton.getEpApplet().getEnvisMap().getMapId(),
 						coorsToSave, eButton.getEpApplet().getEnvisMap().getCOOR_Z());
-				eButton.setName(eButton.getEpApplet().getString(R.string.saved));
-				//eButton.getEpApplet().getEnvisMap().translateToMiddle();
+				eButton.setText(eButton.getEpApplet().getString(R.string.saved));
+//				if(eButton.getEpApplet() instanceof DrawMapApplet)
+//					eButton.getEpApplet().getEnvisMap().translateToMiddle();
 			}
 			//eButton.getEpApplet().getEnvisMap().translateToMiddle();
 		}

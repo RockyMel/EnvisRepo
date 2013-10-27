@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import android.util.Log;
+
 public class ZCoorSpinner extends EnvisButton{
 	
 	private float xLine, yLine, maxX;

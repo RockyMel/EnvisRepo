@@ -18,29 +18,30 @@ public class Show3DMapBtnListener implements OnClickListener{
 	ArrayList<String> setIds;
 	ArrayList<String> sensorIds;
 	int MODE;
-	Calendar calfrom;
-	Calendar calto;
+	String fromstr;
+	String tostr;
+	Calendar from;
+	Calendar to;
 	public Show3DMapBtnListener(String id) {
 		// TODO Auto-generated constructor stub
 		this.mapId = id;
 	}
-	
-	
+
+
 	//FOR HISTORICAL
 	public Show3DMapBtnListener(
 			Context context, String mapId,
-			ArrayList<String> setIds, ArrayList<String> sensorIds,int MODE,Calendar calfrom,Calendar calto) {
+			ArrayList<String> setIds, ArrayList<String> sensorIds,int MODE,Calendar from,Calendar to) {
 		// TODO Auto-generated constructor stub
 		this.mapId = mapId;
 		this.context = context;
 		this.setIds = setIds;
 		this.sensorIds = sensorIds;
 		this.MODE = MODE;
-		this.calfrom = calfrom;
-		this.calto = calto;
-		
-		
-		
+		this.from = from;
+		this.to = to;
+		fromstr = from.get(Calendar.YEAR) + "-" + from.get(Calendar.MONTH) + "-" + from.get(Calendar.DAY_OF_MONTH)+ " " + from.get(Calendar.HOUR_OF_DAY) + ":" + from.get(Calendar.MINUTE) + ":10";
+		tostr = to.get(Calendar.YEAR) + "-" + (to.get(Calendar.MONTH)+1) + "-" + to.get(Calendar.DAY_OF_MONTH)+ " " + to.get(Calendar.HOUR_OF_DAY) + ":" + to.get(Calendar.MINUTE) + ":10";
 	}
 
 	//FOR REAL TIME
@@ -63,8 +64,11 @@ public class Show3DMapBtnListener implements OnClickListener{
 		intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
 		intent.putStringArrayListExtra(v.getContext().getString(R.string.sets_to_vis_extra), setIds);
 		intent.putStringArrayListExtra(v.getContext().getString(R.string.sensors_to_vis_extra), sensorIds);
-		// !!!!! add sets + sensors ids + coordinates
-		//intent.putExtra(v.getContext().getString(R.string.set_coor_extra, value)
+		if(MODE == 0){
+			intent.putExtra(v.getContext().getString(R.string.date_flag), v.getContext().getString(R.string.date_flag));
+			intent.putExtra(v.getContext().getString(R.string.from_date_flag), fromstr);
+			intent.putExtra(v.getContext().getString(R.string.to_date_flag), tostr);
+		}
 		context.startActivity(intent);
 	}
 

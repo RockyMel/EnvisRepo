@@ -44,6 +44,7 @@ public class MapViewButtonController implements OnClickListener{
 				intent.putExtra(view.getContext().getString(R.string.flags),
                         view.getContext().getString(R.string.plot_flag_extra));
 				((Activity) view.getContext()).startActivity(intent);
+				((Activity) view.getContext()).finish();
 			}
 		}
 		switch(mode){

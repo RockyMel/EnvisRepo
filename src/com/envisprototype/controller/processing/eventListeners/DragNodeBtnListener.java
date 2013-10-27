@@ -14,15 +14,15 @@ public class DragNodeBtnListener extends AbstractEditMapListener{
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
 			if(!EditMapListener.isIfDrag()){
-				eButton.setName(eButton.getEpApplet().getString(R.string.stop_drag_node_btn));
-				editMapApplet.getDeleteNodeBtn().setName(editMapApplet.getString(R.string.delete_node_btn));
-				editMapApplet.getAddNodeBtn().setName(editMapApplet.getString(R.string.add_node));
+				eButton.setText(eButton.getEpApplet().getString(R.string.stop_drag_node_btn));
+				editMapApplet.getDeleteNodeBtn().setText(editMapApplet.getString(R.string.delete_node_btn));
+				editMapApplet.getAddNodeBtn().setText(editMapApplet.getString(R.string.add_node));
 				EditMapListener.setIfDrag(true);
 				EditMapListener.setIfDelete(false);
 				EditMapListener.setAdding(false);
 			}
 			else{
-				eButton.setName(eButton.getEpApplet().getString(R.string.drag_node_btn));
+				eButton.setText(eButton.getEpApplet().getString(R.string.drag_node_btn));
 				EditMapListener.setIfDrag(false);
 				}
 			}
