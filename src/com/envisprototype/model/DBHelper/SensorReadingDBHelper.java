@@ -17,10 +17,10 @@ import android.widget.Toast;
 
 public class SensorReadingDBHelper {
 	final static String nameSpace = "http://api.webservice.envis.com";  
-	final static String endPoint = "http://115.146.94.162:8080/EnvisAWS/services/DataProvider?wsdl";  
+	final static String endPoint = "http://115.146.92.166/EnvisAWS/services/DataProvider?wsdl";  
 
 
-
+//http://115.146.94.162:8080/EnvisAWS/services/DataProvider
 
 	public static String getDataReadingSensorByHisTimeJSON(String SensorID,String datefrom,String dateto){
 		String methodName = "getSensorReadingByHisTime";
@@ -69,7 +69,7 @@ public class SensorReadingDBHelper {
 	}
 	public static String getDataReadingBySensorIDJSON(String SensorID,Context context){
 		Log.i("idddddd", SensorID);
-		String methodName = "getDataReadingBySensorID";
+		String methodName = "getSensorReadingByRealTime";
 		String soapAction = nameSpace + "/" + methodName;
 
 		//Boolean response;
@@ -77,7 +77,7 @@ public class SensorReadingDBHelper {
 		SoapObject rpc = new SoapObject(nameSpace, methodName);   
 	
 		rpc.addProperty("sensorID", SensorID);
-		rpc.addProperty("dataFormat", 1);
+		rpc.addProperty("dataType", 1);
 
 
 

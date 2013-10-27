@@ -23,7 +23,7 @@ import com.envisprototype.model.set.SetListModel;
 public class SaveButtonController implements OnClickListener {
 
 	String flag;
-	EditText id;
+	TextView id;
 	EditText name;
 	EditText brand;
 	EditText notes;
@@ -50,7 +50,7 @@ public class SaveButtonController implements OnClickListener {
 //
 //	}
 
-	public SaveButtonController(String flag, EditText id, EditText name,
+	public SaveButtonController(String flag, TextView id, EditText name,
 			EditText brand, EditText notes, ImageButton delete,
 			String setid,int type, Context context) {
 		// TODO Auto-generated constructor stub

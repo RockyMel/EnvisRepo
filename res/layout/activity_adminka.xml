@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+     android:background="@drawable/app_background">
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,14 +16,6 @@
         android:layout_weight="8" >
 
         </ExpandableListView>
-
-    <Button
-        android:id="@+id/map_by_name_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_gravity="center_horizontal"
-        android:text="Button" />
 
 </LinearLayout>
 <include layout="@layout/for_drawer" />

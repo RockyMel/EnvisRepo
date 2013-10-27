@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class NewSensorInfoViewActivity extends Activity{
-	private EditText id;
+	private TextView id;
 	private TextView sensortype;
 	private EditText brand;
 	private EditText name;
@@ -61,7 +61,11 @@ public class NewSensorInfoViewActivity extends Activity{
 		Log.i("nsiva", setid);
 		flag=getIntent().getStringExtra("flag");
 		if(flag.equals("new"))
+			{
 			typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
+			sensorid= getIntent().getStringExtra("sensorid");
+
+			}
 		else
 			sensorid= getIntent().getStringExtra("sensorid");
 		init();
@@ -73,7 +77,7 @@ public class NewSensorInfoViewActivity extends Activity{
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		id = (EditText)findViewById(R.id.ID);
+		id = (TextView)findViewById(R.id.ID);
 		brand = (EditText)findViewById(R.id.BRAND);
 		name = (EditText)findViewById(R.id.NAME);
 		notes = (EditText)findViewById(R.id.NOTES);
@@ -107,11 +111,11 @@ public class NewSensorInfoViewActivity extends Activity{
 			typeImage.setImageResource(R.drawable.light);
 			sensortype.setText("New Light Sensor");
 		}
-		if(typercvd == 4){
+		if(typercvd == 5){
 			typeImage.setImageResource(R.drawable.temp);
 			sensortype.setText("New Temperature Sensor");	
 		}
-		if(typercvd == 5){
+		if(typercvd == 4){
 			typeImage.setImageResource(R.drawable.ir);
 			sensortype.setText("New Motion Sensor");	
 		}
@@ -142,16 +146,14 @@ public class NewSensorInfoViewActivity extends Activity{
 
 		if(flag.equals("new"))
 		{
-			id.setText("S1ZZZ");
+			id.setText(sensorid);
 			sensor.setSetid(setid);
-			//	type.setText(typercvd+"");
 			delete.setVisibility(ImageButton.INVISIBLE);
 		}
 		else
 		{
 			id.setText(sensor.getId().toString());
 			name.setText(sensor.getName());
-			//type.setText(sensor.getType());
 			brand.setText(sensor.getBrand());
 			notes.setText(sensor.getNotes());
 
@@ -166,65 +168,6 @@ public class NewSensorInfoViewActivity extends Activity{
 		// TODO Auto-generated method stub
 
 		super.onPause();
-		/*
-		Location myloc=  new Location(LocationManager.NETWORK_PROVIDER);
-		if(flag.equals("new"))
-		{
-
-
-			GPSTracker gps = new GPSTracker(this);
-			double latitude = 0;
-			double longitude = 0;
-
-			if(gps.canGetLocation()){
-
-				latitude = gps.getLatitude();
-				longitude = gps.getLongitude();
-
-				// \n is for new line
-				//Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();	
-			}else{
-				// can't get location
-				// GPS or Network is not enabled
-				// Ask user to enable GPS/network in settings
-				gps.showSettingsAlert();
-			}
-
-			myloc.setLatitude(latitude);
-			myloc.setLongitude(longitude);
-
-			sensor.setId(id.getText().toString());
-			sensor.setName(name.getText().toString());
-			sensor.setLocation(myloc);
-			sensor.setBrand(brand.getText().toString());
-			sensor.setNotes(notes.getText().toString());
-			sensor.setType(type.getText().toString());
-			sensor.setSetid(setid);
-
-			SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(id.getText().toString());
-			if(temp!=null)
-			{
-				SensorListModel.getSingletonInstance().removeSensor(temp);
-				SensorListModel.getSingletonInstance().addSensor(sensor);
-			}
-			else
-				SensorListModel.getSingletonInstance().addSensor(sensor);
-
-		}
-
-
-		if(!del){
-			sensor.setId(id.getText().toString());
-			sensor.setName(name.getText().toString());
-
-			SensorListModel.getSingletonInstance().removeSensor(sensor);
-			SensorListModel.getSingletonInstance().addSensor(sensor);
-		}
-		else
-			del = false;
-
-
-		 */
 
 	}
 

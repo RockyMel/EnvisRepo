@@ -17,7 +17,7 @@ public class AddSensorButtonController implements OnClickListener {
 	List<SensorInterface> sli;
 	String flag;
 	Context context;
-	private EditText id;
+
 	public AddSensorButtonController(String setid,
 			List<SensorInterface> sli, String flag,
 			Context context) {
@@ -29,15 +29,7 @@ public class AddSensorButtonController implements OnClickListener {
 		this.context=context;
 	}
 
-	public AddSensorButtonController(EditText id, List<SensorInterface> list,
-			String flag2, Context context) {
-		// TODO Auto-generated constructor stub
-		this.id =id;
-		this.setid=setid;
-		this.sli=sli;
-		this.flag=flag;
-		this.context=context;
-	}
+
 
 	@Override
 	public void onClick(View view) {
@@ -45,7 +37,7 @@ public class AddSensorButtonController implements OnClickListener {
 		
 			Intent intent=new Intent(view.getContext(),ChooseSensorTypeActivity.class);
 			//intent.putExtra("mode", "sensor");
-			intent.putExtra("setid",id.getText().toString());
+			intent.putExtra("setid",setid);
 			//Log.i("test", setid);
 			//intent.putExtra("",id);
 			

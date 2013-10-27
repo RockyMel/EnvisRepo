@@ -147,7 +147,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 					TimeFromPickerButton.setVisibility(Button.INVISIBLE);
 					TimeToPickerButton.setVisibility(Button.INVISIBLE);
 					MODE = 1;
-					VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
 				} else {
 					DateFromPickerButton.setVisibility(Button.VISIBLE);
 					DateToPickerButton.setVisibility(Button.VISIBLE);

@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.DBHelper.SetInfoDBHelper;
@@ -29,7 +30,7 @@ public class SetSaveOnClickController implements OnClickListener {
 	ImageButton delete;
 	String flag;
 	SetInterface set;
-	EditText id;
+	TextView id;
 	EditText name;
 	EditText notes;
 	Location location;
@@ -53,7 +54,7 @@ public class SetSaveOnClickController implements OnClickListener {
 	//
 	//	}
 
-	public SetSaveOnClickController(SetInterface set, EditText id, String setid,
+	public SetSaveOnClickController(SetInterface set, TextView id2, String setid,
 			EditText name, EditText notes, 
 			ImageButton delete, ImageButton add, String flag,
 			Location location, Context context) {
@@ -67,7 +68,7 @@ public class SetSaveOnClickController implements OnClickListener {
 		this.context=context;
 		this.flag=flag;
 		this.add=add;
-		this.id=id;
+		this.id=id2;
 	}
 
 	@Override

@@ -8,10 +8,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
@@ -38,7 +38,7 @@ public class NewSetInfoViewActivity extends Activity {
 	String setid;
 	String flag;
 
-	EditText id;
+	TextView id;
 	EditText name;
 	EditText notes;
 
@@ -67,8 +67,9 @@ public class NewSetInfoViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_set_info_view);
-		//setid = getIntent().getStringExtra("setid");
+		setid = getIntent().getStringExtra("setid");
 		flag=getIntent().getStringExtra("flag");
+		
 		init();
 	}
 
@@ -105,7 +106,7 @@ public class NewSetInfoViewActivity extends Activity {
 	private void init() {
 		// TODO Auto-generated method stub
 
-		id= (EditText) findViewById(R.id.ID);
+		id= (TextView) findViewById(R.id.ID);
 		name= (EditText) findViewById(R.id.NAME);
 		notes= (EditText) findViewById(R.id.NOTES);
 		sensorlistview = (ListView) findViewById(R.id.listOfSensors);
@@ -153,6 +154,7 @@ public class NewSetInfoViewActivity extends Activity {
 
 		if(flag.equals("new"))
 		{
+			id.setText(setid);
 			//id.setText(setid);
 			Delete.setVisibility(ImageButton.INVISIBLE);
 			Add.setVisibility(ImageButton.INVISIBLE);
@@ -193,7 +195,7 @@ public class NewSetInfoViewActivity extends Activity {
 
 		}
 		//setid="set1";
-		Add.setOnClickListener(new AddSensorButtonController(id,list,flag,this));
+		Add.setOnClickListener(new AddSensorButtonController(setid,list,flag,this));
 
 
 

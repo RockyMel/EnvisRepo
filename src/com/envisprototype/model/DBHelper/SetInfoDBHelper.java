@@ -23,19 +23,14 @@ public class SetInfoDBHelper {
 
 	public static void addSet(SetInterface set){
 
-		//String[] args = { set.getId(),set.getName(),set.getLocation().getLongitude()+"",set.getLocation().getLongitude()+"",set.getNotes()};
 
 
 		String methodName = "addSets";
 		String soapAction = nameSpace + "/" + methodName;
 
-		//Boolean response;
 
 		SoapObject rpc = new SoapObject(nameSpace, methodName);   
-		//PropertyInfo pi = new PropertyInfo();
-		//Log.i("brand", newsensor.getBrand());
-		//String sensor_info=newsensor.getId()+";"+newsensor.getType()+";"+newsensor.getName()+";"+newsensor.getBrand()+";"+"active"+";"+newsensor.getLocation().getLongitude() + "" +";"+newsensor.getLocation().getLatitude() + ""+";"+newsensor.getNotes()+";"+"END";
-		//Log.i("testing",sensor_info);
+
 		rpc.addProperty("setInfos", set.getId());
 		rpc.addProperty("setInfos", set.getName());
 		rpc.addProperty("setInfos", set.getLocation().getLongitude()+"");
@@ -64,6 +59,37 @@ public class SetInfoDBHelper {
 
 
 
+	}
+
+
+	public static String generateSetID() {
+		// TODO Auto-generated method stub
+		String methodName = "generateSetID";
+		String soapAction = nameSpace + "/" + methodName;
+
+
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+
+
+
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);  
+
+		HttpTransportSE transport = new HttpTransportSE(endPoint); 
+		SoapPrimitive resultsRequestSOAP = null;
+		try {
+			transport.call(soapAction, envelope);
+			resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			System.out.println(resultsRequestSOAP.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		Log.i("SETDBHELPER", "done");
+		return resultsRequestSOAP.toString();
 	}
 
 

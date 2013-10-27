@@ -131,6 +131,10 @@
             android:name="com.envisprototype.view.RealTimeChartActivity"
             android:label="@string/title_activity_real_time_chart" >
         </activity>
+         <activity
+            android:name="com.envisprototype.view.NewRealTimeChartActivity"
+            android:label="@string/title_activity_real_time_chart" >
+        </activity>
         <activity
             android:name="com.envisprototype.view.RealTimeChartListActivity"
             android:label="@string/title_activity_real_time_chart_list" >

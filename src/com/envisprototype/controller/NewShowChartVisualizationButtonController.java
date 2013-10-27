@@ -19,8 +19,7 @@ import android.widget.LinearLayout;
 
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.view.NewChartActivity;
-import com.envisprototype.view.RealTimeChartActivity;
-import com.envisprototype.view.model.ChartData;
+import com.envisprototype.view.NewRealTimeChartActivity;
 import com.envisprototype.view.model.ChartDataByTypes;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.jjoe64.graphview.GraphView.GraphViewData;
@@ -179,7 +178,7 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 
 		}
 		if(MODE==1){
-			Intent intent = new Intent(context,RealTimeChartActivity.class);
+			Intent intent = new Intent(context,NewRealTimeChartActivity.class);
 			view.getContext().startActivity(intent);
 		}
 

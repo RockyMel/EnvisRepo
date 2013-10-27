@@ -17,6 +17,21 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="250dip"
 		    android:orientation="vertical" />
+		<LinearLayout
+		    android:id="@+id/graph3"
+		    android:layout_width="fill_parent"
+		    android:layout_height="250dip"
+		    android:orientation="vertical" />
+		<LinearLayout
+		    android:id="@+id/graph4"
+		    android:layout_width="fill_parent"
+		    android:layout_height="250dip"
+		    android:orientation="vertical" />
+		<LinearLayout
+		    android:id="@+id/graph5"
+		    android:layout_width="fill_parent"
+		    android:layout_height="250dip"
+		    android:orientation="vertical" />
 	</LinearLayout>
 	
 </ScrollView>
