@@ -231,5 +231,4 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 	
 
 
-
 }

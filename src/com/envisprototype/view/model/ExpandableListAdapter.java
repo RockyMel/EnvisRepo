@@ -9,7 +9,9 @@ import com.envisprototype.R;
 import com.envisprototype.controller.OneSensorChosenListener;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
+import com.envisprototype.model.set.SetModel;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -81,7 +83,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			childBox.setChecked(true);
 		if (sensorID != null){
 			SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensorID);
-			SetListModel.getSingletonInstance().findSetById(temp.getSetid()).getName();
+			
+			//SetListModel.getSingletonInstance().findSetById(temp.getSetid()).getName();
+			
+			SetInterface tempSM = SetListModel.getSingletonInstance().findSetById(temp.getSetid());
+			tempSM.getName();
 			childBox.setText(SetListModel.getSingletonInstance().findSetById(temp.getSetid()).getName() + "::" + temp.getName());
 			childBox.setOnCheckedChangeListener(new OneSensorChosenListener(context,sensorID));
 		}

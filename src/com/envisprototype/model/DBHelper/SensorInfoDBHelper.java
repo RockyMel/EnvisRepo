@@ -16,7 +16,7 @@ import com.envisprototype.model.sensor.SensorInterface;
 
 public class SensorInfoDBHelper {
 	final static String nameSpace = "http://api.webservice.envis.com";  
-	final static String endPoint = "http://115.146.94.162:8080/EnvisAWS/services/DataProvider?wsdl";  
+	final static String endPoint = "http://115.146.92.166/EnvisAWS/services/DataProvider?wsdl";  
 
 
 

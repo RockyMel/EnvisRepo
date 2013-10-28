@@ -45,14 +45,14 @@ public class NewRealTimeChartActivity extends Activity {
 	private GraphView graphView5;
 	boolean killMe = false;
 
-//	private GraphViewSeries exampleSeries1;
-//	private GraphViewSeries exampleSeries2;
+	//	private GraphViewSeries exampleSeries1;
+	//	private GraphViewSeries exampleSeries2;
 	private GraphViewSeries	seriesforaq[];
 	private GraphViewSeries	seriesforh[];
 	private GraphViewSeries	seriesforl[];
 	private GraphViewSeries	seriesfort[];
 	private GraphViewSeries	seriesforwl[];
-	
+
 	private double graphaqlastXValue[];
 	private double graphhlastXValue[];
 	private double graphllastXValue[];
@@ -64,8 +64,8 @@ public class NewRealTimeChartActivity extends Activity {
 	ChartDataByTypes templ=null; 
 	ChartDataByTypes tempt=null; 
 	ChartDataByTypes tempwl=null; 
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,8 +84,8 @@ public class NewRealTimeChartActivity extends Activity {
 		LinearLayout layout4 = (LinearLayout) findViewById(R.id.graph4);
 		LinearLayout layout5 = (LinearLayout) findViewById(R.id.graph5);
 
-		Log.i("asdqwe SIZE", ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(1).size()+"");
-	
+		Log.i("asdqwe SIZE", ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(5).size()+"");
+
 		if(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(1).size()>0)
 		{
 			tempaq	=  new ChartDataByTypes();
@@ -109,7 +109,7 @@ public class NewRealTimeChartActivity extends Activity {
 				graphView1.addSeries(seriesforaq[i]);
 
 			}
-		
+
 			graphaqlastXValue = new double[tempaq.list.size()];
 			for(int k=0;k<graphaqlastXValue.length;k++)
 			{
@@ -173,7 +173,7 @@ public class NewRealTimeChartActivity extends Activity {
 			{
 				graphllastXValue[k]=1.0d;
 			}
-		
+
 		}
 		if(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(5).size()>0)
 		{
@@ -203,7 +203,7 @@ public class NewRealTimeChartActivity extends Activity {
 			{
 				graphtlastXValue[k]=1.0d;
 			}
-			
+
 		}
 		if(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDListByType(6).size()>0)
 		{
@@ -237,13 +237,13 @@ public class NewRealTimeChartActivity extends Activity {
 			}
 
 		}
-		
-	
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 		if(tempaq==null)
 			layout1.setVisibility(View.GONE);
 		if(temph==null)
@@ -254,7 +254,7 @@ public class NewRealTimeChartActivity extends Activity {
 			layout4.setVisibility(View.GONE);
 		if(tempwl==null)
 			layout5.setVisibility(View.GONE);
-		
+
 
 	}
 
@@ -267,7 +267,7 @@ public class NewRealTimeChartActivity extends Activity {
 
 	@Override
 	protected void onPause() {
-		
+
 		killMe=true;
 		super.onPause();
 	}
@@ -281,8 +281,8 @@ public class NewRealTimeChartActivity extends Activity {
 			Log.i("in resume2", "yes");
 
 			mTimer1 = new Runnable() {
-				
-				
+
+
 				class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
 					//int index;
 
@@ -296,7 +296,7 @@ public class NewRealTimeChartActivity extends Activity {
 					protected String doInBackground(String... args) {
 
 						String response = "";
-				
+
 
 						for(int i=0;i<tempaq.list.size();i++)
 						{
@@ -344,8 +344,11 @@ public class NewRealTimeChartActivity extends Activity {
 								Log.i("DATAFORREALTIME",tempdata+"");
 								Log.i("LAST THINGY",tempdata+" -- "+seriesforaq[index]+" -- "+ graphaqlastXValue[index]);
 								graphaqlastXValue[index] +=1d;
-								seriesforaq[index].appendData(new GraphViewData(graphaqlastXValue[index], tempdata ), true, 10);
-								index++;
+								if(tempdata!=null)
+								{
+									seriesforaq[index].appendData(new GraphViewData(graphaqlastXValue[index], tempdata ), true, 10);
+									index++;
+								}
 							}
 							mHandler.postDelayed(runnable, 200);
 
@@ -353,7 +356,7 @@ public class NewRealTimeChartActivity extends Activity {
 						}
 					}
 				}
-				
+
 				@Override
 				public void run() {
 					if(killMe)
@@ -362,31 +365,31 @@ public class NewRealTimeChartActivity extends Activity {
 					task.execute("dummy");
 
 				}
-			
+
 			};
 			mHandler.postDelayed(mTimer1, 200);
 
 		}
-		
+
 		if(temph!=null){
 			Log.i("in resume2", "yesh");
 
 			mTimer2 = new Runnable() {
-				
-				
+
+
 				class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
 					//int index;
 
 					Runnable runnable;
 					GetRTSensorReadingTask(Runnable runnable){
-					
+
 						this.runnable = runnable;
 					}
 					@Override
 					protected String doInBackground(String... args) {
 
 						String response = "";
-				
+
 
 						for(int i=0;i<temph.list.size();i++)
 						{
@@ -432,8 +435,11 @@ public class NewRealTimeChartActivity extends Activity {
 								Log.i("DATAFORREALTIME",tempdata+"");
 								Log.i("LAST THINGY",tempdata+" -- "+seriesforh[index]+" -- "+ graphaqlastXValue[index]);
 								graphhlastXValue[index] +=1d;
-								seriesforh[index].appendData(new GraphViewData(graphhlastXValue[index], tempdata ), true, 10);
-								index++;
+								if(tempdata!=null)
+								{
+									seriesforh[index].appendData(new GraphViewData(graphhlastXValue[index], tempdata ), true, 10);
+									index++;
+								}
 							}
 							mHandler.postDelayed(runnable, 200);
 
@@ -441,7 +447,7 @@ public class NewRealTimeChartActivity extends Activity {
 						}
 					}
 				}
-				
+
 				@Override
 				public void run() {
 					if(killMe)
@@ -450,7 +456,7 @@ public class NewRealTimeChartActivity extends Activity {
 					task.execute("dummy");
 
 				}
-				
+
 			};
 			mHandler.postDelayed(mTimer1, 200);
 
@@ -459,8 +465,8 @@ public class NewRealTimeChartActivity extends Activity {
 			Log.i("in resume2", "yes");
 
 			mTimer3 = new Runnable() {
-				
-				
+
+
 				class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
 					//int index;
 
@@ -519,11 +525,14 @@ public class NewRealTimeChartActivity extends Activity {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-								Log.i("DATAFORREALTIME",tempdata+"");
-								Log.i("LAST THINGY",tempdata+" -- "+seriesforl[index]+" -- "+ graphaqlastXValue[index]);
+								//Log.i("DATAFORREALTIME",tempdata+"");
+								//Log.i("LAST THINGY",tempdata+" -- "+seriesforl[index]+" -- "+ graphaqlastXValue[index]);
 								graphllastXValue[index] +=1d;
+								if(tempdata!=null)
+								{
 								seriesforl[index].appendData(new GraphViewData(graphllastXValue[index], tempdata ), true, 10);
 								index++;
+								}
 							}
 							mHandler.postDelayed(runnable, 200);
 
@@ -531,7 +540,7 @@ public class NewRealTimeChartActivity extends Activity {
 						}
 					}
 				}
-				
+
 				@Override
 				public void run() {
 					if(killMe)
@@ -540,7 +549,7 @@ public class NewRealTimeChartActivity extends Activity {
 					task.execute("dummy");
 
 				}
-				
+
 			};
 			mHandler.postDelayed(mTimer3, 200);
 
@@ -549,8 +558,8 @@ public class NewRealTimeChartActivity extends Activity {
 			Log.i("in resume2", "yes");
 
 			mTimer4 = new Runnable() {
-				
-				
+
+
 				class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
 					//int index;
 
@@ -564,7 +573,7 @@ public class NewRealTimeChartActivity extends Activity {
 					protected String doInBackground(String... args) {
 
 						String response = "";
-					
+
 
 						for(int i=0;i<tempt.list.size();i++)
 						{
@@ -612,8 +621,11 @@ public class NewRealTimeChartActivity extends Activity {
 								Log.i("DATAFORREALTIME",tempdata+"");
 								Log.i("LAST THINGY",tempdata+" -- "+seriesfort[index]+" -- "+ graphtlastXValue[index]);
 								graphtlastXValue[index] +=1d;
+								if(tempdata!=null)
+								{
 								seriesfort[index].appendData(new GraphViewData(graphtlastXValue[index], tempdata ), true, 10);
 								index++;
+								}
 							}
 							mHandler.postDelayed(runnable, 200);
 
@@ -621,7 +633,7 @@ public class NewRealTimeChartActivity extends Activity {
 						}
 					}
 				}
-				
+
 				@Override
 				public void run() {
 					if(killMe)
@@ -630,7 +642,7 @@ public class NewRealTimeChartActivity extends Activity {
 					task.execute("dummy");
 
 				}
-				
+
 			};
 			mHandler.postDelayed(mTimer4, 200);
 
@@ -639,8 +651,8 @@ public class NewRealTimeChartActivity extends Activity {
 			Log.i("in resume2", "yes");
 
 			mTimer5 = new Runnable() {
-				
-				
+
+
 				class GetRTSensorReadingTask extends AsyncTask<String, Void, String> {
 					//int index;
 
@@ -654,7 +666,7 @@ public class NewRealTimeChartActivity extends Activity {
 					protected String doInBackground(String... args) {
 
 						String response = "";
-			
+
 
 						for(int i=0;i<tempwl.list.size();i++)
 						{
@@ -702,8 +714,11 @@ public class NewRealTimeChartActivity extends Activity {
 								Log.i("DATAFORREALTIME",tempdata+"");
 								Log.i("LAST THINGY",tempdata+" -- "+seriesforwl[index]+" -- "+ graphwllastXValue[index]);
 								graphwllastXValue[index] +=1d;
+								if(tempdata!=null)
+								{
 								seriesforwl[index].appendData(new GraphViewData(graphwllastXValue[index], tempdata ), true, 10);
 								index++;
+								}
 							}
 							mHandler.postDelayed(runnable, 200);
 
@@ -711,7 +726,7 @@ public class NewRealTimeChartActivity extends Activity {
 						}
 					}
 				}
-				
+
 				@Override
 				public void run() {
 					if(killMe)
@@ -720,12 +735,12 @@ public class NewRealTimeChartActivity extends Activity {
 					task.execute("dummy");
 
 				}
-			
+
 			};
 			mHandler.postDelayed(mTimer5, 200);
 
 		}
-		
+
 
 	}
 

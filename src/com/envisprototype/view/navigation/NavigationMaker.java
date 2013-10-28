@@ -30,11 +30,12 @@ public class NavigationMaker implements OnNavigationListener{
 
 	private static void prepareListData() {
 		listDataHeader = new ArrayList<DrawerMenuItem>();
-		listDataHeader.add(new DrawerMenuItem("Favourites", R.drawable.favorites));
+		listDataHeader.add(new DrawerMenuItem("Home", R.drawable.favourites));
 		listDataHeader.add(new DrawerMenuItem("Admin", R.drawable.admin));
-		listDataHeader.add(new DrawerMenuItem("2D charts", R.drawable.chart));
-		listDataHeader.add(new DrawerMenuItem("3D Visual", R.drawable.three_d_vis));
-		listDataHeader.add(new DrawerMenuItem("Settings", R.drawable.settings));
+		listDataHeader.add(new DrawerMenuItem("2D charts", R.drawable.two_d_chart));
+		listDataHeader.add(new DrawerMenuItem("3D Visual", R.drawable.three_d_chart));
+		listDataHeader.add(new DrawerMenuItem("Scan & View", R.drawable.ic_qrlauncher));
+		//listDataHeader.add(new DrawerMenuItem("Settings", R.drawable.settings));
 	}
 
 	public static void makeNavigationDrawer(Context context) {
