@@ -55,8 +55,8 @@ public abstract class EnvisPApplet extends PApplet{
 		currentClick = new PositionDisplay(this, "");
 		currentClick.setPlace(width/15, height/30);
 		rotateScope = new EnvisButton(this, "");
-		rotateScope.setPlace(width/40, height-4*height/50);
-		rotateScope.setSize(width-width/10, 3*height/50);
+		rotateScope.setPlace(width/25, height-height/10);
+		rotateScope.setSize(width-width/5, 3*height/55);
 		rotateScope.addEventListener(new RotateScopeListener());
 		envisMap = new Map(this);
 		barGraphSetList = new ArrayList<BarGraphSet>();
@@ -149,6 +149,7 @@ public abstract class EnvisPApplet extends PApplet{
 		 * - a bunch of buttons to choose vis type (bars or spheres)
 		 * - bars or spheres
 		 */
+		stroke(STROKE_COLOR);
 		currentClick.drawMe();
 		pushMatrix();
 		rotateScope.drawRect();
@@ -181,9 +182,14 @@ public abstract class EnvisPApplet extends PApplet{
 		}
 		popMatrix();
 		axis.drawMe();
+		pushMatrix();
 		line(width/2,0,width/2,height);
 		line(0,height/2,MAX_WIDTH,height/2);
 		line(width/2,0,width/2,height);
+		//rectMode(PApplet.CORNERS);
+		fill(54,255);
+		rect(MAX_WIDTH, 0, width-MAX_WIDTH-1, height-1);
+		popMatrix();
 		if(ifWithSensors){
 			zoom.drawRect();
 		}

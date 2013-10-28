@@ -17,7 +17,8 @@ import com.envisprototype.model.set.SetListModel;
 
 public class SetPlotPApplet extends EnvisPApplet {
 	
-	EnvisButton addSensitivePart , upSetIdBtn, downSetIdBtn, okBtn;
+	EnvisButton addSensitivePart , okBtn;
+//	EnvisButton upSetIdBtn, downSetIdBtn;
 	ZCoorSpinner zCoorSpinner;
 	String currentIdToPlot;
 	Iterator iterator;
@@ -45,24 +46,24 @@ public void setup(){
 	}
 	
 	// setting up the spinning list of ids to the right
-	upSetIdBtn = new EnvisButton(this, "UP");
-	downSetIdBtn = new EnvisButton(this, "DOWN");
-	upSetIdBtn.setPlace(MAX_WIDTH, height/20);
+//	upSetIdBtn = new EnvisButton(this, "UP");
+//	downSetIdBtn = new EnvisButton(this, "DOWN");
+//	upSetIdBtn.setPlace(MAX_WIDTH, height/20);
 	okBtn = new EnvisButton(this, "Ok");
 	okBtn.addEventListener(new SaveSetBtnListener());
 	idButtons = new ArrayList<EnvisButton>();
-	int setBtnHeight = 2*height/20;
+	int setBtnHeight = height/20;
 	for(String id: setIdFromAndroid){
 		
 		EnvisButton tempSetBtn = new EnvisButton(this, id, id);
 		Log.i("id",id);
-		tempSetBtn.setPlace(MAX_WIDTH, setBtnHeight);
+		tempSetBtn.setPlace(DEF_BTN_X, setBtnHeight);
 		tempSetBtn.addEventListener(new IdBtnListener());
 		idButtons.add(tempSetBtn);
 		setBtnHeight+=height/20;
 	}
-	downSetIdBtn.setPlace(MAX_WIDTH, height-2*height/20);
-	okBtn.setPlace(MAX_WIDTH, height-height/20);
+//	downSetIdBtn.setPlace(MAX_WIDTH, height-2*height/20);
+	okBtn.setPlace(DEF_BTN_X, height-height/10);
 	String sensorId;// setId;
     setIterator = envisSensors.keySet().iterator();
 	while(setIterator.hasNext()){
@@ -94,13 +95,6 @@ public void setup(){
 
 public void draw(){
 	super.draw();
-	for(int i = 0; i < idButtons.size(); i++){
-		idButtons.get(i).drawMe();
-		idButtons.get(i).fireEvent();
-	}
-	upSetIdBtn.drawMe();
-	downSetIdBtn.drawMe();
-	okBtn.drawMe();
 	if(ifAddingSets){
 		pushMatrix();
 		translate(width/2, height/2);
@@ -116,15 +110,24 @@ public void draw(){
 		zCoorSpinner.drawMe();
 		zCoorSpinner.fireDragEvent();
 	}
-	okBtn.fireEvent();
+	for(int i = 0; i < idButtons.size(); i++){
+		idButtons.get(i).drawMe();
+		idButtons.get(i).fireEvent();
+	}
+//	upSetIdBtn.drawMe();
+//	downSetIdBtn.drawMe();
+	okBtn.drawMe();
 }
 
 public void mouseReleased(){
 	addSensitivePart.fireEvent();
+	okBtn.fireEvent();
 }
 
 @Override
-public void mouseDragged(){}
+public void mouseDragged(){
+	super.mouseDragged();
+}
 
 public boolean isIfAddingSets() {
 	return ifAddingSets;

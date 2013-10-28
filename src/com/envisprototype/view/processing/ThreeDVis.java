@@ -47,6 +47,7 @@ public class ThreeDVis extends EnvisPApplet{
 		}
 		// to visualise the map in 3D
 		// by this time the map has already been copied from the model
+		
 		envisMap.setIf3D(true);
 		envisMap.translateToMiddle();
 		rotateButton = new EnvisButton(this, "Rotate");
@@ -67,7 +68,7 @@ public class ThreeDVis extends EnvisPApplet{
 		regenerateBarSetCoors = new EnvisButton(this, "Regenerate");
 		regenerateBarSetCoors.setPlace(DEF_BTN_X, 15*height/30);
 		regenerateBarSetCoors.addEventListener(new RegenerateBarsBtnListener());
-		visTypeBtn = new EnvisButton(this, "Show spheres");
+		visTypeBtn = new EnvisButton(this, "Spheres");
 		visTypeBtn.setPlace(DEF_BTN_X, 13*height/30);
 		visTypeBtn.addEventListener(new VisTypeBtnListener());
 		prevTimeStampBtn = new EnvisButton(this, "<<<<<");

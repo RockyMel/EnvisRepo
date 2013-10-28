@@ -38,12 +38,12 @@ public class AddToDrawingScopeListener extends AbstractDrawMapListener{
 						// adding the last three points
 						float width = drawMapApplet.mouseX;
 						float height = drawMapApplet.mouseY;
-						envisMap.addNewNode(envisMap.getRealCoors().getCoorX().get(0)+width/2,
+						envisMap.addNewNode(width ,
 								envisMap.getRealCoors().getCoorY().get(0));
-						envisMap.addNewNode(envisMap.getRealCoors().getCoorX().get(0)+width/2,
-								envisMap.getRealCoors().getCoorY().get(0)+height/2);
+						envisMap.addNewNode(width,
+								height);
 						envisMap.addNewNode(envisMap.getRealCoors().getCoorX().get(0),
-								envisMap.getRealCoors().getCoorY().get(0)+height/2);
+								height);
 						envisMap.setIfCentered(true);
 //						CoordinateWriter output = new CoordinateWriter(drawMapApplet);
 //						output.saveMapToFile("map.txt");

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
@@ -24,8 +25,8 @@ public class AddMapActivity extends EnvisActivity {
 	EditText notes;
 	MapInterface map;
 	Location myloc =  new Location(LocationManager.NETWORK_PROVIDER);
-	Button drawMapBtn;
-	Button SaveBtn;
+	ImageButton drawMapBtn;
+	ImageButton SaveBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,10 +43,10 @@ public class AddMapActivity extends EnvisActivity {
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);
 		map = new MapModel();
-		drawMapBtn = (Button) findViewById(R.id.draw_map_btn);
+		drawMapBtn = (ImageButton) findViewById(R.id.draw_map_btn);
 		drawMapBtn.setOnClickListener(new DrawMapBtnListener(id));
 		final Context context = this;
-		SaveBtn = (Button)findViewById(R.id.savebutton);
+		SaveBtn = (ImageButton)findViewById(R.id.savebutton);
 		SaveBtn.setOnClickListener(new SaveMapToAddBtnListener(this, true, id, name));
 	}
 

@@ -140,7 +140,7 @@ public class BarGraph {
 	      p.endShape(PConstants.CLOSE);
 	      
 	      //p.stroke(255);
-	      p.stroke(UIElement.color[UIElement.R],UIElement.color[UIElement.R],UIElement.color[UIElement.R]);
+	      p.stroke(255);
 	      p.popMatrix();
 	      p.popMatrix();
 	}

@@ -77,15 +77,15 @@ public class RotateScopeListener extends AbstractEnvisButtonListener{
 	
 	public float[] calcRotation(){
 		mainApplet = eButton.getEpApplet();
-		float newXmag = mainApplet.mouseX/PApplet.parseFloat(mainApplet.width) * PConstants.TWO_PI;
-		float newYmag = mainApplet.mouseY/PApplet.parseFloat(mainApplet.height) * PConstants.TWO_PI;
+		float newXmag = mainApplet.mouseX/PApplet.parseFloat(mainApplet.width) * 4 * PConstants.PI;
+		float newYmag = mainApplet.mouseY/PApplet.parseFloat(mainApplet.height) * 4 * PConstants.PI;
 		float diff = zmag-newXmag;
-		  if (mainApplet.abs(diff) >  0.01f) { 
+		  if (PApplet.abs(diff) >  0.01f) { 
 			  zmag -= diff/5.0f; 
 		  }
 		  
 		  diff = ymag-newYmag;
-		  if (mainApplet.abs(diff) >  0.01f) { 
+		  if (PApplet.abs(diff) >  0.01f) { 
 		    ymag -= diff/5.0f; 
 		  }
 		  float[] rotationVals = {xmag, ymag, zmag};

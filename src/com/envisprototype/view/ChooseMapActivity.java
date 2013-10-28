@@ -144,6 +144,14 @@ public class ChooseMapActivity extends EnvisActivity {
 				 MapInterface map = MapListModel.getSingletonInstance().findMapById(mapId);
 				 init();
 				 Log.i("id","in choose map result id = " + map.getId());
+				 mapIdTv.setVisibility(TextView.VISIBLE);
+				 mapNameTv.setVisibility(TextView.VISIBLE);
+				 //mapLocationTv.setVisibility(TextView.VISIBLE);
+				 mapNotesTv.setVisibility(TextView.VISIBLE);
+				 ((TextView) findViewById(R.id.textView4)).setVisibility(TextView.VISIBLE);
+					((TextView) findViewById(R.id.textView5)).setVisibility(TextView.VISIBLE);
+					//((TextView) findViewById(R.id.textView6)).setVisibility(TextView.VISIBLE);
+					((TextView) findViewById(R.id.textView7)).setVisibility(TextView.VISIBLE);
 				 mapIdTv.setText(map.getId());
 				 mapNameTv.setText(map.getName());
 				 mapLocationTv.setText(map.getLocation().toString());

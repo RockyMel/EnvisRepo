@@ -92,6 +92,6 @@
     <string name="title_activity_real_time_chart_list">RealTimeChartListActivity</string>
     <string name="title_activity_choose_sensor_type">ChooseSensorTypeActivity</string>
     <string name="title_activity_new_set_info_view">NewSetInfoViewActivity</string>
-  <string name="spheres_vis_type_btn">Show Spheres</string>
-    <string name="bars_vis_type_btn">Show bars</string>
+  <string name="spheres_vis_type_btn">Spheres</string>
+    <string name="bars_vis_type_btn">Bars</string>
 </resources>

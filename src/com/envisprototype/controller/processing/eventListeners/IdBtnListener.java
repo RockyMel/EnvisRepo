@@ -20,7 +20,7 @@ public class IdBtnListener extends AbstractPlotBtnListener{
 					btn.setColor(255, 0, 0);
 				}
 				else{
-					btn.setColor(255, 255, 255);
+					btn.setColor(255,255,255);
 				}
 			}
 		}

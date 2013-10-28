@@ -1,9 +1,8 @@
-<android.support.v4.widget.DrawerLayout
+ <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,79 +12,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddMapActivity" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText1"
-        android:text="ID"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-   
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView2"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText3"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="Location"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_below="@+id/editText3"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editText7"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_toLeftOf="@+id/editText3"
+        android:layout_alignLeft="@+id/textView2"
         android:text="Notes:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-      <Button
-        android:id="@+id/draw_map_btn"
-		android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:text="Draw" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView3"
-        android:ems="10" />
 
     <TextView
         android:id="@+id/textView2"
@@ -97,16 +31,74 @@
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
+    <ImageButton
         android:id="@+id/savebutton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/draw_map_btn"
-        android:layout_alignRight="@+id/draw_map_btn"
-        android:layout_marginBottom="80dp"
+        android:background="@null"
+        android:src="@drawable/save"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText7"
         android:text="Save" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText1"
+        android:layout_alignLeft="@+id/savebutton"
+        android:text="ID"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText2"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="69dp"
+        android:layout_height="69dp"
+        android:layout_above="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
+        android:src="@drawable/map_icon" />
+
+    <ImageButton
+        android:id="@+id/draw_map_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/savebutton"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/draw_map"
+        android:text="Draw" />
 
 </RelativeLayout>
 <include layout="@layout/for_drawer" />
-</android.support.v4.widget.DrawerLayout>
+</android.support.v4.widget.DrawerLayout>
