@@ -21,10 +21,13 @@ import android.widget.Toast;
 
 import com.envisprototype.R;
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
+import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.view.model.ChartDataByTypes;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphView.LegendAlign;
+import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
@@ -98,11 +101,16 @@ public class NewRealTimeChartActivity extends Activity {
 			((LineGraphView) graphView1).setDrawBackground(true);
 			graphView1.setViewPort(1, 8);
 			graphView1.setScalable(true);
+			graphView1.setShowLegend(true);
+			graphView1.setLegendAlign(LegendAlign.BOTTOM);
+			graphView1.setLegendWidth(200);
 			layout1.addView(graphView1);
 			seriesforaq=new GraphViewSeries[tempaq.list.size()];
 			for(int i=0;i<tempaq.list.size();i++)
 			{
-				seriesforaq[i] = new GraphViewSeries(new GraphViewData[] {
+				int temp = (int)(Math.random()*100);
+
+				seriesforaq[i] = new GraphViewSeries( SensorListModel.getSingletonInstance().findSensorById(tempaq.list.get(i)).getName(),new GraphViewSeriesStyle(Color.rgb(temp, 50, 100), 3),new GraphViewData[] {
 						new GraphViewData(1, 1.0d)
 
 				});
@@ -128,11 +136,16 @@ public class NewRealTimeChartActivity extends Activity {
 			((LineGraphView) graphView1).setDrawBackground(true);
 			graphView2.setViewPort(1, 8);
 			graphView2.setScalable(true);
+			graphView2.setShowLegend(true);
+			graphView2.setLegendAlign(LegendAlign.BOTTOM);
+			graphView2.setLegendWidth(200);
 			layout2.addView(graphView2);
 			seriesforh=new GraphViewSeries[temph.list.size()];
 			for(int i=0;i<temph.list.size();i++)
 			{
-				seriesforh[i] = new GraphViewSeries(new GraphViewData[] {
+				int temp = (int)(Math.random()*100);
+
+				seriesforh[i] = new GraphViewSeries(SensorListModel.getSingletonInstance().findSensorById(temph.list.get(i)).getName(),new GraphViewSeriesStyle(Color.rgb(temp, 50, 100), 3),new GraphViewData[] {
 						new GraphViewData(1, 1.0d)
 
 				});
@@ -157,11 +170,16 @@ public class NewRealTimeChartActivity extends Activity {
 			((LineGraphView) graphView3).setDrawBackground(true);
 			graphView3.setViewPort(1, 8);
 			graphView3.setScalable(true);
+			graphView3.setShowLegend(true);
+			graphView3.setLegendAlign(LegendAlign.BOTTOM);
+			graphView3.setLegendWidth(200);
 			layout3.addView(graphView3);
 			seriesforl=new GraphViewSeries[templ.list.size()];
 			for(int i=0;i<templ.list.size();i++)
 			{
-				seriesforl[i] = new GraphViewSeries(new GraphViewData[] {
+				int temp = (int)(Math.random()*100);
+
+				seriesforl[i] = new GraphViewSeries( SensorListModel.getSingletonInstance().findSensorById(templ.list.get(i)).getName(),new GraphViewSeriesStyle(Color.rgb(temp, 50, 100), 3),new GraphViewData[] {
 						new GraphViewData(1, 1.0d)
 
 				});
@@ -187,11 +205,16 @@ public class NewRealTimeChartActivity extends Activity {
 			((LineGraphView) graphView4).setDrawBackground(true);
 			graphView4.setViewPort(1, 8);
 			graphView4.setScalable(true);
+			graphView4.setShowLegend(true);
+			graphView4.setLegendAlign(LegendAlign.BOTTOM);
+			graphView4.setLegendWidth(200);
 			layout4.addView(graphView4);
 			seriesfort=new GraphViewSeries[tempt.list.size()];
 			for(int i=0;i<tempt.list.size();i++)
 			{
-				seriesfort[i] = new GraphViewSeries(new GraphViewData[] {
+				int temp = (int)(Math.random()*100);
+
+				seriesfort[i] = new GraphViewSeries(SensorListModel.getSingletonInstance().findSensorById(tempt.list.get(i)).getName(),new GraphViewSeriesStyle(Color.rgb(temp, 50, 100), 3),new GraphViewData[] {
 						new GraphViewData(1, 1.0d)
 
 				});
@@ -218,12 +241,17 @@ public class NewRealTimeChartActivity extends Activity {
 			((LineGraphView) graphView5).setDrawBackground(true);
 			graphView5.setViewPort(1, 8);
 			graphView5.setScalable(true);
+			graphView5.setShowLegend(true);
+			graphView5.setLegendAlign(LegendAlign.BOTTOM);
+			graphView5.setLegendWidth(200);
 			layout5.addView(graphView5);
 
 			seriesforwl=new GraphViewSeries[tempwl.list.size()];
 			for(int i=0;i<tempwl.list.size();i++)
 			{
-				seriesforwl[i] = new GraphViewSeries(new GraphViewData[] {
+				int temp = (int)(Math.random()*100);
+
+				seriesforwl[i] = new GraphViewSeries(SensorListModel.getSingletonInstance().findSensorById(tempwl.list.get(i)).getName(),new GraphViewSeriesStyle(Color.rgb(temp, 50, 100), 3),new GraphViewData[] {
 						new GraphViewData(1, 1.0d)
 
 				});

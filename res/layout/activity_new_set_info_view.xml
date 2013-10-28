@@ -1,3 +1,9 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="@drawable/yellowblack_land">
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent" >
@@ -66,15 +72,6 @@
             android:src="@drawable/addsesnor" />
 
         <ImageButton
-            android:id="@+id/Save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/Add"
-            android:layout_centerHorizontal="true"
-            android:background="@null"
-            android:src="@drawable/save" />
-
-        <ImageButton
             android:id="@+id/Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,6 +106,35 @@
             android:layout_toRightOf="@+id/imageView1"
             android:ems="10" />
 
+        <ImageButton
+            android:id="@+id/Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/listOfSensors"
+            android:layout_toRightOf="@+id/Add"
+            android:background="@null"
+            android:src="@drawable/save" />
+
+        <ImageButton
+            android:id="@+id/plot_sensors_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/Add"
+            android:layout_toRightOf="@+id/Save"
+            android:background="@null"
+            android:src="@drawable/plot_sensors" />
+
+        <ImageButton
+            android:id="@+id/unplot_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/Delete"
+            android:layout_toLeftOf="@+id/Delete"
+            android:background="@null"
+            android:src="@drawable/unplot_btn" />
+
     </RelativeLayout>
 
 </ScrollView>
+<include layout="@layout/for_drawer" />
+</android.support.v4.widget.DrawerLayout>
