@@ -48,16 +48,16 @@ public class SetListActivity extends Activity {
 			}
 		}
 		//Log.i("mapId",getIntent().getExtras().getString(getString(R.string.map_id_extra)));
-		addsensor.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				// TODO Auto-generated method stub
-				Intent intent=new Intent(view.getContext(),InputIDActivity.class);
-				intent.putExtra("mode", "set");
-				view.getContext().startActivity(intent); 
-			}
-		});
+//		addsensor.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View view) {
+//				// TODO Auto-generated method stub
+//				Intent intent=new Intent(view.getContext(),InputIDActivity.class);
+//				intent.putExtra("mode", "set");
+//				view.getContext().startActivity(intent); 
+//			}
+//		});
 		
 		
 		

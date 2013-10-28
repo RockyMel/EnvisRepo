@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.envisprototype.view.AdminAuthActivity;
+import com.envisprototype.view.AdminkaActivity;
 import com.envisprototype.view.ChartVisualizationSettingsActivity;
 import com.envisprototype.view.ChooseMapActivity;
 import com.envisprototype.view.FavoritesTab;
+import com.envisprototype.view.TagViewActivity;
 
 public class onDrawerItemClickListener implements OnItemClickListener {
 	DrawerLayout drawer;
@@ -35,7 +36,7 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 			break;
 		case 1: {
 			//intent = new Intent(v.getContext(), AdminTab.class);
-			intent = new Intent(v.getContext(), AdminAuthActivity.class);
+			intent = new Intent(v.getContext(), AdminkaActivity.class);
 		}
 			break;
 		case 2: {
@@ -47,6 +48,8 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 		}
 			break;
 		case 4: {
+			intent = new Intent(v.getContext(), TagViewActivity.class);
+
 		}
 		}
 		if (intent != null) {

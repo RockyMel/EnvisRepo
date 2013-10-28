@@ -26,4 +26,6 @@ public interface MapListInterface {
 
 	public abstract void saveCoorsForMap(String mapId, Coordinates coorsToSave, float zCoor);
 
+
+
 }

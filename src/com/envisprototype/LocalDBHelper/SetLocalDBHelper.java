@@ -71,7 +71,7 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 	public void addSet(SetInterface newset) {
 		// TODO Auto-generated method stub
 		ContentValues values= prepareValues(newset);
-
+		Log.i("asd", "asddf");
 		getWritableDatabase().insert(TABLE_NAME, null, values);
 
 		setModel.addSet(newset);
