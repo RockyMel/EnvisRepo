@@ -71,7 +71,7 @@ public class ExpandableAdminAdapter extends ExpandableListAdapter{
 		if (headerTitle != null){
 			textListHeader.setText(headerTitle);
 			image.setImageResource(convertView.getResources().
-					getIdentifier("com.envisprototype:drawable/sensors",null,null));
+					getIdentifier("com.envisprototype:drawable/set",null,null));
 		}
 		textListHeader.setTypeface(null, Typeface.BOLD);
 		textListHeader.setText(headerTitle);

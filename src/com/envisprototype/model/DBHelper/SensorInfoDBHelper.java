@@ -16,41 +16,37 @@ import com.envisprototype.model.sensor.SensorInterface;
 
 public class SensorInfoDBHelper {
 	final static String nameSpace = "http://api.webservice.envis.com";  
-	final static String endPoint = "http://iweb1.cs.rmit.edu.au:53780/EnvisWebservice/services/DataProvider?wsdl";  
+	final static String endPoint = "http://115.146.94.162:8080/EnvisAWS/services/DataProvider?wsdl";  
 
 
-	
+
 
 	public static boolean addSensor(SensorInterface newsensor){
 		String methodName = "addSensor";
 		String soapAction = nameSpace + "/" + methodName;
 
-		Boolean response;
 
 		SoapObject rpc = new SoapObject(nameSpace, methodName);   
-		PropertyInfo pi = new PropertyInfo();
 		Log.i("brand", newsensor.getBrand());
 		//String sensor_info=newsensor.getId()+";"+newsensor.getType()+";"+newsensor.getName()+";"+newsensor.getBrand()+";"+"active"+";"+newsensor.getLocation().getLongitude() + "" +";"+newsensor.getLocation().getLatitude() + ""+";"+newsensor.getNotes()+";"+"END";
 		//Log.i("testing",sensor_info);
-		rpc.addProperty("sensorInfo", newsensor.getId());
-		rpc.addProperty("sensorInfo", newsensor.getType());
-		rpc.addProperty("sensorInfo", newsensor.getName());
-		rpc.addProperty("sensorInfo", newsensor.getBrand());
-		rpc.addProperty("sensorInfo", "active");
-		rpc.addProperty("sensorInfo", newsensor.getLocation().getLongitude() + "");
-		rpc.addProperty("sensorInfo", newsensor.getLocation().getLatitude() + "");
-		rpc.addProperty("sensorInfo", newsensor.getNotes());
-		
-		
-		
+		rpc.addProperty("sensorInfos", newsensor.getId());
+		rpc.addProperty("sensorInfos", newsensor.getType());
+		rpc.addProperty("sensorInfos", newsensor.getName());
+		rpc.addProperty("sensorInfos", newsensor.getBrand());
+		rpc.addProperty("sensorInfos", "active");
+		rpc.addProperty("sensorInfos", newsensor.getNotes());
+
+
+
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
 		envelope.setOutputSoapObject(rpc);  
 
 		HttpTransportSE transport = new HttpTransportSE(endPoint); 
-
+		SoapPrimitive resultsRequestSOAP=null;
 		try {
 			transport.call(soapAction, envelope);
-			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
 			System.out.println(resultsRequestSOAP.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,15 +54,45 @@ public class SensorInfoDBHelper {
 			e.printStackTrace();
 		}
 
-		Log.i("DBHELPER", "done");
-		return false;
+		Log.i("DBHELPER", resultsRequestSOAP.toString());
+		
+		if( resultsRequestSOAP.toString().equals("true"))
+				return true;
+		else
+			return false;
+
+
+	}
+
+	public static String generateSensorID(){
+		String methodName = "generateSensorID";
+		String soapAction = nameSpace + "/" + methodName;
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);  
+
+		HttpTransportSE transport = new HttpTransportSE(endPoint); 
+		SoapPrimitive resultsRequestSOAP = null;
+		try {
+			transport.call(soapAction, envelope);
+			resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			System.out.println(resultsRequestSOAP.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		//Log.i("DBHELPER", "done");
+		return resultsRequestSOAP.toString();
 
 
 	}
 
 
 	public static void associateSensorWithSet(){
-		
+
 	}
 
 }

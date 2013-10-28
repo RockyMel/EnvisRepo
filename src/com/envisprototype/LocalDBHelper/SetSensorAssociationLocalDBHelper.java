@@ -112,5 +112,11 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 		return CREATE_SET_SENSOR_ASS_TABLE_QUERY;
 	}
 
+	public void removeAssociation(String id) {
+		// TODO Auto-generated method stub
+		getWritableDatabase().delete(TABLE_NAME,SENSORIDCOL+"='" + id +"'", null);
+		
+	}
+
 	
 }

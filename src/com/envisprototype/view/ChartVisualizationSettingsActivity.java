@@ -24,7 +24,11 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+<<<<<<< HEAD
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+=======
+import com.envisprototype.controller.NewShowChartVisualizationButtonController;
+>>>>>>> refs/remotes/choose_remote_name/master
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
 import com.envisprototype.view.navigation.NavigationMaker;
@@ -96,11 +100,19 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		QRButton = (Button)findViewById(R.id.QR);
 		VisualizationButton = (Button)findViewById(R.id.VisualizationButton);
 		sensorlist = (ListView)findViewById(R.id.chosensensorslist);
+<<<<<<< HEAD
 		//		if(if3DVis == false)
 		//			VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
 		//		else{
 		//			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
 		//		}
+=======
+		if(if3DVis == false)
+			VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
+		else{
+			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+		}
+>>>>>>> refs/remotes/choose_remote_name/master
 		final Context context = this;
 
 		SetsButton.setOnClickListener(new OnClickListener() {
@@ -147,6 +159,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 					TimeFromPickerButton.setVisibility(Button.INVISIBLE);
 					TimeToPickerButton.setVisibility(Button.INVISIBLE);
 					MODE = 1;
+<<<<<<< HEAD
 					if(if3DVis == false)
 						// for real time now !!!!
 						VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
@@ -154,18 +167,25 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
 					}
 					//VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+=======
+					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+>>>>>>> refs/remotes/choose_remote_name/master
 				} else {
 					DateFromPickerButton.setVisibility(Button.VISIBLE);
 					DateToPickerButton.setVisibility(Button.VISIBLE);
 					TimeFromPickerButton.setVisibility(Button.VISIBLE);
 					TimeToPickerButton.setVisibility(Button.VISIBLE);
 					MODE = 0;
+<<<<<<< HEAD
 					if(if3DVis == false)
 						VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
 					else{
 						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
 					}
 					//VisualizationButton.setOnClickListener(new ShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+=======
+					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+>>>>>>> refs/remotes/choose_remote_name/master
 				}
 
 			}

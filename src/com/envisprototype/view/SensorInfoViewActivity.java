@@ -1,12 +1,8 @@
 package com.envisprototype.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,7 +14,6 @@ import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;
-import com.envisprototype.view.processing.SetPlotPApplet;
 
 public class SensorInfoViewActivity extends EnvisActivity {
 	EditText id;
@@ -32,19 +27,20 @@ public class SensorInfoViewActivity extends EnvisActivity {
 	Button defaultXYZBtn;
 	//Button plotBtn;
 	String sensorid;
-	SensorInterface sensor;
+	SensorInterface sensor;//
 	public static Boolean del = false;
 	String flag;
 	String setid;
-
+	int typercvd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sensor_info_view);
-		sensorid = getIntent().getStringExtra("sensorid");
+		//sensorid = getIntent().getStringExtra("sensorid");
 		setid= getIntent().getStringExtra("setid");
-		Log.i("Yahhar Par 3", setid);
 		flag=getIntent().getStringExtra("flag");
+		if(flag.equals("new"))
+			typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
 		init();
 	}
 
@@ -64,7 +60,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		delete = (Button)findViewById(R.id.Delete);
 		defaultXYZBtn = (Button) findViewById(R.id.bring_to_default_coors_btn);
 
-		save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
+	//	save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
 		
 		if(flag.equals("new"))
 			sensor=new SensorModel();
@@ -80,6 +76,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		if(flag.equals("new"))
 		{
 			id.setText(sensorid);
+			type.setText(typercvd+"");
 			delete.setVisibility(Button.INVISIBLE);
 			defaultXYZBtn.setVisibility(Button.INVISIBLE);
 		}

@@ -44,6 +44,10 @@ public class RealTimeChartActivity extends Activity {
 		StrictMode.setThreadPolicy(policy);
 		View view = this.getWindow().getDecorView();
 		view.setBackgroundColor(Color.BLACK);
+<<<<<<< HEAD
+=======
+		
+>>>>>>> refs/remotes/choose_remote_name/master
 		LinearLayout layout1;// = (LinearLayout) findViewById(R.id.graph1);
 		//		layout.addView(graphView);
 
@@ -65,6 +69,7 @@ public class RealTimeChartActivity extends Activity {
 
 		layout1 = (LinearLayout) findViewById(R.id.graph1);
 		layout1.addView(graphView);
+<<<<<<< HEAD
 		
 		LinearLayout layout2;// = (LinearLayout) findViewById(R.id.graph1);
 		//		layout.addView(graphView);
@@ -89,6 +94,32 @@ public class RealTimeChartActivity extends Activity {
 		layout2.addView(graphView2);
 
 		
+=======
+		//layout1.setVisibility(View.GONE);
+		LinearLayout layout2;// = (LinearLayout) findViewById(R.id.graph1);
+		//		layout.addView(graphView);
+
+		// ----------
+		exampleSeries2 = new GraphViewSeries(new GraphViewData[] {
+				new GraphViewData(1, 0.0d)
+
+		});
+
+		graphView2 = new LineGraphView(
+				this
+				, "GraphViewDemo"
+				);
+		((LineGraphView) graphView2).setDrawBackground(true);
+
+		graphView2.addSeries(exampleSeries2); // data
+		graphView2.setViewPort(1, 8);
+		graphView2.setScalable(true);
+
+		layout2 = (LinearLayout) findViewById(R.id.graph2);
+		layout2.addView(graphView2);
+
+		layout2.requestFocus();
+>>>>>>> refs/remotes/choose_remote_name/master
 
 	}
 

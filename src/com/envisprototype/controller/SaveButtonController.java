@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.envisprototype.LocalDBHelper.MapSensorAssociationDBHelper;
 import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
@@ -22,32 +24,47 @@ import com.envisprototype.view.processing.Coords;
 public class SaveButtonController implements OnClickListener {
 
 	String flag;
-	EditText id;
+	TextView id;
 	EditText name;
-	EditText location;
-	EditText type;
 	EditText brand;
 	EditText notes;
-	Button delete;
+	ImageButton delete;
 	String setid;
 	Context context;
+	private int type;
 
 
-	public SaveButtonController(String flag, EditText id, EditText name,
-			EditText location,EditText type,EditText brand,
-			EditText notes,Button delete, String setid, Context context) {
+//	public SaveButtonController(String flag, EditText id, EditText name,
+//			EditText location,EditText type,EditText brand,
+//			EditText notes,Button delete, String setid, Context context) {
+//		// TODO Auto-generated constructor stub
+//		this.flag=flag;
+//		this.id=id;
+//		this.name=name;
+//		this.location=location;
+//		this.type=type;
+//		this.brand=brand;
+//		this.notes=notes;
+//		this.delete=delete;
+//		this.context=context;
+//		this.setid=setid;
+//
+//	}
+
+	public SaveButtonController(String flag, TextView id, EditText name,
+			EditText brand, EditText notes, ImageButton delete,
+			String setid,int type, Context context) {
 		// TODO Auto-generated constructor stub
-		this.flag=flag;
-		this.id=id;
-		this.name=name;
-		this.location=location;
-		this.type=type;
-		this.brand=brand;
-		this.notes=notes;
-		this.delete=delete;
-		this.context=context;
-		this.setid=setid;
-
+		this.flag = flag;
+		this.id = id;
+		this.name = name;
+		this.brand = brand;
+		this.notes = notes;
+		this.delete = delete;
+		this.setid = setid;
+		this.context = context;
+		this.type = type;
+		
 	}
 
 	@Override
@@ -59,40 +76,35 @@ public class SaveButtonController implements OnClickListener {
 		Location myloc=null;
 		SetInterface set=SetListModel.getSingletonInstance().findSetById(setid);
 
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", setid);
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getId());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getName());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getNotes());
-//		Log.i("SETID@SAVEBUTTONCONTROLLER", set.getLocation().getLongitude()+"");
-		
 		myloc=set.getLocation();
-
-		//Log.i("testing location1", myloc.getLongitude()+myloc.getLongitude()+"");
+		Location location=new Location(LocationManager.NETWORK_PROVIDER);
+		location.setLatitude(myloc.getLatitude());
+		location.setLongitude(myloc.getLongitude());
+		
+		Log.i("sadadsf1", myloc.getLatitude()+" "+myloc.getLongitude());
+		Log.i("sadadsf2", location.getLatitude()+" "+location.getLongitude());
 
 		final SensorInterface sensor = new SensorModel();
-
 		sensor.setId(id.getText().toString());
 		sensor.setName(name.getText().toString());
-		sensor.setLocation(myloc);
-
+		sensor.setLocation(location);
 		sensor.setBrand(brand.getText().toString());
 		sensor.setNotes(notes.getText().toString());
-		try{
-		sensor.setType(Integer.parseInt(type.getText().toString()));
-		}catch(NumberFormatException nfe){
-			sensor.setType(0);
-		}
+		sensor.setType(type);
+		Log.i("wqertytuyio", setid);
 		sensor.setSetid(setid);
 		
+<<<<<<< HEAD
 		//SensorInterface temp = set.getSensor(id.getText().toString());
+=======
+>>>>>>> refs/remotes/choose_remote_name/master
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
 
 		if(temp!=null)
 		{
-			//set.removeSensor(temp);
-			//set.addSensor(sensor);
-			SensorListModel.getSingletonInstance().removeSensor(temp);
-			SensorListModel.getSingletonInstance().addSensor(sensor);
+//			SensorListModel.getSingletonInstance().removeSensor(temp);
+//			SensorListModel.getSingletonInstance().addSensor(sensor);
+			SensorListModel.getSingletonInstance().editSensor(sensor);
 			Thread thread = new Thread()
 			{
 				@Override
@@ -107,7 +119,8 @@ public class SaveButtonController implements OnClickListener {
 		else
 		{
 			SensorListModel.getSingletonInstance().addSensor(sensor);
-
+		
+			Log.i("jdsha.f", SensorListModel.getSingletonInstance().findSensorById(id.getText().toString()).getLocation()+"");
 			
 			Thread thread = new Thread()
 			{
@@ -115,8 +128,8 @@ public class SaveButtonController implements OnClickListener {
 				public void run() {
 					System.out.println("asdsaD" + sensor.getBrand());
 					SensorLocalDBHelper.getSingletonInstance(context).addSensor(sensor);
-					// add sensor set association
 					SetSensorAssociationLocalDBHelper.getSingletonInstance(context).associateSensorWithSet(id.getText().toString(), setid);
+<<<<<<< HEAD
 					// also if set has already been plotted, set sensor's xyz to the one of the set
 					
 					//SensorInterface sensorToPlot = SensorLocalDBHelper.getSingletonInstance(context).findSensorById(sensor.getId());
@@ -134,6 +147,9 @@ public class SaveButtonController implements OnClickListener {
 					}
 					
 					
+=======
+					SensorInfoDBHelper.addSensor(sensor);
+>>>>>>> refs/remotes/choose_remote_name/master
 				}
 			};
 			thread.start();

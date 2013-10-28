@@ -81,7 +81,7 @@ public class SetInfoViewActivity extends EnvisActivity {
 			location=set.getLocation();
 			Log.i("setinfoview", set.getLocation()+"");
 		}
-		Save.setOnClickListener(new SetSaveOnClickController(set,setid,name,notes,list,Delete,Add,flag,location, this));
+		//Save.setOnClickListener(new SetSaveOnClickController(set,setid,name,notes,list,Delete,Add,flag,location, this));
 
 		if(flag.equals("new"))
 		{

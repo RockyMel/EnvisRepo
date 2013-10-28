@@ -1,21 +1,25 @@
 package com.envisprototype.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 
 import com.envisprototype.R;
+import com.envisprototype.view.model.ChartDataByTypes;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
-import com.envisprototype.view.model.ChartVizAdapter;
+import com.envisprototype.view.model.NewChartVizAdapter;
 
 public class NewChartActivity extends Activity {
-	//GraphViewData[] data = new GraphViewData[];
-	public static ChartVizAdapter cva;
-	public static ListView lv;
 
+	public static ListView lv;
+	public static NewChartVizAdapter ncva;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,30 +29,27 @@ public class NewChartActivity extends Activity {
 		View view = this.getWindow().getDecorView();
 		view.setBackgroundColor(Color.BLACK);
 		
-		cva = new ChartVizAdapter(this,0,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs());
+
+		List<ChartDataByTypes> temp = new ArrayList<ChartDataByTypes>();
+		int index=0;
+		for(int i=0;i<ChartDataByTypes.getSingletonInstance().size();i++)
+		{
+			System.out.println( i+ ": " + ChartDataByTypes.getSingletonInstance().get(i).type +"");
+			if(ChartDataByTypes.getSingletonInstance().get(i).list.size()>0)
+			{
+			
+				temp.add(index	, ChartDataByTypes.getSingletonInstance().get(i));index++;
+			}
+
+		}
+		Log.i("sisisisize1", ChartDataByTypes.singletonInstance.size()+"");
+		Log.i("sisisisize2",temp.size()+"");
+
+		ncva = new NewChartVizAdapter(this,0,temp);
 		lv=(ListView)findViewById(R.id.listView1);
-		lv.setAdapter(cva);
+		lv.setAdapter(ncva);
 
-		/*LinearLayout layout;
-		for(int i=0;i< ChartData.getSingletonInstance().data.length;i++){
-			GraphViewSeries seriesRnd = new GraphViewSeries("Random curve", null, ChartData.getSingletonInstance().data[i]);
-			LineGraphView graphView = new LineGraphView(
-					this
-					, "GraphViewDemo"
-					);
-
-			graphView.addSeries(seriesRnd);
-			// set legend
-			graphView.setShowLegend(true);
-			graphView.setLegendAlign(LegendAlign.BOTTOM);
-			graphView.setLegendWidth(200);
-			// set view port, start=2, size=10
-			graphView.setViewPort(2, 10);
-			graphView.setScalable(true);
-			layout = (LinearLayout) findViewById(R.id.graph2);
-			layout.addView(graphView);
-
-		}*/
+		
 		
 		
 

@@ -20,7 +20,7 @@ public class SensorReadingDBHelper {
 	final static String endPoint = "http://115.146.92.166/EnvisAWS/services/DataProvider?wsdl";  
 
 
-
+//http://115.146.94.162:8080/EnvisAWS/services/DataProvider
 
 	public static String getDataReadingSensorByHisTimeJSON(String SensorID,String datefrom,String dateto){
 		String methodName = "getSensorReadingByHisTime";
@@ -40,7 +40,11 @@ public class SensorReadingDBHelper {
 		rpc.addProperty("datefrom", datefrom);
 		rpc.addProperty("dateto", dateto);
 		rpc.addProperty("dataType", 1);
-
+		Log.i("chk", SensorID);
+		Log.i("chk", datefrom);
+		Log.i("chk", dateto);
+		//Log.i("chk", 1);
+		
 
 
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
