@@ -15,14 +15,12 @@ public class BarGraph {
 	private int z = 20; // bar graph width or z
 	private int x = 20; // bar graph length or x
 	private float h, reading;
-	private TreeMap<String, Float> readingRange = null;
-	public void setReading(float reading) {
-		this.reading = reading;
-		this.h = PApplet.map(reading, 0, 1000, 0, 100);
-	}
-	public void setReading(String timeStamp) {
-		this.reading = readingRange.get(timeStamp);
-		this.h = PApplet.map(reading, 0, 1000, 0, 100);
+	//private TreeMap<String, Float> readingRange = null;
+	public void setReading(Float reading) {
+		if(reading != null){
+			this.reading = reading;
+			this.h = PApplet.map(reading, 0, 1000, 0, 100);
+		}
 	}
 
 	private int offset = 15; // value to offset sensor reading text
@@ -169,12 +167,6 @@ public class BarGraph {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
-	}
-	public TreeMap<String, Float> getReadingRange() {
-		return readingRange;
-	}
-	public void setReadingRange(TreeMap<String, Float> readingRange) {
-		this.readingRange = readingRange;
 	}
 
 

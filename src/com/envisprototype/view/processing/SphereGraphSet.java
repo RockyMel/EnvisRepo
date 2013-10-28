@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import android.util.Log;
+
 
 public class SphereGraphSet {
 	
@@ -42,8 +44,10 @@ public class SphereGraphSet {
 		
 	}
 	
-	public void setReadingForSphere(float reading){
-		this.oneSphereGraph.setReading(reading);
+	public void setReadingForSphere(Float reading){
+		if(reading != null){
+			this.oneSphereGraph.setReading(reading);
+		}
 	}
 
 }

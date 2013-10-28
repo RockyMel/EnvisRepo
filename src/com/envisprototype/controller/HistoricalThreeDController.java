@@ -11,8 +11,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
-import com.envisprototype.view.processing.BarGraphSet;
-import com.envisprototype.view.processing.EnvisPApplet;
+import com.envisprototype.model.processing.SensorReadingsModel;
 
 public class HistoricalThreeDController{
 
@@ -44,7 +43,7 @@ public class HistoricalThreeDController{
 
 		@Override
 		protected void onPostExecute(String result) {
-			TreeMap<String, Float> data = new TreeMap<String, Float>(); 
+			TreeMap<String, Float> data = new TreeMap<String, Float>();
 				try {
 					System.out.println("---" + result);
 					JSONObject obj = new JSONObject(result);
@@ -56,9 +55,10 @@ public class HistoricalThreeDController{
 							if(obj.getJSONArray(i+"")!=null){
 								data.put(obj.getJSONArray(i+"").getString(1),
 										Float.parseFloat(obj.getJSONArray(i+"").getString(2)));
-								for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
-									barSet.getBarGraphList().get(0).setReadingRange(data);
-								}
+//								for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
+//									barSet.getBarGraphList().get(0).setReadingRange(data);
+//								}
+								SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, data);
 								i++;
 							}
 							else

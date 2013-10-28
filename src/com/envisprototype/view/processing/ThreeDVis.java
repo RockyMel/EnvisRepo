@@ -1,21 +1,25 @@
 package com.envisprototype.view.processing;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.HistoricalThreeDController;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
+import com.envisprototype.controller.processing.eventListeners.NextTimeStampBtnListener;
 import com.envisprototype.controller.processing.eventListeners.PerspectiveSideBtnListener;
+import com.envisprototype.controller.processing.eventListeners.PrevTimeStampBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RegenerateBarsBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RotateButtonListener;
 import com.envisprototype.controller.processing.eventListeners.RotateScopeListener;
 import com.envisprototype.controller.processing.eventListeners.TopViewButtnoListener;
 import com.envisprototype.controller.processing.eventListeners.VisTypeBtnListener;
+import com.envisprototype.model.processing.SensorReadingsModel;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
@@ -23,12 +27,14 @@ import com.envisprototype.model.set.SetListModel;
 public class ThreeDVis extends EnvisPApplet{
 
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton,
-	prospectiveSideButton, regenerateBarSetCoors, visTypeBtn; 
+	prospectiveSideButton, regenerateBarSetCoors, visTypeBtn, nextTimeStampBtn,
+	prevTimeStampBtn; 
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 	String fromDate, toDate = null;
 	public static String curDate;
-//	private static HashMap<String, Float> sensorReadings = new HashMap<String, Float>();	
+	boolean ifHist = false;
+	//	private static HashMap<String, Float> sensorReadings = new HashMap<String, Float>();	
 
 
 	public void setup(){
@@ -36,7 +42,7 @@ public class ThreeDVis extends EnvisPApplet{
 		{
 			Calendar tempCal = Calendar.getInstance();
 			curDate = tempCal.get(Calendar.YEAR) + "-" + 
-			tempCal.get(Calendar.MONTH) + "-" + tempCal.get(Calendar.DAY_OF_MONTH)+ " " 
+					tempCal.get(Calendar.MONTH) + "-" + tempCal.get(Calendar.DAY_OF_MONTH)+ " " 
 					+ tempCal.get(Calendar.HOUR_OF_DAY) + ":" + tempCal.get(Calendar.MINUTE) + ":10";
 		}
 		// to visualise the map in 3D
@@ -64,6 +70,12 @@ public class ThreeDVis extends EnvisPApplet{
 		visTypeBtn = new EnvisButton(this, "Show spheres");
 		visTypeBtn.setPlace(DEF_BTN_X, 13*height/30);
 		visTypeBtn.addEventListener(new VisTypeBtnListener());
+		prevTimeStampBtn = new EnvisButton(this, "<<<<<");
+		prevTimeStampBtn.setPlace(DEF_BTN_X, 17*height/30);
+		prevTimeStampBtn.addEventListener(new PrevTimeStampBtnListener());
+		nextTimeStampBtn = new EnvisButton(this, ">>>>>");
+		nextTimeStampBtn.setPlace(DEF_BTN_X, 19*height/30);
+		nextTimeStampBtn.addEventListener(new NextTimeStampBtnListener());
 		RotateScopeListener.setIfTop(true);
 		// need to get coordinates for the sensors
 		{
@@ -71,7 +83,7 @@ public class ThreeDVis extends EnvisPApplet{
 			setIterator = envisSensors.keySet().iterator();
 			while(setIterator.hasNext()){
 				sensorId = setIterator.next();
-//				sensorReadings.put(sensorId, 0f);
+				//				sensorReadings.put(sensorId, 0f);
 				if(!SensorListModel.getSingletonInstance().findSensorById(sensorId).isIfDefaultCoors()){
 					envisSensors.get(sensorId).setRealX(SensorListModel.getSingletonInstance().findSensorById(sensorId).getX());
 					envisSensors.get(sensorId).setRealY(SensorListModel.getSingletonInstance().findSensorById(sensorId).getY());
@@ -110,13 +122,20 @@ public class ThreeDVis extends EnvisPApplet{
 				sphereGraphList.add(sphereGraphSet);
 			}
 		}
-		
+
 		if(extras.containsKey(getString(R.string.date_flag))){
-			 fromDate = extras.getString(getString(R.string.from_date_flag));
-			 toDate = extras.getString(getString(R.string.to_date_flag));
+			ifHist = true;
+			fromDate = extras.getString(getString(R.string.from_date_flag));
+			toDate = extras.getString(getString(R.string.to_date_flag));
 			this.curDate = fromDate;
 			HistoricalThreeDController toGetHistData = new HistoricalThreeDController(setIdFromAndroid, fromDate, toDate);
 			toGetHistData.fetchData();
+//			for(BarGraphSet barSet: barGraphSetList){
+//				TreeMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(barSet.getSensorID());
+//				//Iterator<String> iterator = pair.keySet().iterator();
+//				String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(0);
+//				barSet.getBarGraphList().get(0).setReading(pair.get(timeStamp));
+//			}
 		}
 		//    for(BarGraphSet barset: barGraphSetList){
 		//    	//if(barset.getSensorID())
@@ -133,7 +152,11 @@ public class ThreeDVis extends EnvisPApplet{
 		regenerateBarSetCoors.drawMe();
 		prospectiveSideButton.drawMe();
 		visTypeBtn.drawMe();
-		text(curDate,width/2-textWidth(curDate), currentClick.getDefY());
+		if(ifHist){
+			text(curDate,width/2-textWidth(curDate), currentClick.getDefY());
+			prevTimeStampBtn.drawMe();
+			nextTimeStampBtn.drawMe();
+		}
 
 	}
 
@@ -151,24 +174,41 @@ public class ThreeDVis extends EnvisPApplet{
 		regenerateBarSetCoors.fireEvent();
 		prospectiveSideButton.fireEvent();
 		visTypeBtn.fireEvent();
+		if(ifHist){
+			prevTimeStampBtn.fireEvent();
+			nextTimeStampBtn.fireEvent();
+		}
 	}
 
 	public float medianValue(ArrayList<Float> list){
 		Collections.sort(list);
 		return list.get(list.size()/2);
 	}
-//	public static HashMap<String, Float> getSensorReadings() {
-//		return sensorReadings;
-//	}
-//	public static void setSensorReadings(HashMap<String, Float> sensorReadings) {
-//		ThreeDVis.sensorReadings = sensorReadings;
-//	}
+	//	public static HashMap<String, Float> getSensorReadings() {
+	//		return sensorReadings;
+	//	}
+	//	public static void setSensorReadings(HashMap<String, Float> sensorReadings) {
+	//		ThreeDVis.sensorReadings = sensorReadings;
+	//	}
 	public EnvisButton getRegenerateBarSetCoors() {
 		return regenerateBarSetCoors;
 	}
 	public void setRegenerateBarSetCoors(EnvisButton regenerateBarSetCoors) {
 		this.regenerateBarSetCoors = regenerateBarSetCoors;
 	}
+	public EnvisButton getNextTimeStampBtn() {
+		return nextTimeStampBtn;
+	}
+	public void setNextTimeStampBtn(EnvisButton nextTimeStampBtn) {
+		this.nextTimeStampBtn = nextTimeStampBtn;
+	}
+	public EnvisButton getPrevTimeStampBtn() {
+		return prevTimeStampBtn;
+	}
+	public void setPrevTimeStampBtn(EnvisButton prevTimeStampBtn) {
+		this.prevTimeStampBtn = prevTimeStampBtn;
+	}
+
 }
 
 
