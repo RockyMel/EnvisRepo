@@ -16,6 +16,7 @@ public class FrontViewButtonListener extends AbstractEnvisButtonListener{
 				//RotateScopeListener.setIfRotate(false);
 				RotateScopeListener.setIfLeftSide(false);
 				RotateScopeListener.setIfTop(false);
+				RotateScopeListener.setIfPerspective(false);
 			}
 		}
 	}

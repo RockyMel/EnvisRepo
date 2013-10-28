@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import android.util.Log;
+
 public class ZCoorSpinner extends EnvisButton{
 	
 	private float xLine, yLine, maxX;
@@ -75,6 +77,12 @@ public class ZCoorSpinner extends EnvisButton{
 			zVal-=map.getCOOR_Z()/2;
 		}
 		return zVal;
+	}
+	
+	public void adjustZ(Map map){
+		float percentage = (epApplet.mouseX-xLine)/(maxX-xLine);
+		float zVal = percentage*(Map.COOR_Z_TOP - Map.COOR_Z_BOTTOM);
+		map.setCOOR_Z((int)zVal);
 	}
 	
 

@@ -17,10 +17,9 @@ public class Map extends UIElement{
 	
 	private int highlightedNode = -1;
 	
-//	private final static int COOR_Z_TOP = 50;
-//	final static int COOR_Z_BOTTOM = -50;
+	public final static int COOR_Z_TOP = 250;
+	public final static int COOR_Z_BOTTOM = 50;
 	private int COOR_Z = 100;
-	final static float MIDDLE_COEFF = 1f;
 	public final static int indexX = 0;
 	public final static int indexY = 1;
 	public final static int indexZ = 2;
@@ -115,17 +114,19 @@ public class Map extends UIElement{
 	    }
 	}
 	
-	public void dragNode(int nodeToDrag){
-	//	float[] centerArray = calculateMiddleCoors();
-		dragNode(nodeToDrag, epApplet.mouseX, epApplet.mouseY);
-	}
+//	public void dragNode(int nodeToDrag){
+//	//	float[] centerArray = calculateMiddleCoors();
+//		dragNode(nodeToDrag, epApplet.mouseX, epApplet.mouseY);
+//	}
 	
 	public void dragNode(int nodeToDrag, float mouseX, float mouseY){
 		//float[] centerArray = calculateMiddleCoors();
-		visCoors.getCoorX().set(nodeToDrag,mouseX- epApplet.width/2);
-		visCoors.getCoorY().set(nodeToDrag,mouseY- epApplet.height/2);
-		realCoors.getCoorX().set(nodeToDrag,mouseX);
-		realCoors.getCoorY().set(nodeToDrag,mouseY);
+		float[] coors = calculateMiddleCoors();
+		visCoors.getCoorX().set(nodeToDrag,mouseX);
+		visCoors.getCoorY().set(nodeToDrag,mouseY);
+		realCoors.getCoorX().set(nodeToDrag,mouseX+coors[indexX]); // there's a bug here somewhere. It's a dirty fix - x coor is not adjusting properly
+		realCoors.getCoorY().set(nodeToDrag,mouseY+coors[indexY]);
+		epApplet.text(coors[indexX], 20, 20);
 	}
 	
 	public void shiftNodes(int index){
@@ -139,6 +140,8 @@ public class Map extends UIElement{
 	
 	public void drawRectWhileDragging(){
 		if(realCoors.getCoorX().size()>0){
+			epApplet.pushMatrix();
+			epApplet.noFill();
 			float defX = realCoors.getCoorX().get(0);
 			float defY =  realCoors.getCoorY().get(0);
 			int defW = (int) (epApplet.mouseX-realCoors.getCoorX().get(0));
@@ -149,11 +152,13 @@ public class Map extends UIElement{
 			epApplet.text(defW,defX+defW/2,defY);
 			epApplet.text(defH,defX,defY+defH/2);
 			epApplet.popMatrix();
+			epApplet.popMatrix();
 		}
 	}
 	
 	public void drawLineWithDimsWhileDragging(){
 		if(realCoors.getCoorX().size()>0){
+			epApplet.pushMatrix();
 			float startX = realCoors.getCoorX().get(realCoors.getCoorX().size()-1);
 			float startY =  realCoors.getCoorY().get(realCoors.getCoorY().size()-1);
 			int endX = (int) (epApplet.mouseX);
@@ -169,6 +174,7 @@ public class Map extends UIElement{
 			epApplet.textSize(epApplet.height/40);
 			epApplet.line(startX, startY, endX, endY);
 			epApplet.text(lineSize, (startX+endX)/2,epApplet.height/20+(startY+endY)/2);
+			epApplet.popMatrix();
 			epApplet.popMatrix();
 		}
 	}
@@ -242,6 +248,8 @@ public class Map extends UIElement{
 			return;
 		}finally{
     }
+		if(!ifClosed)
+			translateToMiddle();
 			if3D = true;
 		ifClosed = true;
 	}
@@ -398,9 +406,9 @@ public boolean ifIntersects(ArrayList<Float> coorX, ArrayList<Float> coorY,
 		  return;
 		 for(int j = 0; j < visCoors.getCoorX().size(); j++){
 			 visCoors.getCoorX().set(j, visCoors.getCoorX().get(j)-
-					 (Float)coors[indexX]*MIDDLE_COEFF);
+					 (Float)coors[indexX]);
 			 visCoors.getCoorY().set(j, visCoors.getCoorY().get(j)-
-					 (Float)coors[indexY]*MIDDLE_COEFF);
+					 (Float)coors[indexY]);
 		      }
 		 ifClosed = true;
 	}

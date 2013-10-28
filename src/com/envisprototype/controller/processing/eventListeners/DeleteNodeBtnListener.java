@@ -14,15 +14,15 @@ public class DeleteNodeBtnListener extends AbstractEditMapListener{
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
 			if(!EditMapListener.isIfDelete()){
-				eButton.setName(editMapApplet.getString(R.string.choose_node_to_delete));
-				editMapApplet.getAddNodeBtn().setName(editMapApplet.getString(R.string.add_node));
-				editMapApplet.getMoveNodeBtn().setName(editMapApplet.getString(R.string.drag_node_btn));
+				eButton.setText(editMapApplet.getString(R.string.choose_node_to_delete));
+				editMapApplet.getAddNodeBtn().setText(editMapApplet.getString(R.string.add_node));
+				editMapApplet.getMoveNodeBtn().setText(editMapApplet.getString(R.string.drag_node_btn));
 				EditMapListener.setIfDrag(false);
 				EditMapListener.setIfDelete(true);
 				EditMapListener.setAdding(false);
 			}
 			else{
-				eButton.setName(editMapApplet.getString(R.string.delete_node_btn));
+				eButton.setText(editMapApplet.getString(R.string.delete_node_btn));
 				EditMapListener.setIfDelete(false);
 				}
 		}

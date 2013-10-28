@@ -6,7 +6,7 @@ import com.envisprototype.view.processing.SetPlotPApplet;
 
 public class AbstractPlotBtnListener extends AbstractEnvisButtonListener{
 	
-	SetPlotPApplet spApplet;
+	protected SetPlotPApplet spApplet;
 	
 	public AbstractPlotBtnListener(){
 		super();

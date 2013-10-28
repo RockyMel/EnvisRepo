@@ -174,6 +174,12 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 	public static String getCreateSensorTableQuery() {
 		return CREATE_SENSOR_TABLE_QUERY;
 	}
+
+	@Override
+	public void addAssociateSensortoMap(String setID, float x, float y, float z) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

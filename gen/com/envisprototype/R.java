@@ -423,11 +423,11 @@ containing a value of this type.
     }
     public static final class string {
         public static final int action_settings=0x7f06001a;
-        public static final int add_node=0x7f060047;
-        public static final int add_node_step_one=0x7f060048;
-        public static final int add_node_step_three=0x7f06004a;
-        public static final int add_node_step_two=0x7f060049;
-        public static final int add_set=0x7f06004f;
+        public static final int add_node=0x7f06004a;
+        public static final int add_node_step_one=0x7f06004b;
+        public static final int add_node_step_three=0x7f06004d;
+        public static final int add_node_step_two=0x7f06004c;
+        public static final int add_set=0x7f060052;
         public static final int admin_string=0x7f06001d;
         public static final int app_name=0x7f060019;
         /**   Title for notification shown when GooglePlayServices needs to be
@@ -453,7 +453,8 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060013;
-        public static final int choose_node_to_delete=0x7f06003d;
+        public static final int bars_vis_type_btn=0x7f06005a;
+        public static final int choose_node_to_delete=0x7f060040;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -521,14 +522,16 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060012;
-        public static final int delete_node_btn=0x7f06003c;
-        public static final int disabled=0x7f060044;
-        public static final int drag_node_btn=0x7f06003e;
-        public static final int draw_free_shape=0x7f060042;
-        public static final int draw_polygon=0x7f060040;
-        public static final int draw_rect=0x7f060045;
+        public static final int date_flag=0x7f060032;
+        public static final int delete_node_btn=0x7f06003f;
+        public static final int disabled=0x7f060047;
+        public static final int drag_node_btn=0x7f060041;
+        public static final int draw_free_shape=0x7f060045;
+        public static final int draw_polygon=0x7f060043;
+        public static final int draw_rect=0x7f060048;
         public static final int fav_string=0x7f06001c;
         public static final int flags=0x7f06002e;
+        public static final int from_date_flag=0x7f060033;
         public static final int hello_world=0x7f06001b;
         public static final int hist_data=0x7f060022;
         public static final int map_id_extra=0x7f060028;
@@ -540,39 +543,41 @@ containing a value of this type.
         public static final int optTwo=0x7f06001f;
         public static final int plot_flag_extra=0x7f06002f;
         public static final int recent_data=0x7f060023;
-        public static final int remove_last_node=0x7f060046;
-        public static final int remove_sets=0x7f06004d;
+        public static final int remove_last_node=0x7f060049;
+        public static final int remove_sets=0x7f060050;
         public static final int request_code=0x7f060031;
-        public static final int save_sets=0x7f06004b;
+        public static final int save=0x7f06004e;
+        public static final int saved=0x7f06004f;
         public static final int sensor_id_extra=0x7f060029;
         public static final int sensors_to_vis_extra=0x7f06002c;
         public static final int set_coor_extra=0x7f06002a;
         public static final int set_higlt_lbl=0x7f060024;
         public static final int sets_id_extra=0x7f06002d;
-        public static final int sets_saved=0x7f06004c;
         public static final int sets_to_vis_extra=0x7f06002b;
         public static final int sort_prompt=0x7f060026;
-        public static final int stop_add_set=0x7f060050;
-        public static final int stop_drag_node_btn=0x7f06003f;
-        public static final int stop_draw_free_shape=0x7f060043;
-        public static final int stop_draw_polygon=0x7f060041;
-        public static final int stop_remove_sets=0x7f06004e;
+        public static final int spheres_vis_type_btn=0x7f060059;
+        public static final int stop_add_set=0x7f060053;
+        public static final int stop_drag_node_btn=0x7f060042;
+        public static final int stop_draw_free_shape=0x7f060046;
+        public static final int stop_draw_polygon=0x7f060044;
+        public static final int stop_remove_sets=0x7f060051;
         public static final int three_d_vis_flag_extra=0x7f060030;
-        public static final int title_activity_add_map=0x7f060037;
-        public static final int title_activity_add_sensor=0x7f060034;
-        public static final int title_activity_chart_visualization_settings=0x7f06003b;
-        public static final int title_activity_choose_sensor_type=0x7f060054;
-        public static final int title_activity_home=0x7f060038;
-        public static final int title_activity_map_info_view=0x7f060036;
-        public static final int title_activity_map_list=0x7f060032;
-        public static final int title_activity_new_chart=0x7f060051;
-        public static final int title_activity_new_set_info_view=0x7f060055;
-        public static final int title_activity_plot_sensor_to=0x7f060033;
-        public static final int title_activity_real_time_chart=0x7f060052;
-        public static final int title_activity_real_time_chart_list=0x7f060053;
-        public static final int title_activity_sensor_info_view=0x7f060035;
-        public static final int title_activity_set_info_view=0x7f060039;
-        public static final int title_activity_set_list=0x7f06003a;
+        public static final int title_activity_add_map=0x7f06003a;
+        public static final int title_activity_add_sensor=0x7f060037;
+        public static final int title_activity_chart_visualization_settings=0x7f06003e;
+        public static final int title_activity_choose_sensor_type=0x7f060057;
+        public static final int title_activity_home=0x7f06003b;
+        public static final int title_activity_map_info_view=0x7f060039;
+        public static final int title_activity_map_list=0x7f060035;
+        public static final int title_activity_new_chart=0x7f060054;
+        public static final int title_activity_new_set_info_view=0x7f060058;
+        public static final int title_activity_plot_sensor_to=0x7f060036;
+        public static final int title_activity_real_time_chart=0x7f060055;
+        public static final int title_activity_real_time_chart_list=0x7f060056;
+        public static final int title_activity_sensor_info_view=0x7f060038;
+        public static final int title_activity_set_info_view=0x7f06003c;
+        public static final int title_activity_set_list=0x7f06003d;
+        public static final int to_date_flag=0x7f060034;
     }
     public static final class style {
         /** 

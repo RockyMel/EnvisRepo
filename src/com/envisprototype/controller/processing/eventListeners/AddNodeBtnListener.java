@@ -15,9 +15,9 @@ public class AddNodeBtnListener extends AbstractEditMapListener{
 			//eButton.getEpApplet().getEnvisMap().
 			// add node
 			if(!EditMapListener.isAdding()){
-				eButton.setName(eButton.getEpApplet().getString(R.string.add_node_step_one));
-				editMapApplet.getDeleteNodeBtn().setName(editMapApplet.getString(R.string.delete_node_btn));
-				editMapApplet.getMoveNodeBtn().setName(editMapApplet.getString(R.string.drag_node_btn));
+				eButton.setText(eButton.getEpApplet().getString(R.string.add_node_step_one));
+				editMapApplet.getDeleteNodeBtn().setText(editMapApplet.getString(R.string.delete_node_btn));
+				editMapApplet.getMoveNodeBtn().setText(editMapApplet.getString(R.string.drag_node_btn));
 				EditMapListener.setIfDrag(false);
 				EditMapListener.setIfDelete(false);
 				EditMapListener.setAdding(true);
@@ -25,7 +25,7 @@ public class AddNodeBtnListener extends AbstractEditMapListener{
 			else{
 				switch(EditMapListener.addingStep){
 				case 1:{
-					eButton.setName(eButton.getEpApplet().getString(R.string.add_node_step_two));
+					eButton.setText(eButton.getEpApplet().getString(R.string.add_node_step_two));
 				}
 				break;
 				case 2:{

@@ -2,19 +2,37 @@ package com.envisprototype.view.processing;
 
 import processing.core.PApplet;
 
+import com.envisprototype.controller.RealTimeThreeDVis;
 import com.envisprototype.model.processing.Coordinates;
 
+import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
 
 public class SensorSet extends UIElement{
 	String id;
 	float x,y,z;
 	float realX, realY, realZ;
-	private int SET_STROKE_WEIGHT = 20;
+	protected int SET_STROKE_WEIGHT = 20;
+	private boolean ifSensor = true;
+	RealTimeThreeDVis realTimeUpdates;
+	public static Handler mHandler;
 	
 	public SensorSet(EnvisPApplet epApplet, String id){
 		super(epApplet);
 		this.id = id;
+		if(mHandler == null){
+			 Activity activity=(Activity) this.epApplet; 
+			    activity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						mHandler = new Handler();
+					}
+				});
+		}
+		realTimeUpdates = new RealTimeThreeDVis(id, epApplet);
 	}
 
 	public SensorSet(EnvisPApplet epApplet, String id, float x, float y, float z) {
@@ -25,12 +43,12 @@ public class SensorSet extends UIElement{
 		this.realX = x;
 		this.realY = y;
 		this.realZ = z;
-		printCoors();
+		printCoors();	
 	}
 	
 	public SensorSet(EnvisPApplet epApplet, String id, String name, float x, float y, float z) {
 		this(epApplet, id, x, y, z);
-		this.name = name;
+		this.text = name;
 		printCoors();
 	}
 	
@@ -50,7 +68,9 @@ public class SensorSet extends UIElement{
 		//epApplet.scale(epApplet.getEnvisMap().getZoomValue());
 		epApplet.point(x,y,z);
 		epApplet.strokeWeight(EnvisPApplet.STROKE_WEIGHT);
-		epApplet.text(realX + ", " + realY, x,y,z);
+		epApplet.text(realX + ", " + realY, x+epApplet.width/100,y,z);
+		//epApplet.fill(255,255,0);
+		epApplet.text(id, x+epApplet.width/100,y+epApplet.height/90,z);
 		epApplet.popMatrix();
 	}
 	
@@ -170,7 +190,17 @@ public class SensorSet extends UIElement{
 		epApplet.rotateY(yRotate);
 		epApplet.rotateZ(zRotate);
 	}
+
+	public boolean isIfSensor() {
+		return ifSensor;
+	}
+
+	public void setIfSensor(boolean ifSensor) {
+		this.ifSensor = ifSensor;
+	}
 	
-	
+	public void startRealTime(){
+		mHandler.postDelayed(realTimeUpdates, 200);
+	}
 
 }

@@ -83,8 +83,23 @@ public class SetListActivity extends Activity {
 							getSingletoneInstance(this).getListOfSensorsAssosiatedWithMap(mapId);
 					sets = SetListModel.getSingletonInstance().getSetListByIds(setIds);
 				}
+				if(bundle.getString(getString(R.string.flags)).equals(getString(R.string.plot_flag_extra))){
+						// get rid of the sets that has already been plotted
+					Iterator<SetInterface> iterator = sets.iterator();
+					SetInterface setToRemove;
+					while(iterator.hasNext()){
+						setToRemove = iterator.next();
+						if(MapSetAssociationDBHelper.getSingletoneInstance(this).isPlotted(setToRemove.getId())){
+							if(!setToRemove.getMapID().equals(mapId))
+								iterator.remove();
+							else{
+								setToRemove.setIftoPlot(true);
+							}
+						}
+					}
+				}
 			}
-		}
+		}      
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		//addListenerOnSpinnerItemSelection();
 		//Collections.sort(sets,new SortBySetAlph());
@@ -96,6 +111,8 @@ public class SetListActivity extends Activity {
 		// 2. associate plotted sets with the map
 		Button plotSetsBtn = (Button) findViewById(R.id.plot_sets_btn);
 		plotSetsBtn.setOnClickListener(new PlotSetsBtnListener(mapId));
+		if(mapId == null)
+			plotSetsBtn.setVisibility(Button.INVISIBLE);
 		//CoordinatesReader setCoorReader = new CoordinatesReader(this);
 		//HashMap<String, SetCoordinates> tempSetCoors = setCoorReader.prepareSensorsCoordinates("sensor.txt");
 		//Iterator<String> iterator = tempSetCoors.keySet().iterator();

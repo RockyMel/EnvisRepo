@@ -2,13 +2,18 @@ package com.envisprototype.view.processing;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import android.util.Log;
 
+import com.envisprototype.controller.processing.dragListeners.ZCoorBtnListener;
 import com.envisprototype.controller.processing.eventListeners.IdBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveSetBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SensitiveListener;
-import com.envisprototype.controller.processing.eventListeners.zCoorBtnListener;
+import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.sensor.SensorListModel;
+import com.envisprototype.model.set.SetInterface;
+import com.envisprototype.model.set.SetListModel;
 
 public class SetPlotPApplet extends EnvisPApplet {
 	
@@ -33,7 +38,7 @@ public void setup(){
 	int zCoorY = (currentClick.getDefY() + currentClick.getDefH()/2)-width/60; 
 	zCoorSpinner.setSize(width/30, width/30);
 	zCoorSpinner.setPlace(currentClick.getDefW()+currentClick.getDefX()+width/50,zCoorY);
-	zCoorSpinner.addDragEventListener(new zCoorBtnListener());
+	zCoorSpinner.addDragEventListener(new ZCoorBtnListener());
 	setIterator = envisSensors.keySet().iterator();
 	while(setIterator.hasNext()){
 		envisSensors.get(setIterator.next()).translateSensorsForMap(envisMap);
@@ -58,6 +63,33 @@ public void setup(){
 	}
 	downSetIdBtn.setPlace(MAX_WIDTH, height-2*height/20);
 	okBtn.setPlace(MAX_WIDTH, height-height/20);
+	String sensorId;// setId;
+    setIterator = envisSensors.keySet().iterator();
+	while(setIterator.hasNext()){
+    	sensorId = setIterator.next();
+    	SensorInterface tempSensor = SensorListModel.getSingletonInstance().findSensorById(sensorId);
+    	SetInterface tempSet = SetListModel.getSingletonInstance().findSetById(sensorId);
+    	if(tempSensor != null){
+    		envisSensors.get(sensorId).setRealX(tempSensor.getX());
+        	envisSensors.get(sensorId).setRealY(tempSensor.getY());
+        	envisSensors.get(sensorId).setRealZ(tempSensor.getZ());
+        	envisSensors.get(sensorId).setX(tempSensor.getX());
+        	envisSensors.get(sensorId).setY(tempSensor.getY());
+        	envisSensors.get(sensorId).setZ(tempSensor.getZ());
+    	}
+    	else
+    	if(tempSet != null){
+    		// set xyz as in set that this sensor belongs to
+    		envisSensors.get(sensorId).setRealX(tempSet.getX());
+        	envisSensors.get(sensorId).setRealY(tempSet.getY());
+        	envisSensors.get(sensorId).setRealZ(tempSet.getZ());
+        	envisSensors.get(sensorId).setX(tempSet.getX());
+        	envisSensors.get(sensorId).setY(tempSet.getY());
+        	envisSensors.get(sensorId).setZ(tempSet.getZ());
+    	}
+    	envisSensors.get(sensorId).translateSensorsForMap(envisMap);
+    	
+    }	
 }
 
 public void draw(){

@@ -16,6 +16,7 @@ public class TopViewButtnoListener extends AbstractEnvisButtonListener{
 				//RotateScopeListener.setIfRotate(false);
 				RotateScopeListener.setIfFront(false);
 				RotateScopeListener.setIfLeftSide(false);
+				RotateScopeListener.setIfPerspective(false);
 			}
 		}
 	}

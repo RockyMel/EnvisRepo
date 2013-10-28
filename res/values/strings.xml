@@ -26,7 +26,9 @@
     <string name="plot_flag_extra">plotExtra</string>
     <string name="three_d_vis_flag_extra">three_d_vis_flag_extra</string>
     <string name="request_code">request code</string>
-
+ <string name="date_flag">date to visualised</string>
+    <string name="from_date_flag">from time stamp</string>
+    <string name="to_date_flag">to time stamp</string>
     <string-array name="sort_arrays">
         <item>Alphabetical Order</item>
         <item>By Location</item>
@@ -79,8 +81,8 @@
     <string name="add_node_step_one">Tap node</string>
     <string name="add_node_step_two">Tap on map</string>
     <string name="add_node_step_three">Press to add</string>
-    <string name="save_sets">Save</string>
-    <string name="sets_saved">Saved</string>
+    <string name="save">Save</string>
+    <string name="saved">Saved</string>
     <string name="remove_sets">Remove set</string>
     <string name="stop_remove_sets">Stop removing</string>
     <string name="add_set">Add set</string>
@@ -90,5 +92,6 @@
     <string name="title_activity_real_time_chart_list">RealTimeChartListActivity</string>
     <string name="title_activity_choose_sensor_type">ChooseSensorTypeActivity</string>
     <string name="title_activity_new_set_info_view">NewSetInfoViewActivity</string>
-
+  <string name="spheres_vis_type_btn">Show Spheres</string>
+    <string name="bars_vis_type_btn">Show bars</string>
 </resources>

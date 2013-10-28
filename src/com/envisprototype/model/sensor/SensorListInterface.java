@@ -24,6 +24,7 @@ public interface SensorListInterface {
 	public abstract void addAssociateSensortoSet(String sensorID, String setID);
 
 	public abstract void editSensor(SensorInterface sensor);
-	
+	public abstract void addAssociateSensortoMap(String setID,
+			float x, float y, float z);
 
 }

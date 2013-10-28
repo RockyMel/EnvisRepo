@@ -11,11 +11,11 @@ public class RotateButtonListener extends AbstractEnvisButtonListener{
 		// TODO Auto-generated method stub
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
-			if(RotateScopeListener.isIfRotate()){
-				RotateScopeListener.setIfRotate(false);
-			}
-			else{
-				RotateScopeListener.setIfRotate(true);
+//			if(RotateScopeListener.isIfRotate()){
+//				RotateScopeListener.setIfRotate(false);
+//			}
+//			else{
+				//RotateScopeListener.setIfRotate(true);
 //				RotateScopeListener.setIfFront(false);
 //				RotateScopeListener.setIfLeftSide(false);
 //				RotateScopeListener.setIfTop(false);
@@ -23,4 +23,4 @@ public class RotateButtonListener extends AbstractEnvisButtonListener{
 		}
 	}
 
-}
+//}

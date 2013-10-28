@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
+import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.NewShowChartVisualizationButtonController;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
@@ -147,14 +148,25 @@ SetsButton.setOnClickListener(new OnClickListener() {
 					TimeFromPickerButton.setVisibility(Button.INVISIBLE);
 					TimeToPickerButton.setVisibility(Button.INVISIBLE);
 					MODE = 1;
-					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+				//	VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+					if(if3DVis == false)
+						// for real time now !!!!
+						VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE));
+					else{
+						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+					}
 				} else {
 					DateFromPickerButton.setVisibility(Button.VISIBLE);
 					DateToPickerButton.setVisibility(Button.VISIBLE);
 					TimeFromPickerButton.setVisibility(Button.VISIBLE);
 					TimeToPickerButton.setVisibility(Button.VISIBLE);
 					MODE = 0;
-					VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					//VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					if(if3DVis == false)
+						VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(context,SetIds,SensorIds,MODE,calfrom,calto));
+					else{
+						VisualizationButton.setOnClickListener(new Show3DMapBtnListener(context, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
+					}
 				}
 
 			}
@@ -360,7 +372,7 @@ SetsButton.setOnClickListener(new OnClickListener() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		ChartVisualizationSettingsListAdapter cvsla = new ChartVisualizationSettingsListAdapter(this,0,ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs());
-
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 		sensorlist.setAdapter(cvsla);
 		
 

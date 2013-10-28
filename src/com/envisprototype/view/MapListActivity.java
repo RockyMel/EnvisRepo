@@ -13,14 +13,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.model.MapListAdapter;
 import com.envisprototype.view.model.SortByAlphMap;
-import com.envisprototype.R;
 
 
 public class MapListActivity extends Activity {

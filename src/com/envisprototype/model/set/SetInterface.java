@@ -36,6 +36,7 @@ public interface SetInterface {
 	
 	public abstract void setZ(float z);
 
+	String getMapID();
 
 	//public abstract List<SensorInterface> getSensors();
 	

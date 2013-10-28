@@ -16,6 +16,7 @@ public class LeftSideViewButtonListener extends AbstractEnvisButtonListener{
 				//RotateScopeListener.setIfRotate(false);
 				RotateScopeListener.setIfFront(false);
 				RotateScopeListener.setIfTop(false);
+				RotateScopeListener.setIfPerspective(false);
 			}
 		}
 	}

@@ -1,15 +1,14 @@
 package com.envisprototype.view.processing;
 
 import android.util.Log;
-import android.view.KeyEvent;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.processing.dragListeners.DrawFreePolygonBtnListener;
+import com.envisprototype.controller.processing.dragListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.dragListeners.DrawingScopeListener;
+import com.envisprototype.controller.processing.dragListeners.ZMapSizeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.AddToDrawingScopeListener;
-import com.envisprototype.controller.processing.eventListeners.DrawFreePolygonBtnListener;
-import com.envisprototype.controller.processing.eventListeners.DrawFreeShapeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.DrawRectMapBtnListener;
-import com.envisprototype.controller.processing.eventListeners.ExitFromDrawMapAppletListener;
 import com.envisprototype.controller.processing.eventListeners.RemoveLastNodeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
 
@@ -18,16 +17,18 @@ public class DrawMapApplet extends EnvisPApplet {
 	EnvisButton rectMapBtn, freeShapeBtn, drawPolygonBtn,
 	removeLastNodeBtn, closeFigure;
 	EnvisButton drawingScope;
+	ZCoorSpinner zCoorSpinner;
 	private boolean ifFreeshape = false;
 	private boolean ifRectMap = false;
 	private boolean ifFreePolygon = false;
+	private BarGraph barGraphTest;
 	
 public void setup(){
 	super.setup();
-	
+	//envisMap = new Map(this);
 	closeFigure = new EnvisButton(this, "Close");
 	closeFigure.setPlace(DEF_BTN_X, height-height/25);
-	closeFigure.addEventListener(new SaveMapBtnListener(this, "map.txt"));
+	closeFigure.addEventListener(new SaveMapBtnListener());
 	closeFigure.setIfCanFireWithNoClick(true);
 	rectMapBtn = new EnvisButton(this, "Draw rect");
 	rectMapBtn.setPlace(DEF_BTN_X, height/29);
@@ -46,6 +47,15 @@ public void setup(){
 	removeLastNodeBtn = new EnvisButton(this, getString(R.string.remove_last_node));
 	removeLastNodeBtn.setPlace(DEF_BTN_X, 7*height/29);
 	removeLastNodeBtn.addEventListener(new RemoveLastNodeBtnListener());
+	
+	//barGraphTest = new BarGraph(this, 50, 1);
+	
+	zCoorSpinner = new ZCoorSpinner(this, "");
+	int zCoorY = (currentClick.getDefY() + currentClick.getDefH()/2)-width/60; 
+	zCoorSpinner.setSize(width/30, width/30);
+	zCoorSpinner.setPlace(currentClick.getDefW()+currentClick.getDefX()+width/50,zCoorY);
+	zCoorSpinner.addDragEventListener(new ZMapSizeBtnListener());
+	
 }
 
 public void draw(){
@@ -64,6 +74,10 @@ public void draw(){
   }
   else{
 	  threeDDrawPreset(false); // false - no sets of sensors will be displayed
+	  zCoorSpinner.drawMe();
+	  zoom.drawMe();
+	  closeFigure.drawMe();
+	  zCoorSpinner.fireDragEvent();
   }
 }
 
@@ -77,6 +91,7 @@ public void mouseReleased(){
 		removeLastNodeBtn.fireEvent();
 	}
 	else{
+		closeFigure.fireEvent();
 	}
 }
 
