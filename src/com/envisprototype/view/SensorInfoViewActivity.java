@@ -64,7 +64,7 @@ public class SensorInfoViewActivity extends EnvisActivity {
 		delete = (Button)findViewById(R.id.Delete);
 		defaultXYZBtn = (Button) findViewById(R.id.bring_to_default_coors_btn);
 
-		save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
+		//save.setOnClickListener(new SaveButtonController(flag,id,name,location,type,brand,notes,delete,setid,this));
 		
 		if(flag.equals("new"))
 			sensor=new SensorModel();

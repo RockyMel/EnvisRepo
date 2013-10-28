@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="/Users/Stoneman/Dropbox/(extra)Sensory Project of Superpowerdom/graphview-3.1.jar"/>
+	<classpathentry kind="lib" path="/Applications/adt-bundle-mac-x86_64-20130917/sdk/add-ons/addon-google_apis-google-10/libs/maps.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
