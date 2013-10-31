@@ -42,7 +42,7 @@ public class ThreeDVis extends EnvisPApplet{
 		{
 			Calendar tempCal = Calendar.getInstance();
 			curDate = tempCal.get(Calendar.YEAR) + "-" + 
-					tempCal.get(Calendar.MONTH) + "-" + tempCal.get(Calendar.DAY_OF_MONTH)+ " " 
+					tempCal.get(Calendar.MONTH+1) + "-" + tempCal.get(Calendar.DAY_OF_MONTH)+ " " 
 					+ tempCal.get(Calendar.HOUR_OF_DAY) + ":" + tempCal.get(Calendar.MINUTE) + ":10";
 		}
 		// to visualise the map in 3D
