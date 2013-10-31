@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.model.processing.SensorReadingsModel;
@@ -55,6 +56,7 @@ public class HistoricalThreeDController{
 							if(obj.getJSONArray(i+"")!=null){
 								data.put(obj.getJSONArray(i+"").getString(1),
 										Float.parseFloat(obj.getJSONArray(i+"").getString(2)));
+								Log.i("loop",obj.getJSONArray(i+"").getString(1) + obj.getJSONArray(i+"").getString(2));
 //								for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
 //									barSet.getBarGraphList().get(0).setReadingRange(data);
 //								}

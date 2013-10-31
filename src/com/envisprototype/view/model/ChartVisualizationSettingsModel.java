@@ -126,6 +126,11 @@ public class ChartVisualizationSettingsModel {
 		
 		return temp;
 	}
+
+	public void clearList() {
+		// TODO Auto-generated method stub
+		this.SensorIDs.clear();
+	}
 	
 	
 }

@@ -25,7 +25,9 @@ import com.envisprototype.view.processing.ThreeDVis;
 					int i = SensorReadingsModel.getSingletonInstance().getTimeIndex();
 					String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(i);
 					ThreeDVis.curDate = timeStamp;
-					barSet.getBarGraphList().get(0).setReading(pair.get(timeStamp));
+					Float reading = pair.get(timeStamp);
+					if(reading != null)
+						barSet.getBarGraphList().get(0).setReading(reading);
 				}
 				for(SphereGraphSet sphereSet: tdPapplet.getSphereGraphList()){
 					TreeMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(sphereSet.getSensorID());

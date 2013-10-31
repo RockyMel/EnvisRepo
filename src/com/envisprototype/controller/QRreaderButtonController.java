@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.envisprototype.zxing.integration.android.IntentIntegrator;
 import com.envisprototype.zxing.integration.android.IntentResult;
 
@@ -23,6 +24,8 @@ public class QRreaderButtonController implements OnClickListener {
 		// TODO Auto-generated method stub
 		IntentIntegrator scanIntegrator = new IntentIntegrator(context);
 		//start scanning
+		ChartVisualizationSettingsModel.getSingletonInstance().clearList();
+
 		scanIntegrator.initiateScan();
 		
 	}

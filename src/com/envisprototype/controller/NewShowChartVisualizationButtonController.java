@@ -54,7 +54,7 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 			this.dialog.show();
 			Calendar from = ChartVisualizationSettingsModel.getSingletonInstance().getFrom();
 			Calendar to = ChartVisualizationSettingsModel.getSingletonInstance().getTo();
-			fromstr = from.get(Calendar.YEAR) + "-" + from.get(Calendar.MONTH) + "-" + from.get(Calendar.DAY_OF_MONTH)+ " " + from.get(Calendar.HOUR_OF_DAY) + ":" + from.get(Calendar.MINUTE) + ":10";
+			fromstr = from.get(Calendar.YEAR) + "-" + from.get(Calendar.MONTH+1) + "-" + from.get(Calendar.DAY_OF_MONTH)+ " " + from.get(Calendar.HOUR_OF_DAY) + ":" + from.get(Calendar.MINUTE) + ":10";
 			tostr = to.get(Calendar.YEAR) + "-" + (to.get(Calendar.MONTH)+1) + "-" + to.get(Calendar.DAY_OF_MONTH)+ " " + to.get(Calendar.HOUR_OF_DAY) + ":" + to.get(Calendar.MINUTE) + ":10";
 
 		}

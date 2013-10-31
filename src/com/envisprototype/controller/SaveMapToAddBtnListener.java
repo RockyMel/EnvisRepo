@@ -67,6 +67,9 @@ public class SaveMapToAddBtnListener implements OnClickListener{
 		if(ifAdd) //adding
 			MapLocalDBHelper.getSingletonInstance(context).addMap(map);
 		else{
+			// getting coors from model
+			map.setRealCoordinates(MapListModel.getSingletonInstance().findMapById(map.getId()).getRealCoordinates());
+			map.setzCoordinate(MapListModel.getSingletonInstance().findMapById(map.getId()).getzCoordinate());
 			MapLocalDBHelper.getSingletonInstance(context).editMap(map);
 			//MapListModel.getSingletonInstance().editMap(map);
 		}

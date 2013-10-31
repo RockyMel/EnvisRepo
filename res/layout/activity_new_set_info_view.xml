@@ -30,6 +30,7 @@
             android:layout_alignRight="@+id/ID"
             android:layout_toRightOf="@+id/NameText"
             android:ems="10"
+            android:textColor="@color/yellow"
              />
 
         <EditText
@@ -40,6 +41,7 @@
             android:layout_alignLeft="@+id/NAME"
             android:layout_alignRight="@+id/NAME"
             android:ems="10"
+            android:textColor="@color/yellow"
             android:inputType="textMultiLine" >
 
             <requestFocus android:layout_height="wrap_content" />
@@ -87,6 +89,7 @@
             android:layout_below="@+id/imageView1"
             android:layout_toLeftOf="@+id/NOTES"
             android:text="Notes"
+            android:textColor="@color/yellow"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -96,6 +99,7 @@
             android:layout_above="@+id/NOTES"
             android:layout_alignLeft="@+id/ID"
             android:text="Name"
+            android:textColor="@color/yellow"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -104,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/NameText"
             android:layout_toRightOf="@+id/imageView1"
-            android:ems="10" />
+            android:ems="10"
+            android:textColor="@color/yellow" />
 
         <ImageButton
             android:id="@+id/Save"

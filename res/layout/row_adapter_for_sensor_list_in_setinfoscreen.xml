@@ -10,6 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Large Text"
+        android:textColor="@color/yellow"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:background="@color/yellow"
         android:text=">>>" />
 
     <TextView
@@ -28,6 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/ID"
         android:text="Medium Text"
+        android:textColor="@color/yellow"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <CheckBox
@@ -36,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/edit"
         android:layout_toLeftOf="@+id/edit"
+        android:textColor="@color/yellow"
         android:text="Plot Sensor" />
 
 </RelativeLayout>

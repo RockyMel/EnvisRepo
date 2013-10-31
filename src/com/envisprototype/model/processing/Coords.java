@@ -1,4 +1,4 @@
-package com.envisprototype.view.processing;
+package com.envisprototype.model.processing;
 
 
 public class Coords {

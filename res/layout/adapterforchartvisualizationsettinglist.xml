@@ -21,6 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/deletebutton"
         android:text="Large Text"
+        android:textColor="@color/yellow"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

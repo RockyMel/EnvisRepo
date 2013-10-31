@@ -11,8 +11,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.envisprototype.model.processing.Coords;
 import com.envisprototype.model.set.SetListModel;
-import com.envisprototype.view.processing.Coords;
 import com.envisprototype.view.processing.SensorSet;
 
 

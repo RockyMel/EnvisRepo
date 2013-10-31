@@ -96,7 +96,8 @@
         android:layout_alignTop="@+id/savebutton"
         android:background="@null"
         android:scaleType="fitXY"
-        android:src="@drawable/draw_map"
+        
+        android:src="@drawable/drawmapnew"
         android:text="Draw" />
 
 </RelativeLayout>

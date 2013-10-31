@@ -120,6 +120,15 @@
             android:layout_alignRight="@+id/SensorTypeInfo"
             />
 
+        <ImageButton
+            android:id="@+id/bring_to_default_coors_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/map"
+            android:layout_toLeftOf="@+id/Delete"
+            android:background="@null"
+            android:src="@drawable/default_sensor_placement" />
+
     </RelativeLayout>
 
 </ScrollView>

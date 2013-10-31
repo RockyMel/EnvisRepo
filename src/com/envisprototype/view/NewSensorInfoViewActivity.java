@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.controller.DefaultXYZSensorBtnListener;
 import com.envisprototype.controller.DeleteSensorButtonController;
 import com.envisprototype.controller.SaveButtonController;
 import com.envisprototype.model.sensor.SensorInterface;
@@ -39,7 +40,7 @@ public class NewSensorInfoViewActivity extends Activity{
 
 	private ImageButton delete;
 	private ImageButton save;
-
+	private ImageButton defaultXYZBtn;
 	private GoogleMap map;
 
 	private LatLng LOCATION_SENSOR;
@@ -59,15 +60,18 @@ public class NewSensorInfoViewActivity extends Activity{
 		setContentView(R.layout.new_sensor_info_view);
 		setid= getIntent().getStringExtra("setid");
 		Log.i("nsiva", setid);
+		defaultXYZBtn = (ImageButton) findViewById(R.id.bring_to_default_coors_btn);
 		flag=getIntent().getStringExtra("flag");
 		if(flag.equals("new"))
 			{
 			typercvd = Integer.parseInt(getIntent().getStringExtra("type"));
 			sensorid= getIntent().getStringExtra("sensorid");
+			defaultXYZBtn.setVisibility(ImageButton.INVISIBLE);
 
 			}
 		else
 			sensorid= getIntent().getStringExtra("sensorid");
+		defaultXYZBtn.setOnClickListener(new DefaultXYZSensorBtnListener(sensorid));
 		init();
 	}
 

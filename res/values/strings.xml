@@ -55,13 +55,13 @@
         <item>Nearest maps</item>
     </string-array>
     <string-array name="sensors_admin_options">
-        <item>add_set</item>
-        <item>edit_set</item>
-        <item>plot_set</item>
+        <item>Add Set</item>
+        <item>Edit Set</item>
+        <item>Plot Set To Map</item>
     </string-array>
     <string-array name="map_admin_options">
-        <item>add_map</item>
-        <item>edit_del_map</item>
+        <item>Add Map</item>
+        <item>Edit Map</item>
     </string-array>
 
     <string name="title_activity_set_info_view">SetInfoViewActivity</string>

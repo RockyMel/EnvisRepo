@@ -82,7 +82,7 @@ public class BarGraph {
 	    p.pushMatrix();
 	    p.textFont(f);
 	    p.fill(255);
-	    p.text(reading,0,z-offset); 
+	    p.text(reading,0,z-2*offset); 
 	    p.popMatrix();
 	    
 	    p.pushMatrix();

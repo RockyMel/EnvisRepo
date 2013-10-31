@@ -52,6 +52,7 @@ public class RealTimeThreeDVis  implements Runnable{
 		String response = "";
 
 		response = SensorReadingDBHelper.getSensorReadingByRealTime(sensorId, context ,1);//getDataReadingBySensorIDJSON(sensorId, context);
+		if(response != null)
 		Log.i("NETCONNECTION3", response);
 		return response;
 	}
@@ -60,7 +61,7 @@ public class RealTimeThreeDVis  implements Runnable{
 	protected void onPostExecute(String result) {
 		// textView.setText(result);
 		//String response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().get(0));
-		if(result.equals("Not"))
+		if(result == null || result.equals("Not"))
 		{
 			Toast.makeText(context, "No Internet Coonnection", Toast.LENGTH_SHORT);
 		}

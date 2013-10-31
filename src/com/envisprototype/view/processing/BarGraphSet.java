@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.envisprototype.controller.RealTimeThreeDVis;
+import com.envisprototype.model.processing.Coords;
 
 
 /* collection of bar graphs for one set */

@@ -8,6 +8,7 @@ import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.processing.dragListeners.AbstractDrawMapListener;
 //import com.envisprototype.controller.processing.CoordinateWriter;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.view.processing.DrawMapApplet;
 import com.envisprototype.view.processing.Map;
 
 public class AddToDrawingScopeListener extends AbstractDrawMapListener{
@@ -52,6 +53,7 @@ public class AddToDrawingScopeListener extends AbstractDrawMapListener{
 						saveCoorsForMap(drawMapApplet.getEnvisMap().getMapId(), coorsToSave, drawMapApplet.getEnvisMap().getCOOR_Z());
 						eButton.getEpApplet().getEnvisMap().translateToMiddle();
 						Log.i("edit","saved");
+						((DrawMapApplet) eButton.getEpApplet()).getCloseFigure().setText("Save");
 						break;
 					}
 					}

@@ -17,6 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="RealTime" 
+        android:textColor="@color/yellow"
         />
 
     <TextView
@@ -27,6 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/TimeFromButton"
         android:layout_marginTop="19dp"
+        android:textColor="@color/yellow"
         android:text="Select Sensors for Visualization by Clicking on the Buttons to the Right:" />
 
     <Button

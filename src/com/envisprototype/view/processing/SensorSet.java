@@ -63,10 +63,12 @@ public class SensorSet extends UIElement{
 		// TODO Auto-generated method stub
 		epApplet.pushMatrix();
 		//epApplet.translate(xRotatedBy, yRotatedBy, zRotatedBy);
-		epApplet.strokeWeight(SET_STROKE_WEIGHT);
-		epApplet.stroke(color[R],color[G],color[B]);
+//		epApplet.strokeWeight(SET_STROKE_WEIGHT);
+//		epApplet.stroke(color[R],color[G],color[B]);
 		//epApplet.scale(epApplet.getEnvisMap().getZoomValue());
-		epApplet.point(x,y,z);
+		epApplet.translate(x, y, z);
+		epApplet.sphere(2);
+		//epApplet.point(x,y,z);
 		epApplet.strokeWeight(EnvisPApplet.STROKE_WEIGHT);
 		epApplet.text(realX + ", " + realY, x+epApplet.width/100,y,z);
 		//epApplet.fill(255,255,0);

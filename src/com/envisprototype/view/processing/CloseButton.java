@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import com.envisprototype.model.processing.Coords;
+
 public class CloseButton {
 	private EnvisPApplet p;
 	private boolean hover, selected;
