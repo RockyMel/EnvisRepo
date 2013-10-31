@@ -65,7 +65,7 @@ public class Show3DMapBtnListener implements OnClickListener{
 		intent.putStringArrayListExtra(v.getContext().getString(R.string.sets_to_vis_extra), setIds);
 		intent.putStringArrayListExtra(v.getContext().getString(R.string.sensors_to_vis_extra), sensorIds);
 		if(MODE == 0){
-			fromstr = from.get(Calendar.YEAR) + "-" + from.get(Calendar.MONTH+1) + "-" + from.get(Calendar.DAY_OF_MONTH)+ " " + from.get(Calendar.HOUR_OF_DAY) + ":" + from.get(Calendar.MINUTE) + ":10";
+			fromstr = from.get(Calendar.YEAR) + "-" + (from.get(Calendar.MONTH)+1) + "-" + from.get(Calendar.DAY_OF_MONTH)+ " " + from.get(Calendar.HOUR_OF_DAY) + ":" + from.get(Calendar.MINUTE) + ":10";
 			tostr = to.get(Calendar.YEAR) + "-" + (to.get(Calendar.MONTH)+1) + "-" + to.get(Calendar.DAY_OF_MONTH)+ " " + to.get(Calendar.HOUR_OF_DAY) + ":" + to.get(Calendar.MINUTE) + ":10";
 			intent.putExtra(v.getContext().getString(R.string.date_flag), v.getContext().getString(R.string.date_flag));
 			intent.putExtra(v.getContext().getString(R.string.from_date_flag), fromstr);

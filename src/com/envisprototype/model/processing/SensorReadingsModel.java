@@ -11,11 +11,12 @@ import android.util.Log;
 public class SensorReadingsModel {
 	
 	private static SensorReadingsModel singletonInstance;
-	public ArrayList<String> timeStamps = new ArrayList<String>();
+	public static ArrayList<String> timeStamps = new ArrayList<String>();
 	private int timeIndex = 0;
 	
-	HashMap<String, TreeMap<String, Float>> sensorReadings = new HashMap<String, TreeMap<String,Float>>();
+	HashMap<String, HashMap<String, Float>> sensorReadings = new HashMap<String, HashMap<String,Float>>();
 	
+
 	private SensorReadingsModel(){};
 
 	public static SensorReadingsModel getSingletonInstance() {
@@ -25,16 +26,26 @@ public class SensorReadingsModel {
 		return singletonInstance;
 	}
 	
-	public void addNewSensorToReadingsModel(String sensorId, TreeMap<String, Float> readingTimePair){
-		sensorReadings.put(sensorId, readingTimePair);
-		Iterator<String> iterator = readingTimePair.keySet().iterator();
-		while(iterator.hasNext()){
-			timeStamps.add(iterator.next());
-		}
-		Collections.sort(timeStamps);
+//	public void addNewSensorToReadingsModel(String sensorId, HashMap<String, Float> readingTimePair){
+//		sensorReadings.put(sensorId, readingTimePair);
+//		Iterator<String> iterator = readingTimePair.keySet().iterator();
+//		while(iterator.hasNext()){
+//			timeStamps.add(iterator.next());
+//		}
+//		//Collections.sort(timeStamps);
+//	}
+	
+	public void addNewSensorToReadingsModel(String sensorId, String timeStamp, Float reading){
+		HashMap<String, Float> tempMapOfTimeStamps = new HashMap<String, Float>();
+		if(sensorReadings.get(sensorId) != null)
+			tempMapOfTimeStamps = sensorReadings.get(sensorId);
+		tempMapOfTimeStamps.put(timeStamp, reading);
+		sensorReadings.put(sensorId, tempMapOfTimeStamps);
+		timeStamps.add(timeStamp);
+		//Collections.sort(timeStamps);
 	}
 	
-	public  TreeMap<String, Float> FindTimeReadingPairsForId(String sensorId){
+	public  HashMap<String, Float> FindTimeReadingPairsForId(String sensorId){
 		return sensorReadings.get(sensorId);
 	}
 	
@@ -51,6 +62,15 @@ public class SensorReadingsModel {
 
 	public int getTimeIndex() {
 		return timeIndex;
+	}
+	
+	public void setTimeIndex(int timeIndex) {
+		this.timeIndex = timeIndex;
+	}
+	
+
+	public HashMap<String, HashMap<String, Float>> getSensorReadings() {
+		return sensorReadings;
 	}
 
 	public void increaseIndex() {

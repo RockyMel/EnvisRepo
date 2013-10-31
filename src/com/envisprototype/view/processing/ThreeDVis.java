@@ -9,6 +9,8 @@ import java.util.TreeMap;
 
 import com.envisprototype.R;
 import com.envisprototype.controller.HistoricalThreeDController;
+import com.envisprototype.controller.processing.dragListeners.TimeStampBtnListener;
+import com.envisprototype.controller.processing.dragListeners.ZMapSizeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.FrontViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.LeftSideViewButtonListener;
 import com.envisprototype.controller.processing.eventListeners.NextTimeStampBtnListener;
@@ -29,6 +31,7 @@ public class ThreeDVis extends EnvisPApplet{
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton,
 	prospectiveSideButton, regenerateBarSetCoors, visTypeBtn, nextTimeStampBtn,
 	prevTimeStampBtn; 
+	ZCoorSpinner timeStampSpinner;
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 	String fromDate, toDate = null;
@@ -78,6 +81,13 @@ public class ThreeDVis extends EnvisPApplet{
 		nextTimeStampBtn.setPlace(DEF_BTN_X, 19*height/30);
 		nextTimeStampBtn.addEventListener(new NextTimeStampBtnListener());
 		RotateScopeListener.setIfTop(true);
+		
+		timeStampSpinner = new ZCoorSpinner(this, "");
+		int zCoorY = (currentClick.getDefY() + currentClick.getDefH()/2)-width/60; 
+		timeStampSpinner.setSize(width/30, width/30);
+		timeStampSpinner.setPlace(currentClick.getDefW()+currentClick.getDefX()+width/50,zCoorY);
+		timeStampSpinner.addDragEventListener(new TimeStampBtnListener());
+		
 		// need to get coordinates for the sensors
 		{
 			String sensorId;// setId;
@@ -157,6 +167,7 @@ public class ThreeDVis extends EnvisPApplet{
 			text(curDate,width/2-textWidth(curDate), currentClick.getDefY());
 			prevTimeStampBtn.drawMe();
 			nextTimeStampBtn.drawMe();
+			timeStampSpinner.drawMe();
 		}
 
 	}
@@ -165,6 +176,7 @@ public class ThreeDVis extends EnvisPApplet{
 	public void mouseDragged(){
 		super.mouseDragged();
 		rotateScope.fireEvent();
+		timeStampSpinner.fireDragEvent();
 	}
 
 	public void mouseReleased(){

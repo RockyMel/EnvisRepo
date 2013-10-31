@@ -1,8 +1,11 @@
 package com.envisprototype.controller;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,45 +26,50 @@ public class HistoricalThreeDController{
 	static String fromStr = null;
 	static String toStr = null;
 
-	private class GetSensorReadingTask extends AsyncTask<String, Void, String> {
-		String sensorId;
-		public GetSensorReadingTask(String sensorId, String fromstr, String toStr){
+	private class GetSensorReadingTask extends AsyncTask<List<String>, Void, HashMap<String, String>> {
+		List<String> sensorIds;
+		public GetSensorReadingTask(List<String> sensorIds, String fromstr, String toStr){
 			//this.index=index;
-				this.sensorId = sensorId;
+			this.sensorIds = sensorIds;
 		}
 
 		/** progress dialog to show user that the backup is processing. */
 		/** application context. */
 
 		protected void onPreExecute() {
+
 		}
 		@Override
-		protected String doInBackground(String... args) {
+		protected HashMap<String, String> doInBackground(List<String>... args) {
 			String response = "";
-			response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(sensorId, fromStr, toStr);
-			return response;
+			HashMap<String, String> id_reading = new HashMap<String, String>(); 
+			for(String sensorId: sensorIds){
+				response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(sensorId, fromStr, toStr);
+				id_reading.put(sensorId, response);
+			}
+			return id_reading;
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
-			TreeMap<String, Float> data = new TreeMap<String, Float>();
-				try {
+		protected void onPostExecute(HashMap<String, String> id_reading) {
+			//HashMap<String, Float> data = new HashMap<String, Float>();
+			Iterator<String> stringIdIterator = id_reading.keySet().iterator();
+			try {
+				while(stringIdIterator.hasNext()){
+					String sensorId = stringIdIterator.next();
+					String result = id_reading.get(sensorId);
 					System.out.println("---" + result);
 					JSONObject obj = new JSONObject(result);
 					int i=1;
 					while(true)
 					{
-
 						try{
 							if(obj.getJSONArray(i+"")!=null){
-								data.put(obj.getJSONArray(i+"").getString(1),
-										Float.parseFloat(obj.getJSONArray(i+"").getString(2)));
-								Log.i("loop",obj.getJSONArray(i+"").getString(1) + obj.getJSONArray(i+"").getString(2));
-//								for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
-//									barSet.getBarGraphList().get(0).setReadingRange(data);
-//								}
-								SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, data);
+								String timeStamp = obj.getJSONArray(i+"").getString(1);
+								Float reading = Float.parseFloat(obj.getJSONArray(i+"").getString(2));
+								Log.i("loop",timeStamp + reading);
 								i++;
+								SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, timeStamp, reading);
 							}
 							else
 								break;
@@ -71,14 +79,23 @@ public class HistoricalThreeDController{
 							break;
 						}
 					}
-					
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.i("loop",SensorReadingsModel.getSingletonInstance().getSensorReadings().size() + "");
 				}
+
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			HashSet hs = new HashSet();
+			hs.addAll(SensorReadingsModel.getSingletonInstance().getTimeStamps());
+			SensorReadingsModel.getSingletonInstance().getTimeStamps().clear();
+			SensorReadingsModel.getSingletonInstance().getTimeStamps().addAll(hs);
+			Collections.sort(SensorReadingsModel.getSingletonInstance().getTimeStamps());
+			System.out.println("DONE");
 		}
-	
+	}
+
 	//FOR HISTORICAL
 	public HistoricalThreeDController(
 			List<String> sensoridlist, String fromStr, String toStr) {
@@ -91,11 +108,13 @@ public class HistoricalThreeDController{
 	}
 
 	public void fetchData() {
-			for(String sensorId: sensoridlist){
-				GetSensorReadingTask task = new GetSensorReadingTask(sensorId, fromStr, toStr);
-				task.execute("dummy");
-			}
-
+		//		new Thread(){
+		//			public void run(){
+		//for(String sensorId: sensoridlist){
+		GetSensorReadingTask task = new GetSensorReadingTask(sensoridlist, fromStr, toStr);
+		task.execute();
+		//				}
+		//			}
+		//		}.start();
 	}
-
 }

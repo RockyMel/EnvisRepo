@@ -3,6 +3,7 @@ package com.envisprototype.controller.processing.dragListeners;
 import java.util.EventObject;
 
 import com.envisprototype.controller.processing.eventListeners.AbstractEnvisButtonListener;
+import com.envisprototype.view.processing.Map;
 import com.envisprototype.view.processing.ZCoorSpinner;
 
 public class ZMapSizeBtnListener extends AbstractEnvisButtonListener{
@@ -17,7 +18,8 @@ public class ZMapSizeBtnListener extends AbstractEnvisButtonListener{
 			if( spinner.getInitX() < spinner.getEpApplet().mouseX &&
 					spinner.getEpApplet().getMAX_WIDTH() > spinner.getEpApplet().mouseX){
 				spinner.setDefX(spinner.getEpApplet().mouseX-spinner.getDefH()/2);
-				spinner.adjustZ(spinner.getEpApplet().getEnvisMap());
+				int newZ = (int) spinner.adjustValue(spinner.getEpApplet().getEnvisMap(), Map.COOR_Z_TOP, Map.COOR_Z_BOTTOM);
+				spinner.getEpApplet().getEnvisMap().setCOOR_Z(newZ);
 			}
 		}
 	}

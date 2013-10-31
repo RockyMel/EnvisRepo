@@ -1,7 +1,7 @@
 package com.envisprototype.controller.processing.eventListeners;
 
 import java.util.EventObject;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 import com.envisprototype.model.processing.SensorReadingsModel;
 import com.envisprototype.view.processing.BarGraphSet;
@@ -20,22 +20,31 @@ public class PrevTimeStampBtnListener extends AbstractEnvisButtonListener{
 		if(ifHitTheButton()){
 			SensorReadingsModel.getSingletonInstance().decreaseIndex();
 			for(BarGraphSet barSet: tdPapplet.getBarGraphSetList()){
-				TreeMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(barSet.getSensorID());
+				HashMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(barSet.getSensorID());
 				//Iterator<String> iterator = pair.keySet().iterator();
 				int i = SensorReadingsModel.getSingletonInstance().getTimeIndex();
 				String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(i);
-				ThreeDVis.curDate = timeStamp;
-				Float reading = pair.get(timeStamp);
-				if(reading != null)
-					barSet.getBarGraphList().get(0).setReading(reading);
+				if(pair != null && timeStamp != null){
+					ThreeDVis.curDate = timeStamp;
+					Float reading = pair.get(timeStamp);
+					//Log.i("structure size ", "st s = " + SensorReadingsModel.getSingletonInstance().getSensorReadings());
+					if(reading != null)
+						barSet.getBarGraphList().get(0).setReading(reading);
+				}
 			}
 			for(SphereGraphSet sphereSet: tdPapplet.getSphereGraphList()){
-				TreeMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(sphereSet.getSensorID());
+				HashMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(sphereSet.getSensorID());
 				//Iterator<String> iterator = pair.keySet().iterator();
 				int i = SensorReadingsModel.getSingletonInstance().getTimeIndex();
 				String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(i);
-				ThreeDVis.curDate = timeStamp;
-				sphereSet.setReadingForSphere(pair.get(timeStamp));
+				if(pair != null && timeStamp != null){
+					ThreeDVis.curDate = timeStamp;
+					Float reading = pair.get(timeStamp);
+					//Log.i("structure size ", "st s = " + SensorReadingsModel.getSingletonInstance().getSensorReadings());
+					if(reading != null)
+						ThreeDVis.curDate = timeStamp;
+					sphereSet.setReadingForSphere(pair.get(timeStamp));
+				}
 			}
 		}
 	}
