@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import com.envisprototype.R;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
-import com.envisprototype.view.processing.SetPlotPApplet;
+import com.envisprototype.view.processing.PlotPApplet;
 
 public class PlotSetsBtnListener implements OnClickListener{
 
@@ -30,7 +30,7 @@ public class PlotSetsBtnListener implements OnClickListener{
 		}
 		
 		// now we have all the setids to plot
-		Intent intent = new Intent(v.getContext(),SetPlotPApplet.class);
+		Intent intent = new Intent(v.getContext(),PlotPApplet.class);
 		intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId);
 		intent.putExtra(v.getContext().getString(R.string.flags),
 				v.getContext().getString(R.string.plot_flag_extra));

@@ -2,11 +2,11 @@ package com.envisprototype.controller.processing.eventListeners;
 
 import java.util.EventObject;
 
-import com.envisprototype.view.processing.SetPlotPApplet;
+import com.envisprototype.view.processing.PlotPApplet;
 
 public class AbstractPlotBtnListener extends AbstractEnvisButtonListener{
 	
-	protected SetPlotPApplet spApplet;
+	protected PlotPApplet spApplet;
 	
 	public AbstractPlotBtnListener(){
 		super();
@@ -17,7 +17,7 @@ public class AbstractPlotBtnListener extends AbstractEnvisButtonListener{
 		super.handleEnvisClassEvent(e);
 		if(ifHitTheButton()){
 			if(spApplet == null){
-				spApplet = (SetPlotPApplet)eButton.getEpApplet();
+				spApplet = (PlotPApplet)eButton.getEpApplet();
 			}
 		}
 		}

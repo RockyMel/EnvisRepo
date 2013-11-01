@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 
 import com.envisprototype.R;
 import com.envisprototype.model.maps.MapListModel;
+import com.envisprototype.view.ChartVisualizationSettingsActivity;
 import com.envisprototype.view.MapInfoViewActivity;
 import com.envisprototype.view.SetListActivity;
 
@@ -22,7 +23,7 @@ public class MapViewButtonController implements OnClickListener{
 		this.id=id;
 		this.context=context;
 	}
-	
+
 	public MapViewButtonController(String id, Context context, int mode) {
 		// TODO Auto-generated constructor stub
 		this(id, context);
@@ -42,28 +43,33 @@ public class MapViewButtonController implements OnClickListener{
 				intent=new Intent(view.getContext(),SetListActivity.class);
 				intent.putExtra(context.getString(R.string.map_id_extra), id);
 				intent.putExtra(view.getContext().getString(R.string.flags),
-                        view.getContext().getString(R.string.plot_flag_extra));
+						view.getContext().getString(R.string.plot_flag_extra));
 				((Activity) view.getContext()).startActivity(intent);
 				((Activity) view.getContext()).finish();
 			}
 		}
-		switch(mode){
-		case 0:{
-			intent=new Intent(view.getContext(),MapInfoViewActivity.class);
-			intent.putExtra(MapListModel.MAP_ID_EXTRA,id);
-			view.getContext().startActivity(intent);
-		}
-		break;
-		case 1:
-		case 2:{
-			intent = new Intent();
-			intent.putExtra(context.getString(R.string.map_id_extra), id);    
-			((Activity) view.getContext()).setResult(Activity.RESULT_OK,intent); 
-			((Activity) view.getContext()).finish();
-		}
-		break;
-		}
-		
+		else
+			switch(mode){
+			case 0:{
+				intent=new Intent(view.getContext(),MapInfoViewActivity.class);
+				intent.putExtra(MapListModel.MAP_ID_EXTRA,id);
+				view.getContext().startActivity(intent);
+			}
+			break;
+			case 1:
+			case 2:{
+				//intent = new Intent();
+				intent = new Intent(context, ChartVisualizationSettingsActivity.class);
+				intent.putExtra(context.getString(R.string.flags), context.getString(R.string.three_d_vis_flag_extra));
+				intent.putExtra(context.getString(R.string.map_id_extra), id);
+				context.startActivity(intent);
+				//			intent.putExtra(context.getString(R.string.map_id_extra), id);    
+				//			((Activity) view.getContext()).setResult(Activity.RESULT_OK,intent); 
+							((Activity) view.getContext()).finish();
+			}
+			break;
+			}
+
 
 	}
 

@@ -7,7 +7,7 @@ import android.util.Log;
 import com.envisprototype.R;
 import com.envisprototype.controller.processing.eventListeners.AbstractPlotBtnListener;
 import com.envisprototype.view.processing.SensorSet;
-import com.envisprototype.view.processing.SetPlotPApplet;
+import com.envisprototype.view.processing.PlotPApplet;
 import com.envisprototype.view.processing.ZCoorSpinner;
 
 public class ZCoorBtnListener extends AbstractPlotBtnListener{
@@ -17,7 +17,7 @@ public class ZCoorBtnListener extends AbstractPlotBtnListener{
 		super.handleEnvisDragEvent(e);
 		if(ifHitTheButton()){
 			if(spApplet == null){
-				spApplet = (SetPlotPApplet)eButton.getEpApplet();
+				spApplet = (PlotPApplet)eButton.getEpApplet();
 			}
 			// moving the spinner
 			if(eButton instanceof ZCoorSpinner){

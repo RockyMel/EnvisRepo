@@ -120,7 +120,7 @@ public class SetSaveOnClickController implements OnClickListener {
 		}
 		else
 		{
-			
+			// ADD CODE TO SAVE CHANGES
 			set.setName(name.getText().toString());
 			set.setNotes(notes.getText().toString());
 

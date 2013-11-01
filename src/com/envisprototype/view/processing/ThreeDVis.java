@@ -50,7 +50,7 @@ public class ThreeDVis extends EnvisPApplet{
 		}
 		// to visualise the map in 3D
 		// by this time the map has already been copied from the model
-		
+		currentClick.setIfVisible(false);
 		envisMap.setIf3D(true);
 		envisMap.translateToMiddle();
 		rotateButton = new EnvisButton(this, "Rotate");
@@ -164,7 +164,11 @@ public class ThreeDVis extends EnvisPApplet{
 		prospectiveSideButton.drawMe();
 		visTypeBtn.drawMe();
 		if(ifHist){
-			text(curDate,width/2-textWidth(curDate), currentClick.getDefY());
+			// to show current time stamp
+			pushMatrix();
+			textSize(currentClick.getDefH());
+			text(curDate, currentClick.getDefX(), currentClick.defY+height/10);
+			popMatrix();
 			prevTimeStampBtn.drawMe();
 			nextTimeStampBtn.drawMe();
 			timeStampSpinner.drawMe();

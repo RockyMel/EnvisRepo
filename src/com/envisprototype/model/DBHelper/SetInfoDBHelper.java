@@ -36,6 +36,7 @@ public class SetInfoDBHelper {
 		rpc.addProperty("setInfos", set.getLocation().getLongitude()+"");
 		rpc.addProperty("setInfos", set.getLocation().getLatitude()+"");
 		rpc.addProperty("setInfos", set.getNotes());
+		// what about xyz?
 
 
 

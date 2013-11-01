@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.envisprototype.R;
 import com.envisprototype.view.AdminkaActivity;
 import com.envisprototype.view.ChartVisualizationSettingsActivity;
-import com.envisprototype.view.ChooseMapActivity;
 import com.envisprototype.view.FavoritesTab;
+import com.envisprototype.view.MapListActivity;
 import com.envisprototype.view.TagViewActivity;
+import com.envisprototype.view.model.MapListAdapter;
 
 public class onDrawerItemClickListener implements OnItemClickListener {
 	DrawerLayout drawer;
@@ -44,7 +46,10 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 		}
 			break;
 		case 3: {
-			intent = new Intent(v.getContext(), ChooseMapActivity.class);
+			// !!! replace choosemapactivity with the one to pick maps
+			//intent = new Intent(v.getContext(), ChooseMapActivity.class);
+			intent = new Intent(v.getContext(), MapListActivity.class);
+			intent.putExtra(v.getContext().getString(R.string.request_code), MapListAdapter.MAP_BY_NAME);
 		}
 			break;
 		case 4: {

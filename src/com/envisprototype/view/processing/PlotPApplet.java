@@ -15,7 +15,7 @@ import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 
-public class SetPlotPApplet extends EnvisPApplet {
+public class PlotPApplet extends EnvisPApplet {
 	
 	EnvisButton addSensitivePart , okBtn;
 //	EnvisButton upSetIdBtn, downSetIdBtn;
@@ -109,6 +109,10 @@ public void draw(){
 		threeDDrawPreset(true);
 		zCoorSpinner.drawMe();
 		zCoorSpinner.fireDragEvent();
+		pushMatrix();
+		textSize(currentClick.getDefH());
+		text(abs(envisSensors.get(currentIdToPlot).getZ()), currentClick.getDefX(), currentClick.defY+height/10);
+		popMatrix();
 	}
 	for(int i = 0; i < idButtons.size(); i++){
 		idButtons.get(i).drawMe();

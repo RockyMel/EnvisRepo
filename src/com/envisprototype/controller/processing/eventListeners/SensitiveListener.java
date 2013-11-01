@@ -7,7 +7,7 @@ import android.util.Log;
 import com.envisprototype.R;
 import com.envisprototype.view.processing.EnvisButton;
 import com.envisprototype.view.processing.SensorSet;
-import com.envisprototype.view.processing.SetPlotPApplet;
+import com.envisprototype.view.processing.PlotPApplet;
 
 public class SensitiveListener extends AbstractPlotBtnListener{
 	public SensitiveListener(){

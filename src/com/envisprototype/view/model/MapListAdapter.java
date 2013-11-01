@@ -16,12 +16,14 @@ import android.widget.TextView;
 import com.envisprototype.R;
 import com.envisprototype.controller.MapViewButtonController;
 import com.envisprototype.model.maps.MapInterface;
-import com.envisprototype.view.ChooseMapActivity;
+
 
 
 public class MapListAdapter extends ArrayAdapter<MapInterface>{
 
 	Context context;
+	public static final int MAP_BY_NAME = 1;
+	public static final int MAP_BY_LOCATION = 2;
 	public MapListAdapter(Context context, int textViewResourceId,List<MapInterface> objects) {
 		super(context, textViewResourceId,objects);
 		this.context=context;
@@ -76,7 +78,7 @@ public class MapListAdapter extends ArrayAdapter<MapInterface>{
 		if(bundle != null){
 			if(bundle.containsKey(context.getString(R.string.request_code))){
 				int mode = bundle.getInt((context.getString(R.string.request_code)));
-				if(mode == ChooseMapActivity.MAP_BY_NAME || mode == ChooseMapActivity.MAP_BY_LOCATION){
+				if(mode == MapListAdapter.MAP_BY_NAME || mode == MapListAdapter.MAP_BY_LOCATION){
 					svbc=new MapViewButtonController(map.getId(),context, mode);
 				}
 			}
