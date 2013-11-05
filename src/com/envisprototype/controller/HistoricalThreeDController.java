@@ -1,7 +1,10 @@
 package com.envisprototype.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -68,6 +71,9 @@ public class HistoricalThreeDController{
 								String timeStamp = obj.getJSONArray(i+"").getString(1);
 								Float reading = Float.parseFloat(obj.getJSONArray(i+"").getString(2));
 								Log.i("loop",timeStamp + reading);
+								if(i == 1){
+									SensorReadingsModel.getSingletonInstance().getFirstTimeStampsForSensors().put(sensorId, timeStamp);
+								}
 								i++;
 								SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, timeStamp, reading);
 							}
@@ -117,4 +123,30 @@ public class HistoricalThreeDController{
 		//			}
 		//		}.start();
 	}
+	
+	public static int compareDates(String date1, String date2){
+		if(date2 == null)
+			return -666;
+//		 Calendar cal1 = Calendar.getInstance();
+//		 Calendar cal2 = Calendar.getInstance();
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    try {
+//				cal1.setTime(sdf.parse(date1));
+//				cal2.setTime(sdf.parse(date2));
+		    	Date cal1 = sdf.parse(date1);
+				Date cal2 = sdf.parse(date2);
+				Log.i("comparing dates", "first string: " + date1);
+				Log.i("comparing dates", "second string: " + date2);
+				Log.i("comparing dates", "first: " + cal1.toString());
+				Log.i("comparing dates", "second: " + cal2.toString());
+				Log.i("comparing dates", cal1.compareTo(cal2) + "");
+				return cal1.compareTo(cal2);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.wtf("comparing dates", "parcing error while comparing dates");
+				return -666; // parcing went wrong
+			}// all done
+	}
+	
 }

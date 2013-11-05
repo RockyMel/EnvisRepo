@@ -84,6 +84,46 @@
             android:layout_marginTop="14dp"
             android:text="Notes:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mapIDTV"
+            android:layout_below="@+id/NOTES"
+            android:layout_marginTop="14dp"
+            android:text="Min value:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <EditText
+            android:id="@+id/MINVALUES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_alignRight="@+id/NOTES"
+            android:layout_toRightOf="@+id/textView8"
+            android:ems="10"
+            android:inputType="numberSigned" />
+        
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mapIDTV"
+            android:layout_below="@+id/MINVALUES"
+            android:layout_marginTop="14dp"
+            android:text="Max value:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <EditText
+            android:id="@+id/MAXVALUES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignRight="@+id/MINVALUES"
+            android:layout_toRightOf="@+id/textView9"
+            android:ems="10"
+            android:inputType="numberSigned" />
 
         <fragment
             android:id="@+id/map"
@@ -91,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/NOTES" />
+            android:layout_below="@+id/MAXVALUES" />
 
         <ImageButton
             android:id="@+id/Save"
@@ -119,6 +159,7 @@
             android:layout_alignLeft="@+id/NAME"
             android:layout_alignRight="@+id/SensorTypeInfo"
             />
+
 
         <ImageButton
             android:id="@+id/bring_to_default_coors_btn"

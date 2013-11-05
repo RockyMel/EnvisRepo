@@ -32,6 +32,7 @@ public abstract class EnvisPApplet extends PApplet{
 	String flag;
 	static ArrayList<BarGraphSet> barGraphSetList;
 	static ArrayList<SphereGraphSet> sphereGraphList;
+	public static String curDate;
 
 	ArrayList<String> setIdFromAndroid;
 	Bundle extras;

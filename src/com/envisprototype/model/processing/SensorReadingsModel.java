@@ -12,6 +12,7 @@ public class SensorReadingsModel {
 	
 	private static SensorReadingsModel singletonInstance;
 	public static ArrayList<String> timeStamps = new ArrayList<String>();
+	private HashMap<String, String> firstTimeStampsForSensors = new HashMap<String, String>();
 	private int timeIndex = 0;
 	
 	HashMap<String, HashMap<String, Float>> sensorReadings = new HashMap<String, HashMap<String,Float>>();
@@ -90,6 +91,19 @@ public class SensorReadingsModel {
 		else{
 			timeIndex = 0;
 		}
+	}
+
+	public  HashMap<String, String> getFirstTimeStampsForSensors() {
+		return firstTimeStampsForSensors;
+	}
+
+	public  void setFirstTimeStampsForSensors(
+			HashMap<String, String> firstTimeStampsForSensors) {
+		this.firstTimeStampsForSensors = firstTimeStampsForSensors;
+	}
+	
+	public String findFirstTimeStampForId(String sensorId){
+		return firstTimeStampsForSensors.get(sensorId);
 	}
 
 }

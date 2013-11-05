@@ -7,6 +7,7 @@ import java.util.Iterator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -20,8 +21,8 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	private static MapSetAssociationDBHelper singletonInstance;
 	//class to store events "list" works better with array adapter(which needs a list)
 	//private SensorListInterface sensorModel=SensorListModel.getSingletonInstance();
-	
-	
+
+
 	private static final String TABLE_NAME="MapSetAssociation";
 	private static final String SETIDCOL="SetID";
 	private static final String MAPIDCOL="MapID";
@@ -33,14 +34,14 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 
 
 	private Context context;
-	
+
 	private MapSetAssociationDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
 
 		super(context.getApplicationContext(),EnvisDBAdapter.getDbname(),null,EnvisDBAdapter.getVersion());
 		this.context = context;
 	}
-	
+
 	public static MapSetAssociationDBHelper getSingletoneInstance(Context context){
 		if(singletonInstance == null)
 			singletonInstance = new MapSetAssociationDBHelper(context);
@@ -57,10 +58,10 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 	public void associateEnvisSensorsSetsWithMap( HashMap<String,SensorSet> envisSensors, String mapId){
 		Iterator iterator = envisSensors.keySet().iterator();
 		ContentValues values=new ContentValues();
@@ -76,9 +77,9 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 				}
 			}
 		}
-		
+
 	}
-	
+
 	public void associateSetWithMap(String SetID,String MapID,float x,float y,float z){
 		ContentValues values=new ContentValues();
 		values.put(SETIDCOL, SetID);
@@ -86,38 +87,42 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		values.put(XCOL, x);
 		values.put(YCOL, y);
 		values.put(ZCOL, z);
-		
-		long success = getWritableDatabase().insert(TABLE_NAME, null, values);
-		if(success == -1){
-			int res = getWritableDatabase().update(TABLE_NAME, values, SETIDCOL + "= '"
-					+ SetID + "'",null);
-			Log.i("z","in ass z = " + res);
+
+		try{
+			long success = getWritableDatabase().insert(TABLE_NAME, null, values);
+			if(success == -1){
+				int res = getWritableDatabase().update(TABLE_NAME, values, SETIDCOL + "= '"
+						+ SetID + "'",null);
+				Log.i("z","in ass z = " + res);
+			}
+		}catch(Exception sqle){
+			Log.i("sql","already exists");
 		}
-		
-	SetListModel.getSingletonInstance().addAssociateSettoMap(SetID,MapID,x,y,z);
-		
+
+		SetListModel.getSingletonInstance().addAssociateSettoMap(SetID,MapID,x,y,z);
+
 	}
-	
+
 	public void removeAssociation(String setId){
 		getWritableDatabase().delete(TABLE_NAME, SETIDCOL + " = '" + setId + "'", null);
 	}
-	
+
 	public void ReplicateAllMapAndSensorAssociations(){
-		
+
 
 		String query="SELECT * FROM " + TABLE_NAME + ";";
-		
+
 		Cursor cursor = getWritableDatabase().rawQuery(query, null);
 		if(cursor.moveToFirst())
 		{
 			do{
-		
+
 				SetListModel.getSingletonInstance().addAssociateSettoMap(cursor.getString(0), cursor.getString(1),cursor.getFloat(2),cursor.getFloat(3),cursor.getFloat(4));
 			}while(cursor.moveToNext());
 		}	
-		
+
 	}
-	
+
 	public Coords getCoordsForSet(String setId){
 		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
 		Coords tempCoords = null;
@@ -127,7 +132,7 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		}
 		return tempCoords;
 	}
-	
+
 	public ArrayList<String> getListOfSensorsAssosiatedWithMap(String mapId){
 		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  MAPIDCOL + " = " + "'" + mapId + "'" +  ";";
 		ArrayList<String> setIds = new ArrayList<String>();		
@@ -139,7 +144,7 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 		}
 		return setIds;
 	}
-	
+
 	public boolean isPlotted(String setId){
 		String query="SELECT * FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
 		Cursor cursor = getWritableDatabase().rawQuery(query, null);
@@ -154,6 +159,6 @@ public class MapSetAssociationDBHelper extends SQLiteOpenHelper{
 	}
 
 
-	
-	
+
+
 }

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PFont;
-import android.app.Activity;
-import android.os.Handler;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.envisprototype.controller.RealTimeThreeDVis;
 import com.envisprototype.model.processing.Coords;
+import com.envisprototype.model.sensor.SensorListModel;
 
 
 /* collection of bar graphs for one set */
@@ -24,8 +24,7 @@ public class BarGraphSet extends AbstractEnvisButton {
 	boolean secondClick = false;
 	PFont font;
 	int timeRangeType;
-	
-	private static int SENSORTYPE_TEMP = 1;
+	private int offset = 5;
 	
 	//private ArrayList<Float> readingsList;
 //	public ArrayList<Float> getReadingsList() {
@@ -69,7 +68,8 @@ public class BarGraphSet extends AbstractEnvisButton {
 		/* timeRangeType == 1 is for real time */
 		if (timeRangeType == 1) {
 			//barGraphList.add(new BarGraph(p, readingsList.get(0), SENSORTYPE_TEMP));
-			BarGraph toAdd = new BarGraph(p, 0, SENSORTYPE_TEMP);
+			int sensorType = SensorListModel.getSingletonInstance().findSensorById(sensorID).getType();
+			BarGraph toAdd = new BarGraph(sensorID,p, 0, sensorType);
 			barGraphList.add(toAdd);
 			//toAdd.setReading(ThreeDVis.getSensorReadings().get(sensorID));
 			addGeneratedCoors();
@@ -157,31 +157,21 @@ public class BarGraphSet extends AbstractEnvisButton {
 	@Override
 	public void drawMe() {
 		for (int j = 0; j < barGraphList.size(); j++) {
-			
-//			p.translate(p.getEnvisSensors().get(sensorID).getX(), 
-//					p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
-//			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
-//			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
-//					-graphCoords.get(j).getX(), -graphCoords.get(j).getY(), 
-//					-graphCoords.get(j).getZ());
-//			p.line(p.getEnvisSensors().get(sensorID).getX(), barGraphList.get(j).getReading(), p.getEnvisSensors().get(sensorID).getZ(), 
-//					-p.getEnvisSensors().get(sensorID).getX(), -p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ());
+
 			p.line(p.getEnvisSensors().get(sensorID).getX(), p.getEnvisSensors().get(sensorID).getY(), p.getEnvisSensors().get(sensorID).getZ(), 
 					graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			p.pushMatrix();
 			p.translate(graphCoords.get(j).getX(), graphCoords.get(j).getY(), graphCoords.get(j).getZ());
 			p.fill(255,255,0);
 			p.textFont(font);
-			p.text(sensorID, 0,	0,barGraphList.get(j).getHeight());
-			//barGraphList.get(j).setReading(readingsList.get(0));
-			//hover(j);
-			//barGraphList.get(j).setReading(readingsList.get(0));
-			//barGraphList.get(j).setReading(ThreeDVis.getSensorReadings().get(sensorID));
+			//p.text(sensorID, 0,	+barGraphList.get(j).getWidth()+p.textAscent()+5,0);
+			p.pushMatrix();
+			p.rotateX(0);
+			p.text(SensorListModel.getSingletonInstance().findSensorById(sensorID).getName(), 0,	+ barGraphList.get(j).getWidth()+p.textAscent()+offset,0);
+			p.text(barGraphList.get(j).getReading(),0,barGraphList.get(j).getWidth()+2*(p.textAscent()+offset));
+			p.popMatrix();
 			barGraphList.get(j).display();
 			p.popMatrix();
-//			p.translate(-p.getEnvisSensors().get(sensorID).getX(), 
-//					-p.getEnvisSensors().get(sensorID).getY(), -p.getEnvisSensors().get(sensorID).getZ());
-
 		}
 	}
 	

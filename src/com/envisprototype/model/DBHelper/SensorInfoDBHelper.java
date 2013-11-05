@@ -36,6 +36,8 @@ public class SensorInfoDBHelper {
 		rpc.addProperty("sensorInfos", newsensor.getBrand());
 		rpc.addProperty("sensorInfos", "active");
 		rpc.addProperty("sensorInfos", newsensor.getNotes());
+		rpc.addProperty("sensorInfos", newsensor.getMaxValue()+"");
+		rpc.addProperty("sensorInfos", newsensor.getMinValue()+"");
 
 
 

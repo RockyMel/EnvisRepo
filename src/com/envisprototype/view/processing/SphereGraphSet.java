@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import com.envisprototype.model.sensor.SensorListModel;
+
 import android.util.Log;
 
 
@@ -31,7 +33,8 @@ public class SphereGraphSet {
 		
 		//readingsList = new ArrayList<Float>();
 		//readingsList.add(ThreeDVis.getSensorReadings().get(sensorID));
-		oneSphereGraph = new SphereGraph(p, 0, SENSORTYPE_TEMP);
+		sensorType = SensorListModel.getSingletonInstance().findSensorById(sensorID).getType();
+		oneSphereGraph = new SphereGraph(sensorID,p, 0, sensorType);
 		
 	}
 	

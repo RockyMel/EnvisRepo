@@ -46,9 +46,9 @@ public class SensorListActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(view.getContext(),InputIDActivity.class);
-				intent.putExtra("mode", "sensor");
-				view.getContext().startActivity(intent); 
+//				Intent intent=new Intent(view.getContext(),InputIDActivity.class);
+//				intent.putExtra("mode", "sensor");
+//				view.getContext().startActivity(intent); 
 			}
 		});
 		

@@ -1,5 +1,6 @@
 package com.envisprototype.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -15,8 +17,11 @@ import android.widget.TextView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.AddSensorButtonController;
+import com.envisprototype.controller.PlotSensorsBtnListener;
 import com.envisprototype.controller.SetSaveOnClickController;
+import com.envisprototype.controller.UnplotSetBtnListener;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -47,6 +52,8 @@ public class NewSetInfoViewActivity extends Activity {
 	ImageButton Add;
 	ImageButton Save;
 	ImageButton Delete;
+	ImageButton plotSensors;
+	ImageButton unplotSet;
 
 	SetInterface set;
 
@@ -113,6 +120,8 @@ public class NewSetInfoViewActivity extends Activity {
 		Add = (ImageButton)findViewById(R.id.Add);
 		Save = (ImageButton)findViewById(R.id.Save);
 		Delete = (ImageButton)findViewById(R.id.Delete);
+		plotSensors = (ImageButton) findViewById(R.id.plot_sensors_btn);
+		unplotSet = (ImageButton) findViewById(R.id.unplot_set);
 		double latitude = 0;
 		double longitude = 0;
 		if(flag.equals("new")){
@@ -191,6 +200,24 @@ public class NewSetInfoViewActivity extends Activity {
 			//list= (List<SensorInterface>) set.getSensors();
 			list=SensorListModel.getSingletonInstance().getSensorListBySetID(setid);
 			sla = new Set_SensorListAdapter(this,0,list,setid);
+			mapId = set.getMapID();
+			if(MapSetAssociationDBHelper.getSingletoneInstance(this).getCoordsForSet(setid)!=null){
+				plotSensors.setVisibility(View.VISIBLE);
+				unplotSet.setVisibility(View.VISIBLE);
+				ArrayList<String> sensorIdsToPlot = new ArrayList<String>();
+				for(SensorInterface sensor: list){
+						sensorIdsToPlot.add(sensor.getId());
+				}
+				plotSensors.setOnClickListener(new PlotSensorsBtnListener(sensorIdsToPlot, mapId));
+				unplotSet.setOnClickListener(new UnplotSetBtnListener(setid, plotSensors));
+				// need to get ids for sensors belonging to this set that are to be plotted
+				
+				
+			}
+			else{
+				plotSensors.setVisibility(View.INVISIBLE);
+				unplotSet.setVisibility(View.INVISIBLE);
+			}
 			sensorlistview.setAdapter(sla);
 
 		}

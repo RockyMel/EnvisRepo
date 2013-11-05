@@ -31,7 +31,8 @@ public class SaveButtonController implements OnClickListener {
 	String setid;
 	Context context;
 	private int type;
-
+	EditText minValueET;
+	EditText maxValueET;
 
 //	public SaveButtonController(String flag, EditText id, EditText name,
 //			EditText location,EditText type,EditText brand,
@@ -52,7 +53,7 @@ public class SaveButtonController implements OnClickListener {
 
 	public SaveButtonController(String flag, TextView id, EditText name,
 			EditText brand, EditText notes, ImageButton delete,
-			String setid,int type, Context context) {
+			String setid,int type, EditText  minValueET, EditText maxValueET, Context context) {
 		// TODO Auto-generated constructor stub
 		this.flag = flag;
 		this.id = id;
@@ -63,6 +64,8 @@ public class SaveButtonController implements OnClickListener {
 		this.setid = setid;
 		this.context = context;
 		this.type = type;
+		this.minValueET = minValueET;
+		this.maxValueET = maxValueET;
 		
 	}
 
@@ -92,6 +95,16 @@ public class SaveButtonController implements OnClickListener {
 		sensor.setType(type);
 		Log.i("wqertytuyio", setid);
 		sensor.setSetid(setid);
+		double minValue = 0,
+				maxValue = 1000;
+		try{
+			minValue = Double.parseDouble(minValueET.getText().toString());
+			maxValue = Double.parseDouble(maxValueET.getText().toString());
+		}catch(Exception e){
+			Log.i("exception", "wrong value");
+		}
+		sensor.setMinValue(minValue);
+		sensor.setMaxValue(maxValue);
 		
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
 

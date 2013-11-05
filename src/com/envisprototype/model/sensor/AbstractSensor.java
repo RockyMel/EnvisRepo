@@ -14,22 +14,35 @@ public abstract class AbstractSensor implements SensorInterface {
 	private String brand;
 	private String notes;
 	private String state;
+	private double minValue;
+	private double maxValue;
 	private Location location;
 	private boolean ifDefaultCoors = true;
 	private boolean iftoPlot; 
 	private float x,y,z;
+	
+	public final static int SENSORTYPE_AIR_QUALITY = 1;
+	public final static int SENSORTYPE_HUMIDITY = 2;
+	public final static int SENSORTYPE_LIGHT = 3;
+	public final static int SENSORTYPE_MOTION = 4;
+	public final static int SENSORTYPE_TEMPERATURE = 5;
+	public final static int SENSORTYPE_WATER_LEVEL = 6;
+	public final static int SENSORTYPE_OTHERS = 7;
 	
 	public AbstractSensor() {
 
 		//this.id=UUID.randomUUID().toString();
 
 	}
-	public AbstractSensor(String name,int type,String brand,String notes,String state, Location location) {
+	
+	public AbstractSensor(String name,int type,String brand,String notes,
+			String state, Location location, double minValue, double maxValue) {
 		super();
 		this.name = name;
 		this.type=type;
 		this.location = location;
-		
+		this.minValue = minValue;
+		this.maxValue = maxValue;
 	}
 	public String getBrand() {
 		return brand;
@@ -191,6 +204,22 @@ public abstract class AbstractSensor implements SensorInterface {
 		this.iftoPlot = iftoPlot;
 	}
 	
+	@Override
+	public double getMinValue(){
+		return minValue;
+	}
+	@Override
+	public void setMinValue(double minValue){
+		this.minValue = minValue;
+	}
+	@Override
+	public double getMaxValue(){
+		return maxValue;
+	}
+	@Override
+	public void setMaxValue(double maxValue){
+		this.maxValue = maxValue;
+	}
 	
 	
 }

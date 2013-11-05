@@ -53,6 +53,11 @@ public interface SensorInterface {
 	public abstract boolean isIfDefaultCoors();
 	
 	public abstract void setIfDefaultCoors(boolean ifDefaultCoors);
+	
+	public abstract double getMinValue();
+	public abstract void setMinValue(double minValue);
+	public abstract double getMaxValue();
+	public abstract void setMaxValue(double maxValue);
 
 	boolean isIftoPlot();
 

@@ -3,12 +3,9 @@ package com.envisprototype.controller;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -20,7 +17,6 @@ import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.model.set.SetModel;
-import com.envisprototype.view.InputIDActivity;
 import com.envisprototype.view.model.GPSTracker;
 
 public class SetSaveOnClickController implements OnClickListener {

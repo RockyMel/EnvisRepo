@@ -64,7 +64,7 @@ public class SynchronizeWithCloud {
 			e.printStackTrace();
 		}
 
-		if(resultsRequestSOAP.toString()!=null)
+		if(resultsRequestSOAP!= null && resultsRequestSOAP.toString()!=null)
 		{
 			JSONObject obj = null;
 			try {
@@ -143,7 +143,7 @@ public class SynchronizeWithCloud {
 			e.printStackTrace();
 		}
 
-		if(resultsRequestSOAP.toString()!=null)
+		if(resultsRequestSOAP != null && resultsRequestSOAP.toString()!=null)
 		{
 			JSONObject obj = null;
 			try {
@@ -160,6 +160,7 @@ public class SynchronizeWithCloud {
 				String brand=null;
 				int type;
 				String notes=null;
+				double maxValue, minValue;
 
 				try{
 					if(obj.getJSONArray(i+"")!=null){
@@ -168,12 +169,18 @@ public class SynchronizeWithCloud {
 						name = obj.getJSONArray(i+"").getString(2);
 						brand = obj.getJSONArray(i+"").getString(3);
 						notes = obj.getJSONArray(i+"").getString(5);
+						//6, 7 - max min values it's a varchar 6- max 7 - min
+						maxValue = Double.parseDouble(obj.getJSONArray(i+"").getString(6));
+						minValue = Double.parseDouble(obj.getJSONArray(i+"").getString(7));
+						
 						SensorInterface newsensor = new SensorModel();
 						newsensor.setId(id);
 						newsensor.setName(name);
 						newsensor.setBrand(brand);
 						newsensor.setType(type);
 						newsensor.setNotes(notes);
+						newsensor.setMaxValue(maxValue);
+						newsensor.setMinValue(minValue);
 						//if(type!=7)
 							SensorLocalDBHelper.getSingletonInstance(context).addSensor(newsensor);
 					}
@@ -220,7 +227,7 @@ public class SynchronizeWithCloud {
 			e.printStackTrace();
 		}
 
-		if(resultsRequestSOAP.toString()!=null)
+		if(resultsRequestSOAP != null && resultsRequestSOAP.toString()!=null)
 		{
 			JSONObject obj = null;
 			try {
@@ -328,7 +335,7 @@ public class SynchronizeWithCloud {
 			e.printStackTrace();
 		}
 
-		if(resultsRequestSOAP.toString()!=null)
+		if(resultsRequestSOAP != null && resultsRequestSOAP.toString()!=null)
 		{
 			JSONObject obj = null;
 			try {
@@ -393,7 +400,7 @@ public class SynchronizeWithCloud {
 			e.printStackTrace();
 		}
 
-		if(resultsRequestSOAP.toString()!=null)
+		if(resultsRequestSOAP != null && resultsRequestSOAP.toString()!=null)
 		{
 			JSONObject obj = null;
 			try {

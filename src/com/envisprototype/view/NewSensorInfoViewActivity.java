@@ -35,6 +35,8 @@ public class NewSensorInfoViewActivity extends Activity{
 	private EditText brand;
 	private EditText name;
 	private EditText notes;
+	private EditText minValueET;
+	private EditText maxValueET;
 
 	private ImageView typeImage;
 
@@ -101,6 +103,9 @@ public class NewSensorInfoViewActivity extends Activity{
 		map.animateCamera(update);
 		update = CameraUpdateFactory.newLatLngZoom(LOCATION_SENSOR, 14);
 		map.animateCamera(update);
+		
+		minValueET = (EditText)findViewById(R.id.MINVALUES);
+		maxValueET = (EditText)findViewById(R.id.MAXVALUES);
 
 		if(typercvd == 1){
 			typeImage.setImageResource(R.drawable.airquality);
@@ -136,7 +141,7 @@ public class NewSensorInfoViewActivity extends Activity{
 		save = (ImageButton)findViewById(R.id.Save);
 		delete = (ImageButton)findViewById(R.id.Delete);
 
-		save.setOnClickListener(new SaveButtonController(flag,id,name,brand,notes,delete,setid,typercvd,this));
+		save.setOnClickListener(new SaveButtonController(flag,id,name,brand,notes,delete,setid,typercvd,minValueET, maxValueET,this));
 
 		if(flag.equals("new"))
 			sensor=new SensorModel();
@@ -160,6 +165,9 @@ public class NewSensorInfoViewActivity extends Activity{
 			name.setText(sensor.getName());
 			brand.setText(sensor.getBrand());
 			notes.setText(sensor.getNotes());
+			minValueET.setText(Double.toString(sensor.getMinValue()));
+			maxValueET.setText(Double.toString(sensor.getMaxValue()));
+			
 
 		}
 

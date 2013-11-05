@@ -3,10 +3,11 @@ package com.envisprototype.controller.processing.dragListeners;
 import java.util.EventObject;
 import java.util.HashMap;
 
+import android.util.Log;
+
 import com.envisprototype.controller.processing.eventListeners.AbstractEnvisButtonListener;
 import com.envisprototype.model.processing.SensorReadingsModel;
 import com.envisprototype.view.processing.BarGraphSet;
-import com.envisprototype.view.processing.Map;
 import com.envisprototype.view.processing.SphereGraphSet;
 import com.envisprototype.view.processing.ThreeDVis;
 import com.envisprototype.view.processing.ZCoorSpinner;
@@ -14,7 +15,7 @@ import com.envisprototype.view.processing.ZCoorSpinner;
 public class TimeStampBtnListener extends AbstractEnvisButtonListener{
 	protected ZCoorSpinner spinner;
 	ThreeDVis tdPapplet = null;
-	
+
 	@Override
 	public void handleEnvisDragEvent(EventObject e){
 		//super.handleEnvisDragEvent(e);
@@ -29,44 +30,57 @@ public class TimeStampBtnListener extends AbstractEnvisButtonListener{
 				spinner.setDefX(spinner.getEpApplet().mouseX-spinner.getDefH()/2);
 				int newIndex = (int) spinner.adjustValue(spinner.getEpApplet().getEnvisMap(),
 						SensorReadingsModel.getSingletonInstance().getTimeStamps().size(), 0);
+				if(newIndex >= SensorReadingsModel.getSingletonInstance().getTimeStamps().size())
+					newIndex = SensorReadingsModel.getSingletonInstance().getTimeStamps().size()-1;
 				SensorReadingsModel.getSingletonInstance().setTimeIndex(newIndex);
 
 
-				
-				
+
+
 				for(BarGraphSet barSet: tdPapplet.getBarGraphSetList()){
 					HashMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(barSet.getSensorID());
 					//Iterator<String> iterator = pair.keySet().iterator();
-					String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(newIndex);
-					if(pair != null && timeStamp != null){
-						ThreeDVis.curDate = timeStamp;
-						Float reading = pair.get(timeStamp);
-						//Log.i("structure size ", "st s = " + SensorReadingsModel.getSingletonInstance().getSensorReadings());
-						if(reading != null)
-							barSet.getBarGraphList().get(0).setReading(reading);
+					String timeStamp = "No timestamp found";
+					try{
+						timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(newIndex);
+					}catch(Exception timeStampException){
+						Log.i("no timestamp", " No timestamp found");
+						return;
 					}
+					if(pair != null && timeStamp != null){
+					//if(timeStamp != null){
+					ThreeDVis.curDate = timeStamp;
+					Float reading = null;
+					if(pair!=null)
+						reading = pair.get(timeStamp);
+					//Log.i("structure size ", "st s = " + SensorReadingsModel.getSingletonInstance().getSensorReadings());
+					//if(reading != null)
+					barSet.getBarGraphList().get(0).setReading(reading);
+						}
 				}
 				for(SphereGraphSet sphereSet: tdPapplet.getSphereGraphList()){
 					HashMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(sphereSet.getSensorID());
 					//Iterator<String> iterator = pair.keySet().iterator();
 					String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(newIndex);
 					if(pair != null && timeStamp != null){
+						//if(timeStamp != null){
 						ThreeDVis.curDate = timeStamp;
-						Float reading = pair.get(timeStamp);
+						Float reading = null;
+						if(pair!=null)
+							reading = pair.get(timeStamp);
 						//Log.i("structure size ", "st s = " + SensorReadingsModel.getSingletonInstance().getSensorReadings());
-						if(reading != null)
-							ThreeDVis.curDate = timeStamp;
-						sphereSet.setReadingForSphere(pair.get(timeStamp));
-					}
+						//if(reading != null)
+						sphereSet.setReadingForSphere(reading);
+							}
 				}
-				
-				
-				
-				
+
+
+
+
 			}
 		}
 	}
-	
+
 	public boolean ifHitTheButton(){
 		float defX, defY, defW, defH;
 		defX = spinner.getDefX();

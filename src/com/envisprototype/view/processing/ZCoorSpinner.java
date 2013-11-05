@@ -12,7 +12,7 @@ public class ZCoorSpinner extends EnvisButton{
 		initX = defX;
 		xLine = this.defX+this.defW;
 		yLine = this.defY+this.defH+this.defH/2;
-		maxX = epApplet.MAX_WIDTH;
+		maxX = epApplet.MAX_WIDTH-10;
 		// TODO Auto-generated constructor stub
 	}
 

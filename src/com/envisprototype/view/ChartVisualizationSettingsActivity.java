@@ -100,6 +100,7 @@ public class ChartVisualizationSettingsActivity extends EnvisActivity {
 		if(if3DVis == false)
 			VisualizationButton.setOnClickListener(new NewShowChartVisualizationButtonController(this,SetIds,SensorIds,MODE,calfrom,calto));
 		else{
+			
 			VisualizationButton.setOnClickListener(new Show3DMapBtnListener(this, mapId, ChartVisualizationSettingsModel.getSingletonInstance().getSetIDs(),ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs(),MODE,calfrom,calto));
 		}
 		final Context context = this;

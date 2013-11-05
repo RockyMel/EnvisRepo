@@ -9,11 +9,11 @@ package com.envisprototype;
 
 public final class R {
     public static final class array {
-        public static final int map_admin_options=0x7f080004;
-        public static final int map_drop_down=0x7f080002;
-        public static final int sensors_admin_options=0x7f080003;
-        public static final int sort_arrays=0x7f080000;
-        public static final int twod_drop_down=0x7f080001;
+        public static final int map_admin_options=0x7f090004;
+        public static final int map_drop_down=0x7f090002;
+        public static final int sensors_admin_options=0x7f090003;
+        public static final int sort_arrays=0x7f090000;
+        public static final int twod_drop_down=0x7f090001;
     }
     public static final class attr {
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
@@ -251,11 +251,13 @@ containing a value of this type.
         public static final int ADD=0x7f050052;
         public static final int Add=0x7f050044;
         public static final int BRAND=0x7f05004f;
-        public static final int DISTANCE=0x7f050071;
+        public static final int DISTANCE=0x7f050075;
         public static final int DateFromButton=0x7f05000b;
         public static final int DateToButton=0x7f050009;
         public static final int Delete=0x7f05003b;
         public static final int ID=0x7f050040;
+        public static final int MAXVALUES=0x7f05006c;
+        public static final int MINVALUES=0x7f05006a;
         public static final int Mode=0x7f050036;
         public static final int NAME=0x7f05003e;
         public static final int NOTES=0x7f050041;
@@ -265,7 +267,7 @@ containing a value of this type.
         public static final int QR=0x7f05000e;
         public static final int QRBUTTON=0x7f050054;
         public static final int SETORSENSOR=0x7f050055;
-        public static final int SORTBYOPTION=0x7f05006f;
+        public static final int SORTBYOPTION=0x7f050073;
         public static final int Save=0x7f05003d;
         public static final int SensorDesc=0x7f05005b;
         public static final int SensorHeading=0x7f050059;
@@ -280,20 +282,20 @@ containing a value of this type.
         public static final int TwoChartButton=0x7f050056;
         public static final int TypeImage=0x7f050067;
         public static final int VisualizationButton=0x7f050010;
-        public static final int action_settings=0x7f050075;
+        public static final int action_settings=0x7f050079;
         public static final int bottom_buttons=0x7f05005e;
-        public static final int bring_to_default_coors_btn=0x7f050069;
+        public static final int bring_to_default_coors_btn=0x7f05006d;
         public static final int button=0x7f050037;
         public static final int button4=0x7f050038;
-        public static final int chooseSensors=0x7f05007c;
+        public static final int chooseSensors=0x7f050080;
         public static final int chooseSensorsBtn=0x7f05002c;
         public static final int chosensensorslist=0x7f050024;
         public static final int deletebutton=0x7f050057;
-        public static final int distance=0x7f05006d;
+        public static final int distance=0x7f050071;
         public static final int drawMapBtn=0x7f050022;
         public static final int draw_map_btn=0x7f050018;
         public static final int drawer_layout=0x7f050005;
-        public static final int edit=0x7f05006a;
+        public static final int edit=0x7f05006e;
         public static final int editText1=0x7f050015;
         public static final int editText2=0x7f050016;
         public static final int editText3=0x7f05001d;
@@ -311,9 +313,9 @@ containing a value of this type.
         public static final int imageButton1=0x7f050021;
         public static final int imageButton2=0x7f05005c;
         public static final int imageView1=0x7f050017;
-        public static final int itemAdd=0x7f050077;
-        public static final int itemAdd2=0x7f050078;
-        public static final int itemAdd4=0x7f05007a;
+        public static final int itemAdd=0x7f05007b;
+        public static final int itemAdd2=0x7f05007c;
+        public static final int itemAdd4=0x7f05007e;
         public static final int lblListHeader=0x7f050066;
         public static final int leftEx=0x7f050062;
         public static final int list=0x7f050039;
@@ -326,29 +328,29 @@ containing a value of this type.
         public static final int mapNameTV=0x7f050031;
         public static final int mapNotesTV=0x7f050033;
         public static final int map_by_name_btn=0x7f050026;
-        public static final int mapname=0x7f05006c;
+        public static final int mapname=0x7f050070;
         public static final int menuIcon=0x7f050060;
         public static final int menuItemLbl=0x7f050061;
-        public static final int menu_settings=0x7f050074;
-        public static final int menu_spinner1=0x7f050076;
+        public static final int menu_settings=0x7f050078;
+        public static final int menu_spinner1=0x7f05007a;
         public static final int mySimpleXYPlot=0x7f050065;
         public static final int nearest_maps_btn=0x7f050029;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int planets_spinner=0x7f05007b;
-        public static final int plotCB=0x7f050073;
+        public static final int planets_spinner=0x7f05007f;
+        public static final int plotCB=0x7f050077;
         public static final int plotSensorBtn=0x7f050050;
-        public static final int plot_sensor_cb=0x7f05006b;
+        public static final int plot_sensor_cb=0x7f05006f;
         public static final int plot_sensors_btn=0x7f050045;
         public static final int plot_sets_btn=0x7f050053;
         public static final int plot_to_map_btn=0x7f05002d;
         public static final int satellite=0x7f050002;
         public static final int savebutton=0x7f050014;
         public static final int scan_qr_btn=0x7f05002b;
-        public static final int sensorBox=0x7f050070;
+        public static final int sensorBox=0x7f050074;
         public static final int sensorImageBtn=0x7f05005f;
         public static final int sensorTypes=0x7f050023;
-        public static final int sensorname=0x7f05006e;
+        public static final int sensorname=0x7f050072;
         public static final int show_map_btn=0x7f05003c;
         public static final int spinner=0x7f050047;
         public static final int spinner1=0x7f050020;
@@ -370,9 +372,14 @@ containing a value of this type.
         public static final int textView5=0x7f050030;
         public static final int textView6=0x7f05001f;
         public static final int textView7=0x7f050011;
-        public static final int threeDVisualisationItem=0x7f050079;
+        public static final int textView8=0x7f050069;
+        public static final int textView9=0x7f05006b;
+        public static final int threeDVisualisationItem=0x7f05007d;
         public static final int unplot_set=0x7f050046;
-        public static final int viewbutton=0x7f050072;
+        public static final int viewbutton=0x7f050076;
+    }
+    public static final class integer {
+        public static final int first=0x7f080000;
     }
     public static final class layout {
         public static final int activity_3d_visualisation=0x7f030000;
@@ -425,27 +432,27 @@ containing a value of this type.
         public static final int style_dropdown=0x7f03002f;
     }
     public static final class menu {
-        public static final int activity_linear_layout=0x7f0a0000;
-        public static final int add_map=0x7f0a0001;
-        public static final int add_sensor=0x7f0a0002;
-        public static final int chart_menu=0x7f0a0003;
-        public static final int chart_visualization_settings=0x7f0a0004;
-        public static final int choose_sensor_type=0x7f0a0005;
-        public static final int expandable_list_main=0x7f0a0006;
-        public static final int input_sensor_id=0x7f0a0007;
-        public static final int line_chart=0x7f0a0008;
-        public static final int main=0x7f0a0009;
-        public static final int map_info_view=0x7f0a000a;
-        public static final int map_list=0x7f0a000b;
-        public static final int new_chart=0x7f0a000c;
-        public static final int new_set_info_view=0x7f0a000d;
-        public static final int real_time_chart=0x7f0a000e;
-        public static final int real_time_chart_list=0x7f0a000f;
-        public static final int sensor_info_view=0x7f0a0010;
-        public static final int set_info_view=0x7f0a0011;
-        public static final int set_list=0x7f0a0012;
-        public static final int tag_view=0x7f0a0013;
-        public static final int visualisation=0x7f0a0014;
+        public static final int activity_linear_layout=0x7f0b0000;
+        public static final int add_map=0x7f0b0001;
+        public static final int add_sensor=0x7f0b0002;
+        public static final int chart_menu=0x7f0b0003;
+        public static final int chart_visualization_settings=0x7f0b0004;
+        public static final int choose_sensor_type=0x7f0b0005;
+        public static final int expandable_list_main=0x7f0b0006;
+        public static final int input_sensor_id=0x7f0b0007;
+        public static final int line_chart=0x7f0b0008;
+        public static final int main=0x7f0b0009;
+        public static final int map_info_view=0x7f0b000a;
+        public static final int map_list=0x7f0b000b;
+        public static final int new_chart=0x7f0b000c;
+        public static final int new_set_info_view=0x7f0b000d;
+        public static final int real_time_chart=0x7f0b000e;
+        public static final int real_time_chart_list=0x7f0b000f;
+        public static final int sensor_info_view=0x7f0b0010;
+        public static final int set_info_view=0x7f0b0011;
+        public static final int set_list=0x7f0b0012;
+        public static final int tag_view=0x7f0b0013;
+        public static final int visualisation=0x7f0b0014;
     }
     public static final class string {
         public static final int action_settings=0x7f06001a;
@@ -628,13 +635,13 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
-        public static final int SettingCodeFont=0x7f090003;
-        public static final int SettingCodeFontBold=0x7f090002;
+        public static final int AppTheme=0x7f0a0001;
+        public static final int SettingCodeFont=0x7f0a0003;
+        public static final int SettingCodeFontBold=0x7f0a0002;
     }
     public static final class styleable {
         /** Attributes that can be used with a MapAttrs.

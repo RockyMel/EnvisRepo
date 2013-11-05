@@ -6,14 +6,16 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensorSetAssosiation.SensorSetAssosiationModel;
 
 public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
-	
+
 	private static SetSensorAssociationLocalDBHelper singletonInstance;
 
 	private static final String TABLE_NAME="SensorSetAssociation";
@@ -24,22 +26,22 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 
 
 	private Context context;
-	
 
-	
+
+
 	private SetSensorAssociationLocalDBHelper(Context context) {
 		// TODO Auto-generated constructor stub
 
 		super(context.getApplicationContext(),EnvisDBAdapter.getDbname(),null,EnvisDBAdapter.getVersion());
 		this.context = context;
 	}
-	
+
 	public static SetSensorAssociationLocalDBHelper getSingletonInstance(Context context){
 		if(singletonInstance == null)
 			singletonInstance = new SetSensorAssociationLocalDBHelper(context);
 		return singletonInstance;
 	}
-	
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
@@ -50,28 +52,35 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 	public void associateSensorWithSet(String SensorID,String SetID){
 		ContentValues values=prepareValues(SensorID, SetID);
-		getWritableDatabase().insert(TABLE_NAME, null, values);
-		
+		try{
+			getWritableDatabase().insert(TABLE_NAME, null, values);
+		}catch(Exception sqle){
+			Log.i("sql","already exists");
+		}
+
 		SensorListModel.getSingletonInstance().addAssociateSensortoSet(SensorID,SetID);
-		
+
 	}
-	
-	
+
+
 	public void editSetSensorAss(String SensorID,String SetID) {
 		// TODO Auto-generated method stub
-		
+
 		ContentValues values = prepareValues(SensorID, SetID);
+		try{
 		getWritableDatabase().update(TABLE_NAME, values, SENSORIDCOL + "= \""
 				+ SensorID + "\"",null);
-	
+		}catch(Exception sqle){
+			Log.i("sql","already exists");
+		}
 	}
-	
+
 	private ContentValues prepareValues(String SensorID,String SetID) {
 		ContentValues values=new ContentValues();
 		values.put(SENSORIDCOL, SensorID);
@@ -79,7 +88,7 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 		getWritableDatabase().insert(TABLE_NAME, null, values);
 		return values;
 	}
-	
+
 	public ArrayList<String> getListOfSensorsAssosiatedWithSet(String setId){
 		String query="SELECT " + SENSORIDCOL + " FROM " + TABLE_NAME + " WHERE " +  SETIDCOL + " = " + "'" + setId + "'" +  ";";
 		ArrayList<String> setIds = new ArrayList<String>();		
@@ -91,21 +100,21 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 		}
 		return setIds;
 	}
-	
+
 	public void ReplicateAllSetAndSensorAssociations(){
-	
+
 
 		String query="SELECT * FROM " + TABLE_NAME + ";";
-		
+
 		Cursor cursor = getWritableDatabase().rawQuery(query, null);
 		if(cursor.moveToFirst())
 		{
 			do{
-		
+
 				SensorListModel.getSingletonInstance().addAssociateSensortoSet(cursor.getString(0), cursor.getString(1));
 			}while(cursor.moveToNext());
 		}	
-		
+
 	}
 
 	public static String getCreateSetSensorAssTableQuery() {
@@ -115,8 +124,8 @@ public class SetSensorAssociationLocalDBHelper extends SQLiteOpenHelper {
 	public void removeAssociation(String id) {
 		// TODO Auto-generated method stub
 		getWritableDatabase().delete(TABLE_NAME,SENSORIDCOL+"='" + id +"'", null);
-		
+
 	}
 
-	
+
 }

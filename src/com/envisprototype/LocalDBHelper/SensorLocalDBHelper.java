@@ -28,8 +28,10 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 	private static final String TYPECOL="Type";
 	private static final String BRANDCOL="Brand";
 	private static final String NOTESCOL="Notes";
-	private static final String CREATE_SENSOR_TABLE_QUERY = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s INT,%s TEXT,%s TEXT);", TABLE_NAME,
-			IDCOL,NAMECOL,TYPECOL,BRANDCOL,NOTESCOL);
+	private static final String MINVALUE="MinValue";
+	private static final String MAXVALUE="MaxValue";
+	private static final String CREATE_SENSOR_TABLE_QUERY = String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY,%s TEXT,%s INT,%s TEXT,%s TEXT, %s DOUBLE, %s DOUBLE);", TABLE_NAME,
+			IDCOL,NAMECOL,TYPECOL,BRANDCOL,NOTESCOL, MINVALUE, MAXVALUE);
 	
 	
 	
@@ -102,7 +104,8 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 		values.put(TYPECOL, sensor.getType());
 		values.put(BRANDCOL, sensor.getBrand());
 		values.put(NOTESCOL, sensor.getNotes());
-		
+		values.put(MINVALUE, sensor.getMinValue());
+		values.put(MAXVALUE, sensor.getMaxValue());
 		return values;
 	}
 
@@ -124,6 +127,8 @@ public class SensorLocalDBHelper extends SQLiteOpenHelper implements SensorListI
 				tempsensor.setType(cursor.getInt(2));
 				tempsensor.setBrand(cursor.getString(3));
 				tempsensor.setNotes(cursor.getString(4));
+				tempsensor.setMinValue(cursor.getDouble(5));
+				tempsensor.setMaxValue(cursor.getDouble(6));
 				temp.add(tempsensor);
 			}while(cursor.moveToNext());
 		}	

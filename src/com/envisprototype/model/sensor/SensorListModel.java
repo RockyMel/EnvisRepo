@@ -82,6 +82,7 @@ public class SensorListModel implements SensorListInterface  {
 		List<SensorInterface> temp = new ArrayList();
 		
 		for(SensorInterface sensor: sensorList){
+			Log.i("gSLBSI1.5",sensor.getId());
 			Log.i("gSLBSI2",sensor.getSetid());
 			Log.i("gSLBSI3",sensor.getId());
 			if(sensor.getSetid().equals(ID))

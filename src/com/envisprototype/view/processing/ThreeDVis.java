@@ -35,7 +35,6 @@ public class ThreeDVis extends EnvisPApplet{
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
 	String fromDate, toDate = null;
-	public static String curDate;
 	boolean ifHist = false;
 	//	private static HashMap<String, Float> sensorReadings = new HashMap<String, Float>();	
 

@@ -70,9 +70,9 @@ public class SensorSet extends UIElement{
 		epApplet.sphere(2);
 		//epApplet.point(x,y,z);
 		epApplet.strokeWeight(EnvisPApplet.STROKE_WEIGHT);
-		epApplet.text(realX + ", " + realY, x+epApplet.width/100,y,z);
+		//epApplet.text(realX + ", " + realY, x+epApplet.width/100,y,z);
 		//epApplet.fill(255,255,0);
-		epApplet.text(id, x+epApplet.width/100,y+epApplet.height/90,z);
+		//epApplet.text(id, x+epApplet.width/100,y+epApplet.height/90,z);
 		epApplet.popMatrix();
 	}
 	

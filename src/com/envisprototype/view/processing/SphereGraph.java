@@ -1,5 +1,7 @@
 package com.envisprototype.view.processing;
 
+import com.envisprototype.model.sensor.SensorListModel;
+
 import processing.core.PApplet;
 import processing.core.PFont;
 
@@ -16,11 +18,19 @@ public class SphereGraph {
 	private float reading; 
 	private int sensorType;
 	private float fillColor;
+	private String SensorId;
+	int maxValue;
+	int minValue;
 	
 	private int SENSORTYPE_TEMP = 1;
 	private int SENSORTYPE_LIGHT = 2;
+	private float[][] colorAssigned= {{0,0,0},{0, 255, 238},{255, 136, 0},{255, 238, 0},
+			{255, 0, 204},{255, 0, 0},{0, 0, 255},{0, 255, 0}};
 	
-	public SphereGraph(PApplet parent, float reading, int sensorType) {
+	public SphereGraph(String sensorId, PApplet parent, float reading, int sensorType) {
+		this.SensorId = sensorId;
+		maxValue = (int)SensorListModel.getSingletonInstance().findSensorById(sensorId).getMaxValue();
+		minValue = (int)SensorListModel.getSingletonInstance().findSensorById(sensorId).getMinValue();
 		p = parent;
 		f = p.createFont("Arial",14,true);
 		this.reading = reading;
@@ -35,23 +45,10 @@ public class SphereGraph {
 	
 	public void display() {
 		
-		if (sensorType == SENSORTYPE_TEMP) {
-			float color_grad = PApplet.map(reading, 1000, 0, 0, 250);
-			float[] colorAssigned = { 255, 0, 0 };		// for users to customize colors to sensor type
-			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
-					colorRGB[1]+colorAssigned[1]+color_grad, 
-					colorRGB[2]+colorAssigned[2]+color_grad,
-					opacity);
-		}
-		
-		else if (sensorType == SENSORTYPE_LIGHT) {
-			float color_grad = PApplet.map(reading, 1000, 0, 50, 250);
-			float[] colorAssigned = { 0, 0, 255 };		// for users to customize colors to sensor type
-			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
-					colorRGB[1]+colorAssigned[1]+color_grad, 
-					colorRGB[2]+colorAssigned[2]+color_grad,
-					opacity);
-		}
+		float color_grad = PApplet.map(reading, (int)maxValue, (int)minValue, 0, 255);
+		color_mainFill = p.color(colorRGB[0]+colorAssigned[sensorType][0]+color_grad, 
+				colorRGB[1]+colorAssigned[sensorType][1]+color_grad, 
+				colorRGB[2]+colorAssigned[sensorType][2]+color_grad, 127);
 		p.textFont(f);
 		p.pushMatrix();
 		p.noStroke();
