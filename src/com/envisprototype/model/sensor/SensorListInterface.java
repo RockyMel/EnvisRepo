@@ -14,7 +14,7 @@ public interface SensorListInterface {
 
 	boolean isSensorListEmpty();
 
-	List getSensorListBySetID(String ID);
+	List<SensorInterface> getSensorListBySetID(String ID);
 	
 	List getSensorIDListByType(int type);
 

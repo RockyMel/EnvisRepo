@@ -1,6 +1,7 @@
 package com.envisprototype.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import com.envisprototype.R;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
+import com.envisprototype.view.model.GoogleMapContentHelper;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GoogleMapActivity extends Activity {
@@ -24,10 +27,12 @@ public class GoogleMapActivity extends Activity {
 	ArrayList<SetInterface> setlist;
 	ArrayList<SensorInterface> tempsensorlist;
 	private GoogleMap map;
-
+	HashMap<Marker,SetInterface> hashy = new HashMap<Marker,SetInterface>();
+	
 	private LatLng LOCATION_SENSOR;
 	private static final LatLng MELBOURNE = new LatLng(-37.81319, 144.96298);
-
+	
+	public static String something = "Loading....";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,13 +47,23 @@ public class GoogleMapActivity extends Activity {
 		for(int i=0;i<setlist.size();i++){
 			
 			tempset = setlist.get(i);
-			Log.i("SetNameONMAPS", setlist.get(i).getName());
-			Double lat = (Double)setlist.get(i).getLocation().getLatitude();
-			Double lng = (Double)setlist.get(i).getLocation().getLongitude();
-			Log.i("longlat;", i +" "+setlist.get(i).getName()+"  Latitude:" +lat + "Longitude:" + lng);
+			Log.i("SetNameONMAPS", tempset.getName());
+			Double lat = (Double)tempset.getLocation().getLatitude();
+			Double lng = (Double)tempset.getLocation().getLongitude();
+			Log.i("longlat;", i +" "+tempset.getName()+"  Latitude:" +lat + "Longitude:" + lng);
 			LOCATION_SENSOR = new LatLng(lat,lng);
-			map.addMarker(new MarkerOptions().position(LOCATION_SENSOR).title(setlist.get(i).getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
-				
+			MarkerOptions tempmarker = new MarkerOptions();
+			tempmarker.position(LOCATION_SENSOR);
+			tempmarker.title(tempset.getName());
+			tempmarker.icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow));
+			tempmarker.snippet("TEST ME\nBLAHBLAHBLHA\nGAGAGAG\namshdbhkjas" + i);
+			
+			//Marker tempmarker_tt = map.addMarker(tempmarker);
+			//tempmarker.
+			
+			//map.addMarker(tempmarker);
+			
+			hashy.put(map.addMarker(tempmarker), tempset);	
 			
 			
 		}
@@ -59,6 +74,7 @@ public class GoogleMapActivity extends Activity {
 		map.animateCamera(update);
 		update = CameraUpdateFactory.newLatLngZoom(LOCATION_SENSOR, 14);
 		map.animateCamera(update);
+		map.setInfoWindowAdapter(new GoogleMapContentHelper(this, map, hashy) );
 		
 		
 	}
