@@ -96,7 +96,12 @@ public class NewSensorInfoViewActivity extends Activity{
 
 		LOCATION_SENSOR = new LatLng(lat,lng);
 		map  = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		//MarkerOptions temp = new MarkerOptions();
+		//temp.position(LOCATION_SENSOR);
+		//temp.title(title)
 		map.addMarker(new MarkerOptions().position(LOCATION_SENSOR).title("Your New Sensor").icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
+		//map.addMarker(new MarkerOptions().position(LOCATION_SENSOR).title("Your New Sensor").icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow)));
+		
 		CameraUpdate update = CameraUpdateFactory.newLatLng(LOCATION_SENSOR);
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		update = CameraUpdateFactory.newLatLngZoom(MELBOURNE, 14);

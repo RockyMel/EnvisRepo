@@ -35,7 +35,7 @@ public class NavigationMaker implements OnNavigationListener{
 		listDataHeader.add(new DrawerMenuItem("2D charts", R.drawable.two_d_chart));
 		listDataHeader.add(new DrawerMenuItem("3D Visual", R.drawable.three_d_chart));
 		listDataHeader.add(new DrawerMenuItem("Scan & View", R.drawable.ic_qrlauncher));
-		//listDataHeader.add(new DrawerMenuItem("Settings", R.drawable.settings));
+		listDataHeader.add(new DrawerMenuItem("Smart Map", R.drawable.add_map));
 	}
 
 	public static void makeNavigationDrawer(Context context) {
