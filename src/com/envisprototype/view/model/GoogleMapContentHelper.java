@@ -65,7 +65,7 @@ public class GoogleMapContentHelper implements InfoWindowAdapter{
 		protected String doInBackground(String... args) {
 			String response = "";
 			for(int i=0;i<SensorListModel.getSingletonInstance().getSensorListBySetID(tempset.getId()).size();i++){
-				response = response + " " + SensorReadingDBHelper.getDataReadingBySensorIDJSON(SensorListModel.getSingletonInstance().getSensorListBySetID(tempset.getId()).get(i).getId(), context);
+				response = response + "\n" + SensorReadingDBHelper.getDataReadingBySensorIDJSON(SensorListModel.getSingletonInstance().getSensorListBySetID(tempset.getId()).get(i).getId(), context);
 				GoogleMapActivity.something = response;
 			}
 			Log.i("asdsadast43trefsdv", response);
