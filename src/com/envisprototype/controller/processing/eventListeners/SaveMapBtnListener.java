@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.model.DBHelper.MapInfoDBHelper;
+import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.DrawMapApplet;
 import com.envisprototype.view.processing.EnvisPApplet;

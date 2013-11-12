@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.util.Log;
 
 import com.envisprototype.model.sensor.SensorInterface;
+import com.envisprototype.model.set.SetListModel;
 
 public class SensorInfoDBHelper {
 	final static String nameSpace = "http://api.webservice.envis.com";  
@@ -57,9 +58,10 @@ public class SensorInfoDBHelper {
 		}
 
 		Log.i("DBHELPER", resultsRequestSOAP.toString());
-		
+		associateSensorWithSet(newsensor.getId(), newsensor.getSetid());
+
 		if( resultsRequestSOAP.toString().equals("true"))
-				return true;
+			return true;
 		else
 			return false;
 
@@ -93,7 +95,89 @@ public class SensorInfoDBHelper {
 	}
 
 
-	public static void associateSensorWithSet(){
+	public static void associateSensorWithSet(String sensorId, String setId){
+
+		String methodName = "associateSensorAndSet";
+		String soapAction = nameSpace + "/" + methodName;
+
+
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+
+		rpc.addProperty("dataInfos", sensorId);
+		rpc.addProperty("dataInfos", setId);
+		rpc.addProperty("dataInfos", SetListModel.getSingletonInstance().findSetById(setId).getX()+"");
+		rpc.addProperty("dataInfos", SetListModel.getSingletonInstance().findSetById(setId).getY()+"");
+		rpc.addProperty("dataInfos", SetListModel.getSingletonInstance().findSetById(setId).getZ()+"");
+
+
+
+
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);  
+
+		HttpTransportSE transport = new HttpTransportSE(endPoint); 
+		SoapPrimitive resultsRequestSOAP=null;
+		try {
+			transport.call(soapAction, envelope);
+			resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			System.out.println(resultsRequestSOAP.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		Log.i("DBHELPER", resultsRequestSOAP.toString());
+
+
+
+
+	}
+
+
+	public static boolean editSensor(SensorInterface sensor){
+		String methodName = "editSensor";
+		String soapAction = nameSpace + "/" + methodName;
+
+
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+		Log.i("brand", sensor.getBrand());
+		//String sensor_info=newsensor.getId()+";"+newsensor.getType()+";"+newsensor.getName()+";"+newsensor.getBrand()+";"+"active"+";"+newsensor.getLocation().getLongitude() + "" +";"+newsensor.getLocation().getLatitude() + ""+";"+newsensor.getNotes()+";"+"END";
+		//Log.i("testing",sensor_info);
+		rpc.addProperty("sensorInfos", sensor.getId());
+		rpc.addProperty("sensorInfos", sensor.getType());
+		rpc.addProperty("sensorInfos", sensor.getName());
+		rpc.addProperty("sensorInfos", sensor.getBrand());
+		rpc.addProperty("sensorInfos", "active");
+		rpc.addProperty("sensorInfos", sensor.getNotes());
+		rpc.addProperty("sensorInfos", sensor.getMaxValue()+"");
+		rpc.addProperty("sensorInfos", sensor.getMinValue()+"");
+
+
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);  
+
+		HttpTransportSE transport = new HttpTransportSE(endPoint); 
+		SoapPrimitive resultsRequestSOAP=null;
+		try {
+			transport.call(soapAction, envelope);
+			resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			System.out.println(resultsRequestSOAP.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		Log.i("DBHELPER", resultsRequestSOAP.toString());
+
+		if( resultsRequestSOAP.toString().equals("true"))
+			return true;
+		else
+			return false;
+
 
 	}
 

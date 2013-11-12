@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
@@ -11,13 +12,14 @@ import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.DeleteMapButtonController;
 import com.envisprototype.controller.EditMapBtnListener;
 import com.envisprototype.controller.SaveMapToAddBtnListener;
+import com.envisprototype.model.DBHelper.MapInfoDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.navigation.NavigationMaker;
 
 
 public class MapInfoViewActivity extends EnvisActivity {
-	EditText id;
+	TextView id;
 	EditText name;
 	EditText location;
 	EditText notes;
@@ -37,7 +39,7 @@ public class MapInfoViewActivity extends EnvisActivity {
 		MapLocalDBHelper.getSingletonInstance(this).ReplicateMapList();
 
 		// TODO Auto-generated method stub
-		id = (EditText)findViewById(R.id.id_map);
+		id = (TextView)findViewById(R.id.id_map);
 		mapid = getIntent().getStringExtra(MapListModel.MAP_ID_EXTRA);
 		name = (EditText)findViewById(R.id.editText2);
 		location = (EditText)findViewById(R.id.editText3);

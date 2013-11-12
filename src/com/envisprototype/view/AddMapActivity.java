@@ -5,9 +5,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.envisprototype.R;
 import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
@@ -19,7 +19,7 @@ import com.envisprototype.model.maps.MapModel;
 
 public class AddMapActivity extends EnvisActivity {
 	
-	EditText id;
+	TextView id;
 	EditText name;
 	EditText location;
 	EditText notes;
@@ -38,7 +38,11 @@ public class AddMapActivity extends EnvisActivity {
 	
 	private void init() {
 		// TODO Auto-generated method stub
-		id = (EditText)findViewById(R.id.editText1);
+		id = (TextView)findViewById(R.id.editText1);
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null && bundle.containsKey("mapid")){
+			id.setText(bundle.getString("mapid"));
+		}
 		name  = (EditText)findViewById(R.id.editText2);
 		location = (EditText)findViewById(R.id.editText3);
 		notes = (EditText)findViewById(R.id.editText7);

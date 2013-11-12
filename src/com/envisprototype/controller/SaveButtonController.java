@@ -108,7 +108,7 @@ public class SaveButtonController implements OnClickListener {
 		
 		SensorInterface temp = SensorListModel.getSingletonInstance().findSensorById(sensor.getId());
 
-		if(temp!=null)
+		if(temp!=null) //Means we are editing
 		{
 //			SensorListModel.getSingletonInstance().removeSensor(temp);
 //			SensorListModel.getSingletonInstance().addSensor(sensor);
@@ -119,6 +119,7 @@ public class SaveButtonController implements OnClickListener {
 				public void run() {
 					System.out.println("asdsaD" + sensor.getBrand());
 					SensorLocalDBHelper.getSingletonInstance(context).editSensor(sensor);
+					SensorInfoDBHelper.editSensor(sensor);
 				}
 			};
 			thread.start();

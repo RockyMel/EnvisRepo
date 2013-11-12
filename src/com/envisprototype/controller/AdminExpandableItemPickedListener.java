@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.envisprototype.R;
+import com.envisprototype.model.DBHelper.MapInfoDBHelper;
 import com.envisprototype.model.DBHelper.SetInfoDBHelper;
 import com.envisprototype.view.AddMapActivity;
 import com.envisprototype.view.MapInfoViewActivity;
@@ -33,7 +34,7 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 			this.view = view;
 		}
 		protected void onPreExecute() {
-			this.dialog.setMessage("Please wait while we generate an ID for your sensor..!!");
+			this.dialog.setMessage("Please wait while we generate an ID for your set..!!");
 			this.dialog.show();
 		}
 		@Override
@@ -57,6 +58,43 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		}
 	}
 
+	class GenerateMapTask extends AsyncTask<String, Void, String> {
+
+		private ProgressDialog dialog;
+		Context context;
+		String mapid;
+		View view;
+		
+		public GenerateMapTask(Context context,View view) {
+			// TODO Auto-generated constructor stub
+			this.context = context;
+			dialog = new ProgressDialog(context);
+			this.view = view;
+		}
+		protected void onPreExecute() {
+			this.dialog.setMessage("Please wait while we generate an ID for your map..!!");
+			this.dialog.show();
+		}
+		@Override
+		protected String doInBackground(String... args) {
+			String response = MapInfoDBHelper.generateMapID();
+			return response;
+
+
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+	
+			mapid = result;
+			this.dialog.dismiss();
+			Intent intent = new Intent(context, AddMapActivity.class);
+			intent.putExtra("flag", "new");
+			intent.putExtra("mapid", mapid);
+			view.getContext().startActivity(intent);
+			
+		}
+	}
 	
 	
 	public AdminExpandableItemPickedListener(String tag){
@@ -106,8 +144,8 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 		}
 		menuOptions = adminkaActivity.getResources().getStringArray(R.array.map_admin_options);
 		if(tag.equals(menuOptions[0])){
-			intent = new Intent(adminkaActivity, AddMapActivity.class);
-			adminkaActivity.startActivity(intent);
+			GenerateMapTask gmt = new GenerateMapTask(adminkaActivity, v);
+			gmt.execute();
 
 		}
 		if(tag.equals(menuOptions[1])){

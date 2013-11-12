@@ -11,6 +11,7 @@ import com.envisprototype.R;
 import com.envisprototype.view.AdminkaActivity;
 import com.envisprototype.view.ChartVisualizationSettingsActivity;
 import com.envisprototype.view.FavoritesTab;
+import com.envisprototype.view.GoogleMapActivity;
 import com.envisprototype.view.MapListActivity;
 import com.envisprototype.view.TagViewActivity;
 import com.envisprototype.view.model.MapListAdapter;
@@ -54,8 +55,14 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 			break;
 		case 4: {
 			intent = new Intent(v.getContext(), TagViewActivity.class);
-
+			break;
 		}
+		
+		case 5: {
+			intent = new Intent(v.getContext(), GoogleMapActivity.class);
+			break;
+		}
+		
 		}
 		if (intent != null) {
 			Log.i("Ok", "about to start activity");

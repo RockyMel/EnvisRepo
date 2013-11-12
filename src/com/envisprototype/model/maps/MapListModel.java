@@ -58,8 +58,11 @@ public class MapListModel implements MapListInterface {
 	public MapInterface findMapById(String Id){
 		
 		for(MapInterface map: mapList){
-			if(map.getId().equals(Id))
-				return map;						
+			if(map.getId().equals(Id)){
+				Log.i("map ids", map.getId() + " - " + Id);
+				return map;
+			}
+										
 		}
 		return  null;
 		
@@ -118,6 +121,9 @@ public class MapListModel implements MapListInterface {
 	public void saveCoorsForMap(String mapId, Coordinates coorsToSave,
 			float zCoor) {
 		// TODO Auto-generated method stub
+		MapInterface tempMap = this.findMapById(mapId);
+		tempMap.setRealCoordinates(coorsToSave);
+		tempMap.setzCoordinate(zCoor);
 		
 	}
 }

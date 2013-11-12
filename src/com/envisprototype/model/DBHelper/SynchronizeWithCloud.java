@@ -88,13 +88,15 @@ public class SynchronizeWithCloud {
 						name = obj.getJSONArray(i+"").getString(1);
 						longitude = Double.parseDouble(obj.getJSONArray(i+"").getString(2));
 						latitude = Double.parseDouble(obj.getJSONArray(i+"").getString(3));
+						
 						notes = obj.getJSONArray(i+"").getString(4);
 						SetInterface newset = new SetModel();
 						newset.setId(id);
 						newset.setName(name);
-						Location location=new Location(LocationManager.NETWORK_PROVIDER);
+						Location location=new Location("");
 						location.setLongitude(longitude);
 						location.setLatitude(latitude);
+						Log.i("locationatsync", location.getLongitude() + " ::: " + location.getLatitude());
 						newset.setLocation(location);
 						newset.setNotes(notes);
 						SetLocalDBHelper.getSingletonInstance(context).addSet(newset);

@@ -17,6 +17,7 @@ import android.location.LocationManager;
 import android.util.Log;
 
 
+import com.envisprototype.model.DBHelper.MapInfoDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListInterface;
 import com.envisprototype.model.maps.MapListModel;
@@ -70,6 +71,16 @@ public class MapLocalDBHelper extends SQLiteOpenHelper implements MapListInterfa
 		values.put(ZCOORCOL,  zCoor);
 		int result = getWritableDatabase().update(TABLE_NAME, values, IDCOL + "= '"
 				+ mapId + "'",null);
+		MapListModel.getSingletonInstance().saveCoorsForMap(mapId, coorsToSave, zCoor);
+		final String tempMapId = mapId;
+		Thread thread = new Thread()
+		{
+			@Override
+			public void run() {
+				MapInfoDBHelper.editMap(MapListModel.getSingletonInstance().findMapById(tempMapId));
+			}
+		};
+		thread.start();
 	}
 	
 	@Override

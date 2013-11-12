@@ -95,6 +95,45 @@ public class SetInfoDBHelper {
 
 
 
+	public static void editSet(SetInterface set){
+
+
+
+		String methodName = "editSets";
+		String soapAction = nameSpace + "/" + methodName;
+
+
+		SoapObject rpc = new SoapObject(nameSpace, methodName);   
+
+		rpc.addProperty("setInfos", set.getId());
+		rpc.addProperty("setInfos", set.getName());
+		rpc.addProperty("setInfos", set.getLocation().getLongitude()+"");
+		rpc.addProperty("setInfos", set.getLocation().getLatitude()+"");
+		rpc.addProperty("setInfos", set.getNotes());
+
+
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);  
+		envelope.setOutputSoapObject(rpc);  
+
+		HttpTransportSE transport = new HttpTransportSE(endPoint); 
+
+		try {
+			transport.call(soapAction, envelope);
+			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			System.out.println(" -----  "+resultsRequestSOAP.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+
+		Log.i("SETDBHELPER", "done");
+
+
+
+
+	}
 
 
 }

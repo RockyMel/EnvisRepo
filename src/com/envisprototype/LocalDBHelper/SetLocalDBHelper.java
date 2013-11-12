@@ -118,13 +118,13 @@ public class SetLocalDBHelper extends SQLiteOpenHelper implements SetListInterfa
 		String query="SELECT * FROM " + TABLE_NAME + ";";
 		
 		Cursor cursor = getWritableDatabase().rawQuery(query, null);
-		Location location =  new Location(LocationManager.NETWORK_PROVIDER);
 		if(cursor.moveToFirst())
 		{
 			do{
 				SetInterface tempset=new SetModel();
 				tempset.setId(cursor.getString(0));
 				tempset.setName(cursor.getString(1));
+				Location location =  new Location("");
 
 				location.setLongitude(cursor.getDouble(2));
 				location.setLatitude(cursor.getDouble(3));

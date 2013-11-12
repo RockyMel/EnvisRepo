@@ -119,7 +119,16 @@ public class SetSaveOnClickController implements OnClickListener {
 			// ADD CODE TO SAVE CHANGES
 			set.setName(name.getText().toString());
 			set.setNotes(notes.getText().toString());
-
+			Thread thread = new Thread()
+			{
+				@Override
+				public void run() {
+					//System.out.println("asdsaD" + sensor.getBrand());
+					SetLocalDBHelper.getSingletonInstance(context).editSet(set);
+					SetInfoDBHelper.editSet(set);
+				}
+			};
+			thread.start();
 		}
 	}
 

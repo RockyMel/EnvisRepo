@@ -6,14 +6,14 @@ import android.location.LocationManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.model.DBHelper.MapInfoDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
-import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.model.GPSTracker;
 
 public class SaveMapToAddBtnListener implements OnClickListener{
@@ -22,9 +22,10 @@ public class SaveMapToAddBtnListener implements OnClickListener{
 	MapInterface map;
 	Location myloc;
 	boolean ifAdd; // true - for add, false for edit
-	EditText id, name;
+	TextView id;
+	EditText name;
 	
-	public SaveMapToAddBtnListener(Context context, boolean ifAdd, EditText id, EditText name){
+	public SaveMapToAddBtnListener(Context context, boolean ifAdd, TextView id, EditText name){
 		this.context = context;
 		this.ifAdd = ifAdd;
 		this.map = new MapModel();
@@ -64,13 +65,31 @@ public class SaveMapToAddBtnListener implements OnClickListener{
 		map.setId(id.getText().toString());
 		map.setName(name.getText().toString());
 		map.setLocation(myloc);
-		if(ifAdd) //adding
-			MapLocalDBHelper.getSingletonInstance(context).addMap(map);
+		if(ifAdd){ //adding
+			Thread thread = new Thread()
+			{
+				@Override
+				public void run() {
+					MapLocalDBHelper.getSingletonInstance(context).addMap(map);
+					MapInfoDBHelper.addMap(map);
+				}
+			};
+			thread.start();
+		}
 		else{
 			// getting coors from model
 			map.setRealCoordinates(MapListModel.getSingletonInstance().findMapById(map.getId()).getRealCoordinates());
 			map.setzCoordinate(MapListModel.getSingletonInstance().findMapById(map.getId()).getzCoordinate());
 			MapLocalDBHelper.getSingletonInstance(context).editMap(map);
+			Thread thread = new Thread()
+			{
+				@Override
+				public void run() {
+					
+					MapInfoDBHelper.editMap(map);
+				}
+			};
+			thread.start();
 			//MapListModel.getSingletonInstance().editMap(map);
 		}
 		
