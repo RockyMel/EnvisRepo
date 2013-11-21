@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.view.model.ExpandableAdminAdapter;
 import com.envisprototype.view.model.ExpandableListAdapter;
 

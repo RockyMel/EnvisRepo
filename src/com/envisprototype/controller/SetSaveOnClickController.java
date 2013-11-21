@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.DBHelper.SetInfoDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListInterface;
@@ -71,6 +71,8 @@ public class SetSaveOnClickController implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
+		if(!Checks.isOnline(view.getContext()))
+			return;
 		if(flag.equals("new"))
 		{
 			flag="exist";

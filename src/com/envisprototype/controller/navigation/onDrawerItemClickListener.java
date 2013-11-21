@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.envisprototype.R;
+import com.envisprototype.controller.Checks;
 import com.envisprototype.view.AdminkaActivity;
 import com.envisprototype.view.ChartVisualizationSettingsActivity;
 import com.envisprototype.view.FavoritesTab;
@@ -36,38 +37,39 @@ public class onDrawerItemClickListener implements OnItemClickListener {
 		case 0: {
 			intent = new Intent(v.getContext(), FavoritesTab.class);
 		}
-			break;
+		break;
 		case 1: {
 			//intent = new Intent(v.getContext(), AdminTab.class);
 			intent = new Intent(v.getContext(), AdminkaActivity.class);
 		}
-			break;
+		break;
 		case 2: {
 			intent = new Intent(v.getContext(), ChartVisualizationSettingsActivity.class);
 		}
-			break;
+		break;
 		case 3: {
 			// !!! replace choosemapactivity with the one to pick maps
 			//intent = new Intent(v.getContext(), ChooseMapActivity.class);
 			intent = new Intent(v.getContext(), MapListActivity.class);
 			intent.putExtra(v.getContext().getString(R.string.request_code), MapListAdapter.MAP_BY_NAME);
 		}
-			break;
+		break;
 		case 4: {
 			intent = new Intent(v.getContext(), TagViewActivity.class);
 			break;
 		}
-		
+
 		case 5: {
-			intent = new Intent(v.getContext(), GoogleMapActivity.class);
+			if(Checks.isOnline(v.getContext()))
+				intent = new Intent(v.getContext(), GoogleMapActivity.class);
 			break;
 		}
-		
+
 		}
 		if (intent != null) {
 			Log.i("Ok", "about to start activity");
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
 			v.getContext().startActivity(intent);
 		}
 		drawer.closeDrawers();

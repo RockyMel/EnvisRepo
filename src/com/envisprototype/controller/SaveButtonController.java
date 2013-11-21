@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.DBHelper.SensorInfoDBHelper;
+import com.envisprototype.model.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;
@@ -72,7 +72,8 @@ public class SaveButtonController implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-
+		if(!Checks.isOnline(v.getContext()))
+			return;
 
 
 		Location myloc=null;

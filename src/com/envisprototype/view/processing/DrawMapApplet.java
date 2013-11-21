@@ -8,13 +8,13 @@ import com.envisprototype.controller.processing.dragListeners.DrawFreeShapeBtnLi
 import com.envisprototype.controller.processing.dragListeners.DrawingScopeListener;
 import com.envisprototype.controller.processing.dragListeners.ZMapSizeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.AddToDrawingScopeListener;
-import com.envisprototype.controller.processing.eventListeners.DrawRectMapBtnListener;
+import com.envisprototype.controller.processing.eventListeners.DrawBoxMapBtnListener;
 import com.envisprototype.controller.processing.eventListeners.RemoveLastNodeBtnListener;
 import com.envisprototype.controller.processing.eventListeners.SaveMapBtnListener;
 
 public class DrawMapApplet extends EnvisPApplet {
 
-	EnvisButton rectMapBtn, freeShapeBtn, drawPolygonBtn,
+	EnvisButton boxMapBtn, freeShapeBtn, drawPolygonBtn,
 	removeLastNodeBtn, closeFigure;
 	EnvisButton drawingScope;
 	ZCoorSpinner zCoorSpinner;
@@ -30,9 +30,9 @@ public class DrawMapApplet extends EnvisPApplet {
 		closeFigure.setPlace(DEF_BTN_X, height-height/25);
 		closeFigure.addEventListener(new SaveMapBtnListener());
 		closeFigure.setIfCanFireWithNoClick(true);
-		rectMapBtn = new EnvisButton(this, "Draw rect");
-		rectMapBtn.setPlace(DEF_BTN_X, height/29);
-		rectMapBtn.addEventListener(new DrawRectMapBtnListener());
+		boxMapBtn = new EnvisButton(this, "Draw rect");
+		boxMapBtn.setPlace(DEF_BTN_X, height/29);
+		boxMapBtn.addEventListener(new DrawBoxMapBtnListener());
 		freeShapeBtn = new EnvisButton(this, "Free shape");
 		freeShapeBtn.setPlace(DEF_BTN_X, 3*height/29);
 		freeShapeBtn.addEventListener(new DrawFreeShapeBtnListener());
@@ -65,7 +65,7 @@ public class DrawMapApplet extends EnvisPApplet {
 			//drawingScope.drawRect();
 			currentClick.drawMe();
 			closeFigure.drawMe();
-			rectMapBtn.drawMe();
+			boxMapBtn.drawMe();
 			freeShapeBtn.drawMe();
 			envisMap.drawMe2D();
 			drawPolygonBtn.drawMe();
@@ -89,7 +89,7 @@ public class DrawMapApplet extends EnvisPApplet {
 		if(!envisMap.isIfCentered()){
 			freeShapeBtn.fireEvent();
 			closeFigure.fireEvent();
-			rectMapBtn.fireEvent();
+			boxMapBtn.fireEvent();
 			drawingScope.fireEvent();	
 			drawPolygonBtn.fireEvent();
 			removeLastNodeBtn.fireEvent();
@@ -156,11 +156,11 @@ public class DrawMapApplet extends EnvisPApplet {
 	}
 
 	public EnvisButton getRectMapBtn() {
-		return rectMapBtn;
+		return boxMapBtn;
 	}
 
 	public void setRectMapBtn(EnvisButton rectMapBtn) {
-		this.rectMapBtn = rectMapBtn;
+		this.boxMapBtn = rectMapBtn;
 	}
 
 	public EnvisButton getFreeShapeBtn() {

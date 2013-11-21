@@ -16,10 +16,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
-import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.controller.PlotSetsBtnListener;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetLocalDBHelper;
 import com.envisprototype.model.processing.SetCoordinates;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;

@@ -171,6 +171,8 @@ public class NewShowChartVisualizationButtonController implements OnClickListene
 
 	@Override
 	public void onClick(View view) {
+		if(!Checks.isOnline(view.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		if(MODE==0){
 			GetSensorReadingTask task = new GetSensorReadingTask(view);

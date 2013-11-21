@@ -2,6 +2,7 @@ package com.envisprototype.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +21,8 @@ import android.util.Log;
 
 import com.envisprototype.model.DBHelper.SensorReadingDBHelper;
 import com.envisprototype.model.processing.SensorReadingsModel;
+import com.envisprototype.model.processing.XbeeTagPair;
+import com.envisprototype.model.sensor.SensorListModel;
 
 public class HistoricalThreeDController{
 
@@ -28,6 +32,7 @@ public class HistoricalThreeDController{
 	Calendar calto;
 	static String fromStr = null;
 	static String toStr = null;
+	public static HashMap<String,ArrayList<XbeeTagPair>> xbeeTokens = new HashMap<String,ArrayList<XbeeTagPair>>();
 
 	private class GetSensorReadingTask extends AsyncTask<List<String>, Void, HashMap<String, String>> {
 		List<String> sensorIds;
@@ -47,8 +52,77 @@ public class HistoricalThreeDController{
 			String response = "";
 			HashMap<String, String> id_reading = new HashMap<String, String>(); 
 			for(String sensorId: sensorIds){
-				response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(sensorId, fromStr, toStr);
-				id_reading.put(sensorId, response);
+				if(!SensorListModel.getSingletonInstance().findSensorById(sensorId).getNotes().equals("master")){
+					response = SensorReadingDBHelper.getDataReadingSensorByHisTimeJSON(sensorId, fromStr, toStr);
+					id_reading.put(sensorId, response);
+					
+				}
+				
+			}
+			{
+				Iterator<String> stringIdIterator = id_reading.keySet().iterator();
+				try {
+					while(stringIdIterator.hasNext()){
+						String sensorId = stringIdIterator.next();
+						String result = id_reading.get(sensorId);
+						System.out.println("---" + result);
+						JSONObject obj = new JSONObject(result);
+						int i=1;
+						Float reading = null;
+						while(true)
+						{
+							try{
+								if(obj.getJSONArray(i+"")!=null){
+									String timeStamp = obj.getJSONArray(i+"").getString(1);
+									//Float reading = Float.parseFloat(obj.getJSONArray(i+"").getString(2));
+									if(obj.getJSONArray(i+"").getString(2).contains(",")){
+										String tempDataToParse = obj.getJSONArray(i+"").getString(2);
+										StringTokenizer st = new StringTokenizer(tempDataToParse,",");
+										reading = Float.parseFloat(st.nextToken());
+										Integer xbeeId = Integer.parseInt(st.nextToken());
+										ArrayList<XbeeTagPair> tempPair;
+										if(xbeeTokens.get(timeStamp)!=null){
+											tempPair = xbeeTokens.get(xbeeId);
+										}
+										else{
+											tempPair = new ArrayList<XbeeTagPair>();
+										}
+										tempPair.add(new XbeeTagPair(sensorId, xbeeId));
+										xbeeTokens.put(timeStamp, tempPair);
+									}
+									else{
+										reading = Float.parseFloat(obj.getJSONArray(i+"").getString(2));
+									}
+									Log.i("loop",timeStamp + reading);
+									if(i == 1){
+										SensorReadingsModel.getSingletonInstance().getFirstTimeStampsForSensors().put(sensorId, timeStamp);
+									}
+									i++;
+									SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, timeStamp, reading);
+								}
+								else
+									break;
+
+							}
+							catch(Exception e){
+								e.printStackTrace();
+								break;
+							}
+						}
+						Log.i("loop",SensorReadingsModel.getSingletonInstance().getSensorReadings().size() + "");
+					}
+
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				HashSet hs = new HashSet();
+				hs.addAll(SensorReadingsModel.getSingletonInstance().getTimeStamps());
+				SensorReadingsModel.getSingletonInstance().getTimeStamps().clear();
+				SensorReadingsModel.getSingletonInstance().getTimeStamps().addAll(hs);
+				Collections.sort(SensorReadingsModel.getSingletonInstance().getTimeStamps());
+				System.out.println("DONE");
 			}
 			return id_reading;
 		}
@@ -56,49 +130,7 @@ public class HistoricalThreeDController{
 		@Override
 		protected void onPostExecute(HashMap<String, String> id_reading) {
 			//HashMap<String, Float> data = new HashMap<String, Float>();
-			Iterator<String> stringIdIterator = id_reading.keySet().iterator();
-			try {
-				while(stringIdIterator.hasNext()){
-					String sensorId = stringIdIterator.next();
-					String result = id_reading.get(sensorId);
-					System.out.println("---" + result);
-					JSONObject obj = new JSONObject(result);
-					int i=1;
-					while(true)
-					{
-						try{
-							if(obj.getJSONArray(i+"")!=null){
-								String timeStamp = obj.getJSONArray(i+"").getString(1);
-								Float reading = Float.parseFloat(obj.getJSONArray(i+"").getString(2));
-								Log.i("loop",timeStamp + reading);
-								if(i == 1){
-									SensorReadingsModel.getSingletonInstance().getFirstTimeStampsForSensors().put(sensorId, timeStamp);
-								}
-								i++;
-								SensorReadingsModel.getSingletonInstance().addNewSensorToReadingsModel(sensorId, timeStamp, reading);
-							}
-							else
-								break;
-
-						}
-						catch(Exception e){
-							break;
-						}
-					}
-					Log.i("loop",SensorReadingsModel.getSingletonInstance().getSensorReadings().size() + "");
-				}
-
-
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			HashSet hs = new HashSet();
-			hs.addAll(SensorReadingsModel.getSingletonInstance().getTimeStamps());
-			SensorReadingsModel.getSingletonInstance().getTimeStamps().clear();
-			SensorReadingsModel.getSingletonInstance().getTimeStamps().addAll(hs);
-			Collections.sort(SensorReadingsModel.getSingletonInstance().getTimeStamps());
-			System.out.println("DONE");
+			
 		}
 	}
 

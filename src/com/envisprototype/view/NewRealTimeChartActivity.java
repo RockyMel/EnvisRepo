@@ -544,7 +544,7 @@ public class NewRealTimeChartActivity extends Activity {
 								}
 								//	obj.getJSONArray();
 								Double tempdata = null;
-								try {
+								try {									
 									tempdata = Double.parseDouble(obj.getString("Reading"));
 								} catch (NumberFormatException e) {
 									// TODO Auto-generated catch block

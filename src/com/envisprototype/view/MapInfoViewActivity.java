@@ -7,12 +7,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.DeleteMapButtonController;
 import com.envisprototype.controller.EditMapBtnListener;
 import com.envisprototype.controller.SaveMapToAddBtnListener;
 import com.envisprototype.model.DBHelper.MapInfoDBHelper;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.model.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.navigation.NavigationMaker;

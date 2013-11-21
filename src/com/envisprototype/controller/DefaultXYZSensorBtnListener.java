@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import com.envisprototype.LocalDBHelper.MapSensorAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSensorAssociationDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -19,6 +19,8 @@ public class DefaultXYZSensorBtnListener implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		SensorInterface sensor = SensorListModel.getSingletonInstance().findSensorById(sensorId);
 		SetInterface setToGetCoors = SetListModel.getSingletonInstance().findSetById(sensor.getSetid());
 		if(setToGetCoors.getMapID() != null){

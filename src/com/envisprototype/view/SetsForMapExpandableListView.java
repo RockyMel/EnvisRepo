@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
-import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.set.SetInterface;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.model.ExpandableListAdapter;

@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -30,6 +30,8 @@ public class DeleteSensorButtonController implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		Log.i("del", id);
 		SensorInterface sensor = SensorListModel.getSingletonInstance().findSensorById(id);

@@ -86,7 +86,7 @@
         android:layout_height="69dp"
         android:layout_above="@+id/textView1"
         android:layout_alignLeft="@+id/textView1"
-        android:src="@drawable/map_icon" />
+        android:src="@drawable/draw_map" />
 
     <ImageButton
         android:id="@+id/draw_map_btn"
@@ -97,7 +97,7 @@
         android:background="@null"
         android:scaleType="fitXY"
         
-        android:src="@drawable/drawmapnew"
+        android:src="@drawable/draw_map"
         android:text="Draw" />
 
 </RelativeLayout>

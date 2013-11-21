@@ -18,6 +18,7 @@ public class VisTypeBtnListener extends AbstractEnvisButtonListener{
 			if(eButton.getText().equals(tdPapplet.getString(R.string.bars_vis_type_btn))){
 				eButton.setText(tdPapplet.getString(R.string.spheres_vis_type_btn));
 				tdPapplet.setIfBars(false);
+				
 				tdPapplet.getRegenerateBarSetCoors().setIfVisible(false);
 			}
 			else{

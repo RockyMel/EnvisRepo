@@ -9,8 +9,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.model.DBHelper.MapInfoDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.maps.MapModel;
@@ -36,6 +36,8 @@ public class SaveMapToAddBtnListener implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		GPSTracker gps = new GPSTracker(context);
 		double latitude = 0;

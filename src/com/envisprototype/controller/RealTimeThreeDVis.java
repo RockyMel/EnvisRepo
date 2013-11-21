@@ -1,5 +1,8 @@
 package com.envisprototype.controller;
 
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +19,8 @@ import com.envisprototype.view.processing.SphereGraphSet;
 import com.envisprototype.view.processing.ThreeDVis;
 
 public class RealTimeThreeDVis  implements Runnable{
+	
+	public static HashMap<String, Integer> xbeeTokens = new HashMap<String, Integer>();
 	
 	//Runnable runnable;
 	String sensorId;
@@ -54,14 +59,16 @@ public class RealTimeThreeDVis  implements Runnable{
 		response = SensorReadingDBHelper.getSensorReadingByRealTime(sensorId, context ,1);//getDataReadingBySensorIDJSON(sensorId, context);
 		if(response != null)
 		Log.i("NETCONNECTION3", response);
-		return response;
-	}
-	
-	@Override
-	protected void onPostExecute(String result) {
-		// textView.setText(result);
-		//String response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().get(0));
-		if(result == null || result.equals("Not"))
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		if(response == null || response.equals("Not"))
 		{
 			Toast.makeText(context, "No Internet Coonnection", Toast.LENGTH_SHORT);
 		}
@@ -69,7 +76,7 @@ public class RealTimeThreeDVis  implements Runnable{
 		{
 			JSONObject obj = null;
 			try {
-				obj = new JSONObject(result);
+				obj = new JSONObject(response);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -77,7 +84,17 @@ public class RealTimeThreeDVis  implements Runnable{
 			//	obj.getJSONArray();
 			Double tempdata = null;
 			try {
-				tempdata = Double.parseDouble(obj.getString("Reading"));
+				if(obj.getString("Reading").contains(",")){
+						String tempDataToParse = obj.getString("Reading");
+						StringTokenizer st = new StringTokenizer(tempDataToParse,",");
+						tempdata = Double.parseDouble(st.nextToken());
+						Integer xbeeId = Integer.parseInt(st.nextToken());
+						xbeeTokens.put(sensorId, xbeeId);
+						//Log.i("reading",sensorId + " " + tempdata + " " + xbeeId);
+				}
+				else{
+					tempdata = Double.parseDouble(obj.getString("Reading"));
+				}
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,7 +102,7 @@ public class RealTimeThreeDVis  implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Log.i("DATAFORREALTIME",tempdata+"");
+			//Log.i("DATAFORREALTIME",tempdata+"");
 			//exampleSeries2.appendData(new GraphViewData(graph1LastXValue, tempdata ), true, 10);
 				if(tempdata!=null){
 					//ThreeDVis.getSensorReadings().put(sensorId, tempdata.floatValue());
@@ -103,6 +120,70 @@ public class RealTimeThreeDVis  implements Runnable{
 		}
 
 		SensorSet.mHandler.postDelayed(runnable, 200);
+
+		
+		
+		
+		
+		
+		
+		return response;
+	}
+	
+	@Override
+	protected void onPostExecute(String result) {
+		// textView.setText(result);
+		//String response = SensorReadingDBHelper.getDataReadingBySensorIDJSON(ChartVisualizationSettingsModel.getSingletonInstance().getSensorIDs().get(0));
+//		if(result == null || result.equals("Not"))
+//		{
+//			Toast.makeText(context, "No Internet Coonnection", Toast.LENGTH_SHORT);
+//		}
+//		else
+//		{
+//			JSONObject obj = null;
+//			try {
+//				obj = new JSONObject(result);
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//	obj.getJSONArray();
+//			Double tempdata = null;
+//			try {
+//				if(obj.getString("Reading").contains(",")){
+//						String tempDataToParse = obj.getString("Reading");
+//						StringTokenizer st = new StringTokenizer(tempDataToParse,",");
+//						tempdata = Double.parseDouble(st.nextToken());
+//						Integer xbeeId = Integer.parseInt(st.nextToken());
+//						xbeeTokens.put(sensorId, xbeeId);
+//						Log.i("reading",sensorId + " " + tempdata + " " + xbeeId);
+//				}
+//				tempdata = Double.parseDouble(obj.getString("Reading"));
+//			} catch (NumberFormatException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			Log.i("DATAFORREALTIME",tempdata+"");
+//			//exampleSeries2.appendData(new GraphViewData(graph1LastXValue, tempdata ), true, 10);
+//				if(tempdata!=null){
+//					//ThreeDVis.getSensorReadings().put(sensorId, tempdata.floatValue());
+//					for(SphereGraphSet spehereSet: EnvisPApplet.getSphereGraphList()){
+//						if(spehereSet.getSensorID().equals(sensorId))
+//							spehereSet.setReadingForSphere(tempdata.floatValue());
+//					}
+//					for(BarGraphSet barSet: EnvisPApplet.getBarGraphSetList()){
+//						if(barSet.getSensorID().equals(sensorId)){
+//							barSet.getBarGraphList().get(0).setReading(tempdata.floatValue());
+//						}
+//					}
+//				}
+//			//barGraphSet.getReadingsList().set(0,new Float(tempdata));
+//		}
+//
+//		SensorSet.mHandler.postDelayed(runnable, 200);
 
 	}
 	

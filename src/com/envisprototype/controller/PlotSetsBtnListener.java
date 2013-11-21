@@ -21,6 +21,8 @@ public class PlotSetsBtnListener implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		ArrayList<String> listToPlot = new ArrayList<String>();
 		for(SetInterface setToPlot: SetListModel.getSingletonInstance().getSetList()){

@@ -4,8 +4,8 @@ import java.util.EventObject;
 
 import android.util.Log;
 
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
 import com.envisprototype.controller.processing.dragListeners.AbstractDrawMapListener;
+import com.envisprototype.model.LocalDBHelper.MapLocalDBHelper;
 //import com.envisprototype.controller.processing.CoordinateWriter;
 import com.envisprototype.model.processing.Coordinates;
 import com.envisprototype.view.processing.DrawMapApplet;

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.widget.ExpandableListView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetListModel;
 import com.envisprototype.view.model.ExpandableListAdapter;

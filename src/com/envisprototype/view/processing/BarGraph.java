@@ -1,12 +1,16 @@
 package com.envisprototype.view.processing;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import android.util.Log;
 
 import com.envisprototype.controller.HistoricalThreeDController;
+import com.envisprototype.controller.RealTimeThreeDVis;
 import com.envisprototype.model.processing.SensorReadingsModel;
+import com.envisprototype.model.processing.XbeeTagPair;
 import com.envisprototype.model.sensor.AbstractSensor;
 import com.envisprototype.model.sensor.SensorListModel;
 
@@ -21,13 +25,7 @@ public class BarGraph {
 	private String sensorId;
 	int maxValue;
 	int minValue;
-//	AIR QUALITY (cyan) = {0, 255, 238}
-//	HUMIDITY (orange) = {255, 136, 0}
-//	LIGHT (yellow) = {255, 238, 0}
-//	MOTION (pink) = {255, 0, 204}
-//	TEMPERATURE (red) = {255, 0, 0}
-//	WATER LEVEL (blue) = {0, 0, 255}
-//	OTHER (green) = {0, 255, 0}
+	Integer idInt;
 	private float[][] colorAssigned= {{0,0,0},{0, 255, 238},{255, 136, 0},{255, 238, 0},
 			{255, 0, 204},{255, 0, 0},{0, 0, 255},{0, 255, 0}};
 	//private TreeMap<String, Float> readingRange = null;
@@ -42,6 +40,28 @@ public class BarGraph {
 			}
 		}
 		this.h = PApplet.map(this.reading, minValue, maxValue, 0, 100);
+		if(RealTimeThreeDVis.xbeeTokens.size() > 0)
+			idInt = RealTimeThreeDVis.xbeeTokens.get(sensorId);
+		else{
+			//idInt
+			ArrayList<XbeeTagPair> pairsForTimeStamp =  HistoricalThreeDController.xbeeTokens.get(EnvisPApplet.curDate);
+			if(pairsForTimeStamp != null)
+			for(XbeeTagPair pair: pairsForTimeStamp){
+				if(pair.getTagId().equals(sensorId)){
+					idInt = pair.getxBeeId();
+				}
+			}
+		}
+			
+		if(idInt !=null){
+			String idString = idInt.toString();
+			SensorSet toGetCoor = p.getEnvisSensors().get(idString);
+			if(toGetCoor != null){
+				p.getEnvisSensors().get(sensorId).setX(toGetCoor.getX());
+				p.getEnvisSensors().get(sensorId).setY(toGetCoor.getY());
+				p.getEnvisSensors().get(sensorId).setZ(toGetCoor.getZ());
+			}
+		}
 	}
 
 	private int offset = 15; // value to offset sensor reading text
@@ -81,58 +101,6 @@ public class BarGraph {
 				colorRGB[1]+colorAssigned[sensorType][1]+color_grad, 
 				colorRGB[2]+colorAssigned[sensorType][2]+color_grad, 127);
 
-//		switch(sensorType){	
-//		
-//		case AbstractSensor.SENSORTYPE_AIR_QUALITY:{
-//			
-//			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
-//					colorRGB[1]+colorAssigned[1]+color_grad, 
-//					colorRGB[2]+colorAssigned[2]+color_grad, 127);
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_HUMIDITY:{
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_LIGHT:{
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_MOTION:{
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_TEMPERATURE:{
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_WATER_LEVEL:{
-//			
-//		}
-//		
-//		case AbstractSensor.SENSORTYPE_OTHERS:{
-//			
-//		}
-//		
-//		}
-		
-//		
-//		if (sensorType == SENSORTYPE_TEMP) {
-//			float color_grad = PApplet.map(reading, 1000, 0, 0, 250);
-//			float[] colorAssigned = { 255, 0, 0 };		// for users to customize colors to sensor type
-//			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
-//					colorRGB[1]+colorAssigned[1]+color_grad, 
-//					colorRGB[2]+colorAssigned[2]+color_grad, 127);
-//		}
-//		
-//		else if (sensorType == SENSORTYPE_LIGHT) {
-//			float color_grad = PApplet.map(reading, 1000, 0, 50, 250);
-//			float[] colorAssigned = { 0, 0, 255 };		// for users to customize colors to sensor type
-//			color_mainFill = p.color(colorRGB[0]+colorAssigned[0]+color_grad, 
-//					colorRGB[1]+colorAssigned[1]+color_grad, 
-//					colorRGB[2]+colorAssigned[2]+color_grad, 127);
-//		}
 		
 		if (this.selected) {
 			color_barFill = color_selectedTrue;

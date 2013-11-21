@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/com/envisprototype/LocalDBHelper/MapLocalDBHelper.java=UTF-8
+encoding//src/com/envisprototype/model/LocalDBHelper/MapLocalDBHelper.java=UTF-8
 encoding//src/com/envisprototype/view/processing/EnvisPApplet.java=UTF-8
+encoding//src/com/envisprototype/view/processing/SphereGraph.java=UTF-8

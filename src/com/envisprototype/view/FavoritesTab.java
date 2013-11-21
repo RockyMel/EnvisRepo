@@ -1,12 +1,12 @@
 package com.envisprototype.view;
 
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
-import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.DBHelper.SynchronizeWithCloud;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.model.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.view.navigation.NavigationMaker;
 import com.envisprototype.R;
 

@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.DefaultXYZSensorBtnListener;
 import com.envisprototype.controller.DeleteSensorButtonController;
 import com.envisprototype.controller.SaveButtonController;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;

@@ -37,6 +37,7 @@ public abstract class EnvisPApplet extends PApplet{
 	ArrayList<String> setIdFromAndroid;
 	Bundle extras;
 	Iterator<String> setIterator;
+	private boolean ifAttractor = false;
 	private boolean ifBars = true; // true - bars, false - spheres
 
 	public void setup(){
@@ -106,12 +107,6 @@ public abstract class EnvisPApplet extends PApplet{
 					//		  SetInterface setFromModel =  SetListModel.getSingletonInstance().findSetById(setId);
 					SensorSet setToShow = new SensorSet(this, setId);
 					envisSensors.put(setId, setToShow);
-					//					  Iterator<String> iterator = envisSensors.keySet().iterator();
-					//				    	if(iterator.hasNext()){
-					//				    		barGraphSetList.add(new BarGraphSet(this, "", iterator.next(), 1));
-					//				    	}
-					// barGraphSetList.add(new BarGraphSet(this, "", setId, 1));
-					//barGraphSet = new BarGraphSet(this, "", iterator.next(), 1);
 
 				}
 			}
@@ -165,20 +160,23 @@ public abstract class EnvisPApplet extends PApplet{
 				SensorSet temp = envisSensors.get(setIterator.next());
 				temp.drawMe();
 			}		
-			if(ifBars){
-				for(BarGraphSet barToShow: barGraphSetList){
-					barToShow.drawMe();
-					//barToShow.fireDragEvent();
+			if(!ifAttractor){
+				if(ifBars){
+					for(BarGraphSet barToShow: barGraphSetList){
+						barToShow.drawMe();
+						//barToShow.fireDragEvent();
 
+					}
+				}
+				else{
+					for (SphereGraphSet sphere: sphereGraphList) {
+						sphere.drawMe();
+					}
 				}
 			}
 			else{
-				for (SphereGraphSet sphere: sphereGraphList) {
-					sphere.drawMe();
-				}
+				
 			}
-
-
 
 		}
 		popMatrix();

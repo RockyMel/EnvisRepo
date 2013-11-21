@@ -15,10 +15,10 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.MapSensorAssociationDBHelper;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.OnSensorPlotCheckBoxChangedListener;
 import com.envisprototype.controller.SensorViewButtonController;
+import com.envisprototype.model.LocalDBHelper.MapSensorAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.set.SetListModel;
 

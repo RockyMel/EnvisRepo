@@ -469,6 +469,8 @@ containing a value of this type.
         public static final int add_set=0x7f060052;
         public static final int admin_string=0x7f06001d;
         public static final int app_name=0x7f060019;
+        public static final int attractor_off=0x7f06005e;
+        public static final int attractor_on=0x7f06005d;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -604,6 +606,9 @@ containing a value of this type.
         public static final int title_activity_add_map=0x7f06003a;
         public static final int title_activity_add_sensor=0x7f060037;
         public static final int title_activity_chart_visualization_settings=0x7f06003e;
+        /**      <string name="spheres_vis_type_btn">Spheres</string>
+    <string name="bars_vis_type_btn">Bars</string> 
+         */
         public static final int title_activity_choose_sensor_type=0x7f060057;
         public static final int title_activity_google_map=0x7f06005c;
         public static final int title_activity_home=0x7f06003b;

@@ -16,12 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.controller.AddSensorButtonController;
 import com.envisprototype.controller.PlotSensorsBtnListener;
 import com.envisprototype.controller.SetSaveOnClickController;
 import com.envisprototype.controller.UnplotSetBtnListener;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.set.SetInterface;
@@ -76,7 +76,7 @@ public class NewSetInfoViewActivity extends Activity {
 		setContentView(R.layout.activity_new_set_info_view);
 		setid = getIntent().getStringExtra("setid");
 		flag=getIntent().getStringExtra("flag");
-		
+		EnvisDBAdapter.getSingletonInstance(this).replecateDB();
 		init();
 	}
 
@@ -144,6 +144,8 @@ public class NewSetInfoViewActivity extends Activity {
 			set = SetListModel.getSingletonInstance().findSetById(setid);
 
 			//Log.i("setinfoview", set.getLocation()+"");
+			Log.i("set", setid);
+			Log.i("set", set.getId());
 			location=set.getLocation();
 			//Log.i("setinfoview", set.getLocation()+"");
 		}

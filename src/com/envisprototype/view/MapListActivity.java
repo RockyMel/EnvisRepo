@@ -14,8 +14,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForMaps;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.view.model.MapListAdapter;
@@ -62,7 +62,6 @@ public class MapListActivity extends Activity {
 	public void addListenerOnSpinnerItemSelection() {
 		spinner = (Spinner) findViewById(R.id.spinner1);
 		spinner.setOnItemSelectedListener(new CustomSortByOnItemSelectedListenerForMaps(maps, mla, lv, this));
-		//sla.notifyDataSetChanged();
 	  }
 	
 	public static void  updateadapter(MapListAdapter mla2)

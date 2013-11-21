@@ -3,7 +3,9 @@ package com.envisprototype.view.processing;
 import processing.core.PApplet;
 
 import com.envisprototype.controller.RealTimeThreeDVis;
+import com.envisprototype.model.maps.MapListModel;
 import com.envisprototype.model.processing.Coordinates;
+import com.envisprototype.model.sensor.SensorListModel;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -17,6 +19,7 @@ public class SensorSet extends UIElement{
 	private boolean ifSensor = true;
 	RealTimeThreeDVis realTimeUpdates;
 	public static Handler mHandler;
+	int base  = 10;
 	
 	public SensorSet(EnvisPApplet epApplet, String id){
 		super(epApplet);
@@ -202,7 +205,8 @@ public class SensorSet extends UIElement{
 	}
 	
 	public void startRealTime(){
-		mHandler.postDelayed(realTimeUpdates, 200);
+		if(!SensorListModel.getSingletonInstance().findSensorById(id).getNotes().equals("master"))
+			mHandler.postDelayed(realTimeUpdates, 400);
 	}
 
 }

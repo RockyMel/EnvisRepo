@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.CustomSortByOnItemSelectedListenerForSensors;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.model.sensor.SensorInterface;
 import com.envisprototype.model.sensor.SensorListModel;
 import com.envisprototype.model.sensor.SensorModel;

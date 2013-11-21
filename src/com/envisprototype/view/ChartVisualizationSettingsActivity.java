@@ -24,10 +24,10 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.NewShowChartVisualizationButtonController;
 import com.envisprototype.controller.Show3DMapBtnListener;
 import com.envisprototype.controller.ShowChartVisualizationButtonController;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.view.navigation.NavigationMaker;
 import com.envisprototype.view.model.ChartVisualizationSettingsModel;
 import com.envisprototype.view.model.ChartVisualizationSettingsListAdapter;

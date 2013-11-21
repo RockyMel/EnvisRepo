@@ -17,11 +17,11 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 
-import com.envisprototype.LocalDBHelper.MapLocalDBHelper;
-import com.envisprototype.LocalDBHelper.MapSetAssociationDBHelper;
-import com.envisprototype.LocalDBHelper.SensorLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetLocalDBHelper;
-import com.envisprototype.LocalDBHelper.SetSensorAssociationLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.MapSetAssociationDBHelper;
+import com.envisprototype.model.LocalDBHelper.SensorLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetLocalDBHelper;
+import com.envisprototype.model.LocalDBHelper.SetSensorAssociationLocalDBHelper;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapModel;
 import com.envisprototype.model.sensor.SensorInterface;

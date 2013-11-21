@@ -6,7 +6,7 @@ import com.envisprototype.R;
 import com.envisprototype.controller.processing.dragListeners.AbstractDrawMapListener;
 import com.envisprototype.view.processing.DrawMapApplet;
 
-public class DrawRectMapBtnListener extends AbstractDrawMapListener{
+public class DrawBoxMapBtnListener extends AbstractDrawMapListener{
 	
 	@Override
 	public void handleEnvisClassEvent(EventObject e) {

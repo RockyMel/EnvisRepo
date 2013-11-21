@@ -18,6 +18,8 @@ public class EditMapBtnListener  implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		Context context = v.getContext();
 		Intent intent = new Intent(context, EditMapApplet.class);

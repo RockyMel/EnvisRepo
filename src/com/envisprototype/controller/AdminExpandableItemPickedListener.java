@@ -104,6 +104,10 @@ public class AdminExpandableItemPickedListener implements OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
+		if(!Checks.isGPSEnabled(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		Activity adminkaActivity = (Activity) v.getContext();
 		Log.i("listener",tag);

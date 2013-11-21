@@ -1,4 +1,4 @@
-package com.envisprototype.LocalDBHelper;
+package com.envisprototype.model.LocalDBHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

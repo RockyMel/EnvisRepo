@@ -30,7 +30,7 @@ public class ThreeDVis extends EnvisPApplet{
 
 	EnvisButton frontViewButton, leftSideViewButton, topViewButton, rotateButton,
 	prospectiveSideButton, regenerateBarSetCoors, visTypeBtn, nextTimeStampBtn,
-	prevTimeStampBtn; 
+	prevTimeStampBtn, attractorButton; 
 	ZCoorSpinner timeStampSpinner;
 	//BarGraphSet barGraphSet;
 	final boolean DRAW_WITH_SENSORS = true;
@@ -70,14 +70,17 @@ public class ThreeDVis extends EnvisPApplet{
 		regenerateBarSetCoors = new EnvisButton(this, "Regenerate");
 		regenerateBarSetCoors.setPlace(DEF_BTN_X, 15*height/30);
 		regenerateBarSetCoors.addEventListener(new RegenerateBarsBtnListener());
-		visTypeBtn = new EnvisButton(this, "Spheres");
+		visTypeBtn = new EnvisButton(this, getString(R.string.spheres_vis_type_btn));
 		visTypeBtn.setPlace(DEF_BTN_X, 13*height/30);
 		visTypeBtn.addEventListener(new VisTypeBtnListener());
+		attractorButton = new EnvisButton(this, "Attractor on");
+		attractorButton.setPlace(DEF_BTN_X, 15*height/30);
+		//visTypeBtn.addEventListener(new VisTypeBtnListener());
 		prevTimeStampBtn = new EnvisButton(this, "<<<<<");
-		prevTimeStampBtn.setPlace(DEF_BTN_X, 17*height/30);
+		prevTimeStampBtn.setPlace(DEF_BTN_X, 19*height/30);
 		prevTimeStampBtn.addEventListener(new PrevTimeStampBtnListener());
 		nextTimeStampBtn = new EnvisButton(this, ">>>>>");
-		nextTimeStampBtn.setPlace(DEF_BTN_X, 19*height/30);
+		nextTimeStampBtn.setPlace(DEF_BTN_X, 21*height/30);
 		nextTimeStampBtn.addEventListener(new NextTimeStampBtnListener());
 		RotateScopeListener.setIfTop(true);
 		
@@ -140,17 +143,7 @@ public class ThreeDVis extends EnvisPApplet{
 			this.curDate = fromDate;
 			HistoricalThreeDController toGetHistData = new HistoricalThreeDController(setIdFromAndroid, fromDate, toDate);
 			toGetHistData.fetchData();
-//			for(BarGraphSet barSet: barGraphSetList){
-//				TreeMap<String, Float>pair = SensorReadingsModel.getSingletonInstance().FindTimeReadingPairsForId(barSet.getSensorID());
-//				//Iterator<String> iterator = pair.keySet().iterator();
-//				String timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(0);
-//				barSet.getBarGraphList().get(0).setReading(pair.get(timeStamp));
-//			}
 		}
-		//    for(BarGraphSet barset: barGraphSetList){
-		//    	//if(barset.getSensorID())
-		//    	barset.startRealTime();
-		//    }
 	}
 	public void draw(){
 		super.draw();

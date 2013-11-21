@@ -10,9 +10,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.envisprototype.R;
-import com.envisprototype.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.controller.DrawMapBtnListener;
 import com.envisprototype.controller.SaveMapToAddBtnListener;
+import com.envisprototype.model.LocalDBHelper.EnvisDBAdapter;
 import com.envisprototype.model.maps.MapInterface;
 import com.envisprototype.model.maps.MapModel;
 

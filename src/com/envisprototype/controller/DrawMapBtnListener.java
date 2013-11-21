@@ -21,6 +21,8 @@ public class DrawMapBtnListener implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		if(MapListModel.getSingletonInstance().findMapById(mapId.getText().toString())!=null){
 			Intent intent = new Intent(v.getContext(), DrawMapApplet.class);
 			intent.putExtra(v.getContext().getString(R.string.map_id_extra), mapId.getText().toString());

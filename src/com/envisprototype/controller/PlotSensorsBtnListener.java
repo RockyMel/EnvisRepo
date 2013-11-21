@@ -24,6 +24,8 @@ public class PlotSensorsBtnListener implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		System.out.println("plotting btn pressed");
 		ArrayList<String> tempSensorIds = new ArrayList<String>();
 		for(String id: sensorIds){

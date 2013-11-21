@@ -45,6 +45,7 @@ public class TimeStampBtnListener extends AbstractEnvisButtonListener{
 						timeStamp = SensorReadingsModel.getSingletonInstance().getTimeStamps().get(newIndex);
 					}catch(Exception timeStampException){
 						Log.i("no timestamp", " No timestamp found");
+						timeStampException.printStackTrace();
 						return;
 					}
 					if(pair != null && timeStamp != null){

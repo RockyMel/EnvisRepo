@@ -1,4 +1,4 @@
-package com.envisprototype.LocalDBHelper;
+package com.envisprototype.model.LocalDBHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

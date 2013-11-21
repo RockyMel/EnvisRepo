@@ -58,6 +58,8 @@ public class Show3DMapBtnListener implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if(!Checks.isOnline(v.getContext()))
+			return;
 		// TODO Auto-generated method stub
 		Context context = v.getContext();
 		Intent intent = new Intent(context, ThreeDVis.class);

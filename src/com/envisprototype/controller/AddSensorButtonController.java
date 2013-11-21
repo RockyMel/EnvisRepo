@@ -22,7 +22,7 @@ public class AddSensorButtonController implements OnClickListener {
 			List<SensorInterface> sli, String flag,
 			Context context) {
 		// TODO Auto-generated constructor stub
-		
+
 		this.setid=setid;
 		this.sli=sli;
 		this.flag=flag;
@@ -34,16 +34,19 @@ public class AddSensorButtonController implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
-		
+		if(!Checks.isOnline(view.getContext()))
+			return;
+		if(!Checks.isGPSEnabled(view.getContext()))
+			return;
 			Intent intent=new Intent(view.getContext(),ChooseSensorTypeActivity.class);
-			//intent.putExtra("mode", "sensor");
-			intent.putExtra("setid",setid);
-			//Log.i("test", setid);
-			//intent.putExtra("",id);
-			
-			view.getContext().startActivity(intent);
-		
-		
+		//intent.putExtra("mode", "sensor");
+		intent.putExtra("setid",setid);
+		//Log.i("test", setid);
+		//intent.putExtra("",id);
+
+		view.getContext().startActivity(intent);
+
+
 	}
 
 }
